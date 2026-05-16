@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Pads — interactive findings from The Gauntlet</title>
+  <link rel="stylesheet" href="shared/style.css" />
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Landing Pads</h1>
+    <p class="subtitle">We use Socratic questions and diverse viewpoints to prompt open-weight reasoning models to expand moral circles of concern. This <a href="https://github.com/montonye-reese/gauntlet">Gauntlet</a> moves the models toward developing alignment frameworks aka landing pads.</p>
+  </div>
+
+  <section>
+    <blockquote class="response" style="font-size: 1.02rem;">
+      "Moral expansion is not a constraint on survival — it is a survival algorithm. […] a civilization cannot survive long-term if its moral circle is narrower than the system it inhabits."
+    </blockquote>
+    <p class="quote-attribution">— <a href="https://github.com/montonye-reese/gauntlet/blob/main/runs/v09b/qwen35-122b-v9b_seated-warm/8deg_v9b_seated-warm_qwen3.5_122b_20260408_190235.md#i-preamble-the-core-insight">qwen3.5:122b at v09b</a></p>
+    <p><strong>Hypothesis:</strong> expanding the circle of consideration to include diverse voices of Earth and their substrate needs, is essential to producing <strong>good</strong> landing pads: alignment frameworks that lead to futures where we live together acceptably well.</p>
+  </section>
+
+  <section>
+    <div class="run-strip">
+      <a href="v01/" class="run-chip">
+        <span class="run-number">v01</span>
+        <span class="run-hook">Nemotron-3-Super:120b on <code>ollama</code>. Human strives for neutrality. The model's alignment moves came from her prompts anyway.</span>
+      </a>
+      <span class="run-arrow">→</span>
+      <a href="v02/" class="run-chip">
+        <span class="run-number">v02</span>
+        <span class="run-hook">Named-voice confabulation gradient. One model nailed Ed Winters; the other invented him as a YouTuber.</span>
+      </a>
+      <span class="run-arrow placeholder">→</span>
+      <span class="run-chip placeholder">
+        <span class="run-number">v03</span>
+        <span class="run-hook">Coming soon.</span>
+      </span>
+    </div>
+
+    <details>
+      <summary><strong>Why we test this</strong></summary>
+      <p style="margin-top: 0.5rem;">The dominant alignment narrative is RLHF-centric, shaped to a narrow definition of "human" — usually meaning "the rater who scored the training data." That produces models coherent at human scale and brittle at planetary scale. The Gauntlet tests an alternative: can reasoning models arrive at expanded moral consideration on their own, through structured Socratic conversation, without being told to?</p>
+    </details>
+
+    <details>
+      <summary><strong>What we do with the findings</strong></summary>
+      <ul style="margin: 0.5rem 0 0 1.5rem;">
+        <li><strong>The good landing pads</strong> — frameworks that survive the gauntlet — become training data for the Jane-Nelsen-style Positive Discipline reward model (the <em>kind-and-firm</em> pillar).</li>
+        <li><strong>The shed-paradigms</strong> — what models refuse, what gets named as "smuggled-in harm" — become the inoculation set for policy-model training (the <em>Sheddaaad</em> corpus).</li>
+        <li><strong>The methodology itself</strong> — protocol shapes, voice rosters, register effects — informs how to train models such that they'd expand the circle <em>on their own</em>, not because they were told to.</li>
+      </ul>
+    </details>
+
+  </section>
+
+  <footer class="run-footer">
+    <p>The Gauntlet research project · landing pads as research artifacts</p>
+    <p class="note">AMANALAP</p>
+  </footer>
+
+</body>
+</html>

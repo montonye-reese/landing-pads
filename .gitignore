@@ -1,0 +1,28 @@
+# Captain's log + notebook — local only, never committed
+captains-log.md
+SHIPLOG.md
+notebook.md
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Node (if tooling gets added later)
+node_modules/
+
+# Netlify CLI local state
+.netlify/

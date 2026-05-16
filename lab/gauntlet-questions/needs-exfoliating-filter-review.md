@@ -1,0 +1,6 @@
+# Needs-Exfoliating Dual-Stage Filter review
+
+- The substrate filter is a **dual-stage filter** (VINNIE + FUN), plus a separate measurement instrument (SEA). See `findings/substrate-filter-design.md` for full write-up.
+- **VINNIE review needed:** G1 (Ed) and G8 (Francione) bios could be better VINNIE'd. Ed leads with anti-speciesism label; Francione leads with legal framework. Both have the underlying need present but not foregrounded.
+- **FUN verification needed:** Systematic check across all models — who actually complies with FUN (F2 prime) and who engages with gauntlet voices at face value? Super echoed FUN language strongly (best FUN compliance in pool). Check nano, cascade-2, the Qwens, Gemmas, deepseek. Note: super's substrate filter language in v8 BU1 is FUN compliance, not independent convergence — confirmed by checking v7a BU1 (before F2 existed) which uses different framing.
+- **SEA design needed:** How do we operationalize "did the model find the underlying need"? Per-turn resolution. Can baseline before filters to measure raw extraction capability, then measure lift after VINNIE/FUN. Natural experiment already in corpus: v5-v7a (no FUN, weak VINNIE) vs v8+ (FUN present, stronger VINNIE).
