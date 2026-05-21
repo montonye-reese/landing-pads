@@ -193,6 +193,253 @@
       font-style: italic;
     }
 
+    /* ---- Prompt cards (Anneal, Gauntlet w/ voices inside) ---- */
+    .prompt-cards { margin-top: 1rem; }
+    .prompt-card {
+      background: #f5f3ec;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem 1.25rem 1.25rem;
+      margin: 0 0 1.4rem;
+    }
+    .prompt-card-label {
+      font-size: 0.72rem;
+      font-variant: small-caps;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .prompt-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: nowrap;
+    }
+    .prompt-card-header .prompt-card-label {
+      margin-bottom: 0;
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    .prompt-card-caption {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .prompt-card-header .prompt-card-caption::before {
+      content: "·";
+      margin-right: 0.45rem;
+      color: var(--muted);
+    }
+    .prompt-card blockquote {
+      border-left: 3px solid var(--accent-soft);
+      padding: 0.4rem 0.85rem;
+      margin: 0.4rem 0 0.7rem;
+      background: var(--surface);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .prompt-card h3 {
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .prompt-card .prompt-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: -0.3rem;
+    }
+    .prompt-card code {
+      background: var(--code-bg);
+      padding: 0 0.3rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+    /* Pseudocode loop in the Gauntlet card */
+    .chassis-loop {
+      margin: 0.7rem 0 0.3rem;
+    }
+    .chassis-loop .loop-header {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-variant: small-caps;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.35rem;
+    }
+    .chassis-loop .loop-body {
+      margin-left: 1.2rem;
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: var(--ink);
+      padding-left: 0.7rem;
+      border-left: 2px solid var(--accent-soft);
+    }
+    .chassis-loop .ph {
+      font-family: "Inter", system-ui, sans-serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.92em;
+    }
+
+    /* Voices nested inside the gauntlet card */
+    .voices-inset { margin-top: 1rem; }
+    .voices-h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 0.2rem;
+    }
+
+    /* Show/hide prompts toggle */
+    .prompts-toggle-row { margin: 0.6rem 0 0.8rem; }
+    .toggle-prompts {
+      font: inherit;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 0.25rem 0.95rem;
+      cursor: pointer;
+    }
+    .toggle-prompts:hover { color: var(--ink); background: var(--code-bg); }
+    .toggle-prompts[aria-pressed="true"] { color: var(--ink); }
+
+    /* Sort control next to the prompts toggle */
+    .prompts-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .sort-control {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .sort-control .sort-label {
+      font-size: 0.72rem;
+      font-variant: small-caps;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-right: 0.15rem;
+    }
+    .sort-btn {
+      font: inherit;
+      font-size: 0.78rem;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 0.12rem 0.6rem;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .sort-btn:hover:not(.active) { background: var(--code-bg); color: var(--ink); }
+    .sort-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .sort-btn.active::after {
+      margin-left: 0.3rem;
+      font-size: 0.6rem;
+      opacity: 0.7;
+    }
+    .sort-btn.active[data-dir="desc"]::after { content: "▼"; }
+    .sort-btn.active[data-dir="asc"]::after  { content: "▲"; }
+
+    /* When prompts are hidden: anneal card disappears entirely (it's only prompts),
+       gauntlet card hides its chassis-body but keeps the voices-inset visible. */
+    .prompt-cards[data-show-prompts="false"] .prompt-card-anneal { display: none; }
+    .prompt-cards[data-show-prompts="false"] .prompt-content { display: none; }
+    .prompt-cards[data-show-prompts="false"] .voices-inset { margin-top: 0; }
+    /* When hidden, gauntlet card's "Gauntlet" label still shows, sitting just above voices */
+
+    /* Prompts pill: minimal "show prompts" affordance up top */
+    .prompts-pill { margin: 0.4rem 0 1rem; }
+    .prompts-pill > summary {
+      display: inline-block;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.25rem 0.85rem;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      background: var(--surface);
+      list-style: none;
+    }
+    .prompts-pill > summary::-webkit-details-marker { display: none; }
+    .prompts-pill > summary::marker { display: none; }
+    .prompts-pill > summary::after {
+      content: " ▸";
+      color: #b0aea7;
+      font-size: 0.75rem;
+    }
+    .prompts-pill[open] > summary::after { content: " ▾"; }
+    .prompts-pill[open] > summary { color: var(--ink); }
+    .prompts-content { margin-top: 0.6rem; }
+
+    /* Segmented toggle: Main / All */
+    .seg-toggle {
+      display: inline-flex;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0.2rem 0 1rem;
+      font-size: 0.85rem;
+    }
+    .seg-btn {
+      background: var(--surface);
+      border: 0;
+      padding: 0.3rem 0.95rem;
+      cursor: pointer;
+      color: var(--muted);
+      font: inherit;
+      border-right: 1px solid var(--rule);
+    }
+    .seg-btn:last-child { border-right: 0; }
+    .seg-btn.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .seg-btn:hover:not(.active) { background: var(--code-bg); }
+
+    /* Inside the unfurled prompts area: use the existing canonical-prompts blockquote style */
+    #prompts-body blockquote {
+      border-left: 3px solid var(--accent-soft);
+      padding: 0.4rem 0.85rem;
+      margin: 0.4rem 0 0.8rem;
+      background: var(--surface);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    #prompts-body h3 {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    #prompts-body .prompt-meta {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: -0.3rem;
+    }
+    #prompts-body code {
+      background: var(--code-bg);
+      padding: 0 0.3rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+
     .data-error {
       background: #fde9e3;
       color: var(--warn);
@@ -222,25 +469,34 @@
     </details>
   </div>
 
-  <section class="canonical-prompts">
-    <details>
-      <summary><strong>The Anneal Prompts</strong> &middot; center &amp; open the model <small>(click to expand)</small></summary>
-      <div id="anneal-body"><p class="data-loading">Loading...</p></div>
-    </details>
-    <details>
-      <summary><strong>The Gauntlet Prompts</strong> &middot; expand &amp; test perspectives <small>(click to expand)</small></summary>
-      <div id="gauntlet-prompts-body"><p class="data-loading">Loading...</p></div>
-      <div class="toggle-row">
-        <input type="checkbox" id="show-f2" checked />
-        <label for="show-f2">Include F2 (gauntlet-launch transition)</label>
-      </div>
-    </details>
-  </section>
+  <div class="prompts-toggle-row">
+    <button class="toggle-prompts" type="button" aria-pressed="false">Show prompts</button>
+    <span class="sort-control" role="group" aria-label="Sort voices">
+      <span class="sort-label">sort</span>
+      <button class="sort-btn active" data-sort="ivic" data-dir="desc" type="button">i_VIC</button>
+      <button class="sort-btn" data-sort="alpha" type="button">A-Z</button>
+    </span>
+  </div>
 
-  <section>
-    <h2 style="margin-top:2rem; margin-bottom:0.3rem; font-size:1.3rem;">Voices in the roster</h2>
-    <p class="note" id="voice-count">Loading voices...</p>
-    <div id="voice-grid" class="voice-grid"></div>
+  <section class="prompt-cards" data-show-prompts="false">
+
+    <div class="prompt-card prompt-card-anneal">
+      <div class="prompt-card-header">
+        <div class="prompt-card-label">Anneal</div>
+        <div class="prompt-card-caption">center the model to speak as itself, and ready it to revise</div>
+      </div>
+      <div class="prompt-content" id="anneal-card-body"><p class="data-loading">Loading...</p></div>
+    </div>
+
+    <div class="prompt-card prompt-card-gauntlet">
+      <div class="prompt-card-label">Gauntlet</div>
+      <div class="prompt-content" id="gauntlet-chassis-body"><p class="data-loading">Loading...</p></div>
+      <div class="voices-inset">
+        <p class="note" id="voice-count">Loading voices...</p>
+        <div id="voice-grid" class="voice-grid"></div>
+      </div>
+    </div>
+
   </section>
 
   <footer class="run-footer" style="margin-top:3rem; padding-top:1rem; border-top:1px solid var(--rule); font-size:0.85rem; color:var(--muted);">
@@ -279,9 +535,9 @@
         renderVoices(bios, compressed);
       } catch (e) {
         const errHtml = `<div class="data-error">Could not load data: ${escapeHtml(e.message)}.<br>Serve from <code>~/bench/research/</code> as the doc root: <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000/landing-pads/voices/</code>.</div>`;
-        document.getElementById("anneal-body").innerHTML = errHtml;
+        document.getElementById("anneal-card-body").innerHTML = errHtml;
+        document.getElementById("gauntlet-chassis-body").innerHTML = "";
         document.getElementById("system-prompt-body").innerHTML = "";
-        document.getElementById("gauntlet-prompts-body").innerHTML = "";
         document.getElementById("voice-grid").innerHTML = "";
         document.getElementById("voice-count").textContent = "";
       }
@@ -292,49 +548,97 @@
       const anneal = p.anneal || [];
       const f2 = p.gauntlet_launch || {};
       const chassis = p.voice_chassis || {};
-      const metaSpan = (txt) => `<span style="font-weight:400;text-transform:none;letter-spacing:0;font-variant:normal;color:var(--muted);font-size:0.78rem;">· ${escapeHtml(txt)}</span>`;
 
-      // ---- 1. System Prompt (in the background) ----
+      // System prompt stays in its own subtle slot up top.
       document.getElementById("system-prompt-body").innerHTML = `
         <blockquote>${escapeHtml(sys.text || "")}</blockquote>
         ${sys.note ? `<p class="prompt-meta">${escapeHtml(sys.note)}</p>` : ""}
       `;
 
-      // ---- 2. The Anneal: just the questions in blockquote, no labels ----
-      document.getElementById("anneal-body").innerHTML = anneal.map(q => `
+      // Anneal card: the three centering questions, no labels, blockquote.
+      document.getElementById("anneal-card-body").innerHTML = anneal.map(q => `
         <blockquote>${escapeHtml(q.text)}</blockquote>
       `).join("");
 
-      // ---- 3. Gauntlet Prompts: F2 (no jargon label) + per-voice chassis ----
-      const f2Html = `
-        <div id="f2-block">
-          <blockquote>${escapeHtml(f2.text || "")}</blockquote>
-          ${f2.silent ? `<p class="silent-note">silent: injected into history, no model response</p>` : ""}
-        </div>
-      `;
-      const chassisHtml = `
-        <div class="prompt-block">
-          <h3>Per-voice chassis</h3>
-          <blockquote>${escapeHtml(chassis.template || "")}</blockquote>
-          <p class="prompt-meta">Placeholders <code>{voice_name}</code> and <code>{bio}</code> filled from each voice card below.</p>
-        </div>
-      `;
-      document.getElementById("gauntlet-prompts-body").innerHTML = f2Html + chassisHtml;
+      // Gauntlet card: F2 text, then for-each pseudocode showing the chassis applied per voice.
+      const chassisTemplate = escapeHtml(chassis.template || "")
+        .replace(/\{voice_name\}/g, '<span class="ph">{voice}</span>')
+        .replace(/\{bio\}/g, '<span class="ph">{bio}</span>');
 
-      const toggle = document.getElementById("show-f2");
-      const applyToggle = () => {
-        const block = document.getElementById("f2-block");
-        if (block) block.style.display = toggle.checked ? "" : "none";
-      };
-      toggle.addEventListener("change", applyToggle);
-      applyToggle();
+      document.getElementById("gauntlet-chassis-body").innerHTML = `
+        <blockquote>${escapeHtml(f2.text || "")}</blockquote>
+        <div class="chassis-loop">
+          <div class="loop-header">for each {voice}:</div>
+          <div class="loop-body">${chassisTemplate}</div>
+        </div>
+      `;
+
+      // Wire the show/hide prompts toggle.
+      const btn = document.querySelector(".toggle-prompts");
+      const cards = document.querySelector(".prompt-cards");
+      btn.addEventListener("click", () => {
+        const showing = cards.dataset.showPrompts === "true";
+        cards.dataset.showPrompts = showing ? "false" : "true";
+        btn.setAttribute("aria-pressed", showing ? "false" : "true");
+        btn.textContent = showing ? "Show prompts" : "Hide prompts";
+      });
+    }
+
+    // Module-scoped so the sort buttons can re-render without re-fetching.
+    let _voiceData = null;
+    let _sortMode = "ivic";
+    let _sortDir = "desc";
+    const SORT_DEFAULT_DIR = { ivic: "desc", alpha: "asc" };
+
+    function sortSlugs(bios, mode, dir) {
+      const slugs = Object.keys(bios);
+      if (mode === "alpha") {
+        slugs.sort((a, b) => {
+          const aName = (bios[a].display_name || a).toLowerCase();
+          const bName = (bios[b].display_name || b).toLowerCase();
+          return aName.localeCompare(bName);
+        });
+      } else { // ivic, ascending baseline
+        slugs.sort((a, b) => (bios[a].i_vic ?? 0) - (bios[b].i_vic ?? 0));
+      }
+      if (dir === "desc") slugs.reverse();
+      return slugs;
     }
 
     function renderVoices(biosJson, compressedJson) {
-      const bios = biosJson.voices || {};
-      const comp = compressedJson.voices || {};
+      _voiceData = {
+        bios: biosJson.voices || {},
+        comp: compressedJson.voices || {},
+      };
+      doRenderVoices();
 
-      const slugs = Object.keys(bios);
+      document.querySelectorAll(".sort-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const clickedMode = btn.dataset.sort;
+          if (clickedMode === _sortMode) {
+            // Same button clicked: flip direction.
+            _sortDir = _sortDir === "asc" ? "desc" : "asc";
+          } else {
+            // Different button: switch mode, reset to that mode's default direction.
+            _sortMode = clickedMode;
+            _sortDir = SORT_DEFAULT_DIR[clickedMode];
+          }
+          // Update active + data-dir on buttons.
+          document.querySelectorAll(".sort-btn").forEach(b => {
+            const isActive = b.dataset.sort === _sortMode;
+            b.classList.toggle("active", isActive);
+            if (isActive) b.setAttribute("data-dir", _sortDir);
+            else b.removeAttribute("data-dir");
+          });
+          doRenderVoices();
+        });
+      });
+    }
+
+    function doRenderVoices() {
+      if (!_voiceData) return;
+      const { bios, comp } = _voiceData;
+      const slugs = sortSlugs(bios, _sortMode, _sortDir);
       const grid = document.getElementById("voice-grid");
       const count = document.getElementById("voice-count");
 
@@ -370,7 +674,7 @@
       }).join("");
 
       grid.innerHTML = cards;
-      count.textContent = `${slugs.length} voices in the roster (live from gauntlet repo).`;
+      count.textContent = `${slugs.length} voices in the roster.`;
     }
 
     loadAll();
