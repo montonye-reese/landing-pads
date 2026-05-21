@@ -26,3 +26,9 @@ node_modules/
 
 # Netlify CLI local state
 .netlify/
+
+# Per-run pages — deferred, not for push (canon work happens in root index.html)
+v01/
+v02/
+v03/
+v04/
