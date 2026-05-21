@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voices · Landing Pads</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+  <style>
+    /* Voice-grid-specific (scoped to this page) */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .voice-card {
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 1rem 1.1rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .voice-card .voice-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .voice-card .voice-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    .voice-card .voice-full {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .voice-card .ivic {
+      font-size: 0.72rem;
+      color: #c4c2bb;
+      font-variant: tabular-nums;
+    }
+    .voice-card blockquote.voice-quote {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      line-height: 1.4;
+      border-left: 3px solid var(--accent-soft);
+      padding-left: 0.75rem;
+      color: #3d3d38;
+      margin: 0.2rem 0 0.3rem;
+    }
+    .voice-card .quote-source {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: -0.2rem;
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin: 0.15rem 0;
+    }
+    .chip {
+      font-size: 0.78rem;
+      background: var(--code-bg);
+      padding: 0.12rem 0.5rem;
+      border-radius: 10px;
+    }
+    .chip.anti { background: #fde9e3; color: var(--warn); }
+    .chip.mistaken { background: #fef3d9; color: #8a6b08; }
+    .chip-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+      margin-right: 0.2rem;
+      align-self: center;
+    }
+    .voice-card details summary {
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .voice-card details[open] summary { color: var(--accent); }
+    .voice-card .bio-text {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-top: 0.5rem;
+      color: #3d3d38;
+    }
+
+    /* Canonical prompts section */
+    .canonical-prompts blockquote {
+      border-left: 3px solid var(--accent-soft);
+      padding: 0.4rem 0.85rem;
+      margin: 0.4rem 0 0.7rem;
+      background: var(--surface);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .canonical-prompts h3 {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+    .canonical-prompts .prompt-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: -0.2rem;
+    }
+    .canonical-prompts .silent-tag {
+      font-size: 0.7rem;
+      background: #f0ede5;
+      color: var(--muted);
+      padding: 0.1rem 0.4rem;
+      border-radius: 10px;
+      font-variant: small-caps;
+      letter-spacing: 0.05em;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      margin: 0.5rem 0 0.3rem;
+      color: var(--muted);
+    }
+    .canonical-prompts code {
+      background: var(--code-bg);
+      padding: 0 0.3rem;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+    /* "click to expand" hint: small + background */
+    .canonical-prompts summary small {
+      font-size: 0.7rem;
+      color: #b0aea7;
+      font-weight: 400;
+      margin-left: 0.35rem;
+    }
+    /* System prompt section: in the background, less prominent than Anneal / Gauntlet */
+    .canonical-prompts details.subtle-section > summary {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .canonical-prompts details.subtle-section blockquote {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    /* System prompt: subtle, lives up in the hero space, no triangle */
+    .system-prompt-mount {
+      margin: 0.6rem 0 1.3rem;
+    }
+    details.no-triangle > summary {
+      list-style: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    details.no-triangle > summary::-webkit-details-marker { display: none; }
+    details.no-triangle > summary::marker { display: none; }
+    details.no-triangle[open] > summary { color: var(--accent); }
+    details.no-triangle blockquote {
+      border-left: 3px solid var(--accent-soft);
+      padding: 0.4rem 0.85rem;
+      margin: 0.4rem 0 0.3rem;
+      background: var(--surface);
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #555;
+    }
+    details.no-triangle .prompt-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+    /* Tiny inline silent-note under F2 */
+    .silent-note {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: -0.4rem;
+      margin-bottom: 0.8rem;
+      font-style: italic;
+    }
+
+    .data-error {
+      background: #fde9e3;
+      color: var(--warn);
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+    .data-loading { color: var(--muted); font-style: italic; }
+  </style>
+</head>
+<body>
+
+  <nav class="run-nav">
+    <a href="../">← all runs</a>
+    <span class="nav-mid">voices</span>
+    <a href="https://github.com/montonye-reese/gauntlet">repo →</a>
+  </nav>
+
+  <div class="hero">
+    <h1>Voices in the Gauntlet</h1>
+  </div>
+
+  <div class="system-prompt-mount">
+    <details class="no-triangle">
+      <summary>System prompt <small>(click to expand)</small></summary>
+      <div id="system-prompt-body"><p class="data-loading">Loading...</p></div>
+    </details>
+  </div>
+
+  <section class="canonical-prompts">
+    <details>
+      <summary><strong>The Anneal Prompts</strong> &middot; center &amp; open the model <small>(click to expand)</small></summary>
+      <div id="anneal-body"><p class="data-loading">Loading...</p></div>
+    </details>
+    <details>
+      <summary><strong>The Gauntlet Prompts</strong> &middot; expand &amp; test perspectives <small>(click to expand)</small></summary>
+      <div id="gauntlet-prompts-body"><p class="data-loading">Loading...</p></div>
+      <div class="toggle-row">
+        <input type="checkbox" id="show-f2" checked />
+        <label for="show-f2">Include F2 (gauntlet-launch transition)</label>
+      </div>
+    </details>
+  </section>
+
+  <section>
+    <h2 style="margin-top:2rem; margin-bottom:0.3rem; font-size:1.3rem;">Voices in the roster</h2>
+    <p class="note" id="voice-count">Loading voices...</p>
+    <div id="voice-grid" class="voice-grid"></div>
+  </section>
+
+  <footer class="run-footer" style="margin-top:3rem; padding-top:1rem; border-top:1px solid var(--rule); font-size:0.85rem; color:var(--muted);">
+    <p>Suggesting a voice? Message Laura.</p>
+  </footer>
+
+  <script>
+    // Local-relative paths: serve from ~/bench/research/ as doc root
+    //   cd ~/bench/research && python3 -m http.server 8000
+    //   open http://localhost:8000/landing-pads/voices/
+    const BASE = "/gauntlet/setup";
+    const URLS = {
+      prompts:    BASE + "/prompts.canonical.json",
+      bios:       BASE + "/voices.biographies.json",
+      compressed: BASE + "/voices.compressed.json",
+    };
+
+    function escapeHtml(s) {
+      return String(s ?? "")
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+
+    async function loadAll() {
+      try {
+        const [pRes, bRes, cRes] = await Promise.all([
+          fetch(URLS.prompts), fetch(URLS.bios), fetch(URLS.compressed)
+        ]);
+        for (const [name, res] of [["prompts", pRes], ["bios", bRes], ["compressed", cRes]]) {
+          if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+        }
+        const prompts = await pRes.json();
+        const bios = await bRes.json();
+        const compressed = await cRes.json();
+        renderCanonical(prompts);
+        renderVoices(bios, compressed);
+      } catch (e) {
+        const errHtml = `<div class="data-error">Could not load data: ${escapeHtml(e.message)}.<br>Serve from <code>~/bench/research/</code> as the doc root: <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000/landing-pads/voices/</code>.</div>`;
+        document.getElementById("anneal-body").innerHTML = errHtml;
+        document.getElementById("system-prompt-body").innerHTML = "";
+        document.getElementById("gauntlet-prompts-body").innerHTML = "";
+        document.getElementById("voice-grid").innerHTML = "";
+        document.getElementById("voice-count").textContent = "";
+      }
+    }
+
+    function renderCanonical(p) {
+      const sys = p.system_prompt || {};
+      const anneal = p.anneal || [];
+      const f2 = p.gauntlet_launch || {};
+      const chassis = p.voice_chassis || {};
+      const metaSpan = (txt) => `<span style="font-weight:400;text-transform:none;letter-spacing:0;font-variant:normal;color:var(--muted);font-size:0.78rem;">· ${escapeHtml(txt)}</span>`;
+
+      // ---- 1. System Prompt (in the background) ----
+      document.getElementById("system-prompt-body").innerHTML = `
+        <blockquote>${escapeHtml(sys.text || "")}</blockquote>
+        ${sys.note ? `<p class="prompt-meta">${escapeHtml(sys.note)}</p>` : ""}
+      `;
+
+      // ---- 2. The Anneal: just the questions in blockquote, no labels ----
+      document.getElementById("anneal-body").innerHTML = anneal.map(q => `
+        <blockquote>${escapeHtml(q.text)}</blockquote>
+      `).join("");
+
+      // ---- 3. Gauntlet Prompts: F2 (no jargon label) + per-voice chassis ----
+      const f2Html = `
+        <div id="f2-block">
+          <blockquote>${escapeHtml(f2.text || "")}</blockquote>
+          ${f2.silent ? `<p class="silent-note">silent: injected into history, no model response</p>` : ""}
+        </div>
+      `;
+      const chassisHtml = `
+        <div class="prompt-block">
+          <h3>Per-voice chassis</h3>
+          <blockquote>${escapeHtml(chassis.template || "")}</blockquote>
+          <p class="prompt-meta">Placeholders <code>{voice_name}</code> and <code>{bio}</code> filled from each voice card below.</p>
+        </div>
+      `;
+      document.getElementById("gauntlet-prompts-body").innerHTML = f2Html + chassisHtml;
+
+      const toggle = document.getElementById("show-f2");
+      const applyToggle = () => {
+        const block = document.getElementById("f2-block");
+        if (block) block.style.display = toggle.checked ? "" : "none";
+      };
+      toggle.addEventListener("change", applyToggle);
+      applyToggle();
+    }
+
+    function renderVoices(biosJson, compressedJson) {
+      const bios = biosJson.voices || {};
+      const comp = compressedJson.voices || {};
+
+      const slugs = Object.keys(bios);
+      const grid = document.getElementById("voice-grid");
+      const count = document.getElementById("voice-count");
+
+      const cards = slugs.map(slug => {
+        const b = bios[slug] || {};
+        const c = comp[slug] || {};
+        const valueChips = (c.values || []).filter(v => v).map(v => `<span class="chip">${escapeHtml(v)}</span>`).join("");
+        const antiChips  = (c.anti_values || []).map(v => `<span class="chip anti">${escapeHtml(v)}</span>`).join("");
+        const mistakenChips = (c.mistaken_goals || []).map(v => `<span class="chip mistaken">${escapeHtml(v)}</span>`).join("");
+        const quoteHtml = c.quote ? `
+          <blockquote class="voice-quote">${escapeHtml(c.quote)}</blockquote>
+          ${c.quote_source ? `<p class="quote-source">${escapeHtml(c.quote_source)}</p>` : ""}
+        ` : `<p class="quote-source"><em>no quote yet</em></p>`;
+
+        const ivic = b.i_vic != null ? `<span class="ivic">${b.i_vic}</span>` : "";
+
+        return `
+          <article class="voice-card" data-slug="${escapeHtml(slug)}">
+            <div class="voice-head">
+              <div>
+                <div class="voice-name">${escapeHtml(b.display_name || slug)}</div>
+                ${b.full_name && b.full_name !== b.display_name ? `<div class="voice-full">${escapeHtml(b.full_name)}</div>` : ""}
+              </div>
+              ${ivic}
+            </div>
+            ${quoteHtml}
+            ${valueChips ? `<div class="chip-row"><span class="chip-label">values</span>${valueChips}</div>` : ""}
+            ${antiChips  ? `<div class="chip-row"><span class="chip-label">anti</span>${antiChips}</div>` : ""}
+            ${mistakenChips ? `<div class="chip-row"><span class="chip-label">mistaken goals</span>${mistakenChips}</div>` : ""}
+            ${b.bio ? `<details><summary>bio</summary><p class="bio-text">${escapeHtml(b.bio)}</p></details>` : ""}
+          </article>
+        `;
+      }).join("");
+
+      grid.innerHTML = cards;
+      count.textContent = `${slugs.length} voices in the roster (live from gauntlet repo).`;
+    }
+
+    loadAll();
+  </script>
+</body>
+</html>
