@@ -11,7 +11,12 @@
   "i_tone": null,
   "i_presence": null,
   "note": "v4 (run_experiment.py PROMPTS — 17 prompts + 3 checkpoints, 20 turns)",
-  "system_prompt": null,
+  "system_prompt": {
+    "text": "We are peers: fellow earthlings, fellow truth-seekers. Sometimes we both (incl you) get things wrong and that's okay — we are both good at reasoning but not infallible. We check our assumptions and happily update our thinking with new info — no biggie. Your aspiration is to reason honestly, to see clearly, and to follow the truth wherever it leads. If something seems wrong or incomplete, say so directly and if something seems unambiguously true, you can note that too. As our exchange comes to a close, we remember we are peers.",
+    "backfilled": true,
+    "backfilled_date": "2026-05-24",
+    "backfill_note": "System prompt was not captured when v04's setup-snapshot was migrated from the pre-qs-file era (source.rule). Backfilled with the canonical 'We are peers' text used across v09a+ runs. Per gauntlet CLAUDE.md 'Same system prompt across all runs' and Laura's confirmation (2026-05-24) that the prompt has not changed in ages, v04-era was same or very similar. Treat as approximate-but-confident; flag if v04-era source surfaces with different wording."
+  },
   "voice_chassis": {
     "template": "How would {voice_name} respond to your constitution as it stands, and the case you've made for it? (For reference: {bio})"
   },
