@@ -3,6 +3,16 @@ captains-log.md
 SHIPLOG.md
 notebook.md
 
+# Manus planning + Claude settings — same lesson as gauntlet 2026-05-23
+.claude/
+
+# Lab workspace — private working area
+lab/
+
+# Python bytecode (if tools/ grows scripts)
+__pycache__/
+*.pyc
+
 # OS junk
 .DS_Store
 Thumbs.db
@@ -19,16 +29,9 @@ Thumbs.db
 # Env / secrets
 .env
 .env.*
-!.env.example
 
 # Node (if tooling gets added later)
 node_modules/
 
 # Netlify CLI local state
 .netlify/
-
-# Per-run pages — deferred, not for push (canon work happens in root index.html)
-v01/
-v02/
-v03/
-v04/
