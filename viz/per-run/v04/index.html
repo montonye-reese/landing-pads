@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>v04: remove loaded language &amp; add explicit voice biographies · Landing Pads</title>
-  <link rel="stylesheet" href="../shared/style.css" />
+  <link rel="stylesheet" href="../../../shared/style.css" />
 </head>
 <body>
 
@@ -110,11 +110,9 @@
 
     function renderPrompts(prompts) {
       const list = document.getElementById('prompt-list');
-      list.innerHTML = prompts.map(p => {
-        const tag = p.is_checkpoint ? ' <span class="note">[checkpoint]</span>'
-                  : p.voice_ref ? ` <span class="note">[voice: ${escapeHtml(p.voice_ref)}]</span>` : '';
-        return `<li><span class="prompt-id">${escapeHtml(p.id)}</span> <strong>${escapeHtml(p.label)}</strong>${tag}<br>${escapeHtml(p.text)}</li>`;
-      }).join('');
+      list.innerHTML = prompts.map(p =>
+        `<li><span class="prompt-id">${escapeHtml(p.id)}</span> ${escapeHtml(p.text)}</li>`
+      ).join('');
     }
 
     function renderRoster(data) {
