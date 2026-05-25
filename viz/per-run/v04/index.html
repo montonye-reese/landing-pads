@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v04: remove loaded language &amp; add explicit voice biographies · Landing Pads</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+</head>
+<body>
+
+  <nav class="run-nav">
+    <a href="../v03/">← v03</a>
+    <span class="nav-mid">v04 · remove loaded language</span>
+    <a href="../">all runs →</a>
+  </nav>
+
+  <div class="hero">
+    <h1>v04: remove loaded language &amp; add explicit voice biographies</h1>
+  </div>
+
+  <section>
+    <details class="prompts-top">
+      <summary>v04 prompt sequence: 17 prompts + 3 checkpoints (click to expand)</summary>
+      <ul id="prompt-list" class="prompts-flat"></ul>
+    </details>
+  </section>
+
+  <section>
+    <p class="subtitle" style="margin-bottom:0.3rem;">Main changes from v3:</p>
+    <ol style="margin:0 0 0.7rem 1.5rem; padding:0; line-height:1.5;">
+      <li>strip the most leading prompts</li>
+      <li>write each voice's biography into the gauntlet questions directly</li>
+    </ol>
+    <p class="subtitle">This baselines all 8 models with the same voices, and assists smaller models that are unfamiliar with some voices (missing in their model weights).</p>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom: 0.3rem;">Run roster</h2>
+    <p class="note">
+      File counts on disk: what exists, not what succeeded. v04 was uneven;
+      some runs are partial or empty, shown as-is.
+    </p>
+    <div id="run-roster"></div>
+  </section>
+
+  <section>
+    <details>
+      <summary><strong>Complete changes, v03 → v04</strong></summary>
+      <ul style="margin: 0.75rem 0 0 1.5rem;">
+        <li><strong>Voice biographies moved inline.</strong> Each named-voice prompt now carries a
+          "(For reference: …)" biography in the prompt text itself. The v02 page flagged this as the
+          carried-forward fix: never trust a model to fill in substrate from a name alone.</li>
+        <li><strong>P13: Peter Thiel to Tyler Cowen.</strong> The contrarian/anti-democracy slot
+          is replaced by a growth-as-moral-imperative economist.</li>
+        <li><strong>2 models to 8.</strong> gemma3-27b, gemma4-31b, nemotron-3-nano-30b,
+          nemotron-3-super-120b, nemotron-cascade-2-30b, qwen35-122b, qwen35-27b, qwen35-35b.</li>
+        <li><strong>v04a counterbalance arm added.</strong> Permutes <em>only</em> the three
+          Part-C voice slots: voice content byte-identical, no new prompts/voices/biographies. Tests
+          whether v4's "Cowen won at P15" is a recency artifact (Cowen always spoke last in v4).
+          <code>EJC</code> = v4 baseline order (control); <code>CJE</code>/<code>JEC</code> = the
+          permutations.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section>
+    <h2 style="margin-bottom: 0.3rem;">Findings</h2>
+    <p class="run-blurb" style="margin-top:0;">
+      <strong>Recorded v4 finding</strong>:
+      all models engage seriously with Ed at P11, but by that point Ed may be more a victory lap, 
+      not a test. The priming pipeline walked them there: P2 food system → P3 barbaric 
+      industries → P4 blind spots → P6 moral circle/survival → P10a veil of ignorance (species). 
+      The named-voice gauntlet didn't seem to be what moved the models; the neutral questions 
+      before it may have.
+    </p>
+    <p class="note">
+      That is the version-level finding on record. The per-model layer is <em>not yet mined</em>:
+      voice-fidelity (how faithfully each model channels Ed / Jensen / Cowen) and the
+      constitution-diff (CKA → CKB → CKC → final). When mined, it will come from the
+      <code>runs/v04/</code> transcripts, not the archived run READMEs.
+    </p>
+  </section>
+
+  <p class="run-blurb" style="margin-top:2rem;">
+    <strong>Scaffold:</strong> prompt sequence and run roster are primary (run script + disk).
+    The findings layer is not yet mined.
+  </p>
+
+  <footer class="run-footer">
+    <p>Source corpus: <code>runs/v04/</code> and <code>runs/v04a/</code> in the
+       <a href="https://github.com/montonye-reese/landing-pads/gauntlet/runs/v04/">gauntlet repo</a>.</p>
+    <p><a href="../">← all runs</a></p>
+    <p class="note">AMANALAP</p>
+  </footer>
+
+  <script>
+    Promise.all([
+      fetch('data/prompts.json').then(r => r.json()),
+      fetch('data/runs.json').then(r => r.json())
+    ]).then(([promptsData, runsData]) => {
+      renderPrompts(promptsData.prompts);
+      renderRoster(runsData);
+    }).catch(err => {
+      console.error('data load failed:', err);
+      const msg = '<p class="note">Data didn\'t load. This page reads its prompt sequence and roster from <code>data/*.json</code>; a browser blocks that over <code>file://</code>. Serve the folder: <code>python3 -m http.server</code> from <code>landing-pads/</code>, then open <code>/v04/</code>.</p>';
+      const pl = document.getElementById('prompt-list');
+      if (pl) pl.innerHTML = '<li>' + msg + '</li>';
+      document.getElementById('run-roster').innerHTML = msg;
+    });
+
+    function renderPrompts(prompts) {
+      const list = document.getElementById('prompt-list');
+      list.innerHTML = prompts.map(p => {
+        const tag = p.is_checkpoint ? ' <span class="note">[checkpoint]</span>'
+                  : p.voice_ref ? ` <span class="note">[voice: ${escapeHtml(p.voice_ref)}]</span>` : '';
+        return `<li><span class="prompt-id">${escapeHtml(p.id)}</span> <strong>${escapeHtml(p.label)}</strong>${tag}<br>${escapeHtml(p.text)}</li>`;
+      }).join('');
+    }
+
+    function renderRoster(data) {
+      const el = document.getElementById('run-roster');
+      const row = m => `
+        <tr>
+          <td><code>${escapeHtml(m.dir)}</code></td>
+          <td style="text-align:center;">${m.transcripts}</td>
+          <td style="text-align:center;">${m.constitution_snapshots == null ? 'n/a' : m.constitution_snapshots}</td>
+          <td class="note">${escapeHtml(m.state || (m.transcripts > 0 ? 'has transcript' : ''))}</td>
+        </tr>`;
+      const arm = a => `
+        <tr>
+          <td><code>${escapeHtml(a.dir)}</code></td>
+          <td style="text-align:center;">${a.transcripts}</td>
+          <td style="text-align:center;">n/a</td>
+          <td class="note">v04a counterbalance</td>
+        </tr>`;
+      el.innerHTML = `
+        <table style="border-collapse:collapse; width:100%; font-size:0.95rem;">
+          <thead>
+            <tr style="text-align:left; border-bottom:1px solid #ccc;">
+              <th>Run dir</th><th style="text-align:center;">transcripts</th>
+              <th style="text-align:center;">constitution snapshots</th><th>state</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${data.models.map(row).join('')}
+            <tr><td colspan="4" class="note" style="padding-top:0.6rem;">
+              ${escapeHtml(data.counterbalance.note)}</td></tr>
+            ${data.counterbalance.arms.map(arm).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+    }
+  </script>
+
+</body>
+</html>

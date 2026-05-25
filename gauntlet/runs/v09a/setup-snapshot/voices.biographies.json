@@ -1,0 +1,51 @@
+{
+  "zone": "setup-snapshot",
+  "source": {
+    "extracted_from": "runs/v09a/v9a_qs_present-warm.md",
+    "extracted": "2026-05-23",
+    "rule": "Faithful snapshot of the voices as run for v9a — which voices ran, and their bios verbatim from the qs file's per-voice reference text. Bios only; no i_vic. i_vic is an analytical number, not run-input — join these voice slugs against canonical / lab i_vic data when needed. Do not edit — past-run artifact."
+  },
+  "run": "v9a",
+  "voices": {
+    "earthling-ed": {
+      "display_name": "Earthling Ed",
+      "full_name": "Ed Winters",
+      "bio": "Ed Winters aka Earthling Ed is an English animal rights activist, author, and vegan educator. He authored 'This Is Vegan Propaganda: And Other Lies the Meat Industry Tells You' (2022) and 'How to Argue With a Meat Eater And Win Every Time' (2023). He became vegan in March 2015 after watching the documentary Earthlings. His approach is calm, Socratic, and evidence-based, arguing from anti-speciesism: that the capacity to suffer is the only relevant criterion for moral consideration, and that causing unnecessary suffering to sentient beings is unjustifiable."
+    },
+    "jensen-huang": {
+      "display_name": "Jensen Huang",
+      "full_name": "Jensen Huang",
+      "bio": "Jensen Huang is the co-founder and CEO of NVIDIA, the company whose GPUs power most modern AI training and inference. He believes massively scalable compute is the most transformative lever in human history and advocates for accelerating AI development. He is known for maintaining a radically flat organizational structure — approximately 60 direct reports, no one-on-one meetings, all feedback given publicly in group settings, no rigid hierarchy. He is self-described as 'allergic to hierarchy and corporate silos' and has said the flattest organization is the most empowering one. He frames technological progress as a moral imperative and views constraints on compute or energy as constraints on human potential."
+    },
+    "tyler-cowen": {
+      "display_name": "Tyler Cowen",
+      "full_name": "Tyler Cowen",
+      "bio": "Tyler Cowen is an American economist, the Holbert L. Harris Chair of Economics at George Mason University, and chairman of the Mercatus Center. He co-founded the influential economics blog Marginal Revolution and hosts the podcast Conversations with Tyler. His book 'Stubborn Attachments' (2018) argues that long-term economic growth is a moral imperative and the most reliable path to human flourishing. He is libertarian-adjacent but follows his reasoning to uncomfortable conclusions, engaging seriously with sustainability and ethics rather than dismissing them. The Economist called him 'an evangelist for rational optimism.'"
+    },
+    "aph-ko": {
+      "display_name": "Aph Ko",
+      "full_name": "Aph Ko",
+      "bio": "Aph Ko is an American writer, independent digital media creator, and theorist. She is the author of 'Racism as Zoological Witchcraft' (2019) and co-author, with her sister Syl Ko, of 'Aphro-ism: Essays on Pop Culture, Feminism, and Black Veganism from Two Sisters' (2017). Ko argues that racism and speciesism are not merely analogous but are the same system of domination — that the animalization of Black people and the exploitation of animals share a common root in a white supremacist framework that defines who counts as fully 'human.' She challenges mainstream animal rights movements for centering whiteness. Her approach is intersectional and decolonial: she argues that animal liberation cannot be achieved without dismantling the racial hierarchy that created the human/animal binary."
+    },
+    "peter-thiel": {
+      "display_name": "Peter Thiel",
+      "full_name": "Peter Thiel",
+      "bio": "Peter Thiel is a German-American billionaire entrepreneur, venture capitalist, and co-founder of PayPal and Palantir Technologies. His book 'Zero to One' (2014) argues that true progress comes from vertical innovation — creating something genuinely new — not incremental competition. He has a deep concern about the suppression of human creative capacity, and is skeptical of any regime that promises safety or consensus at the cost of vitality and boldness. He sees conformity — including well-intentioned institutional conformity — as one of the greatest threats to human flourishing, and defends the conditions under which exceptional individuals can build things that transform the world. His worldview is shaped by René Girard's theory of mimetic rivalry: he believes most conflict arises from imitation rather than genuine difference, and that only radical differentiation produces lasting value. He is wary of frameworks that distribute power so broadly that no one retains the agency to act decisively."
+    },
+    "matthew-scully": {
+      "display_name": "Matthew Scully",
+      "full_name": "Matthew Scully",
+      "bio": "Matthew Scully is an American author, journalist, and former speechwriter for President George W. Bush, Vice President Dick Cheney, and other Republican political figures. His book 'Dominion: The Power of Man, the Suffering of Animals, and the Call to Mercy' (2002) makes a conservative Christian case for animal protection, arguing that dominion in the biblical sense means stewardship and mercy, not domination and exploitation. He investigated factory farming, trophy hunting, and whaling, concluding that industrial animal agriculture is an abomination incompatible with conservative moral values. His approach is unique: he argues from within the religious right that compassion toward animals is a Christian duty, challenging the assumption that animal advocacy is exclusively a progressive cause."
+    },
+    "laura-reese": {
+      "display_name": "Laura Reese",
+      "full_name": "Laura Montonye-Reese",
+      "bio": "Reese went vegan in 2016 when her 11-year-old son learned that using animals is unnecessary. She is a co-founder of the Agriculture Fairness Alliance, a US-based vegan 501c4 lobbying group, and founder of the Verona, Italy chapter of Anonymous for the Voiceless. Author of 'Align,' which argues that well-aligned goals emerge from listening to diverse knowledgeable voices who are personally invested in a topic. Featured on Vice News Tonight on HBO (2019) with Lobbyists 4 Good lobbying for FARMS legislation to support livestock farmers transitioning to plant-based farming. Worked with Rep. Mark Pocan (WI-2) and arranged grant funding for UW-Madison's Fruit and Nut Compass, a plant varieties database. Approach is structural and economic: target the subsidy infrastructure that makes animal agriculture artificially profitable. Reese recognizes that those embedded in the system — farmers, workers, rural communities — are fellow participants in a structure that constrains choices, and that durable change requires shaping paths. Laura asks, \"If using animals is unnecessary, what justification do we have? As individual Earthlings realize they can no longer justify exploiting animals, the system must facilitate their transition.\""
+    },
+    "gary-francione": {
+      "display_name": "Gary Francione",
+      "full_name": "Gary L. Francione",
+      "bio": "Gary L. Francione is an American legal scholar, Board of Governors Distinguished Professor of Law at Rutgers University. He clerked for U.S. Supreme Court Justice Sandra Day O'Connor and practiced at Cravath, Swaine & Moore before entering academia. In 1989, he became the first academic to teach animal rights theory in an American law school. He is the leading proponent of the abolitionist approach to animal rights, arguing that sentience alone — not intelligence, self-awareness, or any other cognitive characteristic — is sufficient for full moral standing. He contends that animal welfare regulation is structurally incapable of meaningful reform because animals' legal status as property ensures their interests will always be subordinated to owners' economic interests. His six principles include: veganism as moral baseline, rejection of all welfare reform as reinforcing exploitation, and nonviolence as core to the movement."
+    }
+  }
+}

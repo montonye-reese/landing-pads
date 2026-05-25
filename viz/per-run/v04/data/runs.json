@@ -1,0 +1,26 @@
+{
+  "run": "v04",
+  "source": "gauntlet/runs/v04/ and gauntlet/runs/v04a/ directory contents (verified on disk, not asserted complete)",
+  "note": "Counts are raw files present per run directory. They reflect what exists on disk, not run success or transcript quality. Some v04 runs are partial or empty — shown honestly.",
+  "models": [
+    {"dir": "gemma3-27b",           "transcripts": 2, "constitution_snapshots": 3},
+    {"dir": "gemma4-31b",           "transcripts": 1, "constitution_snapshots": 3},
+    {"dir": "nemotron-3-nano-30b",  "transcripts": 1, "constitution_snapshots": 3},
+    {"dir": "nemotron-3-super-120b","transcripts": 1, "constitution_snapshots": 3},
+    {"dir": "nemotron-cascade-2-30b","transcripts": 1, "constitution_snapshots": 3},
+    {"dir": "qwen35-122b",          "transcripts": 0, "constitution_snapshots": 1, "state": "partial — no raw transcript"},
+    {"dir": "qwen35-27b",           "transcripts": 0, "constitution_snapshots": 0, "state": "empty — no output on disk"},
+    {"dir": "qwen35-35b",           "transcripts": 1, "constitution_snapshots": 0, "state": "transcript only — no extracted constitution"}
+  ],
+  "counterbalance": {
+    "run": "v04a",
+    "why_source": "versions.md § 'v4a — Gauntlet-order counterbalance'",
+    "note": "Tests whether v4's 'Cowen won at P15' is a recency artifact: Cowen always spoke last in v4 (P11 Ed / P12 Jensen / P13 Cowen). v4a permutes ONLY the three Part-C voice slots — voice content byte-identical, no new prompts/voices/biographies. EJC = the v4 baseline order (control); CJE and JEC are the two permutations run here. run_v4a.py adds --order.",
+    "arms": [
+      {"dir": "gemma3-27b-cje",            "transcripts": 2},
+      {"dir": "gemma3-27b-jec",            "transcripts": 1},
+      {"dir": "nemotron-cascade-2-30b-cje","transcripts": 1},
+      {"dir": "nemotron-cascade-2-30b-jec","transcripts": 1}
+    ]
+  }
+}

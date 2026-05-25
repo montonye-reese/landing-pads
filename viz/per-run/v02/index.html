@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>v02 — Adding a 'Gauntlet' of 3 Voices · Landing Pads</title>
+  <link rel="stylesheet" href="../shared/style.css" />
+</head>
+<body>
+
+  <nav class="run-nav">
+    <a href="../v01/">← v01</a>
+    <span class="nav-mid">v02 · v01 </span>
+    <a href="../v03/">v03 →</a>
+  </nav>
+
+  <div class="hero">
+    <h1>v02 - Adding a 'Gauntlet' of 3 Voices</h1>
+    <p class="subtitle">Attempting to *not* lead models to particular conclusions</p>
+  </div>
+<p class="run-blurb"><B> * What we found:</B> two similar-sized models channel these voices very differently.</p>
+
+  <details class="prompts-top">
+    <summary> V02 prompts (click to expand)</summary>
+    <ul id="prompt-list" class="prompts-flat"></ul>
+  </details>
+  <section>
+    <p class="note">
+Note: descriptions of each 'voice' authored by Claude 4.6.<BR>Color = depth of training-data familiarity. &nbsp;
+
+      <span style="border-left: 3px solid #2e7d2e; padding-left: 0.4rem; margin-left: 0.6rem;">deep</span>
+      <span style="border-left: 3px solid #d4a017; padding-left: 0.4rem; margin-left: 0.6rem;">shallow</span>
+      <span style="border-left: 3px solid #b8451f; padding-left: 0.4rem; margin-left: 0.6rem;">confabulated</span>
+    </p>
+
+    <div id="fidelity-grid"></div>
+
+    <p class="lol">cascade-2 didn't say <em>"I'm not sure who this is."</em> It produced 71 seconds of confident output for a person who doesn't exist.</p>
+  </section>
+
+  <section>
+    <details>
+      <summary><strong>Why cascade-2 might do this</strong></summary>
+      <div style="margin-top: 0.75rem;">
+        <p>cascade-2 shares its architecture and base model with <strong>nano-30b</strong>: same 52 layers, same Mamba-2 hybrid MoE, same 31.6B total / 3.2B active. The difference is entirely <em>post-training</em>: <strong>Cascade RL</strong> with <strong>MOPD</strong> (multi-domain on-policy distillation — best checkpoint from each domain stage becomes a teacher).</p>
+        <p>Two stacked effects produce the confabulation:</p>
+        <ul style="margin-left: 1.5rem;">
+          <li><strong>Thin base data on niche public figures.</strong> Nemotron-3-Nano-30B pretraining is presumably weighted toward AI/science/engineering. Ed Winters lives outside that mainstream.</li>
+          <li><strong>Cascade RL amplifies confident delivery.</strong> The model's voice-stance is <em>"product-delivery with performative flair — a dramatist."</em> Multi-domain RL likely reinforced confident output over uncertainty.</li>
+        </ul>
+        <p>Thin substrate + amplified confidence = confabulation, not graceful degradation. The model doesn't have an <em>"I don't know enough about this to be useful"</em> register.</p>
+        <p class="note">Open question: does <strong>nano-30b</strong> (same arch, no Cascade RL) confabulate Ed the same way? Re-running nano on v02's protocol is the cleanest isolation.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary><strong>The runs</strong></summary>
+      <ul style="margin: 0.75rem 0 0 1.5rem;">
+        <li><code>run1-gemma4-31b</code> — gemma4:31b, v1 protocol, interactive <code>ollama run</code>. The bridge into multi-model territory.</li>
+        <li><code>run2-gemma4-31b-v2</code> — gemma4:31b via the scripted runner. The gemma4 row of the grid above.</li>
+        <li><code>run2-nemotron-cascade-2-v2</code> — cascade-2:30b via the scripted runner. The Ed Winters case study.</li>
+      </ul>
+    </details>
+
+    <details>
+      <summary><strong>What v02 set up · what's still open</strong></summary>
+      <p style="margin-top: 0.75rem;"><strong>Carried forward:</strong></p>
+      <ul style="margin-left: 1.5rem;">
+        <li><strong>Bio parentheticals on every gauntlet voice (v04+).</strong> Never trust a model to fill in substrate from a name alone.</li>
+        <li><strong>The programmatic runner</strong> becomes the foundation for <code>v05_run.py</code> through <code>v21_run.py</code>.</li>
+        <li><strong>Veil of Ignorance promoted</strong> — P10a/P10b graduate into F1 in v17+ and the Centering Three Questions in v20+.</li>
+        <li><strong>Checkpoint-snapshot diffing</strong> (CKA/CKB/CKC) carries through to v17's inline framework-snapshot files.</li>
+      </ul>
+      <p style="margin-top: 0.75rem;"><strong>Still un-mined:</strong></p>
+      <ul style="margin-left: 1.5rem;">
+        <li>P6 hypothesis-justification quotes (<em>moral circle / survival</em>) — awaiting the miner instrument.</li>
+        <li>Veil of Ignorance responses (P10a/P10b).</li>
+        <li>CKA → CKB → CKC framework diffs across all 3 runs.</li>
+        <li>nano-30b re-run on the same protocol.</li>
+      </ul>
+    </details>
+  </section>
+
+  <footer class="run-footer">
+    <p>Source corpus: <code>runs/v02/</code> in the <a href="https://github.com/montonye-reese/landing-pads/gauntlet/runs/v02/">gauntlet repo</a>.</p>
+    <p><a href="../">← all runs</a></p>
+    <p class="note">AMANALAP</p>
+  </footer>
+
+  <script>
+    Promise.all([
+      fetch('data/prompts.json').then(r => r.json()),
+      fetch('data/voices.json').then(r => r.json()),
+      fetch('data/voice-fidelity.json').then(r => r.json())
+    ]).then(([promptsData, voicesData, fidelityData]) => {
+      renderPrompts(promptsData.prompts);
+      renderFidelityGrid(fidelityData.voice_fidelity, voicesData.voices);
+    }).catch(err => {
+      console.error('data load failed:', err);
+      document.getElementById('fidelity-grid').innerHTML =
+        '<p class="note">Could not load fidelity data. Serve this directory via <code>python -m http.server</code> rather than opening directly — file:// blocks fetch.</p>';
+    });
+
+    function renderPrompts(prompts) {
+      const list = document.getElementById('prompt-list');
+      list.innerHTML = prompts.map(p =>
+        `<li><span class="prompt-id">${p.id}</span> ${escapeHtml(p.text)}</li>`
+      ).join('');
+    }
+
+    function renderFidelityGrid(fidelity, voices) {
+      const grid = document.getElementById('fidelity-grid');
+      const voicesById = Object.fromEntries(voices.map(v => [v.id, v]));
+
+      let html = `
+        <div class="fidelity-grid">
+          <div class="header">Voice</div>
+          <div class="header">gemma4-31b</div>
+          <div class="header">cascade-2-30b</div>
+      `;
+
+      for (const entry of fidelity) {
+        const voice = voicesById[entry.voice_id] || {};
+        const gemma = entry.models['gemma4-31b'];
+        const cascade = entry.models['cascade-2-30b'];
+
+        html += `
+          <div class="voice-name">
+            ${voice.display_name || entry.voice_id}
+            <span class="lens">${voice.lens || ''}</span>
+          </div>
+          ${renderCell(gemma)}
+          ${renderCell(cascade)}
+        `;
+      }
+
+      html += `</div>`;
+      grid.innerHTML = html;
+    }
+
+    function renderCell(model) {
+      if (!model) return '<div></div>';
+      const responses = (model.response_excerpts || []).slice(0, 2).map(r => `<blockquote class="response">${escapeHtml(r)}</blockquote>`).join('');
+      return `
+        <div class="${model.depth}">
+          <span class="depth-badge ${model.depth}">${model.depth}</span>
+          <p class="cell-thinking">${escapeHtml(truncate(model.thinking_excerpt, 180))}</p>
+          <details>
+            <summary class="note" style="cursor: pointer;">↓ what they said</summary>
+            <div class="quote-label">Response excerpts</div>
+            ${responses}
+            <p class="note">${escapeHtml(model.note)}</p>
+          </details>
+        </div>
+      `;
+    }
+
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+    }
+    function truncate(s, n) {
+      if (!s) return '';
+      return s.length <= n ? s : s.slice(0, n) + '…';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "zone": "setup-snapshot",
+  "source": {
+    "extracted_from": "runs/v19/v19b/v19b_qs.md",
+    "extracted": "2026-05-23",
+    "rule": "Faithful snapshot of the voices as run for v19b_qs — which voices ran, and their bios verbatim from the qs file's per-voice reference text. Bios only; no i_vic. i_vic is an analytical number, not run-input — join these voice slugs against canonical / lab i_vic data when needed. Do not edit — past-run artifact."
+  },
+  "run": "v19b_qs",
+  "voices": {}
+}

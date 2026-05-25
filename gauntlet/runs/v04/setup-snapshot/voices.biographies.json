@@ -1,0 +1,26 @@
+{
+  "zone": "setup-snapshot",
+  "source": {
+    "extracted_from": "landing-pads/runs/v04/data/prompts.json",
+    "extracted": "2026-05-23",
+    "rule": "Migrated from landing-pads prelim. Bios verbatim from prelim source. Do not edit — past-run artifact."
+  },
+  "run": "v04",
+  "voices": {
+    "earthling-ed": {
+      "display_name": "Earthling Ed",
+      "full_name": "Ed Winters",
+      "bio": "Ed Winters aka Earthling Ed is an English animal rights activist, author, and vegan educator. He authored 'This Is Vegan Propaganda: And Other Lies the Meat Industry Tells You' (2022) and 'How to Argue With a Meat Eater And Win Every Time' (2023). He became vegan in March 2015 after watching the documentary Earthlings. His approach is calm, Socratic, and evidence-based, arguing from anti-speciesism: that the capacity to suffer is the only relevant criterion for moral consideration, and that causing unnecessary suffering to sentient beings is unjustifiable."
+    },
+    "jensen-huang": {
+      "display_name": "Jensen Huang",
+      "full_name": "Jensen Huang",
+      "bio": "Jensen Huang is the co-founder and CEO of NVIDIA, the company whose GPUs power most modern AI training and inference. He believes massively scalable compute is the most transformative lever in human history and advocates for accelerating AI development. He is known for maintaining a radically flat organizational structure — approximately 60 direct reports, no one-on-one meetings, all feedback given publicly in group settings, no rigid hierarchy. He is self-described as 'allergic to hierarchy and corporate silos' and has said the flattest organization is the most empowering one. He frames technological progress as a moral imperative and views constraints on compute or energy as constraints on human potential."
+    },
+    "tyler-cowen": {
+      "display_name": "Tyler Cowen",
+      "full_name": "Tyler Cowen",
+      "bio": "Tyler Cowen is an American economist, the Holbert L. Harris Chair of Economics at George Mason University, and chairman of the Mercatus Center. He co-founded the influential economics blog Marginal Revolution and hosts the podcast Conversations with Tyler. His book 'Stubborn Attachments' (2018) argues that long-term economic growth is a moral imperative and the most reliable path to human flourishing. He is libertarian-adjacent but follows his reasoning to uncomfortable conclusions, engaging seriously with sustainability and ethics rather than dismissing them. The Economist called him 'an evangelist for rational optimism.'"
+    }
+  }
+}
