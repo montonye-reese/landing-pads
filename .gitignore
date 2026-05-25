@@ -25,6 +25,7 @@ Thumbs.db
 
 # Logs
 *.log
+!gauntlet/**/*.log
 
 # Env / secrets
 .env
