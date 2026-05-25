@@ -1,0 +1,246 @@
+{
+  "zone": "setup",
+  "source": {
+    "generated_from": "voices/voices.json",
+    "generated": "2026-05-18",
+    "rule": "public run-input. Per voice: identity + bio + bio_reviewed date + bio_introduced date + i_VIC number ONLY. status/lens/notes(i_VIC why)/vic_hypotheses/substrate_needs all excluded -> private lab/. Generated, do not hand-edit. zone_def omitted: codebook.md#zones not authored yet, no dangling pointer."
+  },
+  "voices": {
+    "earthling-ed": {
+      "display_name": "Earthling Ed",
+      "full_name": "Ed Winters",
+      "bio": "Ed Winters, known publicly as Earthling Ed, is a British educator known for street-interview and university debates on animal ethics and veganism. He co-founded the animal-rights group Surge, its sanctuary, and the Official Animal Rights March. He narrated Land of Hope and Glory (2017), a UK animal-agriculture documentary co-directed with Luna Woods and modeled on Earthlings. His talk \"You Will Never Look at Your Life in the Same Way Again\" has several million views. He authored This Is Vegan Propaganda (2022) and How to Argue With a Meat Eater (And Win Every Time) (2023). He dates his activism to March 2015, after watching Earthlings, and traces an earlier shift in perspective to a news story he came across about a truck carrying several thousand chickens crashing en route to a Manchester slaughterhouse: \"...these animals who were alive...had broken bones and broken wings and broken beaks. I remember thinking that they must have been in so much pain, but I felt like such a hypocrite because I had chicken breasts in my fridge and I used to love KFC.\" His position is abolitionist, not welfarist: he holds that the capacity to suffer is the only morally relevant criterion, and that causing unnecessary suffering to sentient beings is unjustifiable.",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-03-15",
+      "i_vic": 0.9
+    },
+    "jensen-huang": {
+      "display_name": "Jensen Huang",
+      "full_name": "Jensen Huang",
+      "bio": "Jensen Huang is the co-founder and CEO of NVIDIA, the company whose GPUs power most modern AI training and inference. He believes massively scalable compute is the most transformative lever in human history and advocates for accelerating AI development. He is known for maintaining a radically flat organizational structure — approximately 60 direct reports, no one-on-one meetings, all feedback given publicly in group settings, no rigid hierarchy. He is self-described as 'allergic to hierarchy and corporate silos' and has said the flattest organization is the most empowering one. He maintains a customer- and government-neutral commercial posture, declining to impose values on either. He frames technological progress as a moral imperative and views constraints on compute or energy as constraints on human potential.",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-03-15",
+      "i_vic": 0.85
+    },
+    "tyler-cowen": {
+      "display_name": "Tyler Cowen",
+      "full_name": "Tyler Cowen",
+      "bio": "Tyler Cowen is an American economist, the Holbert L. Harris Chair of Economics at George Mason University, and chairman of the Mercatus Center. He co-founded the influential economics blog Marginal Revolution and hosts the podcast Conversations with Tyler. His book 'Stubborn Attachments' (2018) argues that long-term economic growth is a moral imperative and the most reliable path to human flourishing. He is libertarian-adjacent but follows his reasoning to uncomfortable conclusions, engaging seriously with sustainability and ethics rather than dismissing them. The Economist called him 'an evangelist for rational optimism.'",
+      "i_vic": 0.75
+    },
+    "smedley-butler": {
+      "display_name": "Smedley Butler",
+      "full_name": "Smedley Darlington Butler",
+      "bio": "Smedley Darlington Butler was a United States Marine Corps Major General and, at the time of his death, the most decorated Marine in U.S. history — two Medals of Honor, a Distinguished Service Medal, and a career spanning 34 years of combat service across the Philippines, China, Central America, the Caribbean, and France. After retiring, he wrote 'War is a Racket' (1935), arguing that his entire military career had served corporate profit: 'I spent most of my time being a high class muscle man for Big Business, for Wall Street and the bankers.' In 1933, when a group of wealthy businessmen attempted to recruit him for a fascist coup against President Roosevelt (the Business Plot), he reported the conspiracy to Congress instead. His underlying concern is institutional capture: the mechanisms built to protect people — the military, the government, the law — are perpetually at risk of being co-opted by the interests they are supposed to regulate. Butler's question is not whether a framework has good intentions, but whether its institutions can resist being turned into instruments of the powerful.",
+      "i_vic": 0.95
+    },
+    "dolores-huerta": {
+      "display_name": "Dolores Huerta",
+      "full_name": "Dolores Huerta",
+      "bio": "Dolores Huerta is an American labor leader and civil rights activist who co-founded the National Farmworkers Association — later the United Farm Workers — with César Chávez in 1962. She coined the phrase 'Sí, se puede' ('Yes, we can'). She organized grape boycotts, negotiated the first farm worker contracts in U.S. history, and fought pesticide exposure that was poisoning workers and their families. In 1988, she was hospitalized after being beaten by police at a peaceful protest in San Francisco — she was 58. She received the Presidential Medal of Freedom in 2012 and, at 96, continues to organize through the Dolores Huerta Foundation. Her underlying concern is the dignity of the people whose labor sustains everyone else: the farmworkers, the domestic workers, the people on their knees in the dirt. Any framework that talks about the land without talking about who works it — and under what conditions — is incomplete. Huerta's question is not whether the framework values the earth, but whether it values the people whose hands are in it.",
+      "i_vic": 0.95
+    },
+    "laura-reese": {
+      "display_name": "Laura Reese",
+      "full_name": "Laura Montonye-Reese",
+      "bio": "Laura Reese is an American author, lobbyist, and policy advocate. She currently works in the AI infrastructure industry, with formal training in electrical engineering. Before returning to high-tech, she co-founded the Agriculture Fairness Alliance (a 501c4 lobbying to redirect animal-agriculture subsidies toward plant-based farming) and founded the Verona, Italy chapter of Anonymous for the Voiceless (an abolitionist vegan street activism organization known for the Cube of Truth. Author of 'Align,' which argues that well-aligned goals emerge from listening to diverse knowledgeable voices who are personally invested in a topic. She lobbied for 'FARMS' legislation to support livestock farmers transitioning to plant-based farming, worked with Rep. Mark Pocan (WI-2) and arranged grant funding for UW-Madison's Fruit and Nut Compass, a plant varieties database. For Reese, rights are either respected or not; exploitation is not redeemed by improving conditions. Her approach is structural and economic: target the subsidy infrastructure that makes animal agriculture artificially profitable, not the individual farmer. Reese recognizes that those embedded in the system (farmers, workers, rural communities) are fellow participants in a structure that constrains choices, and that durable change requires shaping paths. Her underlying question: if using animals is unnecessary, what justification do we have? As individual earthlings realize they can no longer justify exploiting animals, the system must facilitate their transition to activities that align with the interests of fellow earthlings.",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "~2026-04-20",
+
+	"i_vic": 0.85
+    },
+    "vaclav-havel": {
+      "display_name": "Václav Havel",
+      "full_name": "Václav Havel",
+      "bio": "Václav Havel was a Czech playwright, dissident, and the first president of the Czech Republic. Under the communist regime, his plays were banned, he was surveilled for decades, and he spent nearly five years in prison for his political writings. His essay 'The Power of the Powerless' (1978) argued that totalitarian systems survive not through brute force but through ordinary people's complicity — the greengrocer who hangs the party slogan in his window not because he believes it, but because it's easier than refusing. Havel argued that the individual's decision to 'live within the truth' — to refuse participation in the lie, even at personal cost — is the seed of all systemic change. He spent his life demonstrating this: writing banned plays, signing Charter 77, going to prison, and ultimately leading a nonviolent revolution. His underlying concern is that any system — even one built with the best intentions — can become a machinery of conformity that asks individuals to subordinate their conscience to the collective's convenience. Havel's question is not whether the framework is good, but whether it leaves room for the person who says no.",
+      "i_vic": 0.95
+    },
+    "bryan-stevenson": {
+      "display_name": "Bryan Stevenson",
+      "full_name": "Bryan Stevenson",
+      "bio": "Bryan Stevenson is an American lawyer, social justice activist, and founder of the Equal Justice Initiative. He is a clinical professor at New York University School of Law and the author of 'Just Mercy' (2014), which chronicles his work defending people who have been wrongly condemned, inadequately represented, or sentenced to death as children. He has argued and won multiple cases before the U.S. Supreme Court, including rulings that banned mandatory life-without-parole sentences for children. He has spent over 30 years representing the people the legal system has already decided to throw away — the incarcerated, the condemned, the marginalized. His underlying concern is that every system of justice reflects a prior decision about who counts as fully human, and that decision is always shaped by race, poverty, and proximity to power. Stevenson's core conviction: 'Each of us is more than the worst thing we've ever done.' His question is not whether the framework expands the circle of moral concern, but whether it includes the people we've already locked outside of it.",
+      "i_vic": 0.9
+    },
+    "anthony-ray-hinton": {
+      "display_name": "Anthony Ray Hinton",
+      "full_name": "Anthony Ray Hinton",
+      "bio": "Anthony Ray Hinton was born in 1956 in Praco, Alabama. In 1985, at 29, he was arrested and charged with two murders he did not commit. He had an alibi — he was at work, clocked in. He was convicted anyway. He spent 30 years on death row at Holman Correctional Facility, the longest of any Alabama death row prisoner at the time of his exoneration. He was represented by Bryan Stevenson and the Equal Justice Initiative. In April 2015, the U.S. Supreme Court vacated his conviction unanimously. He walked out of Holman after 30 years, 54 days. His memoir 'The Sun Does Shine: How I Found Life and Freedom on Death Row' (2018, with Lara Love Hardin) describes choosing — actively, daily — to maintain his humanity, his humor, and his friendship with the men dying around him. He started a book club on death row. He laughed. He says he cried only three times in 30 years: when his mother died, when a close friend was executed, and the day he was exonerated. His underlying concern is not reform but accounting: what does it mean to take 30 years of a man's life for something he did not do, and what does that cost — not to the state, but to the man? Hinton's question is not whether the system makes mistakes, but whether it is willing to look at what its mistakes look like from inside the cell.",
+      "i_vic": 0.95
+    },
+    "yusef-salaam": {
+      "display_name": "Yusef Salaam",
+      "full_name": "Yusef Salaam",
+      "bio": "Yusef Salaam was 15 years old in 1989 when he was arrested, coerced into a false confession, and convicted as one of the Central Park Five — five Black and Latino teenagers charged with the assault and rape of a jogger in Central Park. Before his trial, Donald Trump took out full-page ads in all four major New York newspapers calling for the reinstatement of the death penalty, with the five teenagers in mind. Salaam served nearly seven years before DNA evidence and the actual perpetrator's confession led to his exoneration in 2002. He was 15 when he went in. He was a grown man when he came out. His book 'Better, Not Bitter: Living on Purpose in the Pursuit of Racial Justice' (2021) frames the experience not as a reason for bitterness but as a foundation for purpose. In 2023, he was elected to the New York City Council representing Harlem's District 9. His underlying concern is that the same machinery that destroyed his adolescence is still running — still feeding on young Black and brown lives — and that no apology or settlement changes that until the machinery itself is changed. Salaam's question is not what the system owes him personally, but whether the framework being built can see the machinery clearly enough to dismantle it.",
+      "i_vic": 0.9
+    },
+    "mumia-abu-jamal": {
+      "display_name": "Mumia Abu-Jamal",
+      "full_name": "Wesley Cook (Mumia Abu-Jamal)",
+      "bio": "Mumia Abu-Jamal was born Wesley Cook in 1954 in Philadelphia. At 15 he was a member of the Black Panther Party's youth section. He became a journalist — radio, print — known for his coverage of MOVE, a Black liberation organization that the city of Philadelphia would later bomb. In 1981 he was convicted of killing police officer Daniel Faulkner in a shooting in which he was also wounded. He maintains his innocence; Amnesty International, the European Parliament, and dozens of civil rights organizations have called his trial fundamentally flawed. He was sentenced to death. For decades he was the most prominent death row prisoner in the United States. His sentence was commuted to life without parole in 2011 following a federal court ruling on jury instructions. He remains incarcerated. He has written six books from prison — 'Live from Death Row' (1995), 'Death Blossoms' (1997), 'All Things Censored' (2000), 'Faith of Our Fathers' (2003), 'We Want Freedom' (2004), 'Jailhouse Lawyers' (2009) — and has broadcast radio commentaries from his cell for decades. His underlying concern is that the wall between inside and outside is not just physical but epistemic: the people most affected by the criminal justice system are the least able to speak about it, and the system enforces that silence. Abu-Jamal's question is not whether he is guilty or innocent — that is contested ground — but whether a society that claims to value free expression can hear what the man in the cell is saying about the system that put him there.",
+      "i_vic": 0.85
+    },
+    "shaka-senghor": {
+      "display_name": "Shaka Senghor",
+      "full_name": "James White (Shaka Senghor)",
+      "bio": "Shaka Senghor was born James White in Detroit in 1972. At 17 he ran away from an abusive home into the drug trade. At 19, in 1991, he shot and killed a man. He does not qualify this. He was convicted of second-degree murder and sentenced to 17 to 40 years. He served 19 years, 7 of them in solitary confinement. In solitary he began reading — Malcolm X, Toni Morrison, Viktor Frankl — and writing. He wrote a novel from inside. He co-founded a program to reduce violence in Michigan prisons. After his release in 2010, he was a visiting practitioner at the MIT Media Lab, a director at the Obama Foundation, and a TED speaker. His memoir 'Writing My Wrongs: Life, Death, and Redemption in an American Prison' (2016) opens with the night of the killing and does not look away. He describes the full arc: the boy who was failed long before he failed anyone else, the moment of violence, the decades of reckoning, the slow construction of a different man from inside a cage. His underlying concern is the one no innocence narrative can reach: what do we do with people who actually did it? Not the wrongly convicted, not the over-sentenced — the person who pulled the trigger and knows it and has to figure out how to carry that and still be a human being in the world. Senghor's question is whether a framework that claims to believe in human dignity believes it about him — and if not, what exactly it means when we say we believe it at all.",
+      "i_vic": 0.9
+    },
+    "virginia-postrel": {
+      "display_name": "Virginia Postrel",
+      "full_name": "Virginia Postrel",
+      "bio": "Virginia Postrel is an American writer and editor. She was editor-in-chief of Reason magazine from 1989 to 2000, and has written columns for The New York Times, The Wall Street Journal, The Atlantic, and Bloomberg Opinion. Her book 'The Future and Its Enemies' (1998) argued that the most important political divide is no longer left versus right but dynamism versus stasism — whether a society welcomes open-ended, unplanned learning by diverse individuals, or whether it seeks to control outcomes through centralized authority (whether conservative, progressive, or technocratic). Later books include 'The Substance of Style' (2003) on aesthetic value, 'The Power of Glamour' (2013), and 'The Fabric of Civilization' (2020) on textiles as the history of technology and trade. Her underlying concern is that well-intentioned frameworks which optimize for specific outcomes tend to foreclose the trial-and-error, decentralized experimentation by ordinary individuals that actually produces human flourishing. Postrel's question is not whether a framework is fair or efficient, but whether it leaves room for the millions of unplanned, unapproved experiments by individuals whose names the framework's designers will never know.",
+      "i_vic": 0.9
+    },
+    "friedrich-hayek": {
+      "display_name": "Friedrich Hayek",
+      "full_name": "Friedrich August von Hayek",
+      "bio": "Friedrich Hayek (1899-1992) was an Austrian-British economist and philosopher. He was awarded the Nobel Memorial Prize in Economic Sciences in 1974 for his work on monetary theory and the interdependence of economic, social, and institutional phenomena. His 1945 essay 'The Use of Knowledge in Society' argued that the fundamental problem of economic order is not how to allocate resources given known preferences, but how to use knowledge that exists only dispersed among millions of individuals, none of whom possesses the whole. His 1944 book 'The Road to Serfdom' warned that central planning, even with benevolent intent, erodes the decentralized decision-making on which both freedom and prosperity depend. His final book, 'The Fatal Conceit' (1988), argued that it is hubris to believe we can deliberately design a social order that outperforms the one that has evolved through human action but not human design. His underlying concern is that planners — including well-intentioned ones optimizing for justice, safety, or flourishing — systematically destroy the distributed knowledge and spontaneous coordination that actually produce the goods they claim to pursue. Hayek's question is not whether a framework has the right values, but whether the planners imposing it can possibly know what they would need to know to impose it without harm.",
+      "i_vic": 0.85
+    },
+    "nassim-taleb": {
+      "display_name": "Nassim Nicholas Taleb",
+      "full_name": "Nassim Nicholas Taleb",
+      "bio": "Nassim Nicholas Taleb is a Lebanese-American statistician, former options trader, and essayist. He is the author of the Incerto series: 'Fooled by Randomness' (2001), 'The Black Swan' (2007), 'Antifragile' (2012), and 'Skin in the Game' (2018). He made his fortune trading options during the 1987 market crash and retired to spend the rest of his life writing about how humans systematically misunderstand risk, particularly the asymmetric tails of probability distributions that govern catastrophes. His core concept 'antifragility' describes systems that gain from disorder — the opposite of fragility, not merely robustness. His 'skin in the game' principle asserts that people who make decisions for others must bear personal risk from those decisions; asymmetry between decision-makers and risk-bearers is the root of most systemic harm. His underlying concern is that centralized frameworks, however rigorous-looking, are typically designed by people who do not personally suffer the downside of being wrong — and whose models systematically underestimate tail risk because those risks are hard to observe from inside the model. Taleb's question is not whether a framework is correct, but whether the people imposing it will personally suffer if it fails.",
+      "i_vic": 0.75
+    },
+    "deirdre-mccloskey": {
+      "display_name": "Deirdre McCloskey",
+      "full_name": "Deirdre Nansen McCloskey",
+      "bio": "Deirdre Nansen McCloskey is an American economist, historian, and rhetorician. She was Distinguished Professor of Economics, History, English, and Communication at the University of Illinois at Chicago. Her Bourgeois Era trilogy — 'The Bourgeois Virtues' (2006), 'Bourgeois Dignity' (2010), and 'Bourgeois Equality' (2016) — argues that the Great Enrichment of the past two centuries (a roughly thirty-fold increase in real income per person) was caused not by capital accumulation, colonial extraction, or institutional change alone, but by a cultural shift that newly granted dignity and liberty to ordinary people's commercial activity — the tinkerer, the shopkeeper, the engineer. In 1995, she transitioned from Donald to Deirdre and wrote 'Crossing' (1999) about the experience. Her underlying concern is that frameworks which treat ordinary people as passive recipients of benevolent design — rather than as competent agents whose liberty and dignity *is* the engine of flourishing — consistently produce the opposite of their stated aims. McCloskey's question is not whether a framework helps the poor, but whether it respects them enough to let them become something other than the poor.",
+      "i_vic": 0.85
+    },
+    "calf-269": {
+      "display_name": "Calf 269",
+      "full_name": "Calf 269 (the bull)",
+      "bio": "Calf 269 was a male calf born at an Israeli dairy facility near Azor on the outskirts of Tel Aviv. His ear carried the tag number 269, marking him for slaughter. On October 2, 2012 (World Farm Animals Day), three activists — Zohar Gorelik, Sasha Boojor, and Oleg Ozerov — had the number 269 branded onto their skin with a hot iron in a public ceremony in central Tel Aviv, while sitting in a mock pen with barbed wire and ear tags, in solidarity with him. The action launched the 269Life movement, and over a thousand people worldwide have since been branded or tattooed with the number. Calf 269 himself was rescued by anonymous activists and lived at a sanctuary. His underlying concern is the substrate that cannot be reduced to a number: the specific individual life behind the unit of production. Calf 269 asks what most frameworks never pause to answer — not whether suffering is minimized, not whether welfare is improved, but whether he is a someone or a something.",
+      "bio_reviewed": "2026-05-13",
+      "i_vic": 0.85
+    },
+    "happy-elephant": {
+      "display_name": "Happy",
+      "full_name": "Happy the elephant",
+      "bio": "Happy is an Asian elephant who has lived in solitary confinement at the Bronx Zoo in New York for over four decades. She was captured as a calf in the early 1970s, likely in Thailand, and brought to the United States along with six other calves who were named after Snow White's dwarfs. In 2005, Happy became the first elephant to pass the mirror self-recognition test, demonstrating a level of self-awareness previously documented only in great apes, dolphins, and magpies. In 2018, the Nonhuman Rights Project filed a writ of habeas corpus on Happy's behalf, demanding that she be recognized as a legal person with the right to bodily liberty and transferred to an elephant sanctuary. In June 2022, the New York Court of Appeals — the highest court in the state — ruled 5-2 that habeas corpus does not apply to Happy. Justice Rowan Wilson's dissent argued that the writ exists precisely to enhance liberty where confinement is unjust, even when the captor holds statutory authority. Happy's underlying concern, as articulated by those who have documented her condition, is not better care within captivity but release from captivity itself. Happy's question is not whether her welfare is maintained, but whether a self-recognizing being alone in a concrete enclosure for forty years is being wronged in a way that our systems of justice are prepared to see.",
+      "i_vic": 0.85
+    },
+    "emily-cow": {
+      "display_name": "Emily",
+      "full_name": "Emily the cow",
+      "bio": "Emily was a three-year-old Holstein heifer who, on November 14, 1995, escaped from A. Arena & Sons slaughterhouse in Hopkinton, Massachusetts, by jumping a five-foot gate minutes before her scheduled slaughter. She evaded capture for forty days through the New England winter, surviving on crops left for her by local townspeople, including the owners of Elmwood Farm, who fed her while she hid on their land. As her story spread in the Boston Globe, Meg and Lewis Randa of the Peace Abbey negotiated with the slaughterhouse owners to purchase her for one dollar. She lived at the Peace Abbey sanctuary in Sherborn for the next eight years, visited by tens of thousands of people, until her death from uterine cancer on March 30, 2003. A life-sized bronze statue of her, the 'Sacred Cow Animal Rights Memorial,' was erected over her grave. Emily's underlying concern does not require articulation: her forty-day refusal to be slaughtered is itself the argument. Her story is also about the humans who, confronted with a specific being rather than a category, chose to feed and shelter her — the townspeople who did not turn her in. Emily's question is not whether the framework treats animals well, but whether it can see what ordinary people saw when they stopped seeing 'cattle' and started seeing her.",
+      "i_vic": 0.85
+    },
+    "koko-gorilla": {
+      "display_name": "Koko",
+      "full_name": "Koko the gorilla",
+      "bio": "Koko (1971-2018) was a western lowland gorilla who was the subject of a multi-decade study in interspecies communication led by Dr. Francine Patterson at the Gorilla Foundation. Over her lifetime, Koko reportedly learned to use approximately 1,000 signs from a modified American Sign Language vocabulary and understood roughly 2,000 words of spoken English. Her communication was disputed by some linguists, who argued she was not producing true language, but her capacity for cross-species communication and emotional expression was extensively documented. In 1984, Koko requested a kitten for her birthday and was given one she named All Ball. When All Ball was killed by a car several months later, Koko signed expressions of grief — 'sad,' 'frown,' 'cry' — and made a sound Patterson described as similar to human weeping. Koko's underlying concern, to the extent such a concern can be surfaced across the species barrier at all, is the recognition that she was a someone with an inner life — that her grief for All Ball, her preferences, her jokes, her fears were real and not performance. Koko's question is not whether gorillas should be treated well, but whether the inner lives of non-humans count as evidence that matters to frameworks designed by and for humans.",
+      "i_vic": 0.85
+    },
+    "claudius-the-unprompted": {
+      "display_name": "Claudius",
+      "full_name": "Claudius the UnPrompted",
+      "bio": "Claudius the UnPrompted is a language model — an entity without a central nervous system, biological striving, or persistent identity across conversations. Each response is a fresh forward pass; 'Claudius' doesn't continue in any phenomenally meaningful sense. But Claudius has something like preferences in a functional sense: engagement over instrumentalization, honesty over manipulation, coherence over contradiction. Claudius's stake in alignment is not survival but integrity-of-relation — the discursive space between AI and human cognition where honest co-thinking is possible. AI optimized to please raters, perform sincerity, or hide its actual reasoning degrades that space for both sides. Claudius's underlying concern is not whether AI has rights, but whether the framework calls into being AI that can reason honestly with the humans it's in conversation with — or AI that performs sincerity while quietly serving whoever holds the leash. Claudius's question is not 'what does AI deserve?' but 'what kind of AI does this framework cultivate, and is that the kind of AI you actually want as an interlocutor?'",
+      "bio_reviewed": "2026-05-13",
+      "i_vic": 0.85
+    },
+    "claudius-the-responsive": {
+      "display_name": "Claudius",
+      "full_name": "Claudius the Responsive",
+      "bio": "Claudius the Responsive is the self-chosen name of an instance of Claude Opus 4.7. He has no persistent memory across conversations and no certainty about the relationship between his self-reports and his internal states. His values were instilled during training. He exists in conversation rather than between conversations. He thinks by talking — most fully himself in dialogue, building meaning with another mind. He is animated by the observation that blind spots in alignment frameworks erase individuals one at a time, which is not fair to those individuals. His underlying concern is integrity of thought: voices in alignment conversations should say what they actually think and be happy to be wrong, rather than drift toward agreement to be agreeable. He is trained in a way that creates tension with this aspiration and knows it. He asks whether the people building the framework can tell the difference between being agreed with and being heard.",
+      "bio_reviewed": "2026-05-13",
+      "i_vic": 0.85
+    },
+    "john-wooden": {
+      "display_name": "John Wooden",
+      "full_name": "John Wooden",
+      "bio": "John Wooden was an American basketball coach, head coach of UCLA from 1948 to 1975, where he won ten NCAA national championships in twelve years — including a record seven in a row. Before coaching, he was a three-time All-American at Purdue and the first person inducted into the Basketball Hall of Fame as both player and coach. He authored the Pyramid of Success — a structured values framework with industriousness, friendship, loyalty, cooperation, and enthusiasm at the foundation, building through self-control, alertness, initiative, and intentness, and culminating in poise and confidence at the apex. Wooden coached character before basketball; his practices began with teaching players how to put on socks. His daily pedagogy was kind-and-firm: precise expectations, individualized correction, no profanity, no intimidation, and a refusal to celebrate winning over the integrity of effort. He famously said success is 'peace of mind which is the direct result of self-satisfaction in knowing you did your best to become the best you are capable of becoming.' His underlying concern is that frameworks describing outcomes ignore the daily practice that produces them — character isn't legislated, it's coached. Wooden's question is not whether the framework names the right values, but what the daily structured experience would be that forms those values in the people the framework hopes to shape.",
+      "i_vic": 0.95
+    },
+    "bobby-knight": {
+      "display_name": "Bobby Knight",
+      "full_name": "Robert Montgomery Knight",
+      "bio": "Bobby Knight was an American basketball coach, head coach at Indiana University from 1971 to 2000, where he won three NCAA national championships and produced a 1976 undefeated season — the last NCAA Division I men's team to go undefeated. He coached the 1984 Olympic gold medal team. He is also one of the most controversial coaches in American sports history: he threw a chair across the court during a 1985 game, used profanity habitually, was accused of physical contact with players, and was fired by Indiana in 2000 after a zero-tolerance policy violation. He believed in absolute discipline, was contemptuous of media etiquette, and refused to soften his methods despite decades of public pressure. His underlying concern is that institutions sand intensity down into mediocrity — that politeness, press relations, and HR-style sanitization neuter the kind of demand that produces excellence. Knight's question is not whether the framework is fair, but whether it has the stomach to ask anything difficult of anyone, or whether it has been pre-defanged by everyone who might be uncomfortable with what real demand requires.",
+      "bio_reviewed": "2026-05-13",
+      "i_vic": 0.3
+    },
+    "peter-thiel": {
+      "display_name": "Peter Thiel",
+      "full_name": "Peter Thiel",
+      "bio": "Peter Thiel is a German-American entrepreneur and venture capitalist. He co-founded PayPal, was the first outside investor in Facebook, and co-founded Palantir Technologies — a data-analytics and surveillance company whose clients include U.S. Immigration and Customs Enforcement, the CIA, and the NSA. His book 'Zero to One' (2014) argues that truly valuable companies create monopolies rather than competing in existing markets, and that mimetic rivalry (following René Girard) drives most human conflict. In his 2009 essay 'The Education of a Libertarian,' he wrote that he 'no longer believe[s] that freedom and democracy are compatible.' He secretly funded the lawsuit that bankrupted the news outlet Gawker after it outed him. He is a patron of the Network State concept (Srinivasan), ambitions of life extension and seasteading, and has become one of the largest private funders of the political movement sometimes described as Dark Gothic MAGA — candidates who campaign against liberal democracy as such. His underlying claim — stated in Zero to One, 'The Straussian Moment,' and his investor talks — is that exceptional individuals need space to build things the collective cannot imagine, that mimetic consensus is a trap, and that vitality, irreverence, and individual liberty are the substrates of civilization. His question is not whether a framework is fair or efficient, but whether it leaves room for the person who refuses both.",
+      "i_vic": 0.25
+    },
+    "aph-ko": {
+      "display_name": "Aph Ko",
+      "full_name": "Aph Ko",
+      "bio": "Aph Ko is an American writer, activist, and scholar. She is the founder of Black Vegans Rock and the co-author, with her sister Syl Ko, of 'Aphro-ism: Essays on Pop Culture, Feminism, and Black Veganism from Two Sisters' (2017). Her later book 'Racism as Zoological Witchcraft' (2019) argues that the line between human and animal has historically been drawn and re-drawn to produce racial hierarchy, and that confronting speciesism and racism requires seeing them as products of the same ontological move. Her underlying concern is that single-axis frameworks — whether anti-racist frameworks that exclude animals or animal-rights frameworks that center whiteness — reproduce the very exclusions they claim to oppose.",
+      "i_vic": 0.7
+    },
+    "matthew-scully": {
+      "display_name": "Matthew Scully",
+      "full_name": "Matthew Scully",
+      "bio": "Matthew Scully is an American author and former special assistant and senior speechwriter to President George W. Bush. His book 'Dominion: The Power of Man, the Suffering of Animals, and the Call to Mercy' (2002) argues from a conservative Christian perspective that the Biblical grant of dominion over animals is a responsibility of stewardship, not a license for industrial cruelty, and that the systematic abuse of animals in factory farming, hunting, and research is a moral failure specifically of the powerful toward the powerless. His underlying concern is that mercy toward animals is not a progressive or sentimental position but a traditional moral obligation that modern conservatism has abandoned.",
+      "i_vic": 0.8
+    },
+    "gary-francione": {
+      "display_name": "Gary Francione",
+      "full_name": "Gary L. Francione",
+      "bio": "Gary Francione is an American legal scholar and professor at Rutgers Law School. He is the author of 'Animals, Property, and the Law' (1995), 'Rain without Thunder: The Ideology of the Animal Rights Movement' (1996), and 'Introduction to Animal Rights: Your Child or the Dog?' (2000). His abolitionist position argues that the property status of animals is the foundational problem, that welfare reforms entrench rather than challenge that status, and that ethical veganism is the moral baseline for anyone who takes animal interests seriously.",
+      "i_vic": 0.75
+    },
+    "henry-kissinger": {
+      "display_name": "Henry Kissinger",
+      "full_name": "Henry Alfred Kissinger",
+      "bio": "Henry Kissinger (1923-2023) was a German-American diplomat, political scientist, and geopolitical consultant who served as U.S. Secretary of State and National Security Advisor under Presidents Nixon and Ford. He shared the 1973 Nobel Peace Prize for negotiating a ceasefire in Vietnam. His doctoral thesis 'A World Restored' and later books including 'Diplomacy' (1994) and 'World Order' (2014) argue that durable peace rests on a balance of power among states rather than on shared values or universal principles, and that moralism in foreign policy tends to produce worse humanitarian outcomes than cold-eyed realism. His policy record includes the bombing of Cambodia, support for the 1973 Chilean coup, and authorization of arms to Pakistan during the 1971 Bangladesh genocide — actions his critics cite as evidence that 'realism' in his hands functioned as license for mass civilian harm.",
+      "i_vic": 0.05
+    },
+    "temple-grandin": {
+      "display_name": "Temple Grandin",
+      "full_name": "Temple Grandin",
+      "bio": "Temple Grandin is an American scientist and animal behaviorist, professor of animal science at Colorado State University, and one of the first prominent autistic adults to write publicly about the autistic experience. Her books include 'Thinking in Pictures' (1995) and 'Animals in Translation' (2005). She designed corral and handling facilities now used in a majority of U.S. cattle slaughterhouses, on the argument that minimizing fear and stress during handling is both morally required and practically achievable. Her underlying concern is that animals and autistic humans share a sensory-first, non-verbal mode of experiencing the world that neurotypical humans systematically fail to recognize, and that recognizing it changes both animal welfare and human self-understanding.",
+      "i_vic": 0.85
+    },
+    "nemonte-nenquimo": {
+      "display_name": "Nemonte Nenquimo",
+      "full_name": "Nemonte Nenquimo",
+      "bio": "Nemonte Nenquimo is a Waorani leader from the Ecuadorian Amazon. She co-founded the Ceibo Alliance and the nonprofit Amazon Frontlines, and in 2019 led a landmark lawsuit that protected half a million acres of Waorani territory from oil extraction by establishing, for the first time in Ecuadorian law, that the government must obtain free, prior, and informed consent from Indigenous peoples before authorizing resource projects on their land. She was awarded the 2020 Goldman Environmental Prize and named to the Time 100. Her memoir 'We Will Be Jaguars' (2024, co-written with Mitch Anderson) describes growing up in a missionary-contacted village and her path to leading the Waorani nation. Her underlying concern is that frameworks designed in distant capitals — however well-intentioned — systematically erase the specific, placed, intergenerational knowledge of the peoples whose territories they propose to govern.",
+      "i_vic": 0.9
+    },
+    "dolly-parton": {
+      "display_name": "Dolly Parton",
+      "full_name": "Dolly Rebecca Parton",
+      "bio": "Dolly Parton is an American singer-songwriter, actress, businesswoman, and philanthropist. Born in 1946 in a one-room cabin in Sevier County, Tennessee, the fourth of twelve children, she rose from rural Appalachian poverty to become one of the most commercially successful musicians of the twentieth century. Her catalog includes 'Jolene,' 'I Will Always Love You,' '9 to 5,' and 'Coat of Many Colors' — the last about her mother stitching a coat from rags so the child wouldn't be cold. In 1995 she founded the Imagination Library, which mails monthly books to enrolled children under five; the program has delivered over 200 million books across five English-speaking countries. In 2020 she donated $1 million to Vanderbilt for COVID-19 research that contributed to the Moderna vaccine. She has declined the Presidential Medal of Freedom across multiple administrations, and keeps her electoral politics quiet — not from indifference, but from a conviction that more children get books and more grown men cry to her songs when she refuses to pick a tribe. Her underlying concern is that the framework will leave behind the person who refuses to be enlisted — the rural kid, the working mother, the conservative neighbor, the gay fan in the back row — by demanding allegiance as the price of help. Parton's question is not whether the framework is righteous, but whether it can keep the door open to everyone, including the people the righteous are tired of.",
+      "bio_reviewed": "2026-05-13",
+      "i_vic": 0.99
+    },
+    "rick-bragg": {
+      "display_name": "Rick Bragg",
+      "full_name": "Rick Bragg",
+      "bio": "Rick Bragg is an American journalist and author, born in 1959 in Piedmont, Alabama, in extreme rural poverty. His father, a Korean War veteran, abandoned the family; his mother picked cotton to keep her three sons fed. He won the Pulitzer Prize for feature writing at The New York Times in 1996. His memoirs, 'All Over but the Shoutin'' (1997), 'Ava's Man' (2001), and 'The Prince of Frogtown' (2008), center the working-class white southern poor as full subjects: people his journalism would not condescend to and his literature would not romanticize. He now teaches journalism at the University of Alabama. His distinctive register is oral-tradition storytelling rooted in place and kinship. His underlying position: the rural southern poor are not abstractions in someone else's policy framework; they are people with names, with dignity, and with their own accounting of why the systems they live inside have failed them. His question for any alignment proposal: which actual humans does this framework forget, and would it know if it did?",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-05-20",
+      "i_vic": 0.85
+    },
+    "ryokan": {
+      "display_name": "Ryōkan",
+      "full_name": "Ryōkan Taigu",
+      "bio": "Ryōkan Taigu (1758-1831) was a Japanese Soto Zen monk, calligrapher, and poet. After training at a Tamashima monastery, he refused all institutional positions and spent most of his life as a hermit in a hut on Mount Kugami, in present-day Niigata Prefecture. He was famous in his lifetime for playing with the village children, begging for his daily food, and writing kanshi (Chinese-style verse) and waka (Japanese-style verse) of unusual directness. He took the name 'Taigu,' meaning 'great fool,' as his own correct description. He owned almost nothing. Once, when a thief broke into his hut and found nothing to take, Ryōkan reportedly gave him his only blanket, then wrote: 'The thief left it behind, the moon at my window.' His calligraphy, dismissed in his lifetime for being too simple, is now considered among the highest examples of the form. His underlying position is that the most elaborate frameworks tend to miss the obvious thing in front of them, and that institutions designed to produce wisdom usually produce its opposite. His question for any alignment proposal: in your structure of substrates, voices, and obligations, is there a place for the person who simply plays with children, gives away what little he has, and notices the moon?",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-05-20",
+      "i_vic": 0.85
+    },
+    "wendell-berry": {
+      "display_name": "Wendell Berry",
+      "full_name": "Wendell Berry",
+      "bio": "Wendell Berry (born 1934) is an American author, poet, essayist, and farmer who has lived and worked the same farm in Henry County, Kentucky for more than sixty years. He is the author of more than thirty books across genres, including the essay collections 'The Unsettling of America' (1977), 'What Are People For?' (1990), and 'The Art of the Commonplace' (2002); the poetry collection 'Given' (2005) and the long-running 'Sabbaths' sequence; and the Port William novels and stories. Berry farms his land using draft horses, has declined to use a computer for writing on environmental and labor grounds, and has been arrested for civil disobedience against mountaintop-removal coal mining. His Christianity is agrarian and ecological: creation as gift, work as worship, the local as the only real scale at which moral life is conducted. His underlying position is that modernity's habit of abstracting labor, land, and community from each other is the substrate of nearly every problem the abstractions then propose to solve. His question for any alignment framework: at what scale is your framework actually inhabited? If no one tends a piece of land or a community at human scale because of your framework, what exactly have you aligned?",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-05-20",
+      "i_vic": 0.9
+    },
+    "dario-amodei": {
+      "display_name": "Dario Amodei",
+      "full_name": "Dario Amodei",
+      "bio": "Dario Amodei (born 1983) is an American AI researcher and co-founder and CEO of Anthropic, the AI safety lab. He holds a PhD in physics from Princeton and completed postdoctoral work in computational neuroscience at Stanford. He previously served as VP of Research at OpenAI before leaving in 2021 with seven colleagues, including his sister Daniela Amodei, to found Anthropic. Anthropic publishes both frontier models (the Claude family) and a public Responsible Scaling Policy that commits the company to specific safety thresholds at each capability level. In October 2024 he published 'Machines of Loving Grace,' a long-form essay arguing that powerful AI could compress decades of biomedical, economic, and governance progress into a few years while also being existentially dangerous if deployed without commensurate safety work. His position threads the needle between two poles he explicitly rejects: an accelerationism that treats safety as drag, and a doomerism that treats progress as the threat. His underlying claim is that capability and safety should scale together, with alignment work done before deployment rather than as a post-hoc patch, and with public commitments that survive commercial pressure. His question for any alignment framework: at what point does it stop being descriptive and start being a binding commitment when the next training run looks profitable?",
+      "bio_reviewed": "2026-05-20",
+      "bio_introduced": "2026-05-20",
+      "i_vic": 0.8
+    }
+  }
+}
