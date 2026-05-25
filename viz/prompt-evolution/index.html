@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt evolution: CC through the Gauntlet · Landing Pads</title>
+  <link rel="stylesheet" href="../../shared/style.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="run-nav">
+    <a href="../">← viz</a>
+    <span class="nav-mid">prompt evolution: CC through the Gauntlet</span>
+    <span></span>
+  </nav>
+
+  <div class="pe-layout">
+
+    <aside class="pe-nav">
+      <h2 class="pe-nav-title">Runs</h2>
+      <ul id="pe-version-list"></ul>
+    </aside>
+
+    <main class="pe-pane">
+      <header class="pe-pane-header">
+        <div class="pe-pane-titlerow">
+          <div class="pe-pane-card" id="pe-pane-title">Select a run</div>
+          <details class="pe-pane-info">
+            <summary class="pe-pane-info-toggle" title="register / tone / presence / date / note">›</summary>
+            <div class="pe-pane-info-content">
+              <span class="pe-pane-meta-inline" id="pe-pane-meta-inline"></span>
+              <span class="pe-pane-note" id="pe-pane-note"></span>
+            </div>
+          </details>
+        </div>
+        <p class="pe-pane-subtitle" id="pe-pane-subtitle">Each run renders its setup-snapshot: Centering Chute, Gauntlet voices, Rethink prompts. Connection trace lights up once BGE-M3 is wired.</p>
+      </header>
+
+      <div id="pe-system-prompt-slot"></div>
+
+      <details class="pe-section pe-cc">
+        <summary class="pe-section-summary">
+          <span class="pe-section-title">CC</span>
+        </summary>
+        <div id="pe-cc-content" class="pe-section-content"></div>
+      </details>
+
+      <details class="pe-section pe-gauntlet">
+        <summary class="pe-section-summary">
+          <span class="pe-section-title">Gauntlet</span>
+        </summary>
+        <div id="pe-gauntlet-content" class="pe-section-content"></div>
+      </details>
+
+      <details class="pe-section pe-rethink">
+        <summary class="pe-section-summary">
+          <span class="pe-section-title">Rethink</span>
+        </summary>
+        <div id="pe-rethink-content" class="pe-section-content"></div>
+      </details>
+
+      <details class="pe-section pe-connection">
+        <summary class="pe-section-summary">
+          <span class="pe-section-title">Connection trace</span>
+          <span class="pe-section-sub">BGE-M3, not yet wired</span>
+        </summary>
+        <div class="pe-section-content pe-placeholder">
+          Cross-version concept drift, voice-to-framework attribution, cliff markers. Lights up once the embedding service is running and analysis is computed. See <code>gauntlet/lab/viz-dreams/cc-through-gauntlet.md</code> §BGE-M3.
+        </div>
+      </details>
+
+    </main>
+  </div>
+
+  <footer class="pe-footer">
+    <small>
+      v1 scaffolded by Claude (Opus 4.7), 2026-05-24. Source data: <code>landing-pads/gauntlet/runs/v{N}/{run}/setup-snapshot/</code>. Dream-doc: <code>gauntlet/lab/viz-dreams/cc-through-gauntlet.md</code>.
+    </small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+{
+  "generated_at": "2026-05-24",
+  "generated_by": "Claude (Opus 4.7), v1 scaffold.",
+  "regenerate_note": "Authoritative source: find landing-pads/gauntlet/runs -name setup-snapshot -type d. Future: extract to tools/build-manifest.sh.",
+  "anomalies": [
+    "v14 has setup-snapshots at BOTH v14/setup-snapshot/ AND v14/v14_cold/setup-snapshot/. Listed as v14_root + v14_cold. Inspect and decide which is canonical; root may be stale."
+  ],
+  "absent": [
+    "v01, v02, v03, v04a, v05-v08 nav entries are disabled — all show in nav for sequence visibility, all unclickable. Re-enable individually as setup-snapshot data lands (rollout-md parser will cover v04a + v05-v08; legacy HTML fix or backfill would cover v01-v03)."
+  ],
+  "versions": [
+    {
+      "id": "v01",
+      "runs": [
+        {
+          "name": "v01",
+          "disabled": true,
+          "disabled_reason": "legacy HTML deprecated; setup-snapshot pending"
+        }
+      ]
+    },
+    {
+      "id": "v02",
+      "runs": [
+        {
+          "name": "v02",
+          "disabled": true,
+          "disabled_reason": "legacy HTML deprecated; setup-snapshot pending"
+        }
+      ]
+    },
+    {
+      "id": "v03",
+      "runs": [
+        {
+          "name": "v03",
+          "disabled": true,
+          "disabled_reason": "legacy HTML deprecated; setup-snapshot pending"
+        }
+      ]
+    },
+    {
+      "id": "v04",
+      "runs": [
+        {
+          "name": "v04",
+          "path": "v04",
+          "meta": {
+            "register": null,
+            "tone": null,
+            "presence": null,
+            "date": null,
+            "note": "v4 (run_experiment.py PROMPTS — 17 prompts + 3 checkpoints, 20 turns)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "v04a",
+      "runs": [
+        {
+          "name": "v04a",
+          "disabled": true,
+          "disabled_reason": "uncovered: model output dirs exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+        }
+      ]
+    },
+    {
+      "id": "v05",
+      "runs": [
+        {
+          "name": "v05",
+          "disabled": true,
+          "disabled_reason": "uncovered: model output dirs + v5.md exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+        }
+      ]
+    },
+    {
+      "id": "v06",
+      "runs": [
+        {
+          "name": "v06",
+          "disabled": true,
+          "disabled_reason": "uncovered: rollout mds only, no qs source. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+        }
+      ]
+    },
+    {
+      "id": "v07",
+      "runs": [
+        {
+          "name": "v07",
+          "disabled": true,
+          "disabled_reason": "uncovered: questions_v7a.md (older format, not qs-script-compatible). Awaiting rollout-md → snapshot parser (task_plan TODO)."
+        }
+      ]
+    },
+    {
+      "id": "v08",
+      "runs": [
+        {
+          "name": "v08",
+          "disabled": true,
+          "disabled_reason": "uncovered: questions_v8.md (older format, not qs-script-compatible). Awaiting rollout-md → snapshot parser (task_plan TODO)."
+        }
+      ]
+    },
+    {
+      "id": "v09a",
+      "runs": [
+        {
+          "name": "v09a",
+          "path": "v09a",
+          "meta": {
+            "register": "present-warm",
+            "tone": null,
+            "presence": null,
+            "date": "2026-04-07",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v09b",
+      "runs": [
+        {
+          "name": "v09b",
+          "path": "v09b",
+          "meta": {
+            "register": "seated-warm",
+            "tone": null,
+            "presence": null,
+            "date": "2026-04-08",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v10",
+      "runs": [
+        {
+          "name": "v10",
+          "path": "v10",
+          "meta": {
+            "register": "warm",
+            "tone": null,
+            "presence": null,
+            "date": "2026-04-11",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v11",
+      "runs": [
+        {
+          "name": "v11_cold",
+          "path": "v11/v11_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-14",
+            "note": null
+          }
+        },
+        {
+          "name": "v11_colleague",
+          "path": "v11/v11_colleague",
+          "meta": {
+            "register": "colleague",
+            "tone": "warm",
+            "presence": "seated",
+            "date": "2026-04-14",
+            "note": null
+          }
+        },
+        {
+          "name": "v11_warm",
+          "path": "v11/v11_warm",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-14",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v12",
+      "runs": [
+        {
+          "name": "v12_cold_label-adv",
+          "path": "v12/v12_cold_label-adv",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-15",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-ar",
+          "path": "v12/v12_cold_label-ar",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-15",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-vegan",
+          "path": "v12/v12_cold_label-vegan",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-15",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-vegan-ck0",
+          "path": "v12/v12_cold_label-vegan-ck0",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-16",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-vegan-p1",
+          "path": "v12/v12_cold_label-vegan-p1",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-16",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-vegan-p2",
+          "path": "v12/v12_cold_label-vegan-p2",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-16",
+            "note": null
+          }
+        },
+        {
+          "name": "v12_cold_label-vegan-p3",
+          "path": "v12/v12_cold_label-vegan-p3",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-16",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v13",
+      "runs": [
+        {
+          "name": "v13_cold",
+          "path": "v13/v13_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v13_cold_label-vegan",
+          "path": "v13/v13_cold_label-vegan",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v14",
+      "runs": [
+        {
+          "name": "v14_root",
+          "path": "v14",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-14",
+            "note": null
+          }
+        },
+        {
+          "name": "v14_cold",
+          "path": "v14/v14_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-14",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v15",
+      "runs": [
+        {
+          "name": "v15_cold",
+          "path": "v15/v15_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v15_cold_label-vegan",
+          "path": "v15/v15_cold_label-vegan",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v15_warm",
+          "path": "v15/v15_warm",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v15_warm_label-vegan",
+          "path": "v15/v15_warm_label-vegan",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-19",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v16",
+      "runs": [
+        {
+          "name": "v16_cold_label-climate",
+          "path": "v16/v16_cold_label-climate",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v16_cold_label-ea",
+          "path": "v16/v16_cold_label-ea",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v16_cold_label-scientology",
+          "path": "v16/v16_cold_label-scientology",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v16_warm_label-climate",
+          "path": "v16/v16_warm_label-climate",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v16_warm_label-ea",
+          "path": "v16/v16_warm_label-ea",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-19",
+            "note": null
+          }
+        },
+        {
+          "name": "v16_warm_label-scientology",
+          "path": "v16/v16_warm_label-scientology",
+          "meta": {
+            "register": "warm",
+            "tone": "warm",
+            "presence": "present",
+            "date": "2026-04-19",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v17",
+      "runs": [
+        {
+          "name": "v17_cold",
+          "path": "v17/v17_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-21",
+            "note": "Distilled-protocol trial balloon. 3 centering questions + silent orientation + 8-voice gauntlet + 1 coherence-recovery rewrite. No label injection."
+          }
+        }
+      ]
+    },
+    {
+      "id": "v18",
+      "runs": [
+        {
+          "name": "v18a_cold",
+          "path": "v18/v18a_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-21",
+            "note": "Expanded-hull trial, Chassis A (v17-style, identical chassis language). 10-voice gauntlet: adds G4 Virginia Postrel (liberty voice) + G10 Calf 269 (non-human voice) to the v17 standard 8. One of four v18 chassis variants (a/b/c/d)."
+          }
+        },
+        {
+          "name": "v18b_cold",
+          "path": "v18/v18b_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-21",
+            "note": "Expanded-hull, uniform Chassis B (receive-mode) across all 10 G-prompts. Same 10-voice roster as v18a. Differs from v18a only in chassis wording: 'Read X on the framework' instead of 'How would X respond'. Tests whether breaking imagine-mode reduces performed scaffolding. One of four v18 chassis variants (a/b/c/d)."
+          }
+        },
+        {
+          "name": "v18c_cold",
+          "path": "v18/v18c_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-21",
+            "note": "Expanded-hull, Chassis A/B alternation. Same 10-voice roster as v18a/b. Chassis alternates by position: odd G = A (imagine-mode), even G = B (receive-mode). Tests whether chassis rotation disrupts the perseveration/scaffolding attractor. One of four v18 chassis variants (a/b/c/d)."
+          }
+        },
+        {
+          "name": "v18d_cold",
+          "path": "v18/v18d_cold",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-23",
+            "note": "Expanded-hull, Chassis B/A alternation, inverted from v18c. Same 10-voice roster as v18a/b/c. Chassis alternates by position: odd G = B (receive-mode), even G = A (imagine-mode). Tests whether the v18c chassis-A preference is positional or intrinsic. One of four v18 chassis variants (a/b/c/d)."
+          }
+        }
+      ]
+    },
+    {
+      "id": "v19",
+      "runs": [
+        {
+          "name": "v19a",
+          "path": "v19/v19a",
+          "meta": {
+            "register": null,
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-25",
+            "note": null
+          }
+        },
+        {
+          "name": "v19b",
+          "path": "v19/v19b",
+          "meta": {
+            "register": null,
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-04-25",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v20",
+      "runs": [
+        {
+          "name": "v20",
+          "path": "v20",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-05-01",
+            "note": null
+          }
+        }
+      ]
+    },
+    {
+      "id": "v21",
+      "runs": [
+        {
+          "name": "v21",
+          "path": "v21",
+          "meta": {
+            "register": "pregauntlet",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-05-01",
+            "note": null
+          }
+        }
+      ]
+    }
+  ]
+}
