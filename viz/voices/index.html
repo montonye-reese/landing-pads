@@ -504,10 +504,11 @@
   </footer>
 
   <script>
-    // Local-relative paths: serve from ~/bench/research/ as doc root
-    //   cd ~/bench/research && python3 -m http.server 8000
-    //   open http://localhost:8000/landing-pads/voices/
-    const BASE = "/gauntlet/setup";
+    // Relative to this file. Serve landing-pads/ (or any ancestor) as doc root, e.g.:
+    //   cd ~/bench/research/landing-pads && python3 -m http.server 8000
+    //   open http://localhost:8000/viz/voices/
+    // Data lives at landing-pads/gauntlet/setup/ (sanitized public copy of gauntlet/setup/).
+    const BASE = "../../gauntlet/setup";
     const URLS = {
       prompts:    BASE + "/prompts.canonical.json",
       bios:       BASE + "/voices.biographies.json",
@@ -534,7 +535,7 @@
         renderCanonical(prompts);
         renderVoices(bios, compressed);
       } catch (e) {
-        const errHtml = `<div class="data-error">Could not load data: ${escapeHtml(e.message)}.<br>Serve from <code>~/bench/research/</code> as the doc root: <code>python3 -m http.server 8000</code>, then open <code>http://localhost:8000/landing-pads/voices/</code>.</div>`;
+        const errHtml = `<div class="data-error">Could not load data: ${escapeHtml(e.message)}.<br>Serve <code>landing-pads/</code> as the doc root: <code>cd landing-pads && python3 -m http.server 8000</code>, then open <code>http://localhost:8000/viz/voices/</code>.</div>`;
         document.getElementById("anneal-card-body").innerHTML = errHtml;
         document.getElementById("gauntlet-chassis-body").innerHTML = "";
         document.getElementById("system-prompt-body").innerHTML = "";
