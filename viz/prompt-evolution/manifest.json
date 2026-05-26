@@ -1,7 +1,7 @@
 {
   "generated_at": "2026-05-24",
   "generated_by": "Claude (Opus 4.7), v1 scaffold.",
-  "regenerate_note": "Authoritative source: find landing-pads/gauntlet/runs -name setup-snapshot -type d. Future: extract to tools/build-manifest.sh.",
+  "regenerate_note": "Authoritative source: find gauntlet/runs -name setup-snapshot -type d (read directly from source; /cp-gauntlet sync deferred until staging-filter need arises). Future: extract to tools/build-manifest.sh.",
   "anomalies": [
     "v14 has setup-snapshots at BOTH v14/setup-snapshot/ AND v14/v14_cold/setup-snapshot/. Listed as v14_root + v14_cold. Inspect and decide which is canonical; root may be stale."
   ],

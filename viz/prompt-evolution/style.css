@@ -347,6 +347,14 @@ nav.run-nav {
   font-style: italic;
 }
 
+/* Transient empty-state indicator: distinct from persistent definitional subtitles
+   (different color, upright not italic) so "no voices this run" doesn't read as
+   the same kind of label as "centering chute" / "why we ran this". */
+.pe-section-sub.pe-section-sub-empty {
+  color: #a99c80;
+  font-style: normal;
+}
+
 /* When open: the inner content sits inside a beige framed card,
    matching voices/index.html's .prompt-card pattern. */
 .pe-section-content {
@@ -371,10 +379,19 @@ nav.run-nav {
   line-height: 1.5;
 }
 
-/* ---- System prompt: subtle details collapsed by default ---- */
+/* ---- System prompt: footnote-styled collapsible ----
+   Deliberately NOT a pe-section. The system prompt is held constant across
+   versions (unchanged since v11) — reference-level material, not the substance
+   of what varies per run. Small, muted, lowercase summary. */
+
+.pe-footnote-divider {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 2rem 0 0.5rem;
+}
 
 .pe-system-prompt {
-  margin: 0.15rem 0 0.6rem;
+  margin: 0.15rem 0 0.8rem;
   font-size: 0.85rem;
   line-height: 1.5;
 }
@@ -382,7 +399,7 @@ nav.run-nav {
 .pe-system-prompt > summary {
   list-style: none;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   color: var(--muted);
   padding: 0.2rem 0;
   user-select: none;
@@ -408,6 +425,13 @@ nav.run-nav {
 
 .pe-system-prompt[open] > summary {
   color: var(--ink);
+}
+
+.pe-system-prompt-sub {
+  color: var(--muted);
+  font-style: italic;
+  margin-left: 0.4rem;
+  text-transform: none;
 }
 
 .pe-system-prompt .pe-system-text {
@@ -655,4 +679,148 @@ nav.run-nav {
   border-radius: 4px;
   font-size: 0.9rem;
   border-left: 3px solid var(--warn);
+}
+
+/* ---- Intent ("why we ran this") ---- */
+/* Section frame (collapsed by default) is provided by .pe-section + .pe-intent
+   modifier; styles below shape the content *inside* the section. */
+
+.pe-intent-rqs {
+  margin-bottom: 0.85rem;
+}
+
+.pe-intent-rq + .pe-intent-rq {
+  margin-top: 0.55rem;
+}
+
+.pe-intent-rq-text {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.pe-intent-rq-prefix {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  margin-right: 0.2rem;
+}
+
+.pe-intent-rq-id {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+.pe-intent-rq-unresolved {
+  color: var(--warn);
+  font-style: italic;
+}
+
+.pe-intent-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.2rem;
+}
+
+.pe-intent-hypothesis {
+  margin-bottom: 0.55rem;
+}
+
+.pe-intent-h-text {
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.pe-intent-h-text + .pe-intent-h-text {
+  margin-top: 0.4rem;
+}
+
+.pe-intent-h-empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.pe-intent-details {
+  margin-top: 0.5rem;
+}
+
+.pe-intent-details > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+.pe-intent-details > summary::-webkit-details-marker { display: none; }
+.pe-intent-details > summary::marker { display: none; }
+
+.pe-intent-details > summary::before {
+  content: "▸ ";
+  color: var(--muted);
+  font-size: 0.7rem;
+  display: inline-block;
+  transition: transform 0.12s ease;
+}
+
+.pe-intent-details[open] > summary::before {
+  transform: rotate(90deg);
+  color: var(--accent);
+}
+
+.pe-intent-details-body {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--rule);
+}
+
+.pe-intent-field {
+  margin-bottom: 0.55rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.pe-intent-field:last-child {
+  margin-bottom: 0;
+}
+
+.pe-intent-field-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.18rem;
+}
+
+.pe-intent-notes {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.pe-intent-notes li {
+  margin-bottom: 0.3rem;
+}
+
+.pe-intent-notes li:last-child {
+  margin-bottom: 0;
+}
+
+.pe-intent-backfill-note {
+  margin-top: 0.7rem;
+  padding-top: 0.4rem;
+  border-top: 1px dotted var(--rule);
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
 }

@@ -38,11 +38,18 @@
         <p class="pe-pane-subtitle" id="pe-pane-subtitle">Each run renders its setup-snapshot: Centering Chute, Gauntlet voices, Rethink prompts. Connection trace lights up once BGE-M3 is wired.</p>
       </header>
 
-      <div id="pe-system-prompt-slot"></div>
+      <details class="pe-section pe-intent">
+        <summary class="pe-section-summary">
+          <span class="pe-section-title">Intent</span>
+          <span class="pe-section-sub">why we ran this</span>
+        </summary>
+        <div id="pe-intent-content" class="pe-section-content"></div>
+      </details>
 
       <details class="pe-section pe-cc">
         <summary class="pe-section-summary">
           <span class="pe-section-title">CC</span>
+          <span class="pe-section-sub">centering chute</span>
         </summary>
         <div id="pe-cc-content" class="pe-section-content"></div>
       </details>
@@ -71,12 +78,19 @@
         </div>
       </details>
 
+      <hr class="pe-footnote-divider" />
+
+      <details class="pe-system-prompt">
+        <summary>system prompt <span class="pe-system-prompt-sub">sent on every turn, unchanged since beginning</span></summary>
+        <div id="pe-system-prompt-content"></div>
+      </details>
+
     </main>
   </div>
 
   <footer class="pe-footer">
     <small>
-      v1 scaffolded by Claude (Opus 4.7), 2026-05-24. Source data: <code>landing-pads/gauntlet/runs/v{N}/{run}/setup-snapshot/</code>. Dream-doc: <code>gauntlet/lab/viz-dreams/cc-through-gauntlet.md</code>.
+      v1 scaffolded by Claude (Opus 4.7), 2026-05-24. Source data: <code>gauntlet/runs/v{N}/{run}/setup-snapshot/</code> (read directly from source; /cp-gauntlet sync deferred until staging-filter need arises). Dream-doc: <code>gauntlet/lab/viz-dreams/cc-through-gauntlet.md</code>.
     </small>
   </footer>
 

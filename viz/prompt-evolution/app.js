@@ -6,15 +6,26 @@
 // Manifest reference: {versions: [{id, runs: [{name, path}]}]}. Path is relative to RUN_BASE.
 
 const MANIFEST_URL = "manifest.json";
-const RUN_BASE = "../../gauntlet/runs";
+// Cross-repo paths (serve from research/ root). Source-of-truth read; /cp-gauntlet sync
+// is deferred until a staging-filter need arises.
+const RUN_BASE = "../../../gauntlet/runs";
+const REGISTRY_URL = "../../../gauntlet/setup/research-questions.json";
 
 const $ = (id) => document.getElementById(id);
 let manifest = null;
+let registry = null;
 
 async function loadManifest() {
   const r = await fetch(MANIFEST_URL);
   if (!r.ok) throw new Error(`manifest ${r.status}`);
   manifest = await r.json();
+
+  // Registry is fail-soft: viz still works without it; RQ ids render as unresolved tags.
+  try {
+    const rr = await fetch(REGISTRY_URL);
+    if (rr.ok) registry = await rr.json();
+  } catch { /* fail-soft */ }
+
   renderNav();
 
   const hash = parseHash();
@@ -138,7 +149,8 @@ async function selectRun(version, runName) {
   $("pe-pane-note").textContent = "";
   $("pe-pane-meta-inline").textContent = "";
   $("pe-pane-subtitle").textContent = "loading setup-snapshot...";
-  $("pe-system-prompt-slot").innerHTML = "";
+  $("pe-system-prompt-content").innerHTML = "";
+  $("pe-intent-content").innerHTML = "";
   ["cc", "gauntlet", "rethink"].forEach(s => $(`pe-${s}-content`).innerHTML = "");
 
   const snapPath = `${RUN_BASE}/${run.path}/setup-snapshot`;
@@ -195,15 +207,18 @@ function renderPane(prompts, voices) {
     ? spData
     : (spData && spData.text) || "";
   const backfillNote = (spData && typeof spData === "object" && spData.backfill_note) || "";
+  const spContent = $("pe-system-prompt-content");
+  spContent.innerHTML = "";
   if (sysText) {
-    const sp = document.createElement("details");
-    sp.className = "pe-system-prompt";
     const noteHtml = backfillNote
       ? `<div class="pe-system-backfill-note">${escapeHtml(backfillNote)}</div>`
       : "";
-    sp.innerHTML = `<summary>System prompt</summary><div class="pe-system-text">${escapeHtml(sysText)}</div>${noteHtml}`;
-    $("pe-system-prompt-slot").appendChild(sp);
+    spContent.innerHTML = `<div class="pe-system-text">${escapeHtml(sysText)}</div>${noteHtml}`;
+  } else {
+    spContent.appendChild(placeholder("no system prompt declared this run"));
   }
+
+  renderIntent(prompts.intent);
 
   // Preserve original sequence position (1-indexed) when bucketing.
   const buckets = {cc: [], gauntlet: [], rethink: []};
@@ -216,20 +231,100 @@ function renderPane(prompts, voices) {
   renderItems(buckets.rethink, $("pe-rethink-content"), voices, prompts, "rethink");
 }
 
+function renderIntent(intent) {
+  const container = $("pe-intent-content");
+  container.innerHTML = "";
+  if (!intent) {
+    container.appendChild(placeholder("no intent declared for this run"));
+    return;
+  }
+
+  // Resolved research question text(s). Registry resolves id → text.
+  const rqs = (intent.research_questions || []).map(id => {
+    const q = (registry?.questions || []).find(rq => rq.id === id);
+    return { id, text: q?.text || null };
+  });
+  if (rqs.length) {
+    const rqBlock = document.createElement("div");
+    rqBlock.className = "pe-intent-rqs";
+    rqBlock.innerHTML = rqs.map(rq => `
+      <div class="pe-intent-rq">
+        <div class="pe-intent-rq-text"><span class="pe-intent-rq-prefix">Question:</span> ${
+          rq.text
+            ? escapeHtml(rq.text)
+            : `<span class="pe-intent-rq-unresolved">[unresolved] ${escapeHtml(rq.id)}</span>`
+        }</div>
+        ${rq.text ? `<div class="pe-intent-rq-id">${escapeHtml(rq.id)}</div>` : ""}
+      </div>
+    `).join("");
+    container.appendChild(rqBlock);
+  }
+
+  // Hypothesis (pre-run prediction). Empty list = honest absence.
+  const hBlock = document.createElement("div");
+  hBlock.className = "pe-intent-hypothesis";
+  if (intent.hypotheses?.length) {
+    hBlock.innerHTML = `<div class="pe-intent-label">Hypothesis</div>` +
+      intent.hypotheses.map(h => `<div class="pe-intent-h-text">${escapeHtml(h.text)}</div>`).join("");
+  } else {
+    hBlock.innerHTML = `<div class="pe-intent-label">Hypothesis</div><div class="pe-intent-h-text pe-intent-h-empty">No explicit pre-run prediction; see notes.</div>`;
+  }
+  container.appendChild(hBlock);
+
+  // Collapsible: manipulation + program + notes.
+  const m = intent.manipulation || {};
+  const p = intent.program || {};
+  const notes = intent.notes || [];
+  const hasDetails = m.changed_from_prior || m.held_constant || p.pillar || p.lens || p.ties_to || notes.length;
+  if (hasDetails) {
+    const det = document.createElement("details");
+    det.className = "pe-intent-details";
+    let body = "";
+    if (m.changed_from_prior) {
+      body += `<div class="pe-intent-field"><div class="pe-intent-field-label">Changed from prior</div><div>${escapeHtml(m.changed_from_prior)}</div></div>`;
+    }
+    if (m.held_constant) {
+      body += `<div class="pe-intent-field"><div class="pe-intent-field-label">Held constant</div><div>${escapeHtml(m.held_constant)}</div></div>`;
+    }
+    if (p.pillar || p.lens || p.ties_to) {
+      const bits = [];
+      if (p.pillar) bits.push(`pillar: ${escapeHtml(p.pillar)}`);
+      if (p.lens) bits.push(`lens: ${escapeHtml(p.lens)}`);
+      if (p.ties_to) bits.push(`ties to: ${escapeHtml(p.ties_to)}`);
+      body += `<div class="pe-intent-field"><div class="pe-intent-field-label">Program</div><div>${bits.join(" · ")}</div></div>`;
+    }
+    if (notes.length) {
+      body += `<div class="pe-intent-field"><div class="pe-intent-field-label">Notes</div><ul class="pe-intent-notes">${notes.map(n => `<li>${escapeHtml(n)}</li>`).join("")}</ul></div>`;
+    }
+    det.innerHTML = `<summary>Manipulation · Program · Notes</summary><div class="pe-intent-details-body">${body}</div>`;
+    container.appendChild(det);
+  }
+
+  // Backfill footnote (only present when intent was reconstructed post-run).
+  if (intent.source?.backfilled) {
+    const fn = document.createElement("div");
+    fn.className = "pe-intent-backfill-note";
+    fn.textContent = `Intent backfilled ${intent.source.backfilled}`;
+    container.appendChild(fn);
+  }
+}
+
 const EMPTY_MESSAGES = {
-  cc: "no centering prompts in this run",
+  cc: "no centering prompts this run",
   gauntlet: "no voices this run",
-  rethink: "no rethink prompts in this run",
+  rethink: "no rethink prompts this run",
 };
 
 function setSectionEmptyIndicator(section, isEmpty) {
+  // Manages a *transient* empty-state indicator. Tagged with .pe-section-sub-empty
+  // so it doesn't collide with a section's persistent subtitle (e.g. "centering chute").
   const summary = document.querySelector(`.pe-${section} > .pe-section-summary`);
   if (!summary) return;
-  let sub = summary.querySelector(".pe-section-sub");
+  let sub = summary.querySelector(".pe-section-sub-empty");
   if (isEmpty) {
     if (!sub) {
       sub = document.createElement("span");
-      sub.className = "pe-section-sub";
+      sub.className = "pe-section-sub pe-section-sub-empty";
       summary.appendChild(sub);
     }
     sub.textContent = EMPTY_MESSAGES[section] || "empty";
