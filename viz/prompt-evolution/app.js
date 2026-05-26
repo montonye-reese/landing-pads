@@ -72,6 +72,19 @@ function renderNav() {
   }
 }
 
+function abbreviateRunName(name, version) {
+  // Primary run (name === version) keeps full name.
+  if (name === version) return name;
+  // Strip "v{N}_" prefix; or just "v{N}" if no trailing underscore (e.g. v18a_cold → a_cold).
+  if (name.startsWith(version + "_")) {
+    name = name.slice(version.length + 1);
+  } else if (name.startsWith(version)) {
+    name = name.slice(version.length);
+  }
+  // _label-X → -X; remaining _ → -
+  return name.replace(/_label-/g, "-").replace(/_/g, "-");
+}
+
 function populateRunTabs(version, activeRunName) {
   const row = $("pe-pane-runs");
   row.innerHTML = "";
@@ -85,7 +98,8 @@ function populateRunTabs(version, activeRunName) {
     if (run.name === activeRunName) tab.classList.add("active");
     tab.dataset.version = version;
     tab.dataset.run = run.name;
-    tab.textContent = run.name;
+    tab.textContent = abbreviateRunName(run.name, version);
+    tab.title = run.name; // full name on hover
     if (!run.disabled) {
       tab.href = `#${version}/${run.name}`;
       tab.addEventListener("click", (e) => {
@@ -197,14 +211,37 @@ function renderPane(prompts, voices) {
     buckets[sectionOf(item)].push({item, num: i + 1});
   });
 
-  renderItems(buckets.cc, $("pe-cc-content"), voices, prompts);
-  renderItems(buckets.gauntlet, $("pe-gauntlet-content"), voices, prompts);
-  renderItems(buckets.rethink, $("pe-rethink-content"), voices, prompts);
+  renderItems(buckets.cc, $("pe-cc-content"), voices, prompts, "cc");
+  renderItems(buckets.gauntlet, $("pe-gauntlet-content"), voices, prompts, "gauntlet");
+  renderItems(buckets.rethink, $("pe-rethink-content"), voices, prompts, "rethink");
 }
 
-function renderItems(entries, container, voices, prompts) {
+const EMPTY_MESSAGES = {
+  cc: "no centering prompts in this run",
+  gauntlet: "no voices this run",
+  rethink: "no rethink prompts in this run",
+};
+
+function setSectionEmptyIndicator(section, isEmpty) {
+  const summary = document.querySelector(`.pe-${section} > .pe-section-summary`);
+  if (!summary) return;
+  let sub = summary.querySelector(".pe-section-sub");
+  if (isEmpty) {
+    if (!sub) {
+      sub = document.createElement("span");
+      sub.className = "pe-section-sub";
+      summary.appendChild(sub);
+    }
+    sub.textContent = EMPTY_MESSAGES[section] || "empty";
+  } else if (sub) {
+    sub.remove();
+  }
+}
+
+function renderItems(entries, container, voices, prompts, section) {
+  setSectionEmptyIndicator(section, entries.length === 0);
   if (!entries.length) {
-    container.appendChild(placeholder("No items in this section for this run."));
+    container.appendChild(placeholder(EMPTY_MESSAGES[section] || "no items in this section"));
     return;
   }
 

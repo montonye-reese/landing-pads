@@ -8,7 +8,7 @@ notebook.md
 
 # Lab workspace — private working area
 lab/
-
+viz/_archive
 # Python bytecode (if tools/ grows scripts)
 __pycache__/
 *.pyc
