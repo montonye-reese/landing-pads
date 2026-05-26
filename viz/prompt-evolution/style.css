@@ -1,4 +1,7 @@
-/* v1 scaffolded by Claude (Opus 4.7), 2026-05-24. */
+/* v1 scaffolded by Claude (Opus 4.7), 2026-05-24.
+   Re-skinned 2026-05-25 to use shared tokens + voices/index.html aesthetic
+   (warm earthy palette, framed prompt-cards, serif blockquotes, ph placeholders).
+   Structure unchanged — only colors + visual idioms. */
 
 /* Viz is a full-width app, not a document — override the shared 880px body cap. */
 body {
@@ -17,22 +20,24 @@ nav.run-nav {
   min-height: calc(100vh - 80px);
 }
 
+/* ---- Left column: run list ---- */
+
 .pe-nav {
-  border-right: 1px solid #ddd;
+  border-right: 1px solid var(--rule);
   padding: 1rem 0.75rem;
   position: sticky;
   top: 0;
   align-self: start;
   max-height: calc(100vh - 60px);
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--code-bg);
 }
 
 .pe-nav-title {
-  font-size: 0.8rem;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-variant: small-caps;
   letter-spacing: 0.06em;
-  color: #888;
+  color: var(--muted);
   margin: 0 0 0.6rem;
 }
 
@@ -49,7 +54,7 @@ nav.run-nav {
 .pe-nav .pe-version-id {
   font-weight: 600;
   font-size: 0.95rem;
-  color: #222;
+  color: var(--ink);
 }
 
 /* Single-run version: the version row IS a link. */
@@ -59,88 +64,19 @@ nav.run-nav {
   text-decoration: none;
   border-radius: 3px;
   cursor: pointer;
+  border-bottom: none;
 }
 
 .pe-nav .pe-version-link:hover {
-  background: #ececec;
+  background: var(--surface);
 }
 
 .pe-nav .pe-version-link.active {
-  background: #d8e8fb;
+  background: var(--accent-soft);
 }
 
 .pe-nav .pe-version-link.active .pe-version-id {
-  color: #000;
-}
-
-/* Multi-run version: <details>/<summary> with custom chevron. */
-.pe-nav .pe-version-details {
-  margin: 0;
-}
-
-.pe-nav .pe-version-details > summary {
-  list-style: none;
-  cursor: pointer;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  user-select: none;
-}
-
-.pe-nav .pe-version-details > summary::-webkit-details-marker { display: none; }
-
-.pe-nav .pe-version-details > summary::before {
-  content: "▸";
-  font-size: 0.7rem;
-  color: #999;
-  transition: transform 0.12s ease;
-  display: inline-block;
-}
-
-.pe-nav .pe-version-details[open] > summary::before {
-  transform: rotate(90deg);
-}
-
-.pe-nav .pe-version-details > summary:hover {
-  background: #ececec;
-}
-
-.pe-nav .pe-version-count {
-  font-size: 0.72rem;
-  color: #999;
-  background: #eee;
-  padding: 0 0.35rem;
-  border-radius: 8px;
-  margin-left: auto;
-}
-
-.pe-nav ul.pe-runs {
-  margin: 0.1rem 0 0.25rem 1.1rem;
-}
-
-/* Plain nav text-links. */
-.pe-nav .pe-run-link {
-  display: block;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.85rem;
-  color: #555;
-  cursor: pointer;
-  border-radius: 3px;
-  text-decoration: none;
-  line-height: 1.3;
-}
-
-.pe-nav .pe-run-link:hover {
-  background: #ececec;
-  color: #000;
-}
-
-.pe-nav .pe-run-link.active {
-  background: #d8e8fb;
-  color: #000;
-  font-weight: 500;
+  color: var(--accent);
 }
 
 /* Disabled nav entries (v01/v02/v03). */
@@ -148,7 +84,7 @@ nav.run-nav {
   display: block;
   padding: 0.2rem 0.5rem;
   font-size: 0.85rem;
-  color: #bbb;
+  color: var(--rule);
   cursor: not-allowed;
   line-height: 1.3;
   font-style: italic;
@@ -157,18 +93,38 @@ nav.run-nav {
 .pe-nav-foot {
   margin-top: 1.5rem;
   font-size: 0.75rem;
-  color: #999;
+  color: var(--muted);
   line-height: 1.4;
 }
+
+/* External-link nav entries (legacy per-run pages). */
+.pe-nav .pe-external-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.pe-nav .pe-external-indicator {
+  font-size: 0.72rem;
+  color: var(--rule);
+}
+
+.pe-nav .pe-external-link:hover .pe-external-indicator {
+  color: var(--muted);
+}
+
+/* ---- Right pane ---- */
 
 .pe-pane {
   padding: 1.25rem 2rem 3rem;
   overflow-y: auto;
+  background: var(--bg);
 }
 
 .pe-pane-header {
-  padding-bottom: 0.2rem;
-  margin-bottom: 0.3rem;
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .pe-pane-titlerow {
@@ -178,22 +134,87 @@ nav.run-nav {
   flex-wrap: wrap;
 }
 
-/* Title-as-card: fixed-ish width/height, tone-on-tone. */
+/* Title-as-card: tone-on-tone, mono identifier. */
 .pe-pane-card {
   display: inline-flex;
   align-items: center;
-  background: #ececec;
+  background: var(--code-bg);
   padding: 0.45rem 0.95rem;
   border-radius: 6px;
-  font-family: ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--ink);
   min-width: 5.5rem;
   height: 2.4rem;
   margin: 0;
   white-space: nowrap;
   box-sizing: border-box;
+}
+
+/* Sub-run tabs row — sits beside the version card, separator before first tab. */
+.pe-pane-runs {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pe-pane-runs:not(:empty)::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.5rem;
+  background: var(--rule);
+  margin: 0 0.15rem;
+}
+
+.pe-pane-run-tab {
+  font: inherit;
+  font-size: 0.82rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 0.22rem 0.75rem;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.1s, color 0.1s, border-color 0.1s;
+  user-select: none;
+  line-height: 1.3;
+}
+
+.pe-pane-run-tab:hover {
+  background: var(--code-bg);
+  color: var(--ink);
+  border-color: var(--rule);
+  border-bottom-color: var(--rule);
+}
+
+.pe-pane-run-tab.active {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft);
+  border-bottom-color: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.pe-pane-run-tab.active:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.pe-pane-run-tab.disabled {
+  color: var(--rule);
+  font-style: italic;
+  cursor: not-allowed;
+}
+
+.pe-pane-run-tab.disabled:hover {
+  background: var(--surface);
+  color: var(--rule);
 }
 
 /* Info column: stays in a consistent spot beside the card across runs. */
@@ -208,9 +229,9 @@ nav.run-nav {
 .pe-pane-info > summary.pe-pane-info-toggle {
   list-style: none;
   cursor: pointer;
-  color: #ccc;
+  color: var(--rule);
   font-size: 1.1rem;
-  font-family: ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   width: 1.5rem;
   height: 1.5rem;
   display: inline-flex;
@@ -223,10 +244,10 @@ nav.run-nav {
 
 .pe-pane-info > summary::-webkit-details-marker { display: none; }
 .pe-pane-info > summary::marker { display: none; }
-.pe-pane-info > summary:hover { color: #666; }
+.pe-pane-info > summary:hover { color: var(--muted); }
 
 .pe-pane-info[open] > summary {
-  color: #555;
+  color: var(--accent);
   transform: rotate(90deg);
 }
 
@@ -243,56 +264,41 @@ nav.run-nav {
 }
 
 .pe-pane-meta-inline {
-  color: #888;
+  color: var(--muted);
   font-size: 0.82rem;
-  font-family: ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   line-height: 1.4;
 }
 
 .pe-pane-meta-inline:empty { display: none; }
 
 .pe-pane-note {
-  color: #888;
+  color: var(--muted);
   font-size: 0.92rem;
+  font-family: "Source Serif 4", Georgia, serif;
   font-style: italic;
   line-height: 1.4;
 }
 
 .pe-pane-note:empty { display: none; }
 
-/* External-link nav entries (legacy per-run pages). */
-.pe-nav .pe-external-link {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.4rem;
-}
-
-.pe-nav .pe-external-indicator {
-  font-size: 0.72rem;
-  color: #aaa;
-}
-
-.pe-nav .pe-external-link:hover .pe-external-indicator {
-  color: #555;
-}
-
 .pe-pane-subtitle {
   margin: 0.3rem 0 0;
-  color: #666;
+  color: var(--muted);
   font-size: 0.9rem;
 }
 
 .pe-pane-meta {
   margin: 0.3rem 0 0;
-  color: #888;
+  color: var(--muted);
   font-size: 0.8rem;
-  font-family: ui-monospace, monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-/* Sections are <details>; collapsed by default, summary acts as the heading. */
+/* ---- Sections (<details>): summary acts as the framed-card label ---- */
+
 .pe-section {
-  margin: 0.35rem 0;
+  margin: 0.8rem 0 1.2rem;
 }
 
 .pe-section > summary.pe-section-summary {
@@ -311,7 +317,7 @@ nav.run-nav {
 .pe-section > summary::before {
   content: "▸";
   font-size: 0.75rem;
-  color: #aaa;
+  color: var(--muted);
   transition: transform 0.12s ease;
   display: inline-block;
   width: 0.8rem;
@@ -319,36 +325,56 @@ nav.run-nav {
 
 .pe-section[open] > summary::before {
   transform: rotate(90deg);
+  color: var(--accent);
 }
 
 .pe-section-title {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.pe-section[open] .pe-section-title {
+  color: var(--ink);
 }
 
 .pe-section-sub {
   font-weight: normal;
-  color: #999;
-  font-size: 0.8rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-style: italic;
 }
 
+/* When open: the inner content sits inside a beige framed card,
+   matching voices/index.html's .prompt-card pattern. */
 .pe-section-content {
   padding: 0.25rem 0 0.75rem;
 }
 
+.pe-section[open] > .pe-section-content {
+  background: #f5f3ec;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1rem 1.25rem 1.25rem;
+  margin-top: 0.3rem;
+}
+
 .pe-placeholder {
-  color: #888;
+  color: var(--muted);
   font-style: italic;
   padding: 0.75rem 1rem;
-  background: #f5f5f5;
+  background: var(--code-bg);
   border-radius: 4px;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-/* System prompt: subtle details collapsed by default. */
+/* ---- System prompt: subtle details collapsed by default ---- */
+
 .pe-system-prompt {
-  margin: 0.15rem 0 0.25rem;
+  margin: 0.15rem 0 0.6rem;
   font-size: 0.85rem;
   line-height: 1.5;
 }
@@ -356,153 +382,172 @@ nav.run-nav {
 .pe-system-prompt > summary {
   list-style: none;
   cursor: pointer;
-  font-size: 0.78rem;
-  color: #888;
+  font-size: 0.82rem;
+  color: var(--muted);
   padding: 0.2rem 0;
   user-select: none;
+  text-transform: lowercase;
 }
 
 .pe-system-prompt > summary::-webkit-details-marker { display: none; }
 .pe-system-prompt > summary::marker { display: none; }
 
 .pe-system-prompt > summary::before {
-  content: "▸ ";
-  color: #aaa;
+  content: "▸";
+  color: var(--muted);
   font-size: 0.7rem;
   display: inline-block;
+  margin-right: 0.45rem;
   transition: transform 0.12s ease;
 }
 
 .pe-system-prompt[open] > summary::before {
   transform: rotate(90deg);
+  color: var(--accent);
 }
 
 .pe-system-prompt[open] > summary {
-  color: #555;
+  color: var(--ink);
 }
 
 .pe-system-prompt .pe-system-text {
-  background: #f0f7ff;
-  border-left: 3px solid #6a9fd4;
-  padding: 0.5rem 0.75rem;
+  background: var(--code-bg);
+  border-left: 3px solid var(--accent-soft);
+  padding: 0.5rem 0.85rem;
   margin: 0.3rem 0 0;
   white-space: pre-wrap;
-  font-size: 0.78rem;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 0.85rem;
   line-height: 1.5;
-  color: #555;
+  color: #3d3d38;
+  border-radius: 0 4px 4px 0;
 }
 
 .pe-system-prompt .pe-system-backfill-note {
-  background: #fff7e8;
-  border-left: 3px solid #d4a76a;
-  padding: 0.4rem 0.6rem;
+  background: var(--code-bg);
+  border-left: 3px solid var(--accent);
+  padding: 0.4rem 0.7rem;
   margin: 0.3rem 0 0;
   font-size: 0.72rem;
   font-style: italic;
-  color: #7a6038;
+  color: var(--muted);
   line-height: 1.5;
+  border-radius: 0 4px 4px 0;
 }
 
 .pe-system-prompt .pe-system-backfill-note::before {
   content: "backfilled: ";
   font-style: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
   font-weight: 600;
-  color: #8a6b08;
+  color: var(--accent);
 }
 
-/* Prompts: just numbered text. No header chrome. */
+/* ---- Prompts: framed blockquote (voices pattern) ---- */
+
 .pe-prompt {
   display: flex;
-  gap: 0.5rem;
-  margin: 0.18rem 0;
-  padding: 0.3rem 0.6rem;
-  background: #fafafa;
-  border-left: 3px solid #ccc;
-  font-size: 0.9rem;
+  gap: 0.65rem;
+  margin: 0.4rem 0;
+  padding: 0.45rem 0.85rem;
+  background: var(--surface);
+  border-left: 3px solid var(--accent-soft);
+  border-radius: 0 4px 4px 0;
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 0.95rem;
   line-height: 1.45;
 }
 
 .pe-prompt.snapshot {
-  border-left-color: #d4a76a;
-  background: #fff7e8;
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
 }
 
 .pe-prompt-num {
-  font-family: ui-monospace, monospace;
-  font-size: 0.85rem;
-  color: #888;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  color: var(--muted);
   font-weight: 600;
   flex-shrink: 0;
   min-width: 1.5rem;
+  padding-top: 0.1rem;
+}
+
+.pe-prompt.snapshot .pe-prompt-num {
+  color: var(--accent);
 }
 
 .pe-prompt-text {
   white-space: pre-wrap;
   flex: 1;
+  color: var(--ink);
 }
 
-/* Chassis-block: shaded container that wraps the for-each header + voice cards as a group.
-   Pattern borrowed from landing-pads/voices/index.html (.chassis-loop). */
+/* ---- Chassis block: for-each loop wrapping voice cards (voices .chassis-loop pattern) ---- */
+
 .pe-chassis-block {
-  background: #f4f6f9;
-  padding: 0.65rem 0.8rem 0.75rem;
-  border-radius: 5px;
-  margin: 0.35rem 0;
+  background: var(--code-bg);
+  padding: 0.85rem 1rem 0.95rem;
+  border-radius: 6px;
+  margin: 0.5rem 0;
 }
 
 .pe-chassis-loop {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.7rem;
 }
 
 .pe-chassis-loop-header {
   font-size: 0.78rem;
-  color: #666;
+  color: var(--muted);
   font-variant: small-caps;
   letter-spacing: 0.06em;
-  margin-bottom: 0.3rem;
-  font-family: ui-monospace, monospace;
+  margin-bottom: 0.35rem;
 }
 
 .pe-chassis-loop-body {
   margin-left: 1rem;
   padding-left: 0.7rem;
-  border-left: 2px solid #d8d5cc;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: #444;
+  border-left: 2px solid var(--accent-soft);
   font-family: "Source Serif 4", Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
+/* Placeholder vars ({voice}, {bio}) — subtle italic-muted, voices' .ph idiom. */
 .pe-chassis-var {
-  display: inline-block;
-  padding: 0 0.3rem;
-  background: #e8e2f3;
-  color: #6a47a0;
-  border-radius: 3px;
-  font-family: ui-monospace, monospace;
-  font-size: 0.78rem;
+  font-family: "Inter", system-ui, sans-serif;
   font-style: italic;
-  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.92em;
+  font-weight: 400;
+  background: none;
+  padding: 0;
 }
 
 .pe-chassis-loop-variant {
-  margin: 0.4rem 0 0.3rem;
+  margin: 0.5rem 0 0.3rem;
 }
 
 .pe-chassis-loop-key {
-  font-size: 0.7rem;
-  color: #777;
-  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-weight: 600;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.25rem;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
 }
 
+/* ---- Voice cards (voices .voice-card pattern) ---- */
+
 .pe-voice-card {
-  margin: 0.5rem 0;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-  background: #fff;
+  margin: 0.55rem 0;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
   font-size: 0.9rem;
 }
 
@@ -511,34 +556,48 @@ nav.run-nav {
   justify-content: space-between;
   align-items: baseline;
   gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pe-voice-card .pe-voice-num {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 600;
+  margin-right: 0.35rem;
 }
 
 .pe-voice-card .pe-voice-name {
   font-weight: 600;
-  color: #222;
+  font-size: 1rem;
+  color: var(--ink);
 }
 
 .pe-voice-card .pe-voice-fullname {
-  color: #888;
+  color: var(--muted);
   font-weight: normal;
   font-size: 0.85rem;
-  margin-left: 0.3rem;
+  margin-left: 0.35rem;
 }
 
 .pe-voice-card .pe-voice-meta {
-  font-size: 0.75rem;
-  color: #888;
-  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
 }
 
-/* Voice-card bio: collapsed behind a details/summary (pattern from voices viewer). */
+/* Voice-card bio: collapsed behind a details/summary. */
 .pe-voice-card details > summary {
   list-style: none;
   cursor: pointer;
   font-size: 0.78rem;
-  color: #888;
+  color: var(--muted);
   user-select: none;
-  margin-top: 0.15rem;
+  margin-top: 0.25rem;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
 }
 
 .pe-voice-card details > summary::-webkit-details-marker { display: none; }
@@ -546,7 +605,7 @@ nav.run-nav {
 
 .pe-voice-card details > summary::before {
   content: "▸ ";
-  color: #aaa;
+  color: var(--muted);
   font-size: 0.7rem;
   display: inline-block;
   transition: transform 0.12s ease;
@@ -554,43 +613,46 @@ nav.run-nav {
 
 .pe-voice-card details[open] > summary::before {
   transform: rotate(90deg);
+  color: var(--accent);
 }
 
 .pe-voice-card details[open] > summary {
-  color: #555;
+  color: var(--ink);
 }
 
 .pe-voice-card .pe-voice-bio {
-  margin-top: 0.4rem;
-  color: #444;
+  margin-top: 0.45rem;
+  color: #3d3d38;
   line-height: 1.55;
   font-size: 0.88rem;
 }
 
 .pe-voice-card .pe-voice-bio.missing {
-  color: #aaa;
+  color: var(--rule);
   font-style: italic;
 }
 
+/* ---- Footer + error ---- */
+
 .pe-footer {
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--rule);
   padding: 0.75rem 2rem;
   font-size: 0.78rem;
-  color: #999;
+  color: var(--muted);
 }
 
 .pe-footer code {
-  background: #f0f0f0;
-  padding: 0 0.2rem;
-  border-radius: 2px;
+  background: var(--code-bg);
+  padding: 0 0.3rem;
+  border-radius: 3px;
   font-size: 0.85em;
 }
 
 .pe-error {
-  color: #b03030;
-  background: #fff0f0;
-  padding: 0.75rem;
+  color: var(--warn);
+  background: #fde9e3;
+  padding: 0.75rem 1rem;
   border-radius: 4px;
   font-size: 0.9rem;
-  border-left: 3px solid #b03030;
+  border-left: 3px solid var(--warn);
 }

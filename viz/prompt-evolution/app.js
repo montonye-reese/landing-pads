@@ -38,65 +38,65 @@ function renderNav() {
   ul.innerHTML = "";
 
   // Display reversed (newest first); manifest array order is preserved for "auto-select latest" logic.
+  // Every version renders as a single link regardless of sub-run count. Sub-runs surface as tabs
+  // in the right-pane title row (see populateRunTabs) after selection.
   for (const v of [...manifest.versions].reverse()) {
     const li = document.createElement("li");
     li.className = "pe-version";
 
-    if (v.runs.length === 1) {
-      const run = v.runs[0];
-      if (run.disabled) {
-        const span = document.createElement("span");
-        span.className = "pe-version-link pe-version-disabled";
-        span.innerHTML = `<span class="pe-version-id">${escapeHtml(v.id)}</span>`;
-        if (run.disabled_reason) span.title = run.disabled_reason;
-        li.appendChild(span);
-      } else {
-        const a = document.createElement("a");
-        a.className = "pe-version-link pe-run-link";
-        a.dataset.version = v.id;
-        a.dataset.run = run.name;
-        a.href = `#${v.id}/${run.name}`;
-        a.innerHTML = `<span class="pe-version-id">${escapeHtml(v.id)}</span>`;
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          history.pushState(null, "", a.href);
-          selectRun(v.id, run.name);
-        });
-        li.appendChild(a);
-      }
+    const defaultRun = v.runs.find(r => !r.disabled) || v.runs[0];
+    const allDisabled = v.runs.every(r => r.disabled);
+
+    if (!defaultRun || allDisabled) {
+      const span = document.createElement("span");
+      span.className = "pe-version-link pe-version-disabled";
+      span.innerHTML = `<span class="pe-version-id">${escapeHtml(v.id)}</span>`;
+      const reason = (defaultRun && defaultRun.disabled_reason) || "";
+      if (reason) span.title = reason;
+      li.appendChild(span);
     } else {
-      const det = document.createElement("details");
-      det.className = "pe-version-details";
-      det.dataset.version = v.id;
-
-      const sum = document.createElement("summary");
-      sum.className = "pe-version-summary";
-      sum.innerHTML = `<span class="pe-version-id">${escapeHtml(v.id)}</span>`;
-      det.appendChild(sum);
-
-      const runsUl = document.createElement("ul");
-      runsUl.className = "pe-runs";
-      for (const run of v.runs) {
-        const ri = document.createElement("li");
-        const a = document.createElement("a");
-        a.className = "pe-run-link";
-        a.dataset.version = v.id;
-        a.dataset.run = run.name;
-        a.href = `#${v.id}/${run.name}`;
-        a.textContent = run.name;
-        a.addEventListener("click", (e) => {
-          e.preventDefault();
-          history.pushState(null, "", a.href);
-          selectRun(v.id, run.name);
-        });
-        ri.appendChild(a);
-        runsUl.appendChild(ri);
-      }
-      det.appendChild(runsUl);
-      li.appendChild(det);
+      const a = document.createElement("a");
+      a.className = "pe-version-link";
+      a.dataset.version = v.id;
+      a.href = `#${v.id}/${defaultRun.name}`;
+      a.innerHTML = `<span class="pe-version-id">${escapeHtml(v.id)}</span>`;
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        history.pushState(null, "", a.href);
+        selectRun(v.id, defaultRun.name);
+      });
+      li.appendChild(a);
     }
 
     ul.appendChild(li);
+  }
+}
+
+function populateRunTabs(version, activeRunName) {
+  const row = $("pe-pane-runs");
+  row.innerHTML = "";
+  const v = manifest.versions.find(x => x.id === version);
+  if (!v || v.runs.length <= 1) return; // single-run versions: no tabs row.
+
+  for (const run of v.runs) {
+    const tab = document.createElement(run.disabled ? "span" : "a");
+    tab.className = "pe-pane-run-tab";
+    if (run.disabled) tab.classList.add("disabled");
+    if (run.name === activeRunName) tab.classList.add("active");
+    tab.dataset.version = version;
+    tab.dataset.run = run.name;
+    tab.textContent = run.name;
+    if (!run.disabled) {
+      tab.href = `#${version}/${run.name}`;
+      tab.addEventListener("click", (e) => {
+        e.preventDefault();
+        history.pushState(null, "", tab.href);
+        selectRun(version, run.name);
+      });
+    } else if (run.disabled_reason) {
+      tab.title = run.disabled_reason;
+    }
+    row.appendChild(tab);
   }
 }
 
@@ -113,14 +113,14 @@ async function selectRun(version, runName) {
     return;
   }
 
-  // active-state highlight + expand parent <details> if multi-run
-  document.querySelectorAll(".pe-run-link.active").forEach(el => el.classList.remove("active"));
-  document.querySelectorAll(`.pe-run-link[data-version="${escapeAttr(version)}"][data-run="${escapeAttr(runName)}"]`)
+  // Nav active-state: highlight the version link (not a sub-run; sub-runs are now in the pane).
+  document.querySelectorAll(".pe-version-link.active").forEach(el => el.classList.remove("active"));
+  document.querySelectorAll(`.pe-version-link[data-version="${escapeAttr(version)}"]`)
     .forEach(el => el.classList.add("active"));
-  const parent = document.querySelector(`.pe-version-details[data-version="${escapeAttr(version)}"]`);
-  if (parent) parent.open = true;
 
-  $("pe-pane-title").textContent = runName;
+  // Pane title row: version card + sub-run tabs (empty for single-run versions).
+  $("pe-pane-version").textContent = version;
+  populateRunTabs(version, runName);
   $("pe-pane-note").textContent = "";
   $("pe-pane-meta-inline").textContent = "";
   $("pe-pane-subtitle").textContent = "loading setup-snapshot...";
@@ -156,6 +156,7 @@ function showError(msg) {
 // - everything else (P1-P10, F1, F2, CK*) → cc. F2 (the gauntlet lead-in) lives at the bottom of CC.
 function sectionOf(item) {
   if (item.kind === "voice_chassis") return "gauntlet";
+  if (item.is_voice) return "gauntlet";  // pre-v09 voices: kind="prompt" + is_voice flag.
   const pid = (item.id || "").trim();
   if (/^BU\d*[a-z]?$/i.test(pid)) return "gauntlet";
   if (pid === "P14" || pid === "PA" || /^P15[a-z]?$/.test(pid)) return "rethink";

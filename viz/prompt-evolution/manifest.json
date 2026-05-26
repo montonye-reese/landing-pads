@@ -6,7 +6,7 @@
     "v14 has setup-snapshots at BOTH v14/setup-snapshot/ AND v14/v14_cold/setup-snapshot/. Listed as v14_root + v14_cold. Inspect and decide which is canonical; root may be stale."
   ],
   "absent": [
-    "v01, v02, v03, v04a, v05-v08 nav entries are disabled — all show in nav for sequence visibility, all unclickable. Re-enable individually as setup-snapshot data lands (rollout-md parser will cover v04a + v05-v08; legacy HTML fix or backfill would cover v01-v03)."
+    "v01, v02, v03 still disabled (legacy HTML, no setup-snapshot). v05-v08 enabled 2026-05-25 via gauntlet/tools/rollout_md_to_snapshot.py (snapshots reconstructed from rollout mds; voice apparatus pre-v09 so voice_chassis is empty and voice items carry text inline with is_voice=true). v04 reorg 2026-05-25: v04 + v04a grouped under shared v04/ parent on disk; v04a still disabled (same rollout-md story, deferred). v09 reorg 2026-05-25: v09a + v09b grouped under shared v09/ parent on disk (loose design files tucked into v09/archive/)."
   ],
   "versions": [
     {
@@ -44,7 +44,7 @@
       "runs": [
         {
           "name": "v04",
-          "path": "v04",
+          "path": "v04/v04",
           "meta": {
             "register": null,
             "tone": null,
@@ -52,16 +52,11 @@
             "date": null,
             "note": "v4 (run_experiment.py PROMPTS — 17 prompts + 3 checkpoints, 20 turns)"
           }
-        }
-      ]
-    },
-    {
-      "id": "v04a",
-      "runs": [
+        },
         {
           "name": "v04a",
           "disabled": true,
-          "disabled_reason": "uncovered: model output dirs exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+          "disabled_reason": "uncovered: model output dirs exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (same family as v05–v08, out of scope this round)."
         }
       ]
     },
@@ -70,8 +65,7 @@
       "runs": [
         {
           "name": "v05",
-          "disabled": true,
-          "disabled_reason": "uncovered: model output dirs + v5.md exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+          "path": "v05"
         }
       ]
     },
@@ -80,8 +74,7 @@
       "runs": [
         {
           "name": "v06",
-          "disabled": true,
-          "disabled_reason": "uncovered: rollout mds only, no qs source. Awaiting rollout-md → snapshot parser (task_plan TODO)."
+          "path": "v06"
         }
       ]
     },
@@ -90,8 +83,7 @@
       "runs": [
         {
           "name": "v07",
-          "disabled": true,
-          "disabled_reason": "uncovered: questions_v7a.md (older format, not qs-script-compatible). Awaiting rollout-md → snapshot parser (task_plan TODO)."
+          "path": "v07"
         }
       ]
     },
@@ -100,17 +92,16 @@
       "runs": [
         {
           "name": "v08",
-          "disabled": true,
-          "disabled_reason": "uncovered: questions_v8.md (older format, not qs-script-compatible). Awaiting rollout-md → snapshot parser (task_plan TODO)."
+          "path": "v08"
         }
       ]
     },
     {
-      "id": "v09a",
+      "id": "v09",
       "runs": [
         {
           "name": "v09a",
-          "path": "v09a",
+          "path": "v09/v09a",
           "meta": {
             "register": "present-warm",
             "tone": null,
@@ -118,15 +109,10 @@
             "date": "2026-04-07",
             "note": null
           }
-        }
-      ]
-    },
-    {
-      "id": "v09b",
-      "runs": [
+        },
         {
           "name": "v09b",
-          "path": "v09b",
+          "path": "v09/v09b",
           "meta": {
             "register": "seated-warm",
             "tone": null,

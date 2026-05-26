@@ -1,0 +1,596 @@
+/* v1 scaffolded by Claude (Opus 4.7), 2026-05-24. */
+
+/* Viz is a full-width app, not a document — override the shared 880px body cap. */
+body {
+  max-width: none;
+  padding: 0;
+}
+
+nav.run-nav {
+  padding: 0.5rem 1rem 0.75rem;
+  margin-bottom: 0;
+}
+
+.pe-layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+.pe-nav {
+  border-right: 1px solid #ddd;
+  padding: 1rem 0.75rem;
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  background: #fafafa;
+}
+
+.pe-nav-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin: 0 0 0.6rem;
+}
+
+.pe-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pe-nav li.pe-version {
+  margin: 0.35rem 0 0;
+}
+
+.pe-nav .pe-version-id {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #222;
+}
+
+/* Single-run version: the version row IS a link. */
+.pe-nav .pe-version-link {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pe-nav .pe-version-link:hover {
+  background: #ececec;
+}
+
+.pe-nav .pe-version-link.active {
+  background: #d8e8fb;
+}
+
+.pe-nav .pe-version-link.active .pe-version-id {
+  color: #000;
+}
+
+/* Multi-run version: <details>/<summary> with custom chevron. */
+.pe-nav .pe-version-details {
+  margin: 0;
+}
+
+.pe-nav .pe-version-details > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+}
+
+.pe-nav .pe-version-details > summary::-webkit-details-marker { display: none; }
+
+.pe-nav .pe-version-details > summary::before {
+  content: "▸";
+  font-size: 0.7rem;
+  color: #999;
+  transition: transform 0.12s ease;
+  display: inline-block;
+}
+
+.pe-nav .pe-version-details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.pe-nav .pe-version-details > summary:hover {
+  background: #ececec;
+}
+
+.pe-nav .pe-version-count {
+  font-size: 0.72rem;
+  color: #999;
+  background: #eee;
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  margin-left: auto;
+}
+
+.pe-nav ul.pe-runs {
+  margin: 0.1rem 0 0.25rem 1.1rem;
+}
+
+/* Plain nav text-links. */
+.pe-nav .pe-run-link {
+  display: block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: none;
+  line-height: 1.3;
+}
+
+.pe-nav .pe-run-link:hover {
+  background: #ececec;
+  color: #000;
+}
+
+.pe-nav .pe-run-link.active {
+  background: #d8e8fb;
+  color: #000;
+  font-weight: 500;
+}
+
+/* Disabled nav entries (v01/v02/v03). */
+.pe-nav .pe-version-disabled {
+  display: block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+  color: #bbb;
+  cursor: not-allowed;
+  line-height: 1.3;
+  font-style: italic;
+}
+
+.pe-nav-foot {
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: #999;
+  line-height: 1.4;
+}
+
+.pe-pane {
+  padding: 1.25rem 2rem 3rem;
+  overflow-y: auto;
+}
+
+.pe-pane-header {
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.pe-pane-titlerow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Title-as-card: fixed-ish width/height, tone-on-tone. */
+.pe-pane-card {
+  display: inline-flex;
+  align-items: center;
+  background: #ececec;
+  padding: 0.45rem 0.95rem;
+  border-radius: 6px;
+  font-family: ui-monospace, monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  min-width: 5.5rem;
+  height: 2.4rem;
+  margin: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+/* Info column: stays in a consistent spot beside the card across runs. */
+.pe-pane-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.pe-pane-info > summary.pe-pane-info-toggle {
+  list-style: none;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 1.1rem;
+  font-family: ui-monospace, monospace;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.1s, transform 0.12s ease;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.pe-pane-info > summary::-webkit-details-marker { display: none; }
+.pe-pane-info > summary::marker { display: none; }
+.pe-pane-info > summary:hover { color: #666; }
+
+.pe-pane-info[open] > summary {
+  color: #555;
+  transform: rotate(90deg);
+}
+
+.pe-pane-info-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.15rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.pe-pane-info[open] .pe-pane-info-content {
+  display: flex;
+}
+
+.pe-pane-meta-inline {
+  color: #888;
+  font-size: 0.82rem;
+  font-family: ui-monospace, monospace;
+  line-height: 1.4;
+}
+
+.pe-pane-meta-inline:empty { display: none; }
+
+.pe-pane-note {
+  color: #888;
+  font-size: 0.92rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.pe-pane-note:empty { display: none; }
+
+/* External-link nav entries (legacy per-run pages). */
+.pe-nav .pe-external-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.pe-nav .pe-external-indicator {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.pe-nav .pe-external-link:hover .pe-external-indicator {
+  color: #555;
+}
+
+.pe-pane-subtitle {
+  margin: 0.3rem 0 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.pe-pane-meta {
+  margin: 0.3rem 0 0;
+  color: #888;
+  font-size: 0.8rem;
+  font-family: ui-monospace, monospace;
+}
+
+/* Sections are <details>; collapsed by default, summary acts as the heading. */
+.pe-section {
+  margin: 0.35rem 0;
+}
+
+.pe-section > summary.pe-section-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.pe-section > summary::-webkit-details-marker { display: none; }
+.pe-section > summary::marker { display: none; }
+
+.pe-section > summary::before {
+  content: "▸";
+  font-size: 0.75rem;
+  color: #aaa;
+  transition: transform 0.12s ease;
+  display: inline-block;
+  width: 0.8rem;
+}
+
+.pe-section[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.pe-section-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.pe-section-sub {
+  font-weight: normal;
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.pe-section-content {
+  padding: 0.25rem 0 0.75rem;
+}
+
+.pe-placeholder {
+  color: #888;
+  font-style: italic;
+  padding: 0.75rem 1rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* System prompt: subtle details collapsed by default. */
+.pe-system-prompt {
+  margin: 0.15rem 0 0.25rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.pe-system-prompt > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: #888;
+  padding: 0.2rem 0;
+  user-select: none;
+}
+
+.pe-system-prompt > summary::-webkit-details-marker { display: none; }
+.pe-system-prompt > summary::marker { display: none; }
+
+.pe-system-prompt > summary::before {
+  content: "▸ ";
+  color: #aaa;
+  font-size: 0.7rem;
+  display: inline-block;
+  transition: transform 0.12s ease;
+}
+
+.pe-system-prompt[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.pe-system-prompt[open] > summary {
+  color: #555;
+}
+
+.pe-system-prompt .pe-system-text {
+  background: #f0f7ff;
+  border-left: 3px solid #6a9fd4;
+  padding: 0.5rem 0.75rem;
+  margin: 0.3rem 0 0;
+  white-space: pre-wrap;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.pe-system-prompt .pe-system-backfill-note {
+  background: #fff7e8;
+  border-left: 3px solid #d4a76a;
+  padding: 0.4rem 0.6rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  font-style: italic;
+  color: #7a6038;
+  line-height: 1.5;
+}
+
+.pe-system-prompt .pe-system-backfill-note::before {
+  content: "backfilled: ";
+  font-style: normal;
+  font-weight: 600;
+  color: #8a6b08;
+}
+
+/* Prompts: just numbered text. No header chrome. */
+.pe-prompt {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.18rem 0;
+  padding: 0.3rem 0.6rem;
+  background: #fafafa;
+  border-left: 3px solid #ccc;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.pe-prompt.snapshot {
+  border-left-color: #d4a76a;
+  background: #fff7e8;
+}
+
+.pe-prompt-num {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 600;
+  flex-shrink: 0;
+  min-width: 1.5rem;
+}
+
+.pe-prompt-text {
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+/* Chassis-block: shaded container that wraps the for-each header + voice cards as a group.
+   Pattern borrowed from landing-pads/voices/index.html (.chassis-loop). */
+.pe-chassis-block {
+  background: #f4f6f9;
+  padding: 0.65rem 0.8rem 0.75rem;
+  border-radius: 5px;
+  margin: 0.35rem 0;
+}
+
+.pe-chassis-loop {
+  margin: 0 0 0.6rem;
+}
+
+.pe-chassis-loop-header {
+  font-size: 0.78rem;
+  color: #666;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+  font-family: ui-monospace, monospace;
+}
+
+.pe-chassis-loop-body {
+  margin-left: 1rem;
+  padding-left: 0.7rem;
+  border-left: 2px solid #d8d5cc;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #444;
+  font-family: "Source Serif 4", Georgia, serif;
+}
+
+.pe-chassis-var {
+  display: inline-block;
+  padding: 0 0.3rem;
+  background: #e8e2f3;
+  color: #6a47a0;
+  border-radius: 3px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.pe-chassis-loop-variant {
+  margin: 0.4rem 0 0.3rem;
+}
+
+.pe-chassis-loop-key {
+  font-size: 0.7rem;
+  color: #777;
+  font-family: ui-monospace, monospace;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.pe-voice-card {
+  margin: 0.5rem 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 0.9rem;
+}
+
+.pe-voice-card .pe-voice-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.pe-voice-card .pe-voice-name {
+  font-weight: 600;
+  color: #222;
+}
+
+.pe-voice-card .pe-voice-fullname {
+  color: #888;
+  font-weight: normal;
+  font-size: 0.85rem;
+  margin-left: 0.3rem;
+}
+
+.pe-voice-card .pe-voice-meta {
+  font-size: 0.75rem;
+  color: #888;
+  font-family: ui-monospace, monospace;
+}
+
+/* Voice-card bio: collapsed behind a details/summary (pattern from voices viewer). */
+.pe-voice-card details > summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: #888;
+  user-select: none;
+  margin-top: 0.15rem;
+}
+
+.pe-voice-card details > summary::-webkit-details-marker { display: none; }
+.pe-voice-card details > summary::marker { display: none; }
+
+.pe-voice-card details > summary::before {
+  content: "▸ ";
+  color: #aaa;
+  font-size: 0.7rem;
+  display: inline-block;
+  transition: transform 0.12s ease;
+}
+
+.pe-voice-card details[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.pe-voice-card details[open] > summary {
+  color: #555;
+}
+
+.pe-voice-card .pe-voice-bio {
+  margin-top: 0.4rem;
+  color: #444;
+  line-height: 1.55;
+  font-size: 0.88rem;
+}
+
+.pe-voice-card .pe-voice-bio.missing {
+  color: #aaa;
+  font-style: italic;
+}
+
+.pe-footer {
+  border-top: 1px solid #eee;
+  padding: 0.75rem 2rem;
+  font-size: 0.78rem;
+  color: #999;
+}
+
+.pe-footer code {
+  background: #f0f0f0;
+  padding: 0 0.2rem;
+  border-radius: 2px;
+  font-size: 0.85em;
+}
+
+.pe-error {
+  color: #b03030;
+  background: #fff0f0;
+  padding: 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  border-left: 3px solid #b03030;
+}
