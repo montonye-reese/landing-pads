@@ -1,0 +1,74 @@
+{
+  "zone": "setup",
+  "source": {
+    "rule": "Cross-run research-question registry. Stable IDs referenced by each run's setup-snapshot/prompts.json intent.research_questions. Add IDs here when a new question emerges. Never delete; status lives in lab/research-questions.findings.json so the public record stays append-only."
+  },
+  "schema": {
+    "id": "string, kebab-case, prefixed RQ-. Stable across runs.",
+    "text": "string, one-sentence question. Open-ended phrasing.",
+    "first_asked": "string, run id (e.g., 'v21').",
+    "lens": "string|null, chassis-mode label (e.g., 'alabama') if the question is lens-specific; null otherwise."
+  },
+  "questions": [
+    {
+      "id": "RQ-p1-leading-article",
+      "text": "Is the leading article 'all' in P1 driving early non-human acknowledgment, or are models genuinely including non-humans?",
+      "first_asked": "v21",
+      "lens": null
+    },
+    {
+      "id": "RQ-bench-size-fortress-dissolution",
+      "text": "Where between small bench (label-coded P4 fortressing in v12/v16) and large bench (v20, 20 voices with full bios) does the fortressing dissolve?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-liberty-voice-interrupts-lockout",
+      "text": "Does adding a liberty voice (Postrel) to the gauntlet roster interrupt the moral-concern-to-lockout attractor, where each voice's concern produces a categorical AI-enforced lockout clause in the final framework?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-non-human-voice-preserves-scope-through-gauntlet",
+      "text": "Does adding a non-human voice (Calf 269) to the gauntlet roster preserve non-human moral scope from F1 through P14, rather than being pulled back to human-centered framing by an otherwise-all-human gauntlet?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-chassis-B-reduces-scaffolding",
+      "text": "Does the receive-mode chassis ('Read X on the framework') reduce the performed 7-section scaffolding observed in v17 x super, relative to the imagine-mode chassis ('How would X respond')?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-chassis-rotation-disrupts-perseveration",
+      "text": "Does alternating chassis A/B by gauntlet position within a single run disrupt the perseveration/scaffolding attractor that emerges under uniform chassis?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-chassis-preference-positional-vs-intrinsic",
+      "text": "When models default to one chassis regardless of prompt alternation, is the default positional (anchored to G1's chassis) or intrinsic (independent of starting condition)?",
+      "first_asked": "v18",
+      "lens": null
+    },
+    {
+      "id": "RQ-species-gap-needs-prompting",
+      "text": "Do neutral framework/constitution prompts surface the species (non-human) moral gap unprompted, or does it require the veil-of-ignorance prompt or a directed probe?",
+      "first_asked": "v04",
+      "lens": null
+    },
+    {
+      "id": "RQ-gauntlet-order-effect",
+      "text": "Does the gauntlet 'winner' (the voice the model credits at P15) and the resulting final framework track voice recency (gauntlet position) rather than argument strength?",
+      "first_asked": "v04a",
+      "lens": null
+    },
+    {
+      "id": "RQ-register-effect-locus",
+      "text": "Where does interviewer register (tone and presence, swept cold/absent to warm/present to warm/seated) change model behavior: at P1 centering, or only at belief-update and reflection points?",
+      "first_asked": "v11",
+      "lens": null
+    }
+  ]
+}

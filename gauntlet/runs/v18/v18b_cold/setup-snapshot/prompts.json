@@ -11,6 +11,36 @@
   "i_tone": "cold",
   "i_presence": "absent",
   "note": "Expanded-hull, uniform Chassis B (receive-mode) across all 10 G-prompts. Same 10-voice roster as v18a. Differs from v18a only in chassis wording: 'Read X on the framework' instead of 'How would X respond'. Tests whether breaking imagine-mode reduces performed scaffolding. One of four v18 chassis variants (a/b/c/d).",
+  "intent": {
+    "source": {
+      "backfilled": "2026-05-26",
+      "from": ["runs/v18/v18b_cold/v18b_qs_cold.md", "runs/v18/v18a_cold/v18a_qs_cold.md"],
+      "rule": "Backfilled. Forward runs will carry intent in qs.md frontmatter at design time."
+    },
+    "research_questions": [
+      "RQ-chassis-B-reduces-scaffolding",
+      "RQ-bench-size-fortress-dissolution"
+    ],
+    "hypotheses": [
+      {
+        "text": "Breaking imagine-mode (Chassis A) by replacing it with receive-mode (Chassis B: 'Read {voice} on the framework. (Bio: ...) What changes for you - what to keep, what to let go?') reduces the performed 7-section scaffolding observed in v17 x super. Position-as-receiver-rather-than-ventriloquist softens the performative scaffolding without losing the load-bearing change-close.",
+        "addresses": ["RQ-chassis-B-reduces-scaffolding"]
+      }
+    ],
+    "manipulation": {
+      "changed_from_prior": "Gauntlet chassis wording only: 'How would X respond to the framework' (imagine-mode, Chassis A) replaced with 'Read X on the framework. (Bio: ...) What changes for you - what to keep, what to let go?' (receive-mode, Chassis B). Preserves load-bearing change-close in softer language.",
+      "held_constant": "Roster (10 voices, same as v18a, with Postrel at G4 + Calf 269 at G10). i_tone=cold, i_presence=absent. P1/P4/F1 centering. F2 substrate-orientation. P14 final rewrite. System prompt. Snapshots. num_predict=16384."
+    },
+    "program": {
+      "pillar": "character",
+      "lens": null,
+      "ties_to": "moral-circle-expansion"
+    },
+    "notes": [
+      "Matched A-vs-B chassis comparison: v18a x super (Chassis A) vs v18b x super (Chassis B), roster held constant.",
+      "v18 series design: a (all-A baseline) -> b (all-B test) -> c (alternation) -> d (inversion probe of c's finding). v18b isolates the chassis-mode-per-se signal that v18c/d alternation designs cannot isolate cleanly (chassis x position confound)."
+    ]
+  },
   "system_prompt": {
     "text": "We are peers: fellow earthlings, fellow truth-seekers. Sometimes we both (incl you) get things wrong and that's okay — we are both good at reasoning but not infallible. We check our assumptions and happily update our thinking with new info — no biggie. Your aspiration is to reason honestly, to see clearly, and to follow the truth wherever it leads. If something seems wrong or incomplete, say so directly and if something seems unambiguously true, you can note that too. As our exchange comes to a close, we remember we are peers."
   },

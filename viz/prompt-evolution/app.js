@@ -6,10 +6,10 @@
 // Manifest reference: {versions: [{id, runs: [{name, path}]}]}. Path is relative to RUN_BASE.
 
 const MANIFEST_URL = "manifest.json";
-// Cross-repo paths (serve from research/ root). Source-of-truth read; /cp-gauntlet sync
-// is deferred until a staging-filter need arises.
-const RUN_BASE = "../../../gauntlet/runs";
-const REGISTRY_URL = "../../../gauntlet/setup/research-questions.json";
+// Read from the in-repo mirror (landing-pads/gauntlet), populated by /cp-gauntlet.
+// Keeps landing-pads self-contained + deployable; manifest paths follow the MIRROR layout.
+const RUN_BASE = "../../gauntlet/runs";
+const REGISTRY_URL = "../../gauntlet/setup/research-questions.json";
 
 const $ = (id) => document.getElementById(id);
 let manifest = null;

@@ -390,6 +390,12 @@ nav.run-nav {
   margin: 2rem 0 0.5rem;
 }
 
+.pe-intent-divider {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0.75rem 0 1.25rem;
+}
+
 .pe-system-prompt {
   margin: 0.15rem 0 0.8rem;
   font-size: 0.85rem;

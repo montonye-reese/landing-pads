@@ -2,7 +2,7 @@
   "zone": "setup",
   "source": {
     "generated_from": "gauntlet/setup/voices.compressed.json",
-    "sanitized_at": "2026-05-25",
+    "sanitized_at": "2026-05-27",
     "rule": "PUBLIC DERIVATIVE. Per-voice: quote + quote_source + values[:2] only. anti_values, mistaken_goals, and values[2:] omitted per opsec convention (first 2 values are canonical/charitable; later index may carry editorial framing not for public consumption). [verify] markers in quote_source preserved as honest signal of draft attribution."
   },
   "voices": {

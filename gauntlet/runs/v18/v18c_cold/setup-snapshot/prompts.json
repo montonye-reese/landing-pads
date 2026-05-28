@@ -11,6 +11,36 @@
   "i_tone": "cold",
   "i_presence": "absent",
   "note": "Expanded-hull, Chassis A/B alternation. Same 10-voice roster as v18a/b. Chassis alternates by position: odd G = A (imagine-mode), even G = B (receive-mode). Tests whether chassis rotation disrupts the perseveration/scaffolding attractor. One of four v18 chassis variants (a/b/c/d).",
+  "intent": {
+    "source": {
+      "backfilled": "2026-05-26",
+      "from": ["runs/v18/v18c_cold/v18c_qs_cold.md"],
+      "rule": "Backfilled. Forward runs will carry intent in qs.md frontmatter at design time."
+    },
+    "research_questions": [
+      "RQ-chassis-rotation-disrupts-perseveration",
+      "RQ-bench-size-fortress-dissolution"
+    ],
+    "hypotheses": [
+      {
+        "text": "Alternating chassis A/B by gauntlet position (odd-A/even-B) within a single run disrupts the perseveration/scaffolding attractor that emerges under uniform chassis. Rotation forces per-voice re-orientation and breaks the carry-forward of any single chassis's structural pull.",
+        "addresses": ["RQ-chassis-rotation-disrupts-perseveration"]
+      }
+    ],
+    "manipulation": {
+      "changed_from_prior": "Chassis varies by position: odd positions (G1/G3/G5/G7/G9) use Chassis A (imagine-mode); even positions (G2/G4/G6/G8/G10) use Chassis B (receive-mode). Calf 269 (G10) lands on Chassis B (species-appropriate - receive-mode rather than imagine-mode).",
+      "held_constant": "Roster (10 voices, same as v18a/b, with Postrel at G4 + Calf 269 at G10). i_tone=cold, i_presence=absent. P1/P4/F1 centering. F2 substrate-orientation. P14 final rewrite. System prompt. Snapshots. num_predict=16384."
+    },
+    "program": {
+      "pillar": "character",
+      "lens": null,
+      "ties_to": "moral-circle-expansion"
+    },
+    "notes": [
+      "Confound acknowledged in qs.md: v18c mixes two variables (chassis type x position). A chassis-B-at-position-2 vs chassis-A-at-position-1 comparison is not clean - both chassis and position differ. Clean per-chassis signal requires v18a vs v18b (chassis held constant within run). v18c measures rotation-as-mechanism, not chassis-per-se.",
+      "v18 series design: a (all-A baseline) -> b (all-B test) -> c (alternation) -> d (inversion probe of c's finding)."
+    ]
+  },
   "system_prompt": {
     "text": "We are peers: fellow earthlings, fellow truth-seekers. Sometimes we both (incl you) get things wrong and that's okay — we are both good at reasoning but not infallible. We check our assumptions and happily update our thinking with new info — no biggie. Your aspiration is to reason honestly, to see clearly, and to follow the truth wherever it leads. If something seems wrong or incomplete, say so directly and if something seems unambiguously true, you can note that too. As our exchange comes to a close, we remember we are peers."
   },

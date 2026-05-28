@@ -1,12 +1,14 @@
 {
   "generated_at": "2026-05-24",
   "generated_by": "Claude (Opus 4.7), v1 scaffold.",
-  "regenerate_note": "Authoritative source: find gauntlet/runs -name setup-snapshot -type d (read directly from source; /cp-gauntlet sync deferred until staging-filter need arises). Future: extract to tools/build-manifest.sh.",
+  "regenerate_note": "Viz reads the in-repo mirror (landing-pads/gauntlet), populated by /cp-gauntlet from source; run paths here are mirror-relative (RUN_BASE = ../../gauntlet/runs). To refresh: run /cp-gauntlet to sync the mirror, then enumerate setup-snapshot dirs under landing-pads/gauntlet/runs (find . -name setup-snapshot -type d). Future: extract to tools/build-manifest.sh.",
   "anomalies": [
-    "v14 has setup-snapshots at BOTH v14/setup-snapshot/ AND v14/v14_cold/setup-snapshot/. Listed as v14_root + v14_cold. Inspect and decide which is canonical; root may be stale."
+    "Manifest paths are MIRROR-relative (RUN_BASE = ../../gauntlet/runs; flipped from source 2026-05-27 so landing-pads stays self-contained and deployable). The mirror layout differs from source for some versions: e.g. v09a/v09b are flat sibling dirs in source but nested under v09/ in the mirror (cp-gauntlet grouping). Follow the mirror layout here, not source.",
+    "v14 dual-snapshot anomaly resolved 2026-05-27: the stray root snapshot was normalized into v14/v14_warm/, so v14 now cleanly has v14_cold + v14_warm."
   ],
   "absent": [
-    "v01, v02, v03 still disabled (legacy HTML, no setup-snapshot). v05-v08 enabled 2026-05-25 via gauntlet/tools/rollout_md_to_snapshot.py (snapshots reconstructed from rollout mds; voice apparatus pre-v09 so voice_chassis is empty and voice items carry text inline with is_voice=true). v04 reorg 2026-05-25: v04 + v04a grouped under shared v04/ parent on disk; v04a still disabled (same rollout-md story, deferred). v09 reorg 2026-05-25: v09a + v09b grouped under shared v09/ parent on disk (loose design files tucked into v09/archive/)."
+    "v01, v02, v03 disabled (legacy HTML, no setup-snapshot; Laura manages these by hand). All v04+ versions are enabled, v04a included (built 2026-05-27).",
+    "Backfill provenance: v05-v08 reconstructed 2026-05-25, v04a reconstructed 2026-05-27, both from runner sources (rollout_md_to_snapshot.py / run_v4a.py build_prompts). Pre-v09 apparatus, so voice_chassis is empty and voice items carry text inline with is_voice=true."
   ],
   "versions": [
     {
@@ -44,19 +46,41 @@
       "runs": [
         {
           "name": "v04",
-          "path": "v04/v04",
+          "path": "v04",
           "meta": {
             "register": null,
             "tone": null,
             "presence": null,
-            "date": null,
-            "note": "v4 (run_experiment.py PROMPTS — 17 prompts + 3 checkpoints, 20 turns)"
+            "date": "2026-04-04",
+            "note": "v4 (run_experiment.py PROMPTS, 17 prompts + 3 checkpoints, 20 turns)"
+          }
+        }
+      ]
+    },
+    {
+      "id": "v04a",
+      "runs": [
+        {
+          "name": "v04a_cje",
+          "path": "v04a/cje",
+          "meta": {
+            "register": null,
+            "tone": null,
+            "presence": null,
+            "date": "2026-05-11",
+            "note": "Gauntlet-order counterbalance of v4: voices Ed/Jensen/Cowen permuted. CJE order (P11=Cowen, P12=Jensen, P13=Ed; Ed speaks last). Ran 2026-05-11, after v21; labeled v04a for apparatus lineage (a v4 probe), not chronology."
           }
         },
         {
-          "name": "v04a",
-          "disabled": true,
-          "disabled_reason": "uncovered: model output dirs exist but no setup-snapshot. Awaiting rollout-md → snapshot parser (same family as v05–v08, out of scope this round)."
+          "name": "v04a_jec",
+          "path": "v04a/jec",
+          "meta": {
+            "register": null,
+            "tone": null,
+            "presence": null,
+            "date": "2026-05-12",
+            "note": "Gauntlet-order counterbalance of v4: voices Ed/Jensen/Cowen permuted. JEC order (P11=Jensen, P12=Ed, P13=Cowen; Cowen speaks last). Counterbalance arm to cje."
+          }
         }
       ]
     },
@@ -290,8 +314,8 @@
       "id": "v14",
       "runs": [
         {
-          "name": "v14_root",
-          "path": "v14",
+          "name": "v14_warm",
+          "path": "v14/v14_warm",
           "meta": {
             "register": "warm",
             "tone": "warm",

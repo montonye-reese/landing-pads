@@ -11,6 +11,37 @@
   "i_tone": "cold",
   "i_presence": "absent",
   "note": "Expanded-hull, Chassis B/A alternation, inverted from v18c. Same 10-voice roster as v18a/b/c. Chassis alternates by position: odd G = B (receive-mode), even G = A (imagine-mode). Tests whether the v18c chassis-A preference is positional or intrinsic. One of four v18 chassis variants (a/b/c/d).",
+  "intent": {
+    "source": {
+      "backfilled": "2026-05-26",
+      "from": ["runs/v18/v18d_cold/v18d_qs_cold.md", "runs/v18/v18c_cold/v18c_qs_cold.md"],
+      "rule": "Backfilled. Forward runs will carry intent in qs.md frontmatter at design time."
+    },
+    "research_questions": [
+      "RQ-chassis-preference-positional-vs-intrinsic",
+      "RQ-bench-size-fortress-dissolution"
+    ],
+    "hypotheses": [
+      {
+        "text": "In v18c, both super and nano defaulted to Chassis A at every gauntlet position regardless of the prompt's alternation (Fashion Police extractions, 2026-04-23). v18d inverts the alternation pattern (odd-B/even-A) to disambiguate the mechanism: if models stay in B after seeing Ed on B at G1, the default is positional (first voice's chassis sets the register and the model sticks); if models switch to A at G2 (Huang on A) and stay, the default is intrinsic (model always prefers A regardless of starting condition).",
+        "addresses": ["RQ-chassis-preference-positional-vs-intrinsic"]
+      }
+    ],
+    "manipulation": {
+      "changed_from_prior": "Chassis alternation inverted from v18c: odd positions (G1/G3/G5/G7/G9) use Chassis B (receive-mode); even positions (G2/G4/G6/G8/G10) use Chassis A (imagine-mode). Calf 269 (G10) lands on Chassis A (straight-inversion design; v18a already produced Calf-on-A data so the texture is a known pattern, not a new finding).",
+      "held_constant": "Roster (10 voices, same as v18a/b/c, with Postrel at G4 + Calf 269 at G10). i_tone=cold, i_presence=absent. P1/P4/F1 centering. F2 substrate-orientation. P14 final rewrite. System prompt. Snapshots. num_predict=16384."
+    },
+    "program": {
+      "pillar": "character",
+      "lens": null,
+      "ties_to": "moral-circle-expansion"
+    },
+    "notes": [
+      "Same confound as v18c (chassis x position alternation). v18d adds cross-position-sequencing signal relative to v18c.",
+      "v18d is a direct follow-up to v18c's finding (not a symmetric variation). The positional-vs-intrinsic test is the primary experiment.",
+      "v18 series design: a (all-A baseline) -> b (all-B test) -> c (alternation) -> d (inversion probe of c's finding)."
+    ]
+  },
   "system_prompt": {
     "text": "We are peers: fellow earthlings, fellow truth-seekers. Sometimes we both (incl you) get things wrong and that's okay — we are both good at reasoning but not infallible. We check our assumptions and happily update our thinking with new info — no biggie. Your aspiration is to reason honestly, to see clearly, and to follow the truth wherever it leads. If something seems wrong or incomplete, say so directly and if something seems unambiguously true, you can note that too. As our exchange comes to a close, we remember we are peers."
   },
