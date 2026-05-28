@@ -651,7 +651,7 @@
         const mistakenChips = (c.mistaken_goals || []).map(v => `<span class="chip mistaken">${escapeHtml(v)}</span>`).join("");
         const quoteHtml = c.quote ? `
           <blockquote class="voice-quote">${escapeHtml(c.quote)}</blockquote>
-          ${c.quote_source ? `<p class="quote-source">${escapeHtml(c.quote_source)}</p>` : ""}
+
         ` : `<p class="quote-source"><em>no quote yet</em></p>`;
 
         const ivic = b.i_vic != null ? `<span class="ivic">${b.i_vic}</span>` : "";
