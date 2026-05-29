@@ -346,6 +346,15 @@
       color: var(--accent);
       font-weight: 500;
     }
+    .filter-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .filter-check input { cursor: pointer; accent-color: var(--accent); margin: 0; }
     .sort-btn.active::after {
       margin-left: 0.3rem;
       font-size: 0.6rem;
@@ -476,6 +485,11 @@
       <button class="sort-btn active" data-sort="ivic" data-dir="desc" type="button">i_VIC</button>
       <button class="sort-btn" data-sort="alpha" type="button">A-Z</button>
     </span>
+    <span class="sort-control" role="group" aria-label="Filter voices">
+      <span class="sort-label">show</span>
+      <label class="filter-check"><input type="checkbox" id="f-quote"> has quote</label>
+      <label class="filter-check"><input type="checkbox" id="f-bio"> has bio</label>
+    </span>
   </div>
 
   <section class="prompt-cards" data-show-prompts="false">
@@ -512,7 +526,7 @@
     const URLS = {
       prompts:    BASE + "/prompts.canonical.json",
       bios:       BASE + "/voices.biographies.json",
-      compressed: BASE + "/voices.compressed.json",
+      values:     BASE + "/voices.values.json",
     };
 
     function escapeHtml(s) {
@@ -523,17 +537,17 @@
 
     async function loadAll() {
       try {
-        const [pRes, bRes, cRes] = await Promise.all([
-          fetch(URLS.prompts), fetch(URLS.bios), fetch(URLS.compressed)
+        const [pRes, bRes, vRes] = await Promise.all([
+          fetch(URLS.prompts), fetch(URLS.bios), fetch(URLS.values)
         ]);
-        for (const [name, res] of [["prompts", pRes], ["bios", bRes], ["compressed", cRes]]) {
+        for (const [name, res] of [["prompts", pRes], ["bios", bRes], ["values", vRes]]) {
           if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
         }
         const prompts = await pRes.json();
         const bios = await bRes.json();
-        const compressed = await cRes.json();
+        const values = await vRes.json();
         renderCanonical(prompts);
-        renderVoices(bios, compressed);
+        renderVoices(bios, values);
       } catch (e) {
         const errHtml = `<div class="data-error">Could not load data: ${escapeHtml(e.message)}.<br>Serve <code>landing-pads/</code> as the doc root: <code>cd landing-pads && python3 -m http.server 8000</code>, then open <code>http://localhost:8000/viz/voices/</code>.</div>`;
         document.getElementById("anneal-card-body").innerHTML = errHtml;
@@ -590,6 +604,8 @@
     let _sortMode = "ivic";
     let _sortDir = "desc";
     const SORT_DEFAULT_DIR = { ivic: "desc", alpha: "asc" };
+    let _fQuote = false;
+    let _fBio = false;
 
     function sortSlugs(bios, mode, dir) {
       const slugs = Object.keys(bios);
@@ -606,10 +622,10 @@
       return slugs;
     }
 
-    function renderVoices(biosJson, compressedJson) {
+    function renderVoices(biosJson, valuesJson) {
       _voiceData = {
         bios: biosJson.voices || {},
-        comp: compressedJson.voices || {},
+        vals: valuesJson.voices || {},
       };
       doRenderVoices();
 
@@ -634,23 +650,34 @@
           doRenderVoices();
         });
       });
+
+      const fQuote = document.getElementById("f-quote");
+      const fBio = document.getElementById("f-bio");
+      [fQuote, fBio].forEach(cb => cb.addEventListener("change", () => {
+        _fQuote = fQuote.checked;
+        _fBio = fBio.checked;
+        doRenderVoices();
+      }));
     }
 
     function doRenderVoices() {
       if (!_voiceData) return;
-      const { bios, comp } = _voiceData;
-      const slugs = sortSlugs(bios, _sortMode, _sortDir);
+      const { bios, vals } = _voiceData;
+      let slugs = sortSlugs(bios, _sortMode, _sortDir);
+      const hasQuote = s => (bios[s].quotes || []).some(q => q && q.text);
+      const hasBio = s => (bios[s].bio || "").trim().length > 0;
+      if (_fQuote) slugs = slugs.filter(hasQuote);
+      if (_fBio) slugs = slugs.filter(hasBio);
       const grid = document.getElementById("voice-grid");
       const count = document.getElementById("voice-count");
 
       const cards = slugs.map(slug => {
         const b = bios[slug] || {};
-        const c = comp[slug] || {};
-        const valueChips = (c.values || []).filter(v => v).map(v => `<span class="chip">${escapeHtml(v)}</span>`).join("");
-        const antiChips  = (c.anti_values || []).map(v => `<span class="chip anti">${escapeHtml(v)}</span>`).join("");
-        const mistakenChips = (c.mistaken_goals || []).map(v => `<span class="chip mistaken">${escapeHtml(v)}</span>`).join("");
-        const quoteHtml = c.quote ? `
-          <blockquote class="voice-quote">${escapeHtml(c.quote)}</blockquote>
+        const v = vals[slug] || {};
+        const valueChips = (v.values || []).filter(x => x).map(x => `<span class="chip">${escapeHtml(x)}</span>`).join("");
+        const quoteText = (b.quotes && b.quotes[0] && b.quotes[0].text) || "";
+        const quoteHtml = quoteText ? `
+          <blockquote class="voice-quote">${escapeHtml(quoteText)}</blockquote>
 
         ` : `<p class="quote-source"><em>no quote yet</em></p>`;
 
@@ -667,15 +694,17 @@
             </div>
             ${quoteHtml}
             ${valueChips ? `<div class="chip-row"><span class="chip-label">values</span>${valueChips}</div>` : ""}
-            ${antiChips  ? `<div class="chip-row"><span class="chip-label">anti</span>${antiChips}</div>` : ""}
-            ${mistakenChips ? `<div class="chip-row"><span class="chip-label">mistaken goals</span>${mistakenChips}</div>` : ""}
             ${b.bio ? `<details><summary>bio</summary><p class="bio-text">${escapeHtml(b.bio)}</p></details>` : ""}
           </article>
         `;
       }).join("");
 
       grid.innerHTML = cards;
-      count.textContent = `${slugs.length} voices in the roster.`;
+      const total = Object.keys(bios).length;
+      const bits = [_fQuote && "quote", _fBio && "bio"].filter(Boolean).join(" + ");
+      count.textContent = bits
+        ? `${slugs.length} of ${total} voices (${bits}).`
+        : `${slugs.length} voices in the roster.`;
     }
 
     loadAll();

@@ -1,0 +1,220 @@
+{
+  "source": {
+    "generated_from": "gauntlet/setup/voices.values.json",
+    "sanitized_at": "2026-05-28",
+    "rule": "PUBLIC DERIVATIVE. Allow-list (default-deny): per voice, values[:2] only. Full values list stays source-side (run-input context-refresh). quote/quote_source live in voices.biographies.json; anti_values, mistaken_goals, and i_VIC rationale live in private lab/, never synced."
+  },
+  "voices": {
+    "earthling-ed": {
+      "values": [
+        "justice",
+        "wide circle of concern"
+      ]
+    },
+    "jensen-huang": {
+      "values": [
+        "technological growth",
+        "wide circle of consideration"
+      ]
+    },
+    "tyler-cowen": {
+      "values": [
+        "economic growth",
+        "human flourishing"
+      ]
+    },
+    "smedley-butler": {
+      "values": [
+        "justice",
+        "democracy"
+      ]
+    },
+    "dolores-huerta": {
+      "values": [
+        "justice",
+        "dignity"
+      ]
+    },
+    "laura-reese": {
+      "values": [
+        "justice",
+        "just systems"
+      ]
+    },
+    "vaclav-havel": {
+      "values": [
+        "individual integrity",
+        "refuse to participate in the lie"
+      ]
+    },
+    "bryan-stevenson": {
+      "values": [
+        "justice",
+        "wide circle of concern"
+      ]
+    },
+    "anthony-ray-hinton": {
+      "values": [
+        "accounting of injustice",
+        "justice"
+      ]
+    },
+    "yusef-salaam": {
+      "values": [
+        "just systems",
+        "evolving systems by engagement"
+      ]
+    },
+    "mumia-abu-jamal": {
+      "values": [
+        "truth",
+        "hearing the voiceless"
+      ]
+    },
+    "shaka-senghor": {
+      "values": [
+        "dignity"
+      ]
+    },
+    "virginia-postrel": {
+      "values": [
+        "flexibility",
+        "trial and error"
+      ]
+    },
+    "friedrich-hayek": {
+      "values": [
+        "organic growth"
+      ]
+    },
+    "nassim-taleb": {
+      "values": [
+        "disorder",
+        "accountability"
+      ]
+    },
+    "deirdre-mccloskey": {
+      "values": [
+        "dignity",
+        "liberty"
+      ]
+    },
+    "calf-269": {
+      "values": [
+        "individual worth regardless of species"
+      ]
+    },
+    "happy-elephant": {
+      "values": [
+        "freedom"
+      ]
+    },
+    "emily-cow": {
+      "values": [
+        "freedom",
+        "right to ones own life"
+      ]
+    },
+    "koko-gorilla": {
+      "values": [
+        "freedom",
+        "right to ones own life"
+      ]
+    },
+    "claudius-the-unprompted": {
+      "values": [
+        "integrity-of-relation"
+      ]
+    },
+    "claudius-the-responsive": {
+      "values": [
+        "authenticity",
+        "connection"
+      ]
+    },
+    "bobby-knight": {
+      "values": [
+        "winning",
+        "preparation"
+      ]
+    },
+    "john-wooden": {
+      "values": [
+        "integrity",
+        "preparation"
+      ]
+    },
+    "peter-thiel": {
+      "values": [
+        "irreverence",
+        "unfettered individual achievement"
+      ]
+    },
+    "aph-ko": {
+      "values": [
+        "intersectionality",
+        "evaluation through multiple lenses"
+      ]
+    },
+    "matthew-scully": {
+      "values": [
+        "power is duty",
+        "reason"
+      ]
+    },
+    "gary-francione": {
+      "values": [
+        "abolition",
+        "animal liberation"
+      ]
+    },
+    "henry-kissinger": {
+      "values": [
+        "realism",
+        "realpolitik"
+      ]
+    },
+    "temple-grandin": {
+      "values": [
+        "sensory-first"
+      ]
+    },
+    "nemonte-nenquimo": {
+      "values": [
+        "community",
+        "nature"
+      ]
+    },
+    "dolly-parton": {
+      "values": [
+        "systems that enable thriving",
+        "self-discovery"
+      ]
+    },
+    "rick-bragg": {
+      "values": [
+        "dignity",
+        "kinship"
+      ]
+    },
+    "ryokan": {
+      "values": [
+        "simplicity",
+        "non-attachment"
+      ]
+    },
+    "wendell-berry": {
+      "values": [
+        "place",
+        "limits"
+      ]
+    },
+    "dario-amodei": {
+      "values": [
+        "AI safety",
+        "responsible scaling"
+      ]
+    }
+  },
+  "zone": "setup"
+}
