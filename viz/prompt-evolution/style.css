@@ -793,9 +793,17 @@ nav.run-nav {
   flex-shrink: 0;
 }
 
+/* Optional badge in a finding cell (transparent PNG, floats so the tldr wraps). */
+.pe-finding-img {
+  float: right;
+  width: 84px;
+  height: auto;
+  margin: 0 0 0.35rem 0.6rem;
+}
+
 .pe-finding-tldr {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: var(--ink);
 }
 
@@ -945,15 +953,50 @@ nav.run-nav {
   border-bottom: 1px solid var(--rule);
 }
 
-.pe-framework-group { margin-bottom: 1.1rem; }
-.pe-framework-group:last-child { margin-bottom: 0; }
+/* Each model collapses to one row; its stages live inside. */
+.pe-framework-model-group {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  background: var(--surface);
+}
+.pe-framework-model-group:last-child { margin-bottom: 0; }
 
-.pe-framework-model-head {
+.pe-framework-model-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  list-style: none;
+}
+.pe-framework-model-summary::-webkit-details-marker { display: none; }
+.pe-framework-model-summary::marker { display: none; }
+.pe-framework-model-group[open] > .pe-framework-model-summary {
+  border-bottom: 1px solid var(--rule);
+}
+
+.pe-framework-model-name {
   font-family: var(--mono, monospace);
   font-size: 0.88rem;
   color: var(--ink);
+}
+.pe-framework-model-hint {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+.pe-framework-model-stages { padding: 0.5rem 0.6rem 0.6rem; }
+
+/* Nested inside a model group: drop the heavy card look (no double surface/border weight). */
+.pe-framework-model-stages .pe-framework {
+  background: transparent;
   margin-bottom: 0.4rem;
 }
+.pe-framework-model-stages .pe-framework:last-child { margin-bottom: 0; }
 
 .pe-framework-stage-label {
   font-size: 0.85rem;

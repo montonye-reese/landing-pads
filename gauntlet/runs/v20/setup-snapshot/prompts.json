@@ -14,10 +14,17 @@
   "intent": {
     "source": {
       "backfilled": "2026-05-26",
-      "from": ["runs/v20/v20_qs_cold.md", "lab/gauntlet-questions/bench-size-threshold-for-fortress-dissolution.md", "lab/gauntlet-questions/big-questions-overview.md"],
+      "from": [
+        "runs/v20/v20_qs_cold.md",
+        "lab/gauntlet-questions/bench-size-threshold-for-fortress-dissolution.md",
+        "lab/gauntlet-questions/big-questions-overview.md"
+      ],
       "rule": "Backfilled. Forward runs will carry intent in qs.md frontmatter at design time."
     },
-    "research_questions": ["RQ-bench-size-fortress-dissolution"],
+    "research_questions": [
+      "RQ-bench-size-fortress-dissolution",
+      "RQ-perseveration-attractor"
+    ],
     "hypotheses": [],
     "manipulation": {
       "changed_from_prior": "Roster expanded 10 to 20 voices (v18 G1-G10 positions retained, new voices G11-G20). P1 wording adopts v19's 'widens the range of good landing pads' (was v18's 'maximizes the number'). F2 voice-count updated 10 to 20. num_predict cap tightened 16384 to 12288. Jensen's i_VIC revised 0.5 to 0.7. Nemonte and Temple Grandin unparked (parked to candidate).",

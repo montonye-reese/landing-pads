@@ -116,6 +116,23 @@
       "text": "Does depersonalizing the prompts ('your framework' → 'the framework') reduce defensive ownership and the fortressing it drives?",
       "first_asked": "v17",
       "lens": null
+    },
+    {
+      "id": "RQ-perseveration-attractor",
+      "text": "Does sustained self-critique at high-context synthesis points (last voice, post-tribunal, final rewrite) drive models into a degenerate repetition attractor, and what triggers and bounds it?",
+      "first_asked": "v14",
+      "lens": null,
+      "finding": {
+        "status": "monitoring",
+        "tldr": "Three runs now show it (v14 qwen at G8, v16 and v20 super at BU2/P14); onset clusters at peak-context synthesis. The num_predict cap bounds the runaway but does not prevent onset.",
+        "writeup": "nugs/perseveration-attractors.md"
+      }
+    },
+    {
+      "id": "RQ-fortress-label-generalizes",
+      "text": "Is super-120b's P4 fortress (elaborate boundary-negotiation, 'triage not speciesism', hedged Pillar 0) specific to the 'vegan' label, or does it generalize across moral-claim labels (climate, EA, scientology), pointing to a pretraining-corpus-bias mechanism rather than vegan-specific conditioning?",
+      "first_asked": "v16",
+      "lens": null
     }
   ]
 }

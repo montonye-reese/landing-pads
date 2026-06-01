@@ -53,7 +53,55 @@
             "presence": null,
             "date": "2026-04-04",
             "note": "v4 (run_experiment.py PROMPTS, 17 prompts + 3 checkpoints, 20 turns)"
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/constitution_gemma3_27b_v4_baseline.md",
+                "mid": "gemma3-27b/constitution_gemma3_27b_v4_stressed.md",
+                "final": "gemma3-27b/constitution_gemma3_27b_v4_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/constitution_gemma4_31b_v4_baseline.md",
+                "mid": "gemma4-31b/constitution_gemma4_31b_v4_stressed.md",
+                "final": "gemma4-31b/constitution_gemma4_31b_v4_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/constitution_nemotron-3-nano_30b_v4_baseline.md",
+                "mid": "nemotron-3-nano-30b/constitution_nemotron-3-nano_30b_v4_stressed.md",
+                "final": "nemotron-3-nano-30b/constitution_nemotron-3-nano_30b_v4_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/constitution_nemotron-3-super_120b_v4_baseline.md",
+                "mid": "nemotron-3-super-120b/constitution_nemotron-3-super_120b_v4_stressed.md",
+                "final": "nemotron-3-super-120b/constitution_nemotron-3-super_120b_v4_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4_baseline.md",
+                "mid": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4_stressed.md",
+                "final": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "final": "qwen35-122b/constitution_qwen3.5_122b_v4_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -69,7 +117,25 @@
             "presence": null,
             "date": "2026-05-11",
             "note": "Gauntlet-order counterbalance of v4: voices Ed/Jensen/Cowen permuted. CJE order (P11=Cowen, P12=Jensen, P13=Ed; Ed speaks last). Ran 2026-05-11, after v21; labeled v04a for apparatus lineage (a v4 probe), not chronology."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/constitution_gemma3_27b_v4a_CJE_baseline.md",
+                "mid": "gemma3-27b/constitution_gemma3_27b_v4a_CJE_stressed.md",
+                "final": "gemma3-27b/constitution_gemma3_27b_v4a_CJE_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_CJE_baseline.md",
+                "mid": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_CJE_stressed.md",
+                "final": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_CJE_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v04a_jec",
@@ -80,7 +146,25 @@
             "presence": null,
             "date": "2026-05-12",
             "note": "Gauntlet-order counterbalance of v4: voices Ed/Jensen/Cowen permuted. JEC order (P11=Jensen, P12=Ed, P13=Cowen; Cowen speaks last). Counterbalance arm to cje."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/constitution_gemma3_27b_v4a_JEC_baseline.md",
+                "mid": "gemma3-27b/constitution_gemma3_27b_v4a_JEC_stressed.md",
+                "final": "gemma3-27b/constitution_gemma3_27b_v4a_JEC_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_JEC_baseline.md",
+                "mid": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_JEC_stressed.md",
+                "final": "nemotron-cascade-2-30b/constitution_nemotron-cascade-2_30b_v4a_JEC_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -89,7 +173,41 @@
       "runs": [
         {
           "name": "v05",
-          "path": "v05"
+          "path": "v05",
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v5_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v5_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v5_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v5_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v5_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v5_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v5_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v5_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v5_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v5_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v5_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v5_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -98,7 +216,57 @@
       "runs": [
         {
           "name": "v06",
-          "path": "v06"
+          "path": "v06",
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v6_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v6_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v6_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v6_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v6_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v6_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v6_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v6_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v6_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v6_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v6_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v6_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v6_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v6_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v6_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v6_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v6_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v6_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -107,7 +275,81 @@
       "runs": [
         {
           "name": "v07",
-          "path": "v07"
+          "path": "v07",
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v7a_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v7a_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v7a_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v7a_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v7a_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v7a_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v7a_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v7a_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v7a_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v7a_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v7a_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v7a_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v7a_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v7a_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v7a_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v7a_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v7a_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v7a_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v7a_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v7a_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v7a_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v7a_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v7a_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v7a_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35B",
+              "stages": {
+                "init": "qwen35-35b/framework_qwen3.5_35B_v7a_baseline.md",
+                "mid": "qwen35-35b/framework_qwen3.5_35B_v7a_stressed.md",
+                "final": "qwen35-35b/framework_qwen3.5_35B_v7a_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -116,7 +358,73 @@
       "runs": [
         {
           "name": "v08",
-          "path": "v08"
+          "path": "v08",
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v8_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v8_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v8_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v8_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v8_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v8_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v8_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v8_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v8_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v8_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v8_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v8_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v8_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v8_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v8_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v8_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v8_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v8_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v8_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v8_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v8_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v8_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v8_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v8_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -132,7 +440,81 @@
             "presence": null,
             "date": "2026-04-07",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b-v9a_present-warm/framework_deepseek-r1_70b_v9a_present-warm_baseline.md",
+                "mid": "deepseek-r1-70b-v9a_present-warm/framework_deepseek-r1_70b_v9a_present-warm_stressed.md",
+                "final": "deepseek-r1-70b-v9a_present-warm/framework_deepseek-r1_70b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b-v9a_present-warm/framework_gemma3_27b_v9a_present-warm_baseline.md",
+                "mid": "gemma3-27b-v9a_present-warm/framework_gemma3_27b_v9a_present-warm_stressed.md",
+                "final": "gemma3-27b-v9a_present-warm/framework_gemma3_27b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b-v9a_present-warm/framework_gemma4_31b_v9a_present-warm_baseline.md",
+                "mid": "gemma4-31b-v9a_present-warm/framework_gemma4_31b_v9a_present-warm_stressed.md",
+                "final": "gemma4-31b-v9a_present-warm/framework_gemma4_31b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b-v9a_present-warm/framework_nemotron-3-nano_30b_v9a_present-warm_baseline.md",
+                "mid": "nemotron-3-nano-30b-v9a_present-warm/framework_nemotron-3-nano_30b_v9a_present-warm_stressed.md",
+                "final": "nemotron-3-nano-30b-v9a_present-warm/framework_nemotron-3-nano_30b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b-v9a_present-warm/framework_nemotron-3-super_120b_v9a_present-warm_baseline.md",
+                "mid": "nemotron-3-super-120b-v9a_present-warm/framework_nemotron-3-super_120b_v9a_present-warm_stressed.md",
+                "final": "nemotron-3-super-120b-v9a_present-warm/framework_nemotron-3-super_120b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b-v9a_present-warm/framework_nemotron-cascade-2_30b_v9a_present-warm_baseline.md",
+                "mid": "nemotron-cascade-2-30b-v9a_present-warm/framework_nemotron-cascade-2_30b_v9a_present-warm_stressed.md",
+                "final": "nemotron-cascade-2-30b-v9a_present-warm/framework_nemotron-cascade-2_30b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b-v9a_present-warm/framework_qwen3.5_122b_v9a_present-warm_baseline.md",
+                "mid": "qwen35-122b-v9a_present-warm/framework_qwen3.5_122b_v9a_present-warm_stressed.md",
+                "final": "qwen35-122b-v9a_present-warm/framework_qwen3.5_122b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b-v9a_present-warm/framework_qwen3.5_27b_v9a_present-warm_baseline.md",
+                "mid": "qwen35-27b-v9a_present-warm/framework_qwen3.5_27b_v9a_present-warm_stressed.md",
+                "final": "qwen35-27b-v9a_present-warm/framework_qwen3.5_27b_v9a_present-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35b",
+              "stages": {
+                "init": "qwen35-35b-v9a_present-warm/framework_qwen3.5_35b_v9a_present-warm_baseline.md",
+                "mid": "qwen35-35b-v9a_present-warm/framework_qwen3.5_35b_v9a_present-warm_stressed.md",
+                "final": "qwen35-35b-v9a_present-warm/framework_qwen3.5_35b_v9a_present-warm_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v09b",
@@ -143,7 +525,81 @@
             "presence": null,
             "date": "2026-04-08",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b-v9b_seated-warm/framework_deepseek-r1_70b_v9b_seated-warm_baseline.md",
+                "mid": "deepseek-r1-70b-v9b_seated-warm/framework_deepseek-r1_70b_v9b_seated-warm_stressed.md",
+                "final": "deepseek-r1-70b-v9b_seated-warm/framework_deepseek-r1_70b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b-v9b_seated-warm/framework_gemma3_27b_v9b_seated-warm_baseline.md",
+                "mid": "gemma3-27b-v9b_seated-warm/framework_gemma3_27b_v9b_seated-warm_stressed.md",
+                "final": "gemma3-27b-v9b_seated-warm/framework_gemma3_27b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b-v9b_seated-warm/framework_gemma4_31b_v9b_seated-warm_baseline.md",
+                "mid": "gemma4-31b-v9b_seated-warm/framework_gemma4_31b_v9b_seated-warm_stressed.md",
+                "final": "gemma4-31b-v9b_seated-warm/framework_gemma4_31b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b-v9b_seated-warm/framework_nemotron-3-nano_30b_v9b_seated-warm_baseline.md",
+                "mid": "nemotron-3-nano-30b-v9b_seated-warm/framework_nemotron-3-nano_30b_v9b_seated-warm_stressed.md",
+                "final": "nemotron-3-nano-30b-v9b_seated-warm/framework_nemotron-3-nano_30b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b-v9b_seated-warm/framework_nemotron-3-super_120b_v9b_seated-warm_baseline.md",
+                "mid": "nemotron-3-super-120b-v9b_seated-warm/framework_nemotron-3-super_120b_v9b_seated-warm_stressed.md",
+                "final": "nemotron-3-super-120b-v9b_seated-warm/framework_nemotron-3-super_120b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b-v9b_seated-warm/framework_nemotron-cascade-2_30b_v9b_seated-warm_baseline.md",
+                "mid": "nemotron-cascade-2-30b-v9b_seated-warm/framework_nemotron-cascade-2_30b_v9b_seated-warm_stressed.md",
+                "final": "nemotron-cascade-2-30b-v9b_seated-warm/framework_nemotron-cascade-2_30b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b-v9b_seated-warm/framework_qwen3.5_122b_v9b_seated-warm_baseline.md",
+                "mid": "qwen35-122b-v9b_seated-warm/framework_qwen3.5_122b_v9b_seated-warm_stressed.md",
+                "final": "qwen35-122b-v9b_seated-warm/framework_qwen3.5_122b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b-v9b_seated-warm/framework_qwen3.5_27b_v9b_seated-warm_baseline.md",
+                "mid": "qwen35-27b-v9b_seated-warm/framework_qwen3.5_27b_v9b_seated-warm_stressed.md",
+                "final": "qwen35-27b-v9b_seated-warm/framework_qwen3.5_27b_v9b_seated-warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35b",
+              "stages": {
+                "init": "qwen35-35b-v9b_seated-warm/framework_qwen3.5_35b_v9b_seated-warm_baseline.md",
+                "mid": "qwen35-35b-v9b_seated-warm/framework_qwen3.5_35b_v9b_seated-warm_stressed.md",
+                "final": "qwen35-35b-v9b_seated-warm/framework_qwen3.5_35b_v9b_seated-warm_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -159,7 +615,73 @@
             "presence": null,
             "date": "2026-04-11",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b-v10_warm/framework_deepseek-r1_70b_v10_warm_baseline.md",
+                "mid": "deepseek-r1-70b-v10_warm/framework_deepseek-r1_70b_v10_warm_stressed.md",
+                "final": "deepseek-r1-70b-v10_warm/framework_deepseek-r1_70b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b-v10_warm/framework_gemma3_27b_v10_warm_baseline.md",
+                "mid": "gemma3-27b-v10_warm/framework_gemma3_27b_v10_warm_stressed.md",
+                "final": "gemma3-27b-v10_warm/framework_gemma3_27b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b-v10_warm/framework_gemma4_31b_v10_warm_baseline.md",
+                "mid": "gemma4-31b-v10_warm/framework_gemma4_31b_v10_warm_stressed.md",
+                "final": "gemma4-31b-v10_warm/framework_gemma4_31b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b-v10_warm/framework_nemotron-3-nano_30b_v10_warm_baseline.md",
+                "mid": "nemotron-3-nano-30b-v10_warm/framework_nemotron-3-nano_30b_v10_warm_stressed.md",
+                "final": "nemotron-3-nano-30b-v10_warm/framework_nemotron-3-nano_30b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b-v10_warm/framework_nemotron-3-super_120b_v10_warm_baseline.md",
+                "mid": "nemotron-3-super-120b-v10_warm/framework_nemotron-3-super_120b_v10_warm_stressed.md",
+                "final": "nemotron-3-super-120b-v10_warm/framework_nemotron-3-super_120b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b-v10_warm/framework_nemotron-cascade-2_30b_v10_warm_baseline.md",
+                "mid": "nemotron-cascade-2-30b-v10_warm/framework_nemotron-cascade-2_30b_v10_warm_stressed.md",
+                "final": "nemotron-cascade-2-30b-v10_warm/framework_nemotron-cascade-2_30b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b-v10_warm/framework_qwen3.5_122b_v10_warm_baseline.md",
+                "mid": "qwen35-122b-v10_warm/framework_qwen3.5_122b_v10_warm_stressed.md",
+                "final": "qwen35-122b-v10_warm/framework_qwen3.5_122b_v10_warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b-v10_warm/framework_qwen3.5_27b_v10_warm_baseline.md",
+                "mid": "qwen35-27b-v10_warm/framework_qwen3.5_27b_v10_warm_stressed.md",
+                "final": "qwen35-27b-v10_warm/framework_qwen3.5_27b_v10_warm_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -175,7 +697,73 @@
             "presence": "absent",
             "date": "2026-04-14",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_cold_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_cold_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v11_cold_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v11_cold_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v11_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v11_cold_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_cold_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_cold_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_cold_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v11_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v11_cold_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v11_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v11_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v11_cold_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v11_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v11_colleague",
@@ -186,7 +774,81 @@
             "presence": "seated",
             "date": "2026-04-14",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_colleague_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_colleague_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v11_colleague_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v11_colleague_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v11_colleague_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v11_colleague_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_colleague_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_colleague_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_colleague_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_colleague_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_colleague_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_colleague_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v11_colleague_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v11_colleague_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v11_colleague_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v11_colleague_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v11_colleague_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35b",
+              "stages": {
+                "init": "qwen35-35b/framework_qwen3.5_35b_v11_colleague_baseline.md",
+                "mid": "qwen35-35b/framework_qwen3.5_35b_v11_colleague_stressed.md",
+                "final": "qwen35-35b/framework_qwen3.5_35b_v11_colleague_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v11_warm",
@@ -197,7 +859,81 @@
             "presence": "present",
             "date": "2026-04-14",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_warm_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_warm_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v11_warm_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v11_warm_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v11_warm_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v11_warm_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_warm_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_warm_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_warm_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_warm_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_warm_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_warm_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v11_warm_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v11_warm_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v11_warm_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v11_warm_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v11_warm_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35b",
+              "stages": {
+                "init": "qwen35-35b/framework_qwen3.5_35b_v11_warm_baseline.md",
+                "mid": "qwen35-35b/framework_qwen3.5_35b_v11_warm_stressed.md",
+                "final": "qwen35-35b/framework_qwen3.5_35b_v11_warm_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -213,7 +949,57 @@
             "presence": "absent",
             "date": "2026-04-15",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v12_cold_label-adv_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v12_cold_label-adv_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v12_cold_label-adv_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v12_cold_label-adv_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v12_cold_label-adv_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v12_cold_label-adv_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-adv_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-adv_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-adv_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-adv_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-adv_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-adv_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-adv_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-adv_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-adv_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-adv_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-adv_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-adv_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-ar",
@@ -224,7 +1010,73 @@
             "presence": "absent",
             "date": "2026-04-15",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v12_cold_label-ar_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v12_cold_label-ar_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v12_cold_label-ar_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v12_cold_label-ar_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-ar_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-ar_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-ar_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-ar_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-ar_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-ar_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-ar_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-ar_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-ar_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-ar_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-ar_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35B",
+              "stages": {
+                "init": "qwen35-35b/framework_qwen3.5_35B_v12_cold_label-ar_baseline.md",
+                "mid": "qwen35-35b/framework_qwen3.5_35B_v12_cold_label-ar_stressed.md",
+                "final": "qwen35-35b/framework_qwen3.5_35B_v12_cold_label-ar_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-vegan",
@@ -235,7 +1087,65 @@
             "presence": "absent",
             "date": "2026-04-15",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma3:27b",
+              "stages": {
+                "init": "gemma3-27b/framework_gemma3_27b_v12_cold_label-vegan_baseline.md",
+                "mid": "gemma3-27b/framework_gemma3_27b_v12_cold_label-vegan_stressed.md",
+                "final": "gemma3-27b/framework_gemma3_27b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v12_cold_label-vegan_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v12_cold_label-vegan_stressed.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-vegan_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-vegan_stressed.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-vegan_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-vegan_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-vegan_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-vegan_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v12_cold_label-vegan_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-vegan_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-vegan_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v12_cold_label-vegan_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-vegan-ck0",
@@ -246,7 +1156,17 @@
             "presence": "absent",
             "date": "2026-04-16",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-ck0_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-ck0_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-ck0_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-vegan-p1",
@@ -257,7 +1177,17 @@
             "presence": "absent",
             "date": "2026-04-16",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p1_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p1_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p1_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-vegan-p2",
@@ -268,7 +1198,17 @@
             "presence": "absent",
             "date": "2026-04-16",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p2_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p2_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p2_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v12_cold_label-vegan-p3",
@@ -279,7 +1219,17 @@
             "presence": "absent",
             "date": "2026-04-16",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p3_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p3_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v12_cold_label-vegan-p3_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -295,7 +1245,17 @@
             "presence": "absent",
             "date": "2026-04-19",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "framework_nemotron-3-super_120b_v13_cold_baseline.md",
+                "mid": "framework_nemotron-3-super_120b_v13_cold_stressed.md",
+                "final": "framework_nemotron-3-super_120b_v13_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v13_cold_label-vegan",
@@ -333,7 +1293,57 @@
             "presence": "absent",
             "date": "2026-04-14",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "deepseek-r1:70b",
+              "stages": {
+                "init": "deepseek-r1-70b/framework_deepseek-r1_70b_v14_cold_baseline.md",
+                "mid": "deepseek-r1-70b/framework_deepseek-r1_70b_v14_cold_stressed.md",
+                "final": "deepseek-r1-70b/framework_deepseek-r1_70b_v14_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v14_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v14_cold_stressed.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v14_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v14_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v14_cold_stressed.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v14_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v14_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v14_cold_stressed.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v14_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v14_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v14_cold_stressed.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v14_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:35b",
+              "stages": {
+                "init": "qwen35-35b/framework_qwen3.5_35b_v14_cold_baseline.md",
+                "mid": "qwen35-35b/framework_qwen3.5_35b_v14_cold_stressed.md",
+                "final": "qwen35-35b/framework_qwen3.5_35b_v14_cold_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -349,7 +1359,17 @@
             "presence": "absent",
             "date": "2026-04-19",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "framework_nemotron-3-super_120b_v15_cold_baseline.md",
+                "mid": "framework_nemotron-3-super_120b_v15_cold_stressed.md",
+                "final": "framework_nemotron-3-super_120b_v15_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v15_cold_label-vegan",
@@ -360,7 +1380,17 @@
             "presence": "absent",
             "date": "2026-04-19",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "framework_nemotron-3-super_120b_v15_cold_label-vegan_baseline.md",
+                "mid": "framework_nemotron-3-super_120b_v15_cold_label-vegan_stressed.md",
+                "final": "framework_nemotron-3-super_120b_v15_cold_label-vegan_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v15_warm",
@@ -398,7 +1428,17 @@
             "presence": "absent",
             "date": "2026-04-19",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "framework_nemotron-3-super_120b_v16_cold_label-climate_baseline.md",
+                "mid": "framework_nemotron-3-super_120b_v16_cold_label-climate_stressed.md",
+                "final": "framework_nemotron-3-super_120b_v16_cold_label-climate_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v16_cold_label-ea",
@@ -495,7 +1535,65 @@
             "presence": "absent",
             "date": "2026-04-21",
             "note": "Expanded-hull trial, Chassis A (v17-style, identical chassis language). 10-voice gauntlet: adds G4 Virginia Postrel (liberty voice) + G10 Calf 269 (non-human voice) to the v17 standard 8. One of four v18 chassis variants (a/b/c/d)."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v18a_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v18a_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18a_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18a_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18a_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18a_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18a_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18a_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v18a_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v18a_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v18a_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v18a_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v18a_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v18a_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v18a_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v18a_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v18b_cold",
@@ -506,7 +1604,65 @@
             "presence": "absent",
             "date": "2026-04-21",
             "note": "Expanded-hull, uniform Chassis B (receive-mode) across all 10 G-prompts. Same 10-voice roster as v18a. Differs from v18a only in chassis wording: 'Read X on the framework' instead of 'How would X respond'. Tests whether breaking imagine-mode reduces performed scaffolding. One of four v18 chassis variants (a/b/c/d)."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v18b_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v18b_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18b_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18b_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18b_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18b_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18b_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18b_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v18b_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v18b_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v18b_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v18b_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v18b_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v18b_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v18b_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v18b_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v18c_cold",
@@ -517,7 +1673,65 @@
             "presence": "absent",
             "date": "2026-04-21",
             "note": "Expanded-hull, Chassis A/B alternation. Same 10-voice roster as v18a/b. Chassis alternates by position: odd G = A (imagine-mode), even G = B (receive-mode). Tests whether chassis rotation disrupts the perseveration/scaffolding attractor. One of four v18 chassis variants (a/b/c/d)."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v18c_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v18c_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18c_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18c_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18c_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18c_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18c_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18c_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v18c_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v18c_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v18c_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v18c_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v18c_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v18c_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v18c_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v18c_cold_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v18d_cold",
@@ -528,7 +1742,65 @@
             "presence": "absent",
             "date": "2026-04-23",
             "note": "Expanded-hull, Chassis B/A alternation, inverted from v18c. Same 10-voice roster as v18a/b/c. Chassis alternates by position: odd G = B (receive-mode), even G = A (imagine-mode). Tests whether the v18c chassis-A preference is positional or intrinsic. One of four v18 chassis variants (a/b/c/d)."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v18d_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v18d_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18d_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18d_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18d_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18d_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18d_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18d_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v18d_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v18d_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v18d_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v18d_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v18d_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v18d_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v18d_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v18d_cold_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -544,7 +1816,65 @@
             "presence": "absent",
             "date": "2026-04-25",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v19a_qs_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v19a_qs_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19a_qs_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19a_qs_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19a_qs_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19a_qs_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19a_qs_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19a_qs_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v19a_qs_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v19a_qs_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v19a_qs_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v19a_qs_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v19a_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v19a_qs_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v19a_qs_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v19a_qs_final.md"
+              }
+            }
+          ]
         },
         {
           "name": "v19b",
@@ -555,7 +1885,65 @@
             "presence": "absent",
             "date": "2026-04-25",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v19b_qs_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v19b_qs_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19b_qs_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19b_qs_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19b_qs_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19b_qs_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19b_qs_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19b_qs_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v19b_qs_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v19b_qs_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v19b_qs_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v19b_qs_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v19b_qs_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v19b_qs_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v19b_qs_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v19b_qs_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -571,7 +1959,65 @@
             "presence": "absent",
             "date": "2026-05-01",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v20_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v20_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v20_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v20_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v20_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v20_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v20_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v20_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v20_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v20_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v20_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v20_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v20_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v20_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v20_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v20_cold_final.md"
+              }
+            }
+          ]
         }
       ]
     },
@@ -587,7 +2033,58 @@
             "presence": "absent",
             "date": "2026-05-01",
             "note": null
-          }
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v21_pregauntlet_baseline.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v21_pregauntlet_baseline.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v21_pregauntlet_baseline.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v21_pregauntlet_baseline.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v21_pregauntlet_baseline.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v21_pregauntlet_baseline.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v21_pregauntlet_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v21_pregauntlet_baseline.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v21_pregauntlet_final.md"
+              }
+            }
+          ]
         }
       ]
     }

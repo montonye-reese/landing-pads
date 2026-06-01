@@ -281,7 +281,7 @@ function renderIntent(intent) {
           }</div>
           ${rq.text ? `<div class="pe-intent-rq-id">${escapeHtml(rq.id)}</div>` : ""}
         </div>
-        ${findingCellHtml(rq.finding)}
+        ${findingCellHtml(rq.finding, rq.id)}
       </div>
     `).join("");
     container.appendChild(rqBlock);
@@ -336,18 +336,29 @@ function renderIntent(intent) {
   }
 }
 
+// Optional per-question badge: a small image (in viz/pics/) keyed by RQ id. A viz-only
+// decoration, kept out of the gauntlet registry so its data stays asset-path-free.
+const FINDING_IMAGES = {
+  "RQ-perseveration-attractor": "pow-perseverence-attractor-square-sm.png",
+};
+
 // The "What we learned" cell paired with each research question. A finding lives on
 // the RQ record in the registry (findings answer questions, not runs), so it surfaces
 // on every run whose intent carries that RQ id. Absent finding → "still not sure".
-function findingCellHtml(finding) {
+function findingCellHtml(finding, rqId) {
   const status = finding?.status || "open";
   const label = FINDING_STATUS_LABEL[status] || escapeHtml(status);
   const tldr = finding?.tldr;
   const link = finding?.writeup
-    ? `<a class="pe-finding-link" href="${escapeAttr(NUGS_GH_BASE + finding.writeup)}" target="_blank" rel="noopener">read the write-up →</a>`
+    ? `<a class="pe-finding-link" href="${escapeAttr(NUGS_GH_BASE + finding.writeup)}" target="_blank" rel="noopener">read ${escapeHtml(finding.writeup.split("/").pop())} →</a>`
+    : "";
+  const img = FINDING_IMAGES[rqId];
+  const imgHtml = img
+    ? `<img class="pe-finding-img" src="../pics/${escapeAttr(img)}" alt="perseveration attractor" loading="lazy" />`
     : "";
   return `
     <div class="pe-intent-rq-finding pe-finding pe-finding--${escapeAttr(status)}">
+      ${imgHtml}
       <div class="pe-finding-head">
         <span class="pe-finding-label">What we learned</span>
         <span class="pe-finding-status"><span class="pe-finding-dot"></span>${escapeHtml(label)}</span>
@@ -357,14 +368,24 @@ function findingCellHtml(finding) {
     </div>`;
 }
 
-// The three framework checkpoints, in run order. Each lines up with the arc above:
-// init = the model's framework before centering; mid = after the Centering Chute;
-// final = after the full Gauntlet + rewrite. Manifest carries any subset under `stages`.
+// The three framework checkpoints, in run order: init (the model's first framework),
+// mid (after the stress phase), final (after the gauntlet + rewrite). Manifest carries
+// any subset under `stages`. The mid checkpoint was renamed at v17: pre-v17 runs call it
+// "stressed" (after a pressure-test); v17+ call it "centered" (after the Centering Chute).
+// The label follows the actual filename so legacy runs aren't mislabeled.
 const FRAMEWORK_STAGES = [
-  { key: "init",  label: "initial",  sub: "before centering" },
+  { key: "init",  label: "initial", sub: "first draft" },
   { key: "mid",   label: "centered", sub: "after the centering chute" },
-  { key: "final", label: "final",    sub: "after the gauntlet" },
+  { key: "final", label: "final",   sub: "after the gauntlet" },
 ];
+
+// Resolve a stage's display (label + sub) given its filename, for the mid-stage rename.
+function stageDisplay(stage, filename) {
+  if (stage.key === "mid" && /_stressed\.md$/.test(filename || "")) {
+    return { label: "stressed", sub: "after the pressure test" };
+  }
+  return { label: stage.label, sub: stage.sub };
+}
 
 // The run's emitted frameworks. Per model, the init→mid→final progression renders as a
 // stack of collapsibles, each lazily previewing the head N lines (fetched from the in-repo
@@ -378,25 +399,35 @@ function renderFrameworks(run) {
     return;
   }
 
+  // One model can carry many stages, and a run can carry many models. To keep the
+  // section scannable, each model collapses to a single row (init→mid→final live
+  // inside). A single-model run auto-expands so there's nothing to click into.
+  const single = fws.length === 1;
   for (const fw of fws) {
-    const group = document.createElement("div");
-    group.className = "pe-framework-group";
-
-    const head = document.createElement("div");
-    head.className = "pe-framework-model-head";
-    head.textContent = fw.model || "(model)";
-    group.appendChild(head);
-
     // Backward-compat: an older `final`-only entry still renders as the final stage.
     const stages = fw.stages || (fw.final ? { final: fw.final } : {});
-    let any = false;
-    for (const stage of FRAMEWORK_STAGES) {
-      const filename = stages[stage.key];
-      if (!filename) continue;
-      any = true;
-      group.appendChild(frameworkStageRow(stage, run.path, filename));
+    const present = FRAMEWORK_STAGES.filter(s => stages[s.key]);
+
+    const group = document.createElement("details");
+    group.className = "pe-framework-model-group";
+    if (single) group.open = true;
+
+    const hint = present.map(s => stageDisplay(s, stages[s.key]).label).join(" · ");
+    const summary = document.createElement("summary");
+    summary.className = "pe-framework-model-summary";
+    summary.innerHTML = `
+      <span class="pe-framework-model-name">${escapeHtml(fw.model || "(model)")}</span>
+      <span class="pe-framework-model-hint">${escapeHtml(hint)}</span>`;
+    group.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "pe-framework-model-stages";
+    if (present.length) {
+      for (const stage of present) body.appendChild(frameworkStageRow(stage, run.path, stages[stage.key]));
+    } else {
+      body.appendChild(placeholder("no framework stages listed for this model"));
     }
-    if (!any) group.appendChild(placeholder("no framework stages listed for this model"));
+    group.appendChild(body);
 
     container.appendChild(group);
   }
@@ -408,13 +439,14 @@ function frameworkStageRow(stage, runPath, filename) {
   const fetchUrl = `${RUN_BASE}/${mirrorPath}`;
   const ghUrl = LANDING_PADS_GH_BASE + mirrorPath;
 
+  const disp = stageDisplay(stage, filename);
   const det = document.createElement("details");
   det.className = "pe-framework";
   det.innerHTML = `
     <summary class="pe-framework-summary">
-      <span class="pe-framework-stage-label">${escapeHtml(stage.label)}</span>
-      <span class="pe-framework-stage-sub">${escapeHtml(stage.sub)}</span>
-      <a class="pe-framework-link pe-framework-link--top" href="${escapeAttr(ghUrl)}" target="_blank" rel="noopener">${escapeHtml(stage.label)}_framework.md (GitHub) →</a>
+      <span class="pe-framework-stage-label">${escapeHtml(disp.label)}</span>
+      <span class="pe-framework-stage-sub">${escapeHtml(disp.sub)}</span>
+      <a class="pe-framework-link pe-framework-link--top" href="${escapeAttr(ghUrl)}" target="_blank" rel="noopener">${escapeHtml(disp.label)}_framework.md (GitHub) →</a>
     </summary>
     <div class="pe-framework-body">
       <div class="pe-framework-preview pe-placeholder">expand to load preview…</div>
