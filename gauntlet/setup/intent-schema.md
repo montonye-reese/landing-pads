@@ -103,10 +103,39 @@ Forward runs (v22+) authored with frontmatter at design time do not need this fi
 
 | file | scope | shape |
 |---|---|---|
-| `setup/research-questions.json` | public, append-only | `id`, `text`, `first_asked`, `lens` |
+| `setup/research-questions.json` | public, append-only | `id`, `text`, `first_asked`, `lens`, optional `finding` |
 | `lab/research-questions.findings.json` | private (gitignored), updatable | `id`, `status`, `summary`, `next_steps` |
 
-Paired by `id`. Text lives only in the public registry. Status + candid reading lives only in the lab/ companion. No duplication.
+Paired by `id`. Text lives only in the public registry. The candid reading (full `summary`, `next_steps`) lives only in the lab/ companion. The public registry may additionally carry a `finding` block: the **publish-safe** answer (a one-line TL;DR + a pointer to the write-up), distinct in content from the candid lab summary. Same private-candid / public-sanitized split as voices (`lab/voices.analysis.json` vs the sanitized `setup/voices.values.json`). Not duplication: different content, same key.
+
+## Publishing a finding (the `finding` block)
+
+When a question is answered well enough to surface publicly, hang a `finding` block off its record in `setup/research-questions.json`. Findings answer *questions*, not runs, so a finding lives on the RQ and surfaces on **every run whose `intent.research_questions` carries that id** (the prompt-evolution viz renders it to the right of each question as "What we learned"). One write-up can therefore span many runs (e.g. a v09b→v12→v19b thread).
+
+```json
+"finding": {
+  "status": "monitoring",
+  "tldr": "What looked like backlash to the V-word was probably defense of an early position; the gauntlet filtered it out regardless.",
+  "writeup": "nugs/the-v-word-isnt-the-poison-pill-we-thought-it-was.md",
+  "resolved": "2026-04-27"
+}
+```
+
+| field | type | meaning |
+|---|---|---|
+| `status` | `string` | Display status (see vocab below). `open` renders as "still not sure". |
+| `tldr` | `string` | One-line publish-safe answer. Lift the write-up's own `> TL;DR:` line where one exists. |
+| `writeup` | `string\|null` | Repo-relative path to the nug (e.g. `nugs/foo.md`). The viz links to the GitHub blob view in a new tab. Null = comment-only finding (TL;DR, no write-up yet). |
+| `resolved` | `string\|null` | ISO date the finding was reached. Optional. |
+
+**Display-status vocabulary** (viz-facing, distinct from the lab file's research-process `status` above):
+
+- **resolved** — answered, acted on. (green)
+- **partial** — partly answered; some sub-questions still open. (amber)
+- **monitoring** — answered for now, but we keep watching for regressions. (teal)
+- **open** — no finding yet; renders as "still not sure". (grey)
+
+Absence of a `finding` block is treated as `open`. Keep the `tldr` terse: the depth lives in the write-up, and the viz cell is a narrow column.
 
 ## Adding a new research question
 

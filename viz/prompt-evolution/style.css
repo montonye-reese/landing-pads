@@ -695,13 +695,33 @@ nav.run-nav {
   margin-bottom: 0.85rem;
 }
 
+/* Each question is a Question | What-we-learned row. Wraps to stacked on narrow panes. */
+.pe-intent-rq {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.1rem;
+  align-items: stretch;
+}
+
 .pe-intent-rq + .pe-intent-rq {
-  margin-top: 0.55rem;
+  margin-top: 0.7rem;
+  padding-top: 0.7rem;
+  border-top: 1px dashed var(--rule);
+}
+
+.pe-intent-rq-q {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.pe-intent-rq-finding {
+  flex: 1 1 260px;
+  min-width: 0;
 }
 
 .pe-intent-rq-text {
-  font-size: 0.93rem;
-  line-height: 1.55;
+  font-size: 0.8rem;
+  line-height: 1.4;
   color: var(--ink);
 }
 
@@ -725,6 +745,77 @@ nav.run-nav {
 .pe-intent-rq-unresolved {
   color: var(--warn);
   font-style: italic;
+}
+
+/* ---- Finding ("what we learned") ---- */
+/* Local status palette, kept inside the earthy token family. */
+.pe-finding {
+  --pe-status: var(--muted);          /* open / unknown */
+  border-left: 2px solid var(--rule);
+  padding: 0.1rem 0 0.1rem 0.7rem;
+}
+.pe-finding--resolved   { --pe-status: var(--good); }      /* green */
+.pe-finding--monitoring { --pe-status: #2f6f8f; }          /* watchful teal-blue */
+.pe-finding--partial    { --pe-status: #c9882a; }          /* amber */
+.pe-finding--open       { --pe-status: var(--muted); }     /* grey: still not sure */
+
+.pe-finding-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.pe-finding-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+.pe-finding-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  font-size: 0.72rem;
+  color: var(--pe-status);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.pe-finding-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--pe-status);
+  flex-shrink: 0;
+}
+
+.pe-finding-tldr {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* "still not sure" with no write-up reads muted, not like a real answer. */
+.pe-finding--open .pe-finding-tldr {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.pe-finding-link {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.pe-finding-link:hover {
+  border-bottom-color: var(--accent);
 }
 
 .pe-intent-label {
@@ -829,4 +920,86 @@ nav.run-nav {
   color: var(--muted);
   font-variant: small-caps;
   letter-spacing: 0.05em;
+}
+
+/* ── Frameworks (run output) ───────────────────────────────────────── */
+.pe-framework {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+  background: var(--surface);
+}
+.pe-framework:last-child { margin-bottom: 0; }
+
+.pe-framework-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0.7rem;
+  cursor: pointer;
+  list-style: none;
+}
+.pe-framework-summary::-webkit-details-marker { display: none; }
+.pe-framework-summary::marker { display: none; }
+.pe-framework[open] > .pe-framework-summary {
+  border-bottom: 1px solid var(--rule);
+}
+
+.pe-framework-group { margin-bottom: 1.1rem; }
+.pe-framework-group:last-child { margin-bottom: 0; }
+
+.pe-framework-model-head {
+  font-family: var(--mono, monospace);
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.pe-framework-stage-label {
+  font-size: 0.85rem;
+  color: var(--ink);
+}
+.pe-framework-stage-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+.pe-framework-body { padding: 0.6rem 0.7rem 0.7rem; }
+
+.pe-framework-md {
+  margin: 0 0 0.5rem;
+  padding: 0.6rem 0.7rem;
+  background: var(--code-bg);
+  border-radius: 3px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 28rem;
+  overflow-y: auto;
+  color: var(--ink);
+}
+
+.pe-framework-more {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.pe-framework-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.pe-framework-link:hover { border-bottom-color: var(--accent); }
+
+/* Same link mirrored into the summary row, pushed to the right edge. */
+.pe-framework-link--top {
+  margin-left: auto;
+  white-space: nowrap;
 }

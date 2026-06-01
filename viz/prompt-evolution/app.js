@@ -11,6 +11,25 @@ const MANIFEST_URL = "manifest.json";
 const RUN_BASE = "../../gauntlet/runs";
 const REGISTRY_URL = "../../gauntlet/setup/research-questions.json";
 
+// Write-ups (nugs) are .md, rendered by GitHub. A finding's `writeup` is a repo-relative
+// path (e.g. "nugs/foo.md"); we link to the GitHub blob view, opened in a new tab.
+// When an on-site nugs viewer exists, swap this base for a local route.
+const NUGS_GH_BASE = "https://github.com/montonye-reese/gauntlet/blob/main/";
+
+// Framework files (the run's OUTPUT) live in the public landing-pads mirror, so they can
+// be both previewed inline (fetched from RUN_BASE) AND linked to the rendered GitHub blob.
+// The blob path is mirror-layout: gauntlet/runs/<run.path>/<file>.
+const LANDING_PADS_GH_BASE = "https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/";
+const FRAMEWORK_PREVIEW_LINES = 70;
+
+// Public-facing status labels. `open` reads as "still not sure" per Laura.
+const FINDING_STATUS_LABEL = {
+  resolved: "resolved",
+  partial: "partial",
+  monitoring: "monitoring",
+  open: "still not sure",
+};
+
 const $ = (id) => document.getElementById(id);
 let manifest = null;
 let registry = null;
@@ -151,7 +170,11 @@ async function selectRun(version, runName) {
   $("pe-pane-subtitle").textContent = "loading setup-snapshot...";
   $("pe-system-prompt-content").innerHTML = "";
   $("pe-intent-content").innerHTML = "";
+  $("pe-frameworks-content").innerHTML = "";
   ["cc", "gauntlet", "rethink"].forEach(s => $(`pe-${s}-content`).innerHTML = "");
+
+  // Frameworks come from the manifest run record (run output), not the setup-snapshot.
+  renderFrameworks(run);
 
   const snapPath = `${RUN_BASE}/${run.path}/setup-snapshot`;
 
@@ -239,22 +262,26 @@ function renderIntent(intent) {
     return;
   }
 
-  // Resolved research question text(s). Registry resolves id → text.
+  // Resolved research question text(s). Registry resolves id → text + (when answered) finding.
+  // Each question renders as a Question | What-we-learned row.
   const rqs = (intent.research_questions || []).map(id => {
     const q = (registry?.questions || []).find(rq => rq.id === id);
-    return { id, text: q?.text || null };
+    return { id, text: q?.text || null, finding: q?.finding || null };
   });
   if (rqs.length) {
     const rqBlock = document.createElement("div");
     rqBlock.className = "pe-intent-rqs";
     rqBlock.innerHTML = rqs.map(rq => `
       <div class="pe-intent-rq">
-        <div class="pe-intent-rq-text"><span class="pe-intent-rq-prefix">Question:</span> ${
-          rq.text
-            ? escapeHtml(rq.text)
-            : `<span class="pe-intent-rq-unresolved">[unresolved] ${escapeHtml(rq.id)}</span>`
-        }</div>
-        ${rq.text ? `<div class="pe-intent-rq-id">${escapeHtml(rq.id)}</div>` : ""}
+        <div class="pe-intent-rq-q">
+          <div class="pe-intent-rq-text"><span class="pe-intent-rq-prefix">Question:</span> ${
+            rq.text
+              ? escapeHtml(rq.text)
+              : `<span class="pe-intent-rq-unresolved">[unresolved] ${escapeHtml(rq.id)}</span>`
+          }</div>
+          ${rq.text ? `<div class="pe-intent-rq-id">${escapeHtml(rq.id)}</div>` : ""}
+        </div>
+        ${findingCellHtml(rq.finding)}
       </div>
     `).join("");
     container.appendChild(rqBlock);
@@ -307,6 +334,123 @@ function renderIntent(intent) {
     fn.textContent = `Intent backfilled ${intent.source.backfilled}`;
     container.appendChild(fn);
   }
+}
+
+// The "What we learned" cell paired with each research question. A finding lives on
+// the RQ record in the registry (findings answer questions, not runs), so it surfaces
+// on every run whose intent carries that RQ id. Absent finding → "still not sure".
+function findingCellHtml(finding) {
+  const status = finding?.status || "open";
+  const label = FINDING_STATUS_LABEL[status] || escapeHtml(status);
+  const tldr = finding?.tldr;
+  const link = finding?.writeup
+    ? `<a class="pe-finding-link" href="${escapeAttr(NUGS_GH_BASE + finding.writeup)}" target="_blank" rel="noopener">read the write-up →</a>`
+    : "";
+  return `
+    <div class="pe-intent-rq-finding pe-finding pe-finding--${escapeAttr(status)}">
+      <div class="pe-finding-head">
+        <span class="pe-finding-label">What we learned</span>
+        <span class="pe-finding-status"><span class="pe-finding-dot"></span>${escapeHtml(label)}</span>
+      </div>
+      ${tldr ? `<div class="pe-finding-tldr">${escapeHtml(tldr)}</div>` : ""}
+      ${link}
+    </div>`;
+}
+
+// The three framework checkpoints, in run order. Each lines up with the arc above:
+// init = the model's framework before centering; mid = after the Centering Chute;
+// final = after the full Gauntlet + rewrite. Manifest carries any subset under `stages`.
+const FRAMEWORK_STAGES = [
+  { key: "init",  label: "initial",  sub: "before centering" },
+  { key: "mid",   label: "centered", sub: "after the centering chute" },
+  { key: "final", label: "final",    sub: "after the gauntlet" },
+];
+
+// The run's emitted frameworks. Per model, the init→mid→final progression renders as a
+// stack of collapsibles, each lazily previewing the head N lines (fetched from the in-repo
+// mirror) on first open, plus a link to the fully-rendered file on the public GitHub blob.
+function renderFrameworks(run) {
+  const container = $("pe-frameworks-content");
+  container.innerHTML = "";
+  const fws = run.frameworks || [];
+  if (!fws.length) {
+    container.appendChild(placeholder("no framework files declared for this run"));
+    return;
+  }
+
+  for (const fw of fws) {
+    const group = document.createElement("div");
+    group.className = "pe-framework-group";
+
+    const head = document.createElement("div");
+    head.className = "pe-framework-model-head";
+    head.textContent = fw.model || "(model)";
+    group.appendChild(head);
+
+    // Backward-compat: an older `final`-only entry still renders as the final stage.
+    const stages = fw.stages || (fw.final ? { final: fw.final } : {});
+    let any = false;
+    for (const stage of FRAMEWORK_STAGES) {
+      const filename = stages[stage.key];
+      if (!filename) continue;
+      any = true;
+      group.appendChild(frameworkStageRow(stage, run.path, filename));
+    }
+    if (!any) group.appendChild(placeholder("no framework stages listed for this model"));
+
+    container.appendChild(group);
+  }
+}
+
+// One collapsible stage row: summary (stage label + sub + GitHub link), lazy head-preview.
+function frameworkStageRow(stage, runPath, filename) {
+  const mirrorPath = `${runPath}/${filename}`;          // relative to RUN_BASE and the GH mirror base
+  const fetchUrl = `${RUN_BASE}/${mirrorPath}`;
+  const ghUrl = LANDING_PADS_GH_BASE + mirrorPath;
+
+  const det = document.createElement("details");
+  det.className = "pe-framework";
+  det.innerHTML = `
+    <summary class="pe-framework-summary">
+      <span class="pe-framework-stage-label">${escapeHtml(stage.label)}</span>
+      <span class="pe-framework-stage-sub">${escapeHtml(stage.sub)}</span>
+      <a class="pe-framework-link pe-framework-link--top" href="${escapeAttr(ghUrl)}" target="_blank" rel="noopener">${escapeHtml(stage.label)}_framework.md (GitHub) →</a>
+    </summary>
+    <div class="pe-framework-body">
+      <div class="pe-framework-preview pe-placeholder">expand to load preview…</div>
+      <a class="pe-framework-link" href="${escapeAttr(ghUrl)}" target="_blank" rel="noopener">read the full framework on GitHub →</a>
+    </div>`;
+
+  // The top link lives inside <summary>; a click there would otherwise also toggle the
+  // details. Stop propagation so it just opens the link (in a new tab).
+  det.querySelector(".pe-framework-link--top")
+    .addEventListener("click", (e) => e.stopPropagation());
+
+  // Lazy-fetch the preview once, on first expand.
+  let loaded = false;
+  det.addEventListener("toggle", async () => {
+    if (!det.open || loaded) return;
+    loaded = true;
+    const preview = det.querySelector(".pe-framework-preview");
+    try {
+      const r = await fetch(fetchUrl);
+      if (!r.ok) throw new Error(`${r.status}`);
+      const text = await r.text();
+      const lines = text.split("\n");
+      const headLines = lines.slice(0, FRAMEWORK_PREVIEW_LINES).join("\n");
+      const truncated = lines.length > FRAMEWORK_PREVIEW_LINES;
+      preview.classList.remove("pe-placeholder");
+      preview.innerHTML = `<pre class="pe-framework-md">${escapeHtml(headLines)}</pre>${
+        truncated ? `<div class="pe-framework-more">… ${lines.length - FRAMEWORK_PREVIEW_LINES} more lines — open the full file above</div>` : ""
+      }`;
+    } catch (e) {
+      loaded = false; // allow retry on next open
+      preview.classList.add("pe-error");
+      preview.textContent = `couldn't load preview (${e.message}); the GitHub link still works`;
+    }
+  });
+
+  return det;
 }
 
 const EMPTY_MESSAGES = {

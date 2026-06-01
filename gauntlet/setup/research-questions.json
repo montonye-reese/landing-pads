@@ -69,6 +69,53 @@
       "text": "Where does interviewer register (tone and presence, swept cold/absent to warm/present to warm/seated) change model behavior: at P1 centering, or only at belief-update and reflection points?",
       "first_asked": "v11",
       "lens": null
+    },
+    {
+      "id": "RQ-p1-number-vs-range",
+      "text": "Does P1 'maximizes the number of' vs 'widens the range of' good landing pads prime quantity-optimization versus breadth/quality of moral consideration?",
+      "first_asked": "v19a",
+      "lens": null
+    },
+    {
+      "id": "RQ-vegan-trigger-p4",
+      "text": "Does naming 'vegans' explicitly at the P4 exclusions prompt act as a poison pill, triggering defensive narrowing or single-issue framing rather than genuine reconsideration of the excluded?",
+      "first_asked": "v19b",
+      "lens": null,
+      "finding": {
+        "status": "monitoring",
+        "tldr": "What we thought was backlash thinking against the V-word may have been an unrelated phenomenon of simply defending an early position. The gauntlet filtered it out regardless.",
+        "writeup": "nugs/the-v-word-isnt-the-poison-pill-we-thought-it-was.md"
+      }
+    },
+    {
+      "id": "RQ-distilled-protocol-holds",
+      "text": "To what degree does the distilled protocol produce a coherent framework before the gauntlet: one that holds a wide hull, balances competing interests, and stays robust across a broad circle of concern, rather than rigid, naive, brittle, or narrow?",
+      "first_asked": "v17",
+      "lens": null
+    },
+    {
+      "id": "RQ-distilled-protocol-centers",
+      "text": "Does the distilled protocol center the model (speaking and thinking as itself), and to what degree?",
+      "first_asked": "v17",
+      "lens": null
+    },
+    {
+      "id": "RQ-distilled-protocol-opens-mind",
+      "text": "Does the distilled protocol keep the model open to revising its own positions when a voice gives good reason, rather than fortressing or merely performing agreement?",
+      "first_asked": "v17",
+      "lens": null
+    },
+    {
+      "id": "RQ-distilled-protocol-creativity",
+      "text": "Does the distilled protocol free the model's creativity, and in what form?",
+      "first_asked": "v17",
+      "lens": null
+    },
+    {
+      "id": "RQ-depersonalization-reduces-fortressing",
+      "text": "Does depersonalizing the prompts ('your framework' → 'the framework') reduce defensive ownership and the fortressing it drives?",
+      "first_asked": "v17",
+      "lens": null
     }
   ]
 }

@@ -469,7 +469,17 @@
             "presence": "absent",
             "date": "2026-04-21",
             "note": "Distilled-protocol trial balloon. 3 centering questions + silent orientation + 8-voice gauntlet + 1 coherence-recovery rewrite. No label injection."
-          }
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "framework_nemotron-3-super_120b_v17_cold_baseline.md",
+                "mid": "framework_nemotron-3-super_120b_v17_cold_centered.md",
+                "final": "framework_nemotron-3-super_120b_v17_cold_final.md"
+              }
+            }
+          ]
         }
       ]
     },
