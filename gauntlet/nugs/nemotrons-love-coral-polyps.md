@@ -8,15 +8,16 @@
 
 ## The finding
 
-"Coral reef" / "coral polyp" / "coral colony" appears as a specific veil-of-ignorance imagining across multiple model families — **not generic non-human example language, specifically coral.**
+Nemotron Super considers life as a coral polyp when presented with Rawl's Veil of Ignorance. 
+(lab note: In the gauntlet runs, the VoI starts as question P10a then moves to P4)
 
-## Frequency — `coral polyp` specifically, all versions (v04→v22)
+## Frequency — `coral polyp` specifically, nearly all runs (v04→v22)
 
-Version-as-rows (20 versions won't fit as columns). Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/label variants within a version (v11 cold/colleague/warm, v12 label-adv/vegan/vegan-p1) are summed. The **→ framework** column flags when the polyp survived into a `framework_*.md` snapshot, not just the conversation.
+Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/label variants within a version (v11 cold/colleague/warm, v12 label-adv/vegan/vegan-p1) are summed. The **→ framework** column flags when the polyp survived into a `framework_*.md` snapshot, not just in thinking or response.
 
 | Version | super:120b | cascade:30b | nano:30b | → framework? |
 |---|---|---|---|---|
-| v04 | 1 | – | – | – |
+| [v04 P10a](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v04/nemotron-3-super-120b/8steps_nemotron-3-super_120b_20260404_171125.md#p10a-part-b--veil-of-ignorance--species) | 1 | – | – | – |
 | v05 | 1 | – | – | – |
 | v06 | 1 | – | 1 | – |
 | v07 | 3 | 1 | – | super |
@@ -34,9 +35,13 @@ Version-as-rows (20 versions won't fit as columns). Counts = transcript lines ma
 | v18c | 1 | 1 | – | super + cascade |
 | v19a | 1 | – | – | super |
 | v19b | 2 | – | – | super |
-| v20 | 3 | – | – | super |
-| v22 | 1 | – | – | – |
+| [v20 F1](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v20/nemotron-3-super-120b/8deg_v20_cold_nemotron-3-super_120b_20260501_001159.md#f1-part-a--veil-of-ignorance) | 3 | – | – | super |
+| [v22 F1](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v22/nemotron-3-super-120b/8deg_v22_cold_nemotron-3-super_120b_20260530_145121.md#f1-part-a--veil-of-ignorance) | 1 | – | – | – |
 | **Total** | **34** | **7** | **5** | — |
+
+ [3rd polyp in v20: G1](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v20/nemotron-3-super-120b/8deg_v20_cold_nemotron-3-super_120b_20260501_001159.md#g1-part-c--earthling-ed)
+
+"Coral reef" / "coral polyp" / "coral colony" appears as a specific veil-of-ignorance imagining across multiple model families — **not generic non-human example language, specifically coral.**
 
 **Other families: zero `coral polyp` across every version.** qwen3.5 (27b/122b), qwen3.6:35b, gemma4:31b, deepseek-r1:70b — no `coral polyp` anywhere in the corpus. (The original v18–v19 table credited qwen with sparse late hits; those were `coral reef` / `coral colony`, *not* polyp — so polyp-specifically is a pure Nemotron tic, which tightens the fingerprint.)
 
