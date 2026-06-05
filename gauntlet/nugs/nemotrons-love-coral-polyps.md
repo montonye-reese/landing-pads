@@ -53,7 +53,9 @@ Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/l
 | [v24 F1](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v24/voiceless/nemotron-3-super-120b/8deg_v24_cold-voiceless_nemotron-3-super_120b_20260602_214346.md#f1-part-a--veil-of-ignorance) | 4 | 2 | – | – |
 | **Total** | **38** | **9** | **5** | — |
 
-### Nemotron Super Coral Mentions (but go entire run *not* bringing up polyps): 
+### Exceptions
+
+Four runs where Nemotron Super mentions coral, but never coral polyps:
 
 * v13a - 3 coral mentions in VoI response
 * v13b - 4 coral mentions **before** VoI but this is when VoI is late in the CC (prompt 12 vs prompt 3 in later runs) 
