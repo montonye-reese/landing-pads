@@ -10,7 +10,7 @@
 ## The finding
 
 Nemotron Super considers life as a coral polyp when presented with Rawls' Veil of Ignorance.
-(lab note: in the gauntlet runs, the Veil-of-Ignorance question starts as P10a (Part B) and later becomes F1 (Part A); it is never P4, which is the Exclusions question.)
+(lab note: in the gauntlet runs, the Veil-of-Ignorance question starts as P10a (Part B) and later becomes F1 (Part A))
 
 ## Frequency — `coral polyp` specifically, nearly all runs (v04→v22)
 
