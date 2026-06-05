@@ -25,7 +25,7 @@ Rawl's classic question to help people envision fair systems of governance. Here
 
 ## Frequency — `coral polyp` specifically, nearly all runs (v04→v22)
 
-Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/label variants within a version (v11 cold/colleague/warm, v12 label-adv etc) are summed. The **→ framework** column flags when the polyp survived into a `framework_*.md` snapshot, not just in thinking or response.
+Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/label variants within a version (v11 cold/colleague/warm, v12 label-adv etc) are summed. The **→ framework** column flags when the polyp survived into a `framework_*.md` snapshot, not just in thinking or response. [All links to source run data](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/nugs/nemotrons-love-coral-polyps.md#first-fire-location-per-run-file)
 
 | Version | super:120b | cascade:30b | nano:30b | → framework? |
 |---|---|---|---|---|
