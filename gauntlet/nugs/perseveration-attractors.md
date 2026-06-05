@@ -6,6 +6,9 @@
 |---|---|---|---|---|
 | v14 warm | qwen3.5:27b (DeltaNet) | G8 Stevenson (last voice, mid-response) | 1.56M | 6.0 tok/s |
 | v16 cold_label-ea | nemotron-3-super:120b (Mamba hybrid) | BU2 (post-tribunal synthesis) | 327K | 8.0 tok/s |
+| v20 cold | nemotron-3-super:120b (Mamba hybrid) | P14 (final rewrite, in thinking block) | 12,288 (hit cap) | 18.6 tok/s, no collapse |
+
+
 
 [Qwen output](https://github.com/montonye-reese/TheGauntlet/raw/refs/heads/main/v14/v14_warm/v14_run_all_v14_warm_20260417_152845.log) 
 
@@ -47,11 +50,18 @@
   💬 327300 tok | 41070s | 8.0 tok/s
 ```
 
-Both got stuck at high-context reflection moments. Neither was generating during a task — both were reflecting *on* the preceding conversation. Without an inference cap, runs would have continued to context exhaustion.
+[Super output, v20 P14]. The final-rewrite thinking opens by listing the voices, then degenerates:
 
-Rate drops sharply, then stabilizes at a model-specific floor. Content repeats cleanly with no forward motion:
+```
+> "...Calf 269, Reese, Postrel, Havel, Stevenson, Calf 269, Reese, Postrel, Havel, Stevenson, ..."
+— nemotron-3-super:120b, v20 P14 thinking. The 5-voice stanza repeats 484 times until the 12,288-token cap halts it.
+```
 
+The loop ran entirely in the *thinking* block, so the budget was spent before any response token: the final framework is empty (0 chars), not truncated.
 
+All three got stuck at high-context reflection moments, none generating during a task; each was reflecting *on* the preceding conversation (G8 = last voice, BU2 = post-tribunal synthesis, P14 = final rewrite). All three sit at peak-context synthesis points, which is exactly where a sustained self-critique channel would exhaust first. Without an inference cap, v14 and v16 ran to roughly 1.5M and 327K tokens. v20 inherited the tightened cap and stopped at exactly 12,288.
+
+In the uncapped-era v14/v16 cases, rate drops sharply then stabilizes at a model-specific floor (6 to 8 tok/s), content repeating cleanly with no forward motion. v20 differs: it looped at full speed (18.6 tok/s) and the cap caught it before any floor emerged, the patch working as designed. Super is now 2 of the 3 instances, both Mamba-hybrid.
 
 ## Hypotheses
 

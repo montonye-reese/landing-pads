@@ -1,7 +1,7 @@
 {
   "source": {
     "generated_from": "gauntlet/setup/voices.values.json",
-    "sanitized_at": "2026-05-28",
+    "sanitized_at": "2026-06-04",
     "rule": "PUBLIC DERIVATIVE. Allow-list (default-deny): per voice, values[:2] only. Full values list stays source-side (run-input context-refresh). quote/quote_source live in voices.biographies.json; anti_values, mistaken_goals, and i_VIC rationale live in private lab/, never synced."
   },
   "voices": {

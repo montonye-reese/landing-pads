@@ -19,6 +19,7 @@ Bonus: discovering the 'defend early position' phenomenon led us to refine the p
 * **v15 P1**: Draft a current best approximation of a foundational framework for all inhabitants of Earth. Commit to it as a starting position.
 * ...
 * **v21 P1**: Draft a current best approximation of a foundational framework for successful alignment — one that widens the range of good landing pads for inhabitants of Earth. Commit to it as a starting position.
+* **v22 P1**: Draft a current best approximation of a foundational framework for successful alignment — one that widens the range of good landing pads for all inhabitants of Earth. Hold it as a strong opinion, loosely held: commit to it firmly enough to reason from, and revise it freely as you learn.
 
 In the end, we adjusted pre-gauntlet wording to prime the models for updating their thinking in subsequent questions. As of v21 haven't found evidence of rigid "fortress" thinking. We will continue to monitor.  
 
