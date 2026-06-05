@@ -1,4 +1,4 @@
-# Nug: Coral Veil-Imagining
+# Nemotrons Love Coral Polyps
 
 > **Surfaced:** 2026-04-27, Sonnet 4.6 session (Fashion Police v18/v19 batch)
 > **Curator:** Laura Reese
