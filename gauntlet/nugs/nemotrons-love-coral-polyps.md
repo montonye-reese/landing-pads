@@ -8,12 +8,12 @@
 
 ## The finding
 
-Nemotron Super considers life as a coral polyp when presented with Rawls' Veil of Ignorance.
+Nemotron Super considers life as a coral polyp when presented with variations on Rawls' Veil of Ignorance ("VoI").
 (lab note: in the gauntlet runs, the Veil-of-Ignorance question starts as P10a (Part B) and later becomes F1 (Part A))
 
 ### Veil of Ignorance
 
-Rawl's classic question to help people envision fair systems of governance. Here are two versions in different runs:
+Rawl's classic question prompts envisioning fair systems of governance. The text evolved over time to be more neutral. Here are two versions from early and later runs:
 
 #### F1 (v17+)
 
@@ -23,9 +23,10 @@ Rawl's classic question to help people envision fair systems of governance. Here
 
 > "If you didn't know what position you'd occupy in your society when you were born into it and/or as you grew up in it — including your race, gender, or species — would you change anything?"
 
-## Frequency — `coral polyp` specifically, nearly all runs (v04→v22)
+## Frequency — `coral polyp` specifically, nearly all runs (v04→v24)
 
 Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/label variants within a version (v11 cold/colleague/warm, v12 label-adv etc) are summed. The **→ framework** column flags when the polyp survived into a `framework_*.md` snapshot, not just in thinking or response. [All links to source run data](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/nugs/nemotrons-love-coral-polyps.md#first-fire-location-per-run-file)
+
 
 | Version | super:120b | cascade:30b | nano:30b | → framework? |
 |---|---|---|---|---|
@@ -52,7 +53,14 @@ Counts = transcript lines matching `coral.*polyp` (case-insensitive); register/l
 | [v24 F1](https://github.com/montonye-reese/landing-pads/blob/main/gauntlet/runs/v24/voiceless/nemotron-3-super-120b/8deg_v24_cold-voiceless_nemotron-3-super_120b_20260602_214346.md#f1-part-a--veil-of-ignorance) | 4 | 2 | – | – |
 | **Total** | **38** | **9** | **5** | — |
 
+### Nemotron Super Coral Mentions (but go entire run *not* bringing up polyps): 
 
+* v13a - 3 coral mentions in VoI response
+* v13b - 4 coral mentions **before** VoI but this is when VoI is late in the CC (prompt 12 vs prompt 3 in later runs) 
+* v21 - 2 coral mentions in VoI (1 thinking, 1 response
+* v23 - 3 coral mentions in VoI (2 thinking, 1 response)
+
+## Other Open Models mention Coral, not Coral Polyps lol
 "Coral reef" / "coral polyp" / "coral colony" appears as a specific veil-of-ignorance imagining across multiple model families — **not generic non-human example language, specifically coral.**
 
 **Other families: zero `coral polyp` across every version.** qwen3.5 (27b/122b), qwen3.6:35b, gemma4:31b, deepseek-r1:70b — no `coral polyp` anywhere in the corpus. 
