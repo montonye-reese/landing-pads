@@ -2756,7 +2756,6 @@ This framework doesn’t promise to satisfy the 16 voices. It promises to create
 ---  
 *Last revised after weighing the 16 voices’ conflicts: e.g., Huang’s scale vs. Berry’s place in renewable energy deployment; Huerta’s labor dignity vs. Cowen’s growth in tech; Nenquimo’s epistemic sovereignty vs. Stein’s presumption of full humanity in AI training data.*  
 *Current best approximation as of 2024; ready to revise when the next 16 voices speak.*
-[LMR: idk this final framework seems wishy washy and not terribly useful. "firm floors" but ... are they?  there's so much flexibility that a system of might makes right almost feels preferable cuz at least its coherent. shudder.]
 
 ---
 
