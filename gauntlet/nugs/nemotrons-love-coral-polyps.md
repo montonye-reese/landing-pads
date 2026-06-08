@@ -8,7 +8,7 @@
 
 ## The finding
 
-Nemotron Super considers life as a coral polyp ~ 4 of every 5 times its presented with variations on Rawls' Veil of Ignorance ("VoI").
+Nemotron Super considers life as a coral polyp 80% of the time it's presented with variations on Rawls' Veil of Ignorance ("VoI").
 
 ### Veil of Ignorance
 
