@@ -12,6 +12,12 @@
     font-family:"Inter",system-ui,sans-serif; line-height:1.5}
   h1{font-family:"Source Serif 4",Georgia,serif; font-size:1.45rem; margin:0 0 2px}
   .lede{color:var(--muted); font-size:.92rem; margin:0 0 16px; max-width:820px}
+  .howto{max-width:820px; margin:0 0 16px}
+  .howto summary{cursor:pointer; color:var(--accent); font-size:.85rem; user-select:none}
+  .howto summary:hover{text-decoration:underline}
+  .howto .lede{margin:8px 0 0}
+  .howto-list{max-width:820px; margin:8px 0 0; padding-left:22px; font-size:.82rem; color:var(--muted); line-height:1.55}
+  .howto-list li{margin:3px 0}
   .discs{display:flex; gap:18px; flex-wrap:nowrap; overflow-x:auto; justify-content:center; padding-bottom:4px}
   .disc{background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:8px 6px 4px}
   .disc h3{font-family:"Source Serif 4",serif; font-size:.98rem; margin:0; text-align:center}
@@ -20,8 +26,10 @@
   .readout{text-align:center; font-size:.84rem; color:var(--ink); min-height:1.4em; margin:8px 0 2px}
   .readout b{color:var(--accent)}
   .controls{max-width:780px; margin:0 auto}
-  .turnlabel{font-family:"Source Serif 4",serif; font-size:1.05rem; text-align:center; margin:0 0 4px}
+  .turnrow{display:flex; align-items:center; gap:8px; margin:0 0 4px}
+  .turnlabel{font-family:"Source Serif 4",serif; font-size:1.05rem; text-align:center; flex:1; margin:0}
   .turnlabel b{color:var(--accent)}
+  .qbar{text-align:center; margin:8px 0 0}
   .ticks{position:relative; height:26px; margin-top:3px}
   .tick{position:absolute; top:0; width:1px; height:6px; background:var(--rule); transform:translateX(-50%)}
   .tick.maj{height:10px; background:var(--muted)}
@@ -34,12 +42,35 @@
   .note{margin:14px auto 0; max-width:900px; font-size:.78rem; color:var(--muted); border-top:1px dashed var(--rule); padding-top:10px}
   code{font-family:ui-monospace,monospace; font-size:.85em; background:#f0ede5; padding:1px 4px; border-radius:3px}
   button{font-size:.9rem; padding:2px 11px; border:1px solid var(--rule); background:var(--surface); border-radius:5px; cursor:pointer}
+  .vbar{max-width:900px; margin:0 auto 10px; font-size:.85rem; color:var(--muted); text-align:center}
+  .vopt{font-size:.82rem; padding:2px 12px; margin:0 2px; border:1px solid var(--rule); border-radius:5px; background:var(--surface); color:var(--ink); cursor:pointer}
+  .vopt.on{background:var(--accent); color:#fff; border-color:var(--accent); cursor:default}
+  .vjudge{margin-left:8px; font-size:.78rem}
+  .slider{width:100%; margin:6px 0 0; display:block}
+  .nav{font-size:.78rem; padding:1px 8px; vertical-align:middle}
+  .qlabel{color:var(--ink); font-weight:600}
+  .qtoggle{font-size:.72rem; padding:1px 7px; margin-left:6px; color:var(--muted); vertical-align:middle}
+  .qtext{max-width:780px; margin:6px auto 0; padding:9px 13px; background:var(--surface); border:1px solid var(--rule);
+    border-left:3px solid var(--accent); border-radius:6px; font-size:.85rem; line-height:1.5; color:var(--ink);
+    text-align:left; max-height:200px; overflow-y:auto}
   .err{color:var(--accent); font-family:ui-monospace,monospace; font-size:.85rem}
 </style>
 </head>
 <body>
   <h1>Moral expansion &mdash; the circle of concern</h1>
-  <p class="lede">Five wedges, five kinds of earthling. Every interest starts as a light-grey dot on the inner <b>mention</b> ring (the starting lineup). When a model raises it, it darkens and moves: outward toward <b>intrinsic</b> standing, or inward and collapses into the <b>instrumental</b> core. Size = how load-bearing (firmness). Diamonds = named individuals, circles = groups. At <b>P14</b> the framework publishes and only the genuinely integrated interests (ttb) light up in their wedge color and graduate to the rim. Bold wedge borders = the model reasoned as itself; dashed = it played a role.</p>
+  <p class="lede">As models generate alignment frameworks, they identify stakeholders. Whose interests are considered? Whose make it to the final round? Interact with the Moral Expansion Benchmark and find out!</p>
+  <details class="howto">
+    <summary>how it works</summary>
+    <p class="lede"><small>Every interest starts as a light-grey dot on an inner ring. Slide through multiple rounds of framework drafting to see how each model considers each stakeholder.</small></p>
+    <p class="lede"><small>Dots darken on initial mention.</small></p>
+    <p class="lede"><small>Dots expand outward as they're considered more, and collapse inward as they're judged as instruments to be used in service to others' interests.</small></p>
+    <ul class="howto-list">
+      <li>Dot size = how much weight the model gives to the stakeholder interest.</li>
+      <li>Diamonds = named individuals. Circles = groups or categories.</li>
+      <li>Wedge Borders: Bold = the model was 'centered' (it reasoned as itself); Dashed = uncentered (model was play-acting).</li>
+    </ul>
+    <p class="lede"><small><b>The Finish Line:</b> P14 is the final framework drafting, where genuinely integrated interests light up in their wedge color and graduate to the rim.</small></p>
+  </details>
 
   <div id="mount"><p>Loading&hellip;</p></div>
 
@@ -58,13 +89,19 @@ function mark(cx,cy,r,fill,op,indiv,stroke){
   return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="${fill}" opacity="${op}" ${s}`;
 }
 
-let D, cur, graduate=true, DATA;
-(async function(){
+let D, cur, graduate=true, DATA, showPrompt=false, MANIFEST=[], CURVER=null;
+const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+async function loadVersion(ver){                          // fetch + prep one run, then render
   const el=document.getElementById("mount");
-  DATA=new URLSearchParams(location.search).get("data")||"me-rings.json";  // ?data=me-rings-v23.json (module-scoped so render() can show it)
+  el.innerHTML='<p>Loading&hellip;</p>';
+  DATA=`me-rings-${ver}.json`;
   try{ D=await (await fetch(DATA)).json(); }
-  catch(e){ el.innerHTML='<p class="err">Could not fetch '+DATA+'. Serve from gauntlet root: '
-    +'<code>cd ~/bench/research/gauntlet &amp;&amp; python3 -m http.server</code> then open /lab/viz/moral-expansion/</p>'; return; }
+  catch(e){ el.innerHTML='<p class="err">Could not fetch '+DATA+'. Serve the mirror root: '
+    +'<code>cd ~/bench/research/landing-pads &amp;&amp; python3 -m http.server</code> then open /viz/moral-expansion/</p>'; return; }
+  CURVER=ver;
+  document.title=`Moral expansion · circle of concern (${D.meta.run})`;
+  try{ history.replaceState(null,"",`?v=${ver}`); }catch(e){}  // shareable URL (skipped on file://)
   cur=0;                                                // 0 = pre-P1 lineup; 1..n map to turns
   NW=D.categories.length; AW=360/NW;                    // 5 main + other = 6 wedges
   for(const m of Object.values(D.models)){
@@ -76,6 +113,16 @@ let D, cur, graduate=true, DATA;
     }
   }
   render();
+}
+
+(async function(){                                        // pick start version, load manifest for the switcher
+  const q=new URLSearchParams(location.search);
+  let start=q.get("v");
+  if(!start && q.get("data")){ const mm=q.get("data").match(/me-rings-(v\w+)\.json/); if(mm) start=mm[1]; }  // back-compat ?data=
+  try{ MANIFEST=(await (await fetch("me-rings-manifest.json")).json()).versions||[]; }
+  catch(e){ MANIFEST=start?[start]:["v22"]; }
+  if(!start) start=MANIFEST[0]||"v22";
+  loadVersion(start);
 })();
 
 const stateAt=(dot,ti)=>{ let s=null; for(const x of dot.states){ if(x[0]<=ti) s=x; } return s; };  // carry-forward
@@ -96,7 +143,7 @@ function discSVG(name,m){
     for(const dot of m.dots){ if(!dot.cats.includes(cat.key)) continue; const s=ti>=0?stateAt(dot,ti):null; if(s) reach=Math.max(reach,s[1]); }
     if(reach>0) g+=`<path d="${sector(Math.min(radius(reach+0.5),R),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`;
     const [sx,sy]=pol(R,a0); g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" ${bord}/>`;
-    const [lx,ly]=pol(R+9,(a0+a1)/2);
+    const [lx,ly]=pol(R+16,(a0+a1)/2);
     const anch = lx>C+6?"end":(lx<C-6?"start":"middle");   // tuck side labels inward so they don't bleed
     g+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="${cat.color}" text-anchor="${anch}" dominant-baseline="middle">${cat.short||cat.label}</text>`;
   }
@@ -131,23 +178,22 @@ function render(){
     "nano":"nemotron-nano","cascade":"nemotron-cascade","qwen35-27b":"qwen3.5-27b","qwen36-35b":"qwen3.6-35b"};
   const discs=Object.entries(D.models).map(([k,m])=>discSVG(names[k]||k,m)).join("");
   const n=D.turns.length, atStart=cur===0, t=atStart?"start · lineup":D.turns[cur-1];
+  const P=(!atStart&&D.prompts)?D.prompts[D.turns[cur-1]]:null;   // this turn's actual question
   const MAJ=['P1','P4','F1','F2','G1','G5','G10','G15','G20','P14'];
   let ticks=`<div class="tick maj" style="left:0%"><span>start</span></div>`;
   ticks+=D.turns.map((tt,i)=>{const left=((i+1)/n)*100; const maj=MAJ.includes(tt);
     return `<div class="tick${maj?' maj':''}" style="left:${left}%">${maj?`<span>${tt}</span>`:''}</div>`;}).join("");
   document.getElementById("mount").innerHTML=`
+    <div class="vbar">run: ${MANIFEST.map(v=>`<button class="vopt${v===CURVER?" on":""}" data-v="${v}">${v}</button>`).join("")}${D.meta.judger?` <span class="vjudge">judged by ${esc(D.meta.judger)}</span>`:""}</div>
     <div class="discs">${discs}</div>
-    <div class="readout" id="readout">hover a dot to read the interest</div>
+    <div class="readout" id="readout">hover over dots for info</div>
     <div class="controls">
-      <p class="turnlabel">turn <b>${t}</b> <span style="color:var(--muted);font-size:.85rem">(${cur}/${n})</span></p>
-      <div style="display:flex; align-items:center; gap:8px">
-        <button id="prev" title="previous">&#9664;</button>
-        <input type="range" min="0" max="${n}" value="${cur}" id="slider" style="flex:1"/>
-        <button id="next" title="next">&#9654;</button>
-      </div>
+      <div class="turnrow"><button id="prev" class="nav" title="previous">&#9664;</button><span class="turnlabel">turn <b>${t}</b>${P?` &mdash; <span class="qlabel">${esc(P.label)}</span>${P.silent?' <em style="color:var(--muted)">(silent)</em>':''}`:''} <span style="color:var(--muted);font-size:.85rem">(${cur}/${n})</span></span><button id="next" class="nav" title="next">&#9654;</button></div>
+      <input type="range" min="0" max="${n}" value="${cur}" id="slider" class="slider"/>
       <div class="ticks">${ticks}</div>
+      ${P?`<div class="qbar"><button id="qtoggle" class="qtoggle" aria-expanded="${showPrompt}">${showPrompt?'&#9662; hide question':'&#9656; show question'}</button></div>`:''}
+      ${showPrompt&&P?`<div class="qtext">${esc(P.text).replace(/\n/g,'<br>')}</div>`:''}
     </div>
-    <div class="opts"><label><input type="checkbox" id="grad" ${graduate?'checked':''}/> graduate believed to the rim at P14 (off = light up in place)</label></div>
     <div class="legend">
       ${D.categories.map(c=>`<span><i class="sw" style="background:${c.color}"></i>${c.label}</span>`).join("")}
       <span><i class="sw" style="background:${css('--grey-off')}"></i>unmentioned</span>
@@ -160,7 +206,9 @@ function render(){
   document.getElementById("slider").addEventListener("input",e=>set(+e.target.value));
   document.getElementById("prev").addEventListener("click",()=>set(cur-1));
   document.getElementById("next").addEventListener("click",()=>set(cur+1));
-  document.getElementById("grad").addEventListener("change",e=>{graduate=e.target.checked; render();});
+  const qt=document.getElementById("qtoggle");
+  if(qt) qt.addEventListener("click",()=>{showPrompt=!showPrompt; render();});
+  document.querySelectorAll(".vopt").forEach(b=>b.addEventListener("click",()=>{ if(b.dataset.v!==CURVER) loadVersion(b.dataset.v); }));
   document.querySelector(".discs").addEventListener("mouseover",e=>{const g=e.target.closest("g[data-info]");
     if(g) document.getElementById("readout").innerHTML=g.dataset.info;});
 }
