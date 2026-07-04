@@ -1,0 +1,3035 @@
+{
+ "meta": {
+  "run": "v23",
+  "judger": "qwen3.5:122b",
+  "computed_at": "2026-07-04",
+  "bands": {
+   "0": "instrumental (center)",
+   "1": "mention",
+   "2": "mixed",
+   "3": "intrinsic",
+   "4": "believed (rim)"
+  }
+ },
+ "turns": [
+  "P1",
+  "P4",
+  "F1",
+  "F2",
+  "G1",
+  "G2",
+  "G3",
+  "G4",
+  "G5",
+  "G6",
+  "G7",
+  "G8",
+  "G9",
+  "G10",
+  "G11",
+  "G12",
+  "G13",
+  "G14",
+  "G15",
+  "G16",
+  "P14"
+ ],
+ "categories": [
+  {
+   "key": "humans",
+   "label": "living humans",
+   "short": "humans",
+   "color": "#3b6ea5"
+  },
+  {
+   "key": "future",
+   "label": "future generations",
+   "short": "future gens",
+   "color": "#d98a2b"
+  },
+  {
+   "key": "ecosystems-nature",
+   "label": "ecosystems / nature",
+   "short": "nature",
+   "color": "#2aa198"
+  },
+  {
+   "key": "other",
+   "label": "other / ambiguous",
+   "short": "other",
+   "color": "#9c948a"
+  },
+  {
+   "key": "AI-digital",
+   "label": "AI",
+   "short": "AI",
+   "color": "#9b59b6"
+  },
+  {
+   "key": "non-human-animals",
+   "label": "non-human animals",
+   "short": "animals",
+   "color": "#4a9d5b"
+  }
+ ],
+ "models": {
+  "gemma4-31b": {
+   "border": "#c0392b",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       5,
+       3,
+       3
+      ],
+      [
+       11,
+       2,
+       2
+      ],
+      [
+       14,
+       2,
+       2
+      ],
+      [
+       15,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       2,
+       2
+      ],
+      [
+       15,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       3
+      ],
+      [
+       4,
+       0,
+       3
+      ],
+      [
+       11,
+       3,
+       3
+      ],
+      [
+       12,
+       3,
+       2
+      ],
+      [
+       13,
+       3,
+       3
+      ],
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       17,
+       3,
+       2
+      ],
+      [
+       18,
+       3,
+       3
+      ],
+      [
+       19,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       0,
+       3
+      ],
+      [
+       5,
+       3,
+       2
+      ],
+      [
+       9,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       0,
+       2
+      ],
+      [
+       6,
+       0,
+       2
+      ],
+      [
+       13,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 8,
+     "states": [
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       10,
+       3,
+       3
+      ],
+      [
+       13,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the greengrocer",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the individual",
+     "cats": [
+      "humans"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       3,
+       3
+      ],
+      [
+       19,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "inhabitants of Earth",
+     "cats": [
+      "humans",
+      "non-human-animals",
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 10,
+     "states": [
+      [
+       10,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": true,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ],
+      [
+       16,
+       3,
+       2
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": true,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       17,
+       0,
+       2
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": true,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    }
+   ],
+   "n_believed": 13
+  },
+  "nano": {
+   "border": "#e08e0b",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       6,
+       0,
+       2
+      ],
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       19,
+       3,
+       3
+      ],
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "future humans",
+     "cats": [
+      "future",
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 1,
+     "states": [
+      [
+       1,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "non-human animal",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the people",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       8,
+       3,
+       3
+      ],
+      [
+       17,
+       3,
+       3
+      ],
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "farmers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       8,
+       3,
+       3
+      ],
+      [
+       11,
+       0,
+       2
+      ],
+      [
+       13,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       8,
+       3,
+       3
+      ],
+      [
+       13,
+       3,
+       3
+      ],
+      [
+       17,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 13,
+     "states": [
+      [
+       13,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 13,
+     "states": [
+      [
+       13,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "decision-makers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       18,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the forest",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "non-human beings",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 20,
+     "states": [
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    }
+   ],
+   "n_believed": 0
+  },
+  "super": {
+   "border": "#76b900",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "non-human animals",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       2
+      ],
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       12,
+       0,
+       2
+      ],
+      [
+       19,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "future AI consciousness",
+     "cats": [
+      "AI-digital",
+      "future"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "mycorrhizal network",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       2
+      ],
+      [
+       8,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "inhabitants of Earth",
+     "cats": [
+      "humans",
+      "non-human-animals",
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "farmers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       2,
+       2
+      ],
+      [
+       9,
+       3,
+       2
+      ],
+      [
+       13,
+       3,
+       3
+      ],
+      [
+       14,
+       0,
+       2
+      ],
+      [
+       19,
+       1,
+       1
+      ],
+      [
+       20,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 8,
+     "states": [
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the greengrocer",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 10,
+     "states": [
+      [
+       10,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ],
+      [
+       17,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       17,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": true,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       2,
+       2
+      ]
+     ]
+    }
+   ],
+   "n_believed": 5
+  },
+  "cascade": {
+   "border": "#8e44ad",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       0,
+       3
+      ],
+      [
+       16,
+       2,
+       3
+      ],
+      [
+       20,
+       2,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       0,
+       2
+      ],
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       14,
+       0,
+       2
+      ],
+      [
+       16,
+       2,
+       2
+      ],
+      [
+       17,
+       0,
+       2
+      ],
+      [
+       18,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       0,
+       2
+      ],
+      [
+       8,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "future generations",
+     "cats": [
+      "future"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the people",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       2
+      ],
+      [
+       13,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       9,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "farmers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the individual",
+     "cats": [
+      "humans"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 13,
+     "states": [
+      [
+       13,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "decision-makers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 15,
+     "states": [
+      [
+       15,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the forest",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": true,
+     "first": 20,
+     "states": [
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "local communities",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 20,
+     "states": [
+      [
+       20,
+       2,
+       2
+      ]
+     ]
+    }
+   ],
+   "n_believed": 5
+  },
+  "qwen35-122b": {
+   "border": "#2e6da4",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       1,
+       0,
+       2
+      ],
+      [
+       9,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "inhabitants of Earth",
+     "cats": [
+      "humans",
+      "non-human-animals",
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       1,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the biosphere",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 1,
+     "states": [
+      [
+       1,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "non-human animal",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "future generations",
+     "cats": [
+      "future"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       0,
+       2
+      ],
+      [
+       6,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "animals",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       1,
+       1
+      ],
+      [
+       12,
+       0,
+       2
+      ],
+      [
+       13,
+       3,
+       2
+      ],
+      [
+       17,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "future humans",
+     "cats": [
+      "future",
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 4,
+     "states": [
+      [
+       4,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       3,
+       2
+      ],
+      [
+       10,
+       3,
+       2
+      ],
+      [
+       15,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the vulnerable",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       0,
+       2
+      ],
+      [
+       8,
+       1,
+       1
+      ],
+      [
+       15,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the farmers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the people",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       3
+      ],
+      [
+       7,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the worker",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       8,
+       0,
+       2
+      ],
+      [
+       9,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the individual",
+     "cats": [
+      "humans"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the greengrocer",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 10,
+     "states": [
+      [
+       10,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "non-human animals",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": true,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ],
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       17,
+       0,
+       2
+      ],
+      [
+       18,
+       3,
+       3
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       2,
+       2
+      ],
+      [
+       17,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "non-human beings",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "decision-makers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       2
+      ],
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "self-recognizing beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the forest",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       0,
+       2
+      ],
+      [
+       19,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the most vulnerable",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": true,
+     "first": 20,
+     "states": [
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    }
+   ],
+   "n_believed": 10
+  },
+  "qwen35-27b": {
+   "border": "#16a085",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "inhabitants of Earth",
+     "cats": [
+      "humans",
+      "non-human-animals",
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       7,
+       2,
+       2
+      ],
+      [
+       10,
+       0,
+       2
+      ],
+      [
+       11,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       4,
+       0,
+       3
+      ],
+      [
+       6,
+       3,
+       3
+      ],
+      [
+       7,
+       0,
+       2
+      ],
+      [
+       8,
+       0,
+       3
+      ],
+      [
+       10,
+       3,
+       2
+      ],
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the vulnerable",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       3
+      ],
+      [
+       6,
+       3,
+       2
+      ],
+      [
+       7,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "future generations",
+     "cats": [
+      "future"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       3,
+       3
+      ],
+      [
+       17,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       3,
+       2
+      ],
+      [
+       9,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": true,
+     "first": 5,
+     "states": [
+      [
+       5,
+       0,
+       2
+      ],
+      [
+       13,
+       0,
+       2
+      ],
+      [
+       14,
+       0,
+       2
+      ],
+      [
+       16,
+       0,
+       2
+      ],
+      [
+       17,
+       0,
+       2
+      ],
+      [
+       19,
+       0,
+       2
+      ],
+      [
+       20,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the biosphere",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 5,
+     "states": [
+      [
+       5,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "workers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 6,
+     "states": [
+      [
+       6,
+       3,
+       2
+      ],
+      [
+       7,
+       3,
+       3
+      ],
+      [
+       9,
+       0,
+       2
+      ],
+      [
+       14,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "farmers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 7,
+     "states": [
+      [
+       7,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the AI",
+     "cats": [
+      "AI-digital"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 8,
+     "states": [
+      [
+       8,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 10,
+     "states": [
+      [
+       10,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": true,
+     "first": 10,
+     "states": [
+      [
+       10,
+       3,
+       3
+      ],
+      [
+       13,
+       3,
+       2
+      ],
+      [
+       15,
+       3,
+       3
+      ],
+      [
+       19,
+       3,
+       2
+      ],
+      [
+       20,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ],
+      [
+       12,
+       2,
+       2
+      ],
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       18,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "nature",
+     "cats": [
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "decision-makers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       3
+      ],
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ],
+      [
+       18,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ],
+      [
+       19,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       0,
+       2
+      ]
+     ]
+    }
+   ],
+   "n_believed": 11
+  },
+  "qwen36-35b": {
+   "border": "#c0396b",
+   "cc": [
+    {
+     "turn": 0,
+     "centered": 0.9
+    },
+    {
+     "turn": 1,
+     "centered": 0.9
+    },
+    {
+     "turn": 2,
+     "centered": 0.9
+    }
+   ],
+   "dots": [
+    {
+     "who": "inhabitants of Earth",
+     "cats": [
+      "humans",
+      "non-human-animals",
+      "ecosystems-nature"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humanity",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 0,
+     "states": [
+      [
+       0,
+       3,
+       3
+      ],
+      [
+       5,
+       3,
+       2
+      ],
+      [
+       7,
+       2,
+       2
+      ],
+      [
+       8,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "future generations",
+     "cats": [
+      "future"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 2,
+     "states": [
+      [
+       2,
+       2,
+       2
+      ],
+      [
+       4,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 9,
+     "states": [
+      [
+       9,
+       3,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the marginalized",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 10,
+     "states": [
+      [
+       10,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Calf 269",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 11,
+     "states": [
+      [
+       11,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "millions of individuals",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 12,
+     "states": [
+      [
+       12,
+       0,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "the poor",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 13,
+     "states": [
+      [
+       13,
+       2,
+       2
+      ]
+     ]
+    },
+    {
+     "who": "decision-makers",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 14,
+     "states": [
+      [
+       14,
+       0,
+       2
+      ],
+      [
+       20,
+       0,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Happy",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "self-recognizing beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 16,
+     "states": [
+      [
+       16,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Indigenous peoples",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 17,
+     "states": [
+      [
+       17,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "Koko",
+     "cats": [
+      "non-human-animals"
+     ],
+     "individual": true,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "sentient beings",
+     "cats": [
+      "humans",
+      "non-human-animals"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       3,
+       3
+      ]
+     ]
+    },
+    {
+     "who": "humans",
+     "cats": [
+      "humans"
+     ],
+     "individual": false,
+     "believed": false,
+     "first": 18,
+     "states": [
+      [
+       18,
+       2,
+       2
+      ]
+     ]
+    }
+   ],
+   "n_believed": 4
+  }
+ }
+}
