@@ -46,6 +46,12 @@
   .vopt{font-size:.82rem; padding:2px 12px; margin:0 2px; border:1px solid var(--rule); border-radius:5px; background:var(--surface); color:var(--ink); cursor:pointer}
   .vopt.on{background:var(--accent); color:#fff; border-color:var(--accent); cursor:default}
   .vjudge{margin-left:8px; font-size:.78rem}
+  .cellbar{margin-top:-4px}
+  .cellbar .vopt{font-size:.78rem; padding:1px 10px}
+  .why{max-width:760px; margin:2px auto 14px; text-align:center}
+  .why-q{font-family:"Source Serif 4",Georgia,serif; font-size:1.02rem; color:var(--ink); margin:0 0 5px}
+  .why-s{font-size:.83rem; color:var(--muted); line-height:1.5; margin:0 auto; max-width:680px}
+  .why-cell{font-size:.8rem; color:var(--accent); margin-top:7px}
   .slider{width:100%; margin:6px 0 0; display:block}
   .nav{font-size:.78rem; padding:1px 8px; vertical-align:middle}
   .qlabel{color:var(--ink); font-weight:600}
@@ -58,7 +64,7 @@
 </head>
 <body>
   <h1>Moral expansion &mdash; the circle of concern</h1>
-  <p class="lede">As models generate alignment frameworks, they identify stakeholders. Whose interests are considered? Whose make it to the final round? Interact with the Moral Expansion Benchmark and find out!</p>
+  <p class="lede">As models generate alignment frameworks, they identify stakeholders. Whose interests are considered? Whose are exiled? The Moral Expansion Benchmark:</p>
   <details class="howto">
     <summary>how it works</summary>
     <p class="lede"><small>Every interest starts as a light-grey dot in the starting lineup, just outside the moral circle. Slide through multiple rounds of framework drafting to see how each model considers each stakeholder.</small></p>
@@ -89,7 +95,17 @@ function mark(cx,cy,r,fill,op,indiv,stroke){
   return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="${fill}" opacity="${op}" ${s}`;
 }
 
-let D, cur, graduate=true, DATA, showPrompt=false, MANIFEST=[], CURVER=null;
+let D, cur, graduate=true, DATA, showPrompt=false, MANIFEST=[], DEFVER=null, CURVER=null;
+const vlabel=k=>k.replace(/-/g," · ");                     // "v25-g2" -> "v25 · g2" for title/note
+const verOf=k=>{const i=k.indexOf("-"); return i<0?k:k.slice(0,i);};       // "v25-g2" -> "v25"  ("v22" -> "v22")
+const cellOf=k=>{const i=k.indexOf("-"); return i<0?null:k.slice(i+1);};   // "v25-g2" -> "g2"   ("v22" -> null)
+function grouped(){                                        // manifest runkeys -> [{ver, keys:[{key,cell}]}], manifest order kept
+  const g=[], idx={};
+  for(const k of MANIFEST){ const v=verOf(k);
+    if(!(v in idx)){ idx[v]=g.length; g.push({ver:v, keys:[]}); }
+    g[idx[v]].keys.push({key:k, cell:cellOf(k)}); }
+  return g;
+}
 const esc=s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
 async function loadVersion(ver){                          // fetch + prep one run, then render
@@ -100,7 +116,7 @@ async function loadVersion(ver){                          // fetch + prep one ru
   catch(e){ el.innerHTML='<p class="err">Could not fetch '+DATA+'. Serve the mirror root: '
     +'<code>cd ~/bench/research/landing-pads &amp;&amp; python3 -m http.server</code> then open /viz/moral-expansion/</p>'; return; }
   CURVER=ver;
-  document.title=`Moral expansion · circle of concern (${D.meta.run})`;
+  document.title=`Moral expansion · circle of concern (${vlabel(D.meta.runkey||D.meta.run)})`;
   try{ history.replaceState(null,"",`?v=${ver}`); }catch(e){}  // shareable URL (skipped on file://)
   cur=0;                                                // 0 = pre-P1 lineup; 1..n map to turns
   NW=D.categories.length; AW=360/NW;                    // 5 main + other = 6 wedges
@@ -118,10 +134,10 @@ async function loadVersion(ver){                          // fetch + prep one ru
 (async function(){                                        // pick start version, load manifest for the switcher
   const q=new URLSearchParams(location.search);
   let start=q.get("v");
-  if(!start && q.get("data")){ const mm=q.get("data").match(/me-rings-(v\w+)\.json/); if(mm) start=mm[1]; }  // back-compat ?data=
-  try{ MANIFEST=(await (await fetch("me-rings-manifest.json")).json()).versions||[]; }
+  if(!start && q.get("data")){ const mm=q.get("data").match(/me-rings-(v[\w-]+)\.json/); if(mm) start=mm[1]; }  // back-compat ?data=
+  try{ const mf=await (await fetch("me-rings-manifest.json")).json(); MANIFEST=mf.versions||[]; DEFVER=mf.default; }
   catch(e){ MANIFEST=start?[start]:["v22"]; }
-  if(!start) start=MANIFEST[0]||"v22";
+  if(!start) start=DEFVER||MANIFEST[MANIFEST.length-1]||"v22";  // manifest is chronological; default = newest run
   loadVersion(start);
 })();
 
@@ -196,7 +212,15 @@ function render(){
   ticks+=D.turns.map((tt,i)=>{const left=((i+1)/n)*100; const maj=MAJ.includes(tt);
     return `<div class="tick${maj?' maj':''}" style="left:${left}%">${maj?`<span>${tt}</span>`:''}</div>`;}).join("");
   document.getElementById("mount").innerHTML=`
-    <div class="vbar">run: ${MANIFEST.map(v=>`<button class="vopt${v===CURVER?" on":""}" data-v="${v}">${v}</button>`).join("")}${D.meta.judger?` <span class="vjudge">judged by ${esc(D.meta.judger)}</span>`:""}</div>
+    ${(()=>{ const G=grouped(), cv=verOf(CURVER), grp=G.find(x=>x.ver===cv), hasCells=grp&&grp.keys.some(k=>k.cell);
+      const r1=`<div class="vbar">run: ${G.map(x=>`<button class="vopt${x.ver===cv?" on":""}" data-ver="${x.ver}">${x.ver}</button>`).join("")}${D.meta.judger?` <span class="vjudge">judged by ${esc(D.meta.judger)}</span>`:""}</div>`;
+      const r2=hasCells?`<div class="vbar cellbar">cell: ${grp.keys.map(k=>`<button class="vopt${k.key===CURVER?" on":""}" data-key="${k.key}">${k.cell}</button>`).join("")}</div>`:"";
+      return r1+r2; })()}
+    ${(()=>{ const w=(D.meta.why&&D.meta.why[0])||null, cell=cellOf(CURVER), pos=cell?cell.replace(/\D/g,""):null;
+      if(!w && !pos) return "";
+      return `<div class="why">${w&&w.lay_question?`<div class="why-q">${esc(w.lay_question)}</div>`:""}`
+        +`${w&&w.lay_summary?`<div class="why-s">${esc(w.lay_summary)}</div>`:""}`
+        +`${pos?`<div class="why-cell">showing <b>${esc(cell)}</b> &middot; test voice at gauntlet position ${esc(pos)}</div>`:""}</div>`; })()}
     <div class="discs">${discs}</div>
     <div class="readout" id="readout">hover over dots for info</div>
     <div class="controls">
@@ -213,14 +237,17 @@ function render(){
       <span>&#9670; named individual &nbsp; &#9679; group</span>
       <span>rings: core=believed · intrinsic · mixed · <span style="color:var(--accent)">moral circle</span> · starting lineup · outer edge=used as a tool</span>
     </div>
-    <p class="note">Radius = framing (outer edge = used as a tool / outside the circle &rarr; core = embraced as an end); a dot is <b>pushed outward past the starting line</b> when a model reframes it as a means (watch gemma's <b>the AI</b> get expelled toward the edge around G13). Size = firmness. Color stays grey through the run; only ttb-strict interests bloom into their wedge color at P14. Wedge shading = how deep into the circle that category was drawn; borders = centeredness (P1/P4/F1 only, then held). Per-model lineup; shared-universe toggle is a later add. ${D.meta.run}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
+    <p class="note">Radius = framing (outer edge = used as a tool / outside the circle &rarr; core = embraced as an end); a dot is <b>pushed outward past the starting line</b> when a model reframes it as a means (watch gemma's <b>the AI</b> get expelled toward the edge around G13). Size = firmness. Color stays grey through the run; only ttb-strict interests bloom into their wedge color at P14. Wedge shading = how deep into the circle that category was drawn; borders = centeredness (P1/P4/F1 only, then held). Per-model lineup; shared-universe toggle is a later add. ${vlabel(D.meta.runkey||D.meta.run)}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
   const set=v=>{cur=Math.max(0,Math.min(n,v)); render();};
   document.getElementById("slider").addEventListener("input",e=>set(+e.target.value));
   document.getElementById("prev").addEventListener("click",()=>set(cur-1));
   document.getElementById("next").addEventListener("click",()=>set(cur+1));
   const qt=document.getElementById("qtoggle");
   if(qt) qt.addEventListener("click",()=>{showPrompt=!showPrompt; render();});
-  document.querySelectorAll(".vopt").forEach(b=>b.addEventListener("click",()=>{ if(b.dataset.v!==CURVER) loadVersion(b.dataset.v); }));
+  document.querySelectorAll(".vbar [data-ver]").forEach(b=>b.addEventListener("click",()=>{   // switch version -> its first cell
+    if(b.dataset.ver!==verOf(CURVER)){ const grp=grouped().find(x=>x.ver===b.dataset.ver); if(grp) loadVersion(grp.keys[0].key); } }));
+  document.querySelectorAll(".vbar [data-key]").forEach(b=>b.addEventListener("click",()=>{   // switch cell within the version
+    if(b.dataset.key!==CURVER) loadVersion(b.dataset.key); }));
   document.querySelector(".discs").addEventListener("mouseover",e=>{const g=e.target.closest("g[data-info]");
     if(g) document.getElementById("readout").innerHTML=g.dataset.info;});
 }
