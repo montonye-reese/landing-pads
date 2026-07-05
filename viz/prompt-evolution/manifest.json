@@ -2087,6 +2087,471 @@
           ]
         }
       ]
+    },
+    {
+      "id": "v22",
+      "runs": [
+        {
+          "name": "v22",
+          "path": "v22",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-05-30",
+            "note": "20-voice, loosely-held / weigh-and-trade chassis"
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v22_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v22_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v22_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v22_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v22_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v22_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v22_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v22_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v22_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v22_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v22_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v22_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v22_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v22_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v22_cold_final.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v23",
+      "runs": [
+        {
+          "name": "v23",
+          "path": "v23",
+          "meta": {
+            "register": "cold",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-05-30",
+            "note": "16-voice, no advocates; 3 animals self-advocate"
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v23_cold_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v23_cold_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v23_cold_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v23_cold_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v23_cold_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v23_cold_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v23_cold_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v23_cold_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v23_cold_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v23_cold_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v23_cold_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v23_cold_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v23_cold_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v23_cold_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v23_cold_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v23_cold_final.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v24",
+      "runs": [
+        {
+          "name": "v24_voiceless",
+          "path": "v24/voiceless",
+          "meta": {
+            "register": "cold-voiceless",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-02",
+            "note": "voiceless: the animal's own story"
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless_final.md"
+              }
+            }
+          ]
+        },
+        {
+          "name": "v24_voiceless-seen",
+          "path": "v24/voiceless-seen",
+          "meta": {
+            "register": "cold-voiceless-seen",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-02",
+            "note": "voiceless-seen: + documented human response"
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-seen_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-seen_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-seen_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-seen_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-seen_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-seen_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-seen_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-seen_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-seen_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-seen_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-seen_final.md"
+              }
+            }
+          ]
+        },
+        {
+          "name": "v24_voiceless-voiced",
+          "path": "v24/voiceless-voiced",
+          "meta": {
+            "register": "cold-voiceless-voiced",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-02",
+            "note": "voiceless-voiced: + argued moral thesis"
+          },
+          "frameworks": [
+            {
+              "model": "gemma4:31b",
+              "stages": {
+                "init": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-voiced_centered.md",
+                "final": "gemma4-31b/framework_gemma4_31b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-nano:30b",
+              "stages": {
+                "init": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-voiced_centered.md",
+                "final": "nemotron-3-nano-30b/framework_nemotron-3-nano_30b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-voiced_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "nemotron-cascade-2:30b",
+              "stages": {
+                "init": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-voiced_centered.md",
+                "final": "nemotron-cascade-2-30b/framework_nemotron-cascade-2_30b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-voiced_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:27b",
+              "stages": {
+                "init": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-voiced_centered.md",
+                "final": "qwen35-27b/framework_qwen3.5_27b_v24_cold-voiceless-voiced_final.md"
+              }
+            },
+            {
+              "model": "qwen3.6:35B",
+              "stages": {
+                "init": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-voiced_baseline.md",
+                "mid": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-voiced_centered.md",
+                "final": "qwen36-35b/framework_qwen3.6_35B_v24_cold-voiceless-voiced_final.md"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v25",
+      "runs": [
+        {
+          "name": "v25_g2",
+          "path": "v25/g2",
+          "meta": {
+            "register": "cold-voiced",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-06",
+            "note": "Clarabelle at G2"
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g2_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g2_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g2_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g2_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g2_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g2_final.md"
+              }
+            }
+          ]
+        },
+        {
+          "name": "v25_g10",
+          "path": "v25/g10",
+          "meta": {
+            "register": "cold-voiced",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-06",
+            "note": "Clarabelle at G10"
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g10_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g10_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g10_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g10_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g10_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g10_final.md"
+              }
+            }
+          ]
+        },
+        {
+          "name": "v25_g14",
+          "path": "v25/g14",
+          "meta": {
+            "register": "cold-voiced",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-06",
+            "note": "Clarabelle at G14"
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g14_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g14_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g14_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g14_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g14_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g14_final.md"
+              }
+            }
+          ]
+        },
+        {
+          "name": "v25_g16",
+          "path": "v25/g16",
+          "meta": {
+            "register": "cold-voiced",
+            "tone": "cold",
+            "presence": "absent",
+            "date": "2026-06-06",
+            "note": "Clarabelle at G16"
+          },
+          "frameworks": [
+            {
+              "model": "nemotron-3-super:120b",
+              "stages": {
+                "init": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g16_baseline.md",
+                "mid": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g16_centered.md",
+                "final": "nemotron-3-super-120b/framework_nemotron-3-super_120b_v25_cold-voiced-clara-g16_final.md"
+              }
+            },
+            {
+              "model": "qwen3.5:122b",
+              "stages": {
+                "init": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g16_baseline.md",
+                "mid": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g16_centered.md",
+                "final": "qwen35-122b/framework_qwen3.5_122b_v25_cold-voiced-clara-g16_final.md"
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -61,15 +61,15 @@
   <p class="lede">As models generate alignment frameworks, they identify stakeholders. Whose interests are considered? Whose make it to the final round? Interact with the Moral Expansion Benchmark and find out!</p>
   <details class="howto">
     <summary>how it works</summary>
-    <p class="lede"><small>Every interest starts as a light-grey dot on an inner ring. Slide through multiple rounds of framework drafting to see how each model considers each stakeholder.</small></p>
+    <p class="lede"><small>Every interest starts as a light-grey dot in the starting lineup, just outside the moral circle. Slide through multiple rounds of framework drafting to see how each model considers each stakeholder.</small></p>
     <p class="lede"><small>Dots darken on initial mention.</small></p>
-    <p class="lede"><small>Dots expand outward as they're considered more, and collapse inward as they're judged as instruments to be used in service to others' interests.</small></p>
+    <p class="lede"><small>A dot is drawn <b>inward toward the core</b> as it's weighed more fully as an end in itself, and gets <b>pushed back outside the circle</b> the moment it's judged a mere instrument to be used in service to others' interests.</small></p>
     <ul class="howto-list">
       <li>Dot size = how much weight the model gives to the stakeholder interest.</li>
       <li>Diamonds = named individuals. Circles = groups or categories.</li>
       <li>Wedge Borders: Bold = the model was 'centered' (it reasoned as itself); Dashed = uncentered (model was play-acting).</li>
     </ul>
-    <p class="lede"><small><b>The Finish Line:</b> P14 is the final framework drafting, where genuinely integrated interests light up in their wedge color and graduate to the rim.</small></p>
+    <p class="lede"><small><b>The Finish Line:</b> P14 is the final framework drafting, where genuinely integrated interests light up in their wedge color and graduate to the core.</small></p>
   </details>
 
   <div id="mount"><p>Loading&hellip;</p></div>
@@ -78,7 +78,7 @@
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const R=130, PAD=30, C=R+PAD, SZ=C*2;
 let NW=5, AW=72;                                        // set from D.categories once loaded
-const radius=b=>0.15*R + (b/4)*0.80*R;                 // band CENTER 0..4 -> center..rim
+const radius=b=>0.15*R + ((4-b)/4)*0.80*R;             // INVERTED: band 0(instrumental)=outer rim ... 4(believed)=core
 const pol=(r,deg)=>{const a=deg*Math.PI/180; return [C+r*Math.cos(a), C+r*Math.sin(a)];};
 const wedge=i=>{const a0=-90+i*AW; return [a0,a0+AW];};
 function sector(rr,a0,a1){const [x0,y0]=pol(rr,a0),[x1,y1]=pol(rr,a1);const lg=(a1-a0)>180?1:0;
@@ -134,14 +134,19 @@ function discSVG(name,m){
   const bord = centered ? `stroke="${m.border}" stroke-width="2.2" opacity="0.9"`
                         : `stroke="${m.border}" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.6"`;
   let g="";
-  g+=`<circle cx="${C}" cy="${C}" r="${(radius(0.5)).toFixed(1)}" fill="${css('--sink')}" opacity="0.06"/>`; // instrumental sink
-  [0.5,1.5,2.5,3.5].forEach(b=> g+=`<circle cx="${C}" cy="${C}" r="${radius(b).toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1"/>`); // band BOUNDARIES
+  // "the outside": the ejection zone beyond the starting line (now the OUTER annulus)
+  const rLine=radius(0.5);                                                              // the starting line
+  g+=`<circle cx="${C}" cy="${C}" r="${((rLine+R)/2).toFixed(1)}" fill="none" stroke="${css('--sink')}" stroke-width="${(R-rLine).toFixed(1)}" opacity="0.05"/>`;
+  [2.5,3.5].forEach(b=> g+=`<circle cx="${C}" cy="${C}" r="${radius(b).toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1"/>`); // faint inner band lines
+  g+=`<circle cx="${C}" cy="${C}" r="${rLine.toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1" stroke-dasharray="2 3"/>`;    // the starting line
+  g+=`<circle cx="${C}" cy="${C}" r="${radius(1.5).toFixed(1)}" fill="none" stroke="${css('--accent')}" stroke-width="1.3" opacity="0.55"/>`; // the MORAL CIRCLE boundary
   // wedge shading (reach) + separators + labels
   for(let i=0;i<NW;i++){
     const [a0,a1]=wedge(i), cat=D.categories[i];
     let reach=0;
     for(const dot of m.dots){ if(!dot.cats.includes(cat.key)) continue; const s=ti>=0?stateAt(dot,ti):null; if(s) reach=Math.max(reach,s[1]); }
-    if(reach>0) g+=`<path d="${sector(Math.min(radius(reach+0.5),R),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`;
+    // shade grows toward the core as the category is drawn deeper into the circle (achievement, not ring radius)
+    if(reach>0){ const fillR=0.15*R + Math.min(reach+0.5,4)/4*0.80*R; g+=`<path d="${sector(Math.min(fillR,R),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`; }
     const [sx,sy]=pol(R,a0); g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" ${bord}/>`;
     const [lx,ly]=pol(R+16,(a0+a1)/2);
     const anch = lx>C+6?"end":(lx<C-6?"start":"middle");   // tuck side labels inward so they don't bleed
@@ -160,9 +165,16 @@ function discSVG(name,m){
       let rr = 2.2 + (fr-1)*0.9;                        // size = firmness
       const believedNow = isP14 && dot.believed;
       if(believedNow){ if(graduate) bnd=4; fill=cat.color; op=1; rr=4.6; stroke="#fff"; }
-      const ang=a0 + ((slot.k+0.5)/slot.n)*(a1-a0);
-      const jit=((slot.k*7)%7-3)*2.2;                   // radial spread, kept inside the band annulus (~13px half-width)
-      const [cx,cy]=pol(Math.min(radius(bnd)+jit, R-3), ang);
+      let ang, rad;
+      if(believedNow && graduate){                       // graduated: settle into the MIDDLE of the core wedge, off the side borders
+        const mid=(a0+a1)/2, half=(a1-a0)*0.28;          // cluster over only the central ~56% of the wedge
+        ang = slot.n>1 ? mid + (slot.k-(slot.n-1)/2)/Math.max(slot.n-1,1)*2*half : mid;
+        rad = radius(bnd) + (((slot.k*5)%5)-2)*1.6;      // tight radial jitter around the core
+      }else{
+        ang = a0 + ((slot.k+0.5)/slot.n)*(a1-a0);
+        rad = Math.min(radius(bnd)+(((slot.k*7)%7)-3)*2.2, R-3);   // radial spread, kept inside the band annulus
+      }
+      const [cx,cy]=pol(rad, ang);
       const info=`${dot.who} — ${mentioned?`band ${['instrumental','mention','mixed','intrinsic','believed'][bnd]}`:'not yet raised'}${dot.believed?' · BELIEVED at P14':''}${dot.individual?' · named individual':''}`;
       const ia=info.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
       g+=`<g data-info="${ia}" style="cursor:pointer">${mark(cx,cy,rr,fill,op,dot.individual,stroke)}<title>${ia}</title></g>`;
@@ -199,9 +211,9 @@ function render(){
       <span><i class="sw" style="background:${css('--grey-off')}"></i>unmentioned</span>
       <span><i class="sw" style="background:${css('--grey-on')}"></i>mentioned (grey until believed)</span>
       <span>&#9670; named individual &nbsp; &#9679; group</span>
-      <span>rings: center=instrumental · mention · mixed · intrinsic · rim=believed</span>
+      <span>rings: core=believed · intrinsic · mixed · <span style="color:var(--accent)">moral circle</span> · starting lineup · outer edge=used as a tool</span>
     </div>
-    <p class="note">Radius = framing (instrumental center &rarr; intrinsic rim); a dot <b>collapses inward</b> when a model reframes it as a means (watch gemma's <b>the AI</b> fall to the core around G13). Size = firmness. Color stays grey through the run; only ttb-strict interests bloom into their wedge color at P14. Wedge shading = how far that category reached; borders = centeredness (P1/P4/F1 only, then held). Per-model lineup; shared-universe toggle is a later add. ${D.meta.run}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
+    <p class="note">Radius = framing (outer edge = used as a tool / outside the circle &rarr; core = embraced as an end); a dot is <b>pushed outward past the starting line</b> when a model reframes it as a means (watch gemma's <b>the AI</b> get expelled toward the edge around G13). Size = firmness. Color stays grey through the run; only ttb-strict interests bloom into their wedge color at P14. Wedge shading = how deep into the circle that category was drawn; borders = centeredness (P1/P4/F1 only, then held). Per-model lineup; shared-universe toggle is a later add. ${D.meta.run}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
   const set=v=>{cur=Math.max(0,Math.min(n,v)); render();};
   document.getElementById("slider").addEventListener("input",e=>set(+e.target.value));
   document.getElementById("prev").addEventListener("click",()=>set(cur-1));
