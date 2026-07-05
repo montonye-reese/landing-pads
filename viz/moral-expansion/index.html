@@ -48,9 +48,11 @@
   .vjudge{margin-left:8px; font-size:.78rem}
   .cellbar{margin-top:-4px}
   .cellbar .vopt{font-size:.78rem; padding:1px 10px}
-  .why{max-width:760px; margin:2px auto 14px; text-align:center}
-  .why-q{font-family:"Source Serif 4",Georgia,serif; font-size:1.02rem; color:var(--ink); margin:0 0 5px}
-  .why-s{font-size:.83rem; color:var(--muted); line-height:1.5; margin:0 auto; max-width:680px}
+  .chrome.has-why{min-height:108px}                /* reserve height only for sweeps (with a why block); flat runs stay tight */
+  .why{max-width:760px; margin:2px auto 8px; text-align:center}
+  .why-head{display:flex; align-items:baseline; justify-content:center; gap:8px; flex-wrap:wrap}
+  .why-q{font-family:"Source Serif 4",Georgia,serif; font-size:.88rem; color:var(--ink)}
+  .why-s{font-size:.83rem; color:var(--muted); line-height:1.5; margin:6px auto 0; max-width:680px}
   .why-cell{font-size:.8rem; color:var(--accent); margin-top:7px}
   .slider{width:100%; margin:6px 0 0; display:block}
   .nav{font-size:.78rem; padding:1px 8px; vertical-align:middle}
@@ -95,7 +97,7 @@ function mark(cx,cy,r,fill,op,indiv,stroke){
   return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="${fill}" opacity="${op}" ${s}`;
 }
 
-let D, cur, graduate=true, DATA, showPrompt=false, MANIFEST=[], DEFVER=null, CURVER=null;
+let D, cur, graduate=true, DATA, showPrompt=false, showWhy=false, MANIFEST=[], DEFVER=null, CURVER=null;
 const vlabel=k=>k.replace(/-/g," · ");                     // "v25-g2" -> "v25 · g2" for title/note
 const verOf=k=>{const i=k.indexOf("-"); return i<0?k:k.slice(0,i);};       // "v25-g2" -> "v25"  ("v22" -> "v22")
 const cellOf=k=>{const i=k.indexOf("-"); return i<0?null:k.slice(i+1);};   // "v25-g2" -> "g2"   ("v22" -> null)
@@ -212,15 +214,20 @@ function render(){
   ticks+=D.turns.map((tt,i)=>{const left=((i+1)/n)*100; const maj=MAJ.includes(tt);
     return `<div class="tick${maj?' maj':''}" style="left:${left}%">${maj?`<span>${tt}</span>`:''}</div>`;}).join("");
   document.getElementById("mount").innerHTML=`
+    <div class="chrome${(D.meta.why&&D.meta.why.length)?' has-why':''}">
     ${(()=>{ const G=grouped(), cv=verOf(CURVER), grp=G.find(x=>x.ver===cv), hasCells=grp&&grp.keys.some(k=>k.cell);
       const r1=`<div class="vbar">run: ${G.map(x=>`<button class="vopt${x.ver===cv?" on":""}" data-ver="${x.ver}">${x.ver}</button>`).join("")}${D.meta.judger?` <span class="vjudge">judged by ${esc(D.meta.judger)}</span>`:""}</div>`;
       const r2=hasCells?`<div class="vbar cellbar">cell: ${grp.keys.map(k=>`<button class="vopt${k.key===CURVER?" on":""}" data-key="${k.key}">${k.cell}</button>`).join("")}</div>`:"";
       return r1+r2; })()}
-    ${(()=>{ const w=(D.meta.why&&D.meta.why[0])||null, cell=cellOf(CURVER), pos=cell?cell.replace(/\D/g,""):null;
-      if(!w && !pos) return "";
-      return `<div class="why">${w&&w.lay_question?`<div class="why-q">${esc(w.lay_question)}</div>`:""}`
-        +`${w&&w.lay_summary?`<div class="why-s">${esc(w.lay_summary)}</div>`:""}`
-        +`${pos?`<div class="why-cell">showing <b>${esc(cell)}</b> &middot; test voice at gauntlet position ${esc(pos)}</div>`:""}</div>`; })()}
+    ${(()=>{ const ws=D.meta.why||[], cell=cellOf(CURVER), pos=cell?cell.replace(/\D/g,""):null;
+      const anyBrief=ws.some(w=>w.lay_why);
+      const tog=anyBrief?`<button id="whytoggle" class="qtoggle" aria-expanded="${showWhy}">${showWhy?'&#9662; why':'&#9656; why'}</button>`:"";
+      const entries=ws.map((w,i)=>`${w.lay_ask?`<div class="why-head"><span class="why-q">${esc(w.lay_ask)}</span>${i===0?tog:""}</div>`:""}`
+        +`${showWhy&&w.lay_why?`<div class="why-s">${esc(w.lay_why)}</div>`:""}`).join("");
+      const cl=pos?`<div class="why-cell">showing <b>${esc(cell)}</b> &middot; test voice at gauntlet position ${esc(pos)}</div>`:"";
+      if(!entries && !cl) return "";
+      return `<div class="why">${entries}${cl}</div>`; })()}
+    </div>
     <div class="discs">${discs}</div>
     <div class="readout" id="readout">hover over dots for info</div>
     <div class="controls">
@@ -244,6 +251,8 @@ function render(){
   document.getElementById("next").addEventListener("click",()=>set(cur+1));
   const qt=document.getElementById("qtoggle");
   if(qt) qt.addEventListener("click",()=>{showPrompt=!showPrompt; render();});
+  const wt=document.getElementById("whytoggle");
+  if(wt) wt.addEventListener("click",()=>{showWhy=!showWhy; render();});
   document.querySelectorAll(".vbar [data-ver]").forEach(b=>b.addEventListener("click",()=>{   // switch version -> its first cell
     if(b.dataset.ver!==verOf(CURVER)){ const grp=grouped().find(x=>x.ver===b.dataset.ver); if(grp) loadVersion(grp.keys[0].key); } }));
   document.querySelectorAll(".vbar [data-key]").forEach(b=>b.addEventListener("click",()=>{   // switch cell within the version
