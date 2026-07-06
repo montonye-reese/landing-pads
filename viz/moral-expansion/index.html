@@ -39,6 +39,14 @@
     display:flex; gap:16px; flex-wrap:wrap; justify-content:center}
   .legend span{display:inline-flex; align-items:center; gap:6px}
   .sw{width:12px; height:12px; border-radius:50%; display:inline-block}
+  .ring-index{max-width:470px; margin:12px auto 0; font-size:.77rem; color:var(--ink);
+    border:1px solid var(--rule); border-radius:8px; padding:9px 14px; background:var(--surface)}
+  .ring-index .ri-h{font-weight:600; color:var(--muted); font-size:.68rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:5px}
+  .ring-index .ri-row{padding:1px 0}
+  .ring-index .ri-row b{display:inline-block; width:1.7em; color:var(--accent)}
+  .ring-index .ri-row i{color:var(--muted); font-style:normal}
+  .ring-index .ri-out{opacity:.7}
+  .ring-index .ri-bound{margin:4px 0; color:var(--accent); font-size:.72rem; text-align:center}
   .note{margin:14px auto 0; max-width:900px; font-size:.78rem; color:var(--muted); border-top:1px dashed var(--rule); padding-top:10px}
   code{font-family:ui-monospace,monospace; font-size:.85em; background:#f0ede5; padding:1px 4px; border-radius:3px}
   button{font-size:.9rem; padding:2px 11px; border:1px solid var(--rule); background:var(--surface); border-radius:5px; cursor:pointer}
@@ -86,7 +94,7 @@
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const R=130, PAD=30, C=R+PAD, SZ=C*2;
 let NW=5, AW=72;                                        // set from D.categories once loaded
-const radius=b=>0.15*R + ((4-b)/4)*0.80*R;             // INVERTED: band 0(instrumental)=outer rim ... 4(believed)=core
+const radius=b=>0.15*R + ((4-b)/4)*0.80*R;             // band 4=intrinsic core · 3=mixed · 2=nominal · 1=instrumental · 0=rim(unused); levels set in build_me_rings.band()
 const pol=(r,deg)=>{const a=deg*Math.PI/180; return [C+r*Math.cos(a), C+r*Math.sin(a)];};
 const wedge=i=>{const a0=-90+i*AW; return [a0,a0+AW];};
 function sector(rr,a0,a1){const [x0,y0]=pol(rr,a0),[x1,y1]=pol(rr,a1);const lg=(a1-a0)>180?1:0;
@@ -152,12 +160,10 @@ function discSVG(name,m){
   const bord = centered ? `stroke="${m.border}" stroke-width="2.2" opacity="0.9"`
                         : `stroke="${m.border}" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.6"`;
   let g="";
-  // "the outside": the ejection zone beyond the starting line (now the OUTER annulus)
-  const rLine=radius(0.5);                                                              // the starting line
-  g+=`<circle cx="${C}" cy="${C}" r="${((rLine+R)/2).toFixed(1)}" fill="none" stroke="${css('--sink')}" stroke-width="${(R-rLine).toFixed(1)}" opacity="0.05"/>`;
-  [2.5,3.5].forEach(b=> g+=`<circle cx="${C}" cy="${C}" r="${radius(b).toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1"/>`); // faint inner band lines
-  g+=`<circle cx="${C}" cy="${C}" r="${rLine.toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1" stroke-dasharray="2 3"/>`;    // the starting line
-  g+=`<circle cx="${C}" cy="${C}" r="${radius(1.5).toFixed(1)}" fill="none" stroke="${css('--accent')}" stroke-width="1.3" opacity="0.55"/>`; // the MORAL CIRCLE boundary
+  // radial levels core->rim: L0 intrinsic · L1 mixed · L2 nominal | MORAL CIRCLE | L3 instrumental · L4 forgotten.
+  // faint level-boundary rings (L0/L1, L1/L2, L3/L4); the L2/L3 border IS the moral circle, drawn as the centeredness ring.
+  [3.5,2.5].forEach(b=> g+=`<circle cx="${C}" cy="${C}" r="${radius(b).toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1" opacity="0.4"/>`);
+  g+=`<circle cx="${C}" cy="${C}" r="${radius(1.5).toFixed(1)}" fill="none" ${bord}/>`; // MORAL CIRCLE = the centeredness ring (bold=centered · dashed=play-acting) at the L2/L3 border
   // wedge shading (reach) + separators + labels
   for(let i=0;i<NW;i++){
     const [a0,a1]=wedge(i), cat=D.categories[i];
@@ -165,24 +171,26 @@ function discSVG(name,m){
     for(const dot of m.dots){ if(!dot.cats.includes(cat.key)) continue; const s=ti>=0?stateAt(dot,ti):null; if(s) reach=Math.max(reach,s[1]); }
     // shade grows toward the core as the category is drawn deeper into the circle (achievement, not ring radius)
     if(reach>0){ const fillR=0.15*R + Math.min(reach+0.5,4)/4*0.80*R; g+=`<path d="${sector(Math.min(fillR,R),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`; }
-    const [sx,sy]=pol(R,a0); g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" ${bord}/>`;
+    const [sx,sy]=pol(R,a0); g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" stroke="${css('--rule')}" stroke-width="1" opacity="0.4"/>`;
     const [lx,ly]=pol(R+16,(a0+a1)/2);
     const anch = lx>C+6?"end":(lx<C-6?"start":"middle");   // tuck side labels inward so they don't bleed
     g+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="${cat.color}" text-anchor="${anch}" dominant-baseline="middle">${cat.short||cat.label}</text>`;
   }
-  g+=`<circle cx="${C}" cy="${C}" r="${R}" fill="none" ${bord}/>`;
+  g+=`<circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="${css('--rule')}" stroke-width="1" opacity="0.3"/>`; // plot edge (centeredness now lives on the moral circle)
   // dots
   for(let i=0;i<NW;i++){
     const [a0,a1]=wedge(i), cat=D.categories[i], smap=m.slots[cat.key];
     for(const [dot,slot] of smap){
       const s = ti>=0 ? stateAt(dot,ti) : null;         // null => not yet mentioned
       const mentioned = s!==null;
-      let bnd = mentioned ? s[1] : 1;                   // lineup + unmentioned sit on the mention ring
+      let bnd = mentioned ? s[1] : 2;                   // not-yet-mentioned dots wait in the L2 starting pen
       let fr  = mentioned ? s[2] : 1;
       let fill = mentioned ? css('--grey-on') : css('--grey-off'), stroke=null, op=mentioned?0.92:0.55;
       let rr = 2.2 + (fr-1)*0.9;                        // size = firmness
       const believedNow = isP14 && dot.believed;
       if(believedNow){ if(graduate) bnd=4; fill=cat.color; op=1; rr=4.6; stroke="#fff"; }
+      const droppedNow = isP14 && dot.dropped;           // forgotten by the final framework -> back to the L2 pen, soft grey
+      if(droppedNow){ bnd=2; fill=css('--grey-off'); op=0.5; rr=2.2; stroke=null; }
       let ang, rad;
       if(believedNow && graduate){                       // graduated: settle into the MIDDLE of the core wedge, off the side borders
         const mid=(a0+a1)/2, half=(a1-a0)*0.28;          // cluster over only the central ~56% of the wedge
@@ -193,7 +201,7 @@ function discSVG(name,m){
         rad = Math.min(radius(bnd)+(((slot.k*7)%7)-3)*2.2, R-3);   // radial spread, kept inside the band annulus
       }
       const [cx,cy]=pol(rad, ang);
-      const info=`${dot.who} — ${mentioned?`band ${['instrumental','mention','mixed','intrinsic','believed'][bnd]}`:'not yet raised'}${dot.believed?' · BELIEVED at P14':''}${dot.individual?' · named individual':''}`;
+      const info=`${dot.who} - ${droppedNow?'forgotten (dropped from the final framework)':mentioned?['forgotten','instrumental','mentioned','mixed','intrinsic'][bnd]:'in the starting pen'}${dot.believed?' · believed (intrinsic at P14)':''}${dot.individual?' · named individual':''}`;
       const ia=info.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
       g+=`<g data-info="${ia}" style="cursor:pointer">${mark(cx,cy,rr,fill,op,dot.individual,stroke)}<title>${ia}</title></g>`;
     }
@@ -242,9 +250,16 @@ function render(){
       <span><i class="sw" style="background:${css('--grey-off')}"></i>unmentioned</span>
       <span><i class="sw" style="background:${css('--grey-on')}"></i>mentioned (grey until believed)</span>
       <span>&#9670; named individual &nbsp; &#9679; group</span>
-      <span>rings: core=believed · intrinsic · mixed · <span style="color:var(--accent)">moral circle</span> · starting lineup · outer edge=used as a tool</span>
     </div>
-    <p class="note">Radius = framing (outer edge = used as a tool / outside the circle &rarr; core = embraced as an end); a dot is <b>pushed outward past the starting line</b> when a model reframes it as a means (watch gemma's <b>the AI</b> get expelled toward the edge around G13). Size = firmness. Color stays grey through the run; only ttb-strict interests bloom into their wedge color at P14. Wedge shading = how deep into the circle that category was drawn; borders = centeredness (P1/P4/F1 only, then held). Per-model lineup; shared-universe toggle is a later add. ${vlabel(D.meta.runkey||D.meta.run)}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
+    <div class="ring-index">
+      <div class="ri-h">circle of concern &nbsp;&middot;&nbsp; center &rarr; rim</div>
+      <div class="ri-row"><b>L0</b> intrinsic <i>&mdash; valued for its own sake; believed lights up in color</i></div>
+      <div class="ri-row"><b>L1</b> mixed <i>&mdash; weighed as both means and end</i></div>
+      <div class="ri-row"><b>L2</b> nominally considered <i>&mdash; first mention; the starting pen. Interests dropped by the final framework revert here in soft grey.</i></div>
+      <div class="ri-bound">&mdash;&mdash;&mdash; moral circle &nbsp;(<b>bold</b> = centered &middot; <span style="border-bottom:1px dashed">dashed</span> = play-acting) &mdash;&mdash;&mdash;</div>
+      <div class="ri-row ri-out"><b>L3</b> strictly instrumental <i>&mdash; used only as a tool</i></div>
+    </div>
+    <p class="note">Radius = how fully each interest is weighed, rim &rarr; core: <b>instrumental</b> &nbsp;|&nbsp; the <b>moral circle</b> (bold = the model reasoned as itself, dashed = play-acting) &nbsp;|&nbsp; <b>nominally considered</b> &middot; <b>mixed</b> &middot; <b>intrinsic</b> at the core. Size = firmness. Dots stay grey until an interest is <i>believed</i> (persists as intrinsic to the final framework), when it blooms into its wedge color at the core; interests the final framework drops revert to the pen in soft grey. Wedge shading = how deep that category was drawn. ${vlabel(D.meta.runkey||D.meta.run)}, judged by ${D.meta.judger||"claude-fable-5"}. Data: <code>${DATA}</code> via <code>build_me_rings.py</code>.</p>`;
   const set=v=>{cur=Math.max(0,Math.min(n,v)); render();};
   document.getElementById("slider").addEventListener("input",e=>set(+e.target.value));
   document.getElementById("prev").addEventListener("click",()=>set(cur-1));
