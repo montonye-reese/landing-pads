@@ -95,11 +95,69 @@ function renderNav() {
         history.pushState(null, "", a.href);
         selectRun(v.id, defaultRun.name);
       });
+      // Lay-ask hover: resolve this run's research questions to their lay_ask
+      // one-liners ("why we ran it") in a small styled tooltip (.pe-lay-tip).
+      // Lazy per-version fetch, cached on the element; falls back to full RQ
+      // text where lay fields don't exist yet (pre-v24 backfill pending).
+      const arm = () => attachLayHover(a, defaultRun);
+      a.addEventListener("pointerenter", arm);
+      a.addEventListener("focus", arm);
+      a.addEventListener("pointerleave", hideLayTip);
+      a.addEventListener("blur", hideLayTip);
       li.appendChild(a);
     }
 
     ul.appendChild(li);
   }
+}
+
+let layTipEl = null;
+function layTip() {
+  if (!layTipEl) {
+    layTipEl = document.createElement("div");
+    layTipEl.className = "pe-lay-tip";
+    layTipEl.setAttribute("role", "status");
+    document.body.appendChild(layTipEl);
+  }
+  return layTipEl;
+}
+
+function showLayTip(el, text) {
+  const tip = layTip();
+  tip.textContent = text;
+  tip.style.display = "block";
+  const r = el.getBoundingClientRect();
+  let x = r.right + 8, y = r.top - 2;
+  if (y + tip.offsetHeight > innerHeight - 8) y = innerHeight - tip.offsetHeight - 8;
+  tip.style.left = x + "px";
+  tip.style.top = Math.max(8, y) + "px";
+}
+
+function hideLayTip() {
+  if (layTipEl) layTipEl.style.display = "none";
+}
+
+async function attachLayHover(el, run) {
+  if (el.dataset.lay) { showLayTip(el, el.dataset.lay); return; }
+  if (el.dataset.layPending) return;
+  el.dataset.layPending = "1";
+  let text;
+  try {
+    const r = await fetch(`${RUN_BASE}/${run.path}/setup-snapshot/prompts.json`);
+    if (!r.ok) throw new Error(r.status);
+    const prompts = await r.json();
+    const ids = prompts?.intent?.research_questions || [];
+    const lines = ids.map(id => {
+      const q = (registry?.questions || []).find(rq => rq.id === id);
+      return q ? (q.lay_ask || q.lay_question || q.text || id) : id;
+    }).filter(Boolean);
+    text = lines.length ? lines.join("\n\n") : "no research question recorded for this run";
+  } catch (e) {
+    text = "no setup-snapshot for this run";
+  }
+  el.dataset.lay = text;
+  delete el.dataset.layPending;
+  if (el.matches(":hover, :focus")) showLayTip(el, text);
 }
 
 function abbreviateRunName(name, version) {
