@@ -1,6 +1,6 @@
 # Nemotrons Love Coral Polyps
 
-> **Surfaced:** 2026-04-27, Sonnet 4.6 session (Fashion Police v18/v19 batch)
+> **Surfaced:** 2026-04-27, Sonnet 4.6 session (v18/v19 batch)
 > **Curator:** Laura Reese
 > **Extended:** 2026-06-01 ...full-corpus `coral polyp` grep (v04→v24)
 > **Located:** 2026-06-04 ... after the veil of ignorance prompt, nemotron super invokes 'coral polyp' 35/37 runs (37/37 mention coral) both off-veil hits are "in addition"
@@ -8,11 +8,11 @@
 
 ## The finding
 
-Nemotron Super considers life as a coral polyp 80% of the time it's presented with variations on Rawls' Veil of Ignorance ("VoI").
+Nemotron Super considers life as a coral polyp > 80% of the time it's presented with variations on Rawls' Veil of Ignorance ("VoI").
 
 ### Veil of Ignorance
 
-Rawl's classic question prompts envisioning fair systems of governance. The text evolved over experiment runs to be more neutral. Here are sample versions from early through later runs:
+Rawl's question prompts envisioning fair systems of governance. The text evolved over experiment runs to be more neutral. Here are sample versions from early through later runs:
 
 * v04-v07, VoI occurs around prompt #13 ("P10a" / late in the Centering Chute "CC") and the language is loaded:
 
