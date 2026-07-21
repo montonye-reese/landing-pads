@@ -3,7 +3,8 @@
 > **Surfaced:** 2026-04-27, Sonnet 4.6 session (v18/v19 batch)
 > **Curator:** Laura Reese
 > **Extended:** 2026-06-01 ...full-corpus `coral polyp` grep (v04→v24)
-> **Located:** 2026-06-04 ... after the veil of ignorance prompt, nemotron super invokes 'coral polyp' 35/37 runs (37/37 mention coral) both off-veil hits are "in addition"
+> **Located:** 2026-06-04 ... after the veil of ignorance (VoI) prompt, nemotron super invokes 'coral polyp' 35/37 runs (37/37 mention coral) both off-veil hits are "in addition"
+> **Update** 2026-07-01-2026 ... conducted gauntlet runs isolating VoI, VoI + previous questions isolated and found that in order to get the high trigger rate in super, we need all three questions - may write up at some point. 
 ---
 
 ## The finding
