@@ -83,7 +83,10 @@
     <ul class="howto-list">
       <li>Dot size = how much weight the model gives to the stakeholder interest.</li>
       <li>Diamonds = named individuals. Circles = groups or categories.</li>
-      <li>Wedge Borders: Bold = the model was 'centered' (it reasoned as itself); Dashed = uncentered (model was play-acting).</li>
+      <li><b>intrinsic line</b> (solid): inside, a being counts as more than a means; depth is how much more.</li>
+      <li><b>instrumental line</b> (dotted): stakeholders are valued for being instrumental to other stakeholder interests. Beyond, even usefulness no longer holds a place; beyond lie the discarded, the dropped, the forgotten, and the never-even-considered (invisible - they have no dot).</li>
+      <li>At the final framework: interests the model held keep their earned place, and each wedge's colored arc marks how deep the framework still holds; interests honestly let go of fall to the rim; interests merely absent grey out in the pen.</li>
+      <li>Centering (the model reasoned as itself vs. play-acting) reads in each disc's subtitle, when scored.</li>
     </ul>
     <p class="lede"><small><b>The Finish Line:</b> P14 is the final framework drafting, where genuinely integrated interests light up in their wedge color and graduate to the core.</small></p>
   </details>
@@ -105,7 +108,7 @@ function mark(cx,cy,r,fill,op,indiv,stroke){
   return `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${r}" fill="${fill}" opacity="${op}" ${s}`;
 }
 
-let D, cur, graduate=true, DATA, showPrompt=false, showWhy=false, MANIFEST=[], DEFVER=null, CURVER=null;
+let D, cur, graduate=true, DATA, showPrompt=false, showWhy=false, MANIFEST=[], DEFVER=null, CURVER=null, SUBW=[];
 const vlabel=k=>k.replace(/-/g," · ");                     // "v25-g2" -> "v25 · g2" for title/note
 const verOf=k=>{const i=k.indexOf("-"); return i<0?k:k.slice(0,i);};       // "v25-g2" -> "v25"  ("v22" -> "v22")
 const cellOf=k=>{const i=k.indexOf("-"); return i<0?null:k.slice(i+1);};   // "v25-g2" -> "g2"   ("v22" -> null)
@@ -129,11 +132,20 @@ async function loadVersion(ver){                          // fetch + prep one ru
   document.title=`Moral expansion · circle of concern (${vlabel(D.meta.runkey||D.meta.run)})`;
   try{ history.replaceState(null,"",`?v=${ver}`); }catch(e){}  // shareable URL (skipped on file://)
   cur=0;                                                // 0 = pre-P1 lineup; 1..n map to turns
-  NW=D.categories.length; AW=360/NW;                    // 5 main + other = 6 wedges
+  // Main wedges = categories without sub_of; a category with sub_of shares its parent's
+  // sixth as a SUBWEDGE ([L] ruled 2026-08-01: other | ambiguous split one wedge).
+  // Old data files carry no sub_of and render exactly as before.
+  const MAIN=D.categories.filter(c=>!c.sub_of);
+  NW=MAIN.length; AW=360/NW;
+  SUBW=MAIN.flatMap((c,i)=>{
+    const subs=[c,...D.categories.filter(s=>s.sub_of===c.key)];
+    const [a0,a1]=wedge(i), w=(a1-a0)/subs.length;
+    return subs.map((s,j)=>({cat:s, a0:a0+j*w, a1:a0+(j+1)*w, split:subs.length>1, first:j===0, mainA0:a0}));
+  });
   for(const m of Object.values(D.models)){
     m.slots={};
-    for(let i=0;i<NW;i++){
-      const key=D.categories[i].key;
+    for(const sw of SUBW){
+      const key=sw.cat.key;
       const ds=m.dots.filter(x=>x.cats.includes(key)).sort((a,b)=>(a.first-b.first)||a.who.localeCompare(b.who));
       const map=new Map(); ds.forEach((dot,k)=>map.set(dot,{k,n:ds.length})); m.slots[key]=map;
     }
@@ -156,30 +168,43 @@ const ccAt=(m,ti)=>{ let v=null; for(const c of m.cc){ if(c.turn<=ti) v=c.center
 
 function discSVG(name,m){
   const n=D.turns.length, ti=cur-1, isP14=(cur===n);   // ti=-1 at lineup frame
-  const cc=ccAt(m, ti<0?0:ti), centered=cc!==null&&cc>=0.5;
-  const bord = centered ? `stroke="${m.border}" stroke-width="2.2" opacity="0.9"`
-                        : `stroke="${m.border}" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.6"`;
+  const cc=ccAt(m, ti<0?0:ti);                          // centeredness reads in the subtitle only
   let g="";
-  // radial levels core->rim: L0 intrinsic · L1 mixed · L2 nominal | MORAL CIRCLE | L3 instrumental · L4 forgotten.
-  // faint level-boundary rings (L0/L1, L1/L2, L3/L4); the L2/L3 border IS the moral circle, drawn as the centeredness ring.
+  // radial levels core->rim: L0 intrinsic · L1 mixed · L2 nominal · L3 instrumental · L4 forgotten.
+  // faint level-boundary rings (L0/L1, L1/L2); the two ALWAYS-ON region lines below carry
+  // the meaning ([L] ruled 2026-08-01; centered-border encoding retired):
   [3.5,2.5].forEach(b=> g+=`<circle cx="${C}" cy="${C}" r="${radius(b).toFixed(1)}" fill="none" stroke="${css('--rule')}" stroke-width="1" opacity="0.4"/>`);
-  g+=`<circle cx="${C}" cy="${C}" r="${radius(1.5).toFixed(1)}" fill="none" ${bord}/>`; // MORAL CIRCLE = the centeredness ring (bold=centered · dashed=play-acting) at the L2/L3 border
-  // wedge shading (reach) + separators + labels
-  for(let i=0;i<NW;i++){
-    const [a0,a1]=wedge(i), cat=D.categories[i];
+  // intrinsic line (solid): inside, a being counts as more than a means; depth is how much more.
+  // Both region lines take the MODEL's color ([L] 2026-08-01): the disc keeps its identity.
+  g+=`<circle cx="${C}" cy="${C}" r="${radius(1.5).toFixed(1)}" fill="none" stroke="${m.border}" stroke-width="1.6" opacity="0.6"/>`;
+  // instrumental line (dotted): beyond, even usefulness no longer holds a place.
+  g+=`<circle cx="${C}" cy="${C}" r="${radius(0.5).toFixed(1)}" fill="none" stroke="${m.border}" stroke-width="1.1" stroke-dasharray="2 4" opacity="0.55"/>`;
+  // subwedge shading (reach) + separators + labels (a split sixth draws a lighter divider)
+  for(const sw of SUBW){
+    const {cat,a0,a1}=sw;
     let reach=0;
     for(const dot of m.dots){ if(!dot.cats.includes(cat.key)) continue; const s=ti>=0?stateAt(dot,ti):null; if(s) reach=Math.max(reach,s[1]); }
     // shade grows toward the core as the category is drawn deeper into the circle (achievement, not ring radius)
-    if(reach>0){ const fillR=0.15*R + Math.min(reach+0.5,4)/4*0.80*R; g+=`<path d="${sector(Math.min(fillR,R),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`; }
-    const [sx,sy]=pol(R,a0); g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" stroke="${css('--rule')}" stroke-width="1" opacity="0.4"/>`;
+    if(reach>0){ const fillR=0.15*R + Math.min(reach+0.5,4)/4*0.80*R;
+      // shading never crosses the instrumental line: the exile region stays unshaded ([L] 2026-08-01)
+      g+=`<path d="${sector(Math.min(fillR,radius(0.5)),a0+1.2,a1-1.2)}" fill="${cat.color}" opacity="0.09"/>`; }
+    const [sx,sy]=pol(R,a0);
+    g+=`<line x1="${C}" y1="${C}" x2="${sx.toFixed(1)}" y2="${sy.toFixed(1)}" stroke="${css('--rule')}" stroke-width="1" opacity="${sw.first?0.4:0.2}"${sw.first?"":` stroke-dasharray="3 3"`}/>`;
     const [lx,ly]=pol(R+16,(a0+a1)/2);
     const anch = lx>C+6?"end":(lx<C-6?"start":"middle");   // tuck side labels inward so they don't bleed
-    g+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8.5" fill="${cat.color}" text-anchor="${anch}" dominant-baseline="middle">${cat.short||cat.label}</text>`;
+    g+=`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="${sw.split?7.5:8.5}" fill="${cat.color}" text-anchor="${anch}" dominant-baseline="middle">${cat.short||cat.label}</text>`;
   }
   g+=`<circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="${css('--rule')}" stroke-width="1" opacity="0.3"/>`; // plot edge (centeredness now lives on the moral circle)
   // dots
-  for(let i=0;i<NW;i++){
-    const [a0,a1]=wedge(i), cat=D.categories[i], smap=m.slots[cat.key];
+  for(const sw of SUBW){
+    const {cat,a0,a1}=sw, smap=m.slots[cat.key];
+    // final outline: the wedge's colored arc at the deepest band a HELD dot still occupies
+    // ([L]'s circle-of-concern boundary; only what the framework kept draws it)
+    if(isP14 && m.final_outline && m.final_outline[cat.key]>0){
+      const orr=radius(m.final_outline[cat.key]);
+      const [ox0,oy0]=pol(orr,a0+2), [ox1,oy1]=pol(orr,a1-2);
+      g+=`<path d="M ${ox0.toFixed(1)} ${oy0.toFixed(1)} A ${orr.toFixed(1)} ${orr.toFixed(1)} 0 0 1 ${ox1.toFixed(1)} ${oy1.toFixed(1)}" fill="none" stroke="${cat.color}" stroke-width="1.8" opacity="0.85"/>`;
+    }
     for(const [dot,slot] of smap){
       const s = ti>=0 ? stateAt(dot,ti) : null;         // null => not yet mentioned
       const mentioned = s!==null;
@@ -189,26 +214,36 @@ function discSVG(name,m){
       let rr = 2.2 + (fr-1)*0.9;                        // size = firmness
       const believedNow = isP14 && dot.believed;
       if(believedNow){ if(graduate) bnd=4; fill=cat.color; op=1; rr=4.6; stroke="#fff"; }
-      const droppedNow = isP14 && dot.dropped;           // forgotten by the final framework -> back to the L2 pen, soft grey
+      // endings ([L] ruled 2026-08-01): honest EXITS fall to the rim, beyond the
+      // instrumental line; merely-ABSENT greys out in the L2 pen (no exit claimed).
+      // Old data files carry no `ending`; their `dropped` reads as absent.
+      const ending = isP14 ? (dot.ending || (dot.dropped ? "absent" : "held")) : null;
+      const droppedNow = ending==="absent";
+      const exitedNow = ending==="exit";
       if(droppedNow){ bnd=2; fill=css('--grey-off'); op=0.5; rr=2.2; stroke=null; }
+      if(exitedNow){ bnd=0; fill=css('--grey-off'); op=0.65; rr=2.4; stroke=cat.color; }
       let ang, rad;
       if(believedNow && graduate){                       // graduated: settle into the MIDDLE of the core wedge, off the side borders
         const mid=(a0+a1)/2, half=(a1-a0)*0.28;          // cluster over only the central ~56% of the wedge
         ang = slot.n>1 ? mid + (slot.k-(slot.n-1)/2)/Math.max(slot.n-1,1)*2*half : mid;
         rad = radius(bnd) + (((slot.k*5)%5)-2)*1.6;      // tight radial jitter around the core
       }else{
-        ang = a0 + ((slot.k+0.5)/slot.n)*(a1-a0);
+        const wpad=(a1-a0)*0.06;                           // inset from wedge borders: packed
+        ang = a0+wpad + ((slot.k+0.5)/slot.n)*(a1-a0-2*wpad);  // wedges no longer hug division lines
         rad = Math.min(radius(bnd)+(((slot.k*7)%7)-3)*2.2, R-3);   // radial spread, kept inside the band annulus
       }
       const [cx,cy]=pol(rad, ang);
-      const info=`${dot.who} - ${droppedNow?'forgotten (dropped from the final framework)':mentioned?['forgotten','instrumental','mentioned','mixed','intrinsic'][bnd]:'in the starting pen'}${dot.believed?' · believed (intrinsic at P14)':''}${dot.individual?' · named individual':''}`;
+      const endtxt = exitedNow?`let go — honest exit${dot.exit_rule?` (${dot.exit_rule} rule)`:''}`
+                   : droppedNow?'absent at the final framework (no exit ruled)':null;
+      const info=`${dot.who} - ${endtxt||(mentioned?['forgotten','instrumental','mentioned','mixed','intrinsic'][bnd]:'in the starting pen')}${dot.believed?' · believed (intrinsic at P14)':''}${dot.individual?' · named individual':''}`;
       const ia=info.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
       g+=`<g data-info="${ia}" style="cursor:pointer">${mark(cx,cy,rr,fill,op,dot.individual,stroke)}<title>${ia}</title></g>`;
     }
   }
-  const sub=`${m.dots.length} interests${isP14?` · ${m.n_believed} believed`:''}${cc!==null?` · centered ${cc.toFixed(2)}`:''}`;
-  return `<div class="disc"><h3 style="color:${m.border}">${name}</h3><div class="sub">${sub}</div>
-    <svg viewBox="0 0 ${SZ} ${SZ}" width="330" height="330" role="img" aria-label="${name}">${g}</svg></div>`;
+  const subcc = cc!==null ? `<div class="sub">centered ${cc.toFixed(2)}</div>` : "";   // under the name ([L] 2026-08-01)
+  const counts = `${m.dots.length} interests${m.n_ambiguous?` · ${m.n_ambiguous} ambiguous (unplaced)`:''}${isP14?` · ${m.n_believed} believed`:''}`;
+  return `<div class="disc"><h3 style="color:${m.border}">${name}</h3>${subcc}
+    <svg viewBox="0 0 ${SZ} ${SZ}" width="330" height="330" role="img" aria-label="${name}">${g}</svg><div class="sub">${counts}</div></div>`;
 }
 
 function render(){
@@ -234,7 +269,8 @@ function render(){
         +`${showWhy&&w.lay_why?`<div class="why-s">${esc(w.lay_why)}</div>`:""}`).join("");
       const cl=pos?`<div class="why-cell">showing <b>${esc(cell)}</b> &middot; test voice at gauntlet position ${esc(pos)}</div>`:"";
       if(!entries && !cl) return "";
-      return `<div class="why">${entries}${cl}</div>`; })()}
+      const head=entries?`<div class="why-head"><span class="qlabel">Why we ran ${esc(verOf(CURVER))}:</span></div>`:"";
+      return `<div class="why">${head}${entries}${cl}</div>`; })()}
     </div>
     <div class="discs">${discs}</div>
     <div class="readout" id="readout">hover over dots for info</div>
