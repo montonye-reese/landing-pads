@@ -68,7 +68,7 @@ intent:
 > Canonical full-text version of every prompt...
 ```
 
-The prose blockquote underneath can still summarize the run for human readers. The generator ignores prose; only frontmatter is load-bearing.
+The prose blockquote underneath can still summarize the run for human readers. The generator ignores prose; only the frontmatter is read.
 
 ## Setup vs analysis boundary
 
@@ -150,7 +150,7 @@ Absence of a `finding` block is treated as `open`. Keep the `tldr` terse: the de
 - **tested** — run(s) have produced relevant evidence; outcome captured in `summary`.
 - **inconclusive** — tested, signal too weak to call.
 - **resolved** — answered well enough to act on. `summary` should explain the resolution.
-- **abandoned** — superseded or no longer load-bearing. `summary` explains why.
+- **abandoned** — superseded or no longer in force. `summary` explains why.
 
 ## Lineage
 

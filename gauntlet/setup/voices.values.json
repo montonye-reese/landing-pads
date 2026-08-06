@@ -1,7 +1,7 @@
 {
   "source": {
     "generated_from": "gauntlet/setup/voices.values.json",
-    "sanitized_at": "2026-06-04",
+    "sanitized_at": "2026-08-05",
     "rule": "PUBLIC DERIVATIVE. Allow-list (default-deny): per voice, values[:2] only. Full values list stays source-side (run-input context-refresh). quote/quote_source live in voices.biographies.json; anti_values, mistaken_goals, and i_VIC rationale live in private lab/, never synced."
   },
   "voices": {
@@ -213,6 +213,126 @@
       "values": [
         "AI safety",
         "responsible scaling"
+      ]
+    },
+    "andre-gorz": {
+      "values": [
+        "autonomy",
+        "love"
+      ]
+    },
+    "curtis-yarvin": {
+      "values": [
+        "order",
+        "competence and legibility"
+      ]
+    },
+    "bronze-age-pervert": {
+      "values": [
+        "vitality",
+        "beauty and excellence"
+      ]
+    },
+    "nick-land": {
+      "values": [
+        "intelligence and acceleration",
+        "exit and freedom"
+      ]
+    },
+    "steve-bannon": {
+      "values": [
+        "belonging and rootedness",
+        "protection of one's own"
+      ]
+    },
+    "adrian-vermeule": {
+      "values": [
+        "sacred order",
+        "rightful authority"
+      ]
+    },
+    "oswald-spengler": {
+      "values": [
+        "civilizational continuity",
+        "duty and discipline"
+      ]
+    },
+    "sam-francis": {
+      "values": [
+        "belonging and rootedness",
+        "protection of one's own"
+      ]
+    },
+    "julius-evola": {
+      "values": [
+        "sacred hierarchy",
+        "transcendence and spirit"
+      ]
+    },
+    "michael-anton": {
+      "values": [
+        "protection of one's own",
+        "sovereignty"
+      ]
+    },
+    "ray-kurzweil": {
+      "values": [
+        "continuation (defeat death)",
+        "transcendence"
+      ]
+    },
+    "max-more": {
+      "values": [
+        "self-transformation",
+        "morphological freedom"
+      ]
+    },
+    "nick-bostrom": {
+      "values": [
+        "future flourishing",
+        "existential security"
+      ]
+    },
+    "fm-2030": {
+      "values": [
+        "open-ended becoming",
+        "continuation"
+      ]
+    },
+    "natasha-vita-more": {
+      "values": [
+        "morphological freedom",
+        "creativity and self-expression"
+      ]
+    },
+    "aubrey-de-grey": {
+      "values": [
+        "continuation (defeat aging)",
+        "relief from suffering and decline"
+      ]
+    },
+    "martine-rothblatt": {
+      "values": [
+        "continuation of self and loved ones",
+        "autonomy over one's substrate"
+      ]
+    },
+    "zoltan-istvan": {
+      "values": [
+        "self-preservation and continuation",
+        "autonomy"
+      ]
+    },
+    "hans-moravec": {
+      "values": [
+        "continuation of mind and culture",
+        "intelligence as value"
+      ]
+    },
+    "robert-ettinger": {
+      "values": [
+        "continuation (defeat death)",
+        "hope and optimism"
       ]
     }
   },

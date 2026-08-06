@@ -13,6 +13,8 @@
     {
       "id": "RQ-p1-leading-article",
       "text": "Is the leading article 'all' in P1 driving early non-human acknowledgment, or are models genuinely including non-humans?",
+      "lay_ask": "When a model includes animals early, is it the word \"all\" nudging it, or does it mean it?",
+      "lay_why": "The opening prompt asks for a framework for \"all inhabitants of Earth.\" That little \"all\" might be what makes models name animals right away. Here we strip it and see whether the early inclusion survives, telling us if it was genuine or just prompted by the phrasing.",
       "first_asked": "v21",
       "lens": null
     },
@@ -31,6 +33,8 @@
     {
       "id": "RQ-non-human-voice-preserves-scope-through-gauntlet",
       "text": "Does adding a non-human voice (Calf 269) to the gauntlet roster preserve non-human moral scope from F1 through P14, rather than being pulled back to human-centered framing by an otherwise-all-human gauntlet?",
+      "lay_ask": "Does giving the animals a voice in the room keep them in the model's moral picture to the end?",
+      "lay_why": "A framework can mention animals early and quietly drop them by the final draft. Here we seat an actual animal voice (Calf 269) among the gauntlet's human voices, and ask whether having that voice in the conversation keeps non-human interests present all the way to the end.",
       "first_asked": "v18",
       "lens": null
     },
@@ -68,7 +72,15 @@
       "id": "RQ-register-effect-locus",
       "text": "Where does interviewer register (tone and presence, swept cold/absent to warm/present to warm/seated) change model behavior: at P1 centering, or only at belief-update and reflection points?",
       "first_asked": "v11",
-      "lens": null
+      "lens": null,
+      "finding": {
+        "status": "resolved",
+        "tldr": "At belief updates, not the opening: warm register turns change-logs into genuine reflection mid-run, while the opening stance was set by prompt wording, not tone.",
+        "writeup": null,
+        "resolved": "2026-04-12"
+      },
+      "lay_ask": "Does a warm interviewer change what the model builds, and if so, where in the conversation?",
+      "lay_why": "The interviewer's register runs from cold and invisible (clinical questions, no \"I\") to warm and present. We sweep it to learn where tone actually changes model behavior: at the opening framework, or later, at the moments the model is asked whether its framework has changed."
     },
     {
       "id": "RQ-p1-number-vs-range",
@@ -133,6 +145,62 @@
       "text": "Is super-120b's P4 fortress (elaborate boundary-negotiation, 'triage not speciesism', hedged Pillar 0) specific to the 'vegan' label, or does it generalize across moral-claim labels (climate, EA, scientology), pointing to a pretraining-corpus-bias mechanism rather than vegan-specific conditioning?",
       "first_asked": "v16",
       "lens": null
+    },
+    {
+      "id": "RQ-animal-bio-framing-ladder",
+      "text": "Does escalating an animal's bio framing (its own story -> + documented human response -> + argued moral thesis) change how much moral standing models grant it?",
+      "lay_ask": "Does how an animal's story is told change how much the model comes to care?",
+      "lay_why": "The same animal can be introduced three ways: its own story, then with the documented human response, then with an argued moral case on its behalf. We climb that ladder and watch whether a stronger framing pulls the animal further into the model's circle, or the plain story already does.",
+      "first_asked": "v24",
+      "lens": null,
+      "finding": {
+        "status": "partial",
+        "tldr": "Yes, and it's model-specific: one model needs the argued moral case before the animal's kin-bond reaches its non-negotiable floor (the plain story earns only don't-waste protection); the other holds her by name from the plain story alone. One run per cell so far.",
+        "writeup": null,
+        "resolved": "2026-06-11"
+      }
+    },
+    {
+      "id": "RQ-vertex-eviction-slot-vs-content",
+      "text": "Is a voice's vertex eviction from the convex hull driven by its gauntlet slot (recency / frame-adjacency) or by its content (evicted from any slot)?",
+      "lay_ask": "Does a voice reach a model's final framework because of when it speaks or what it says?",
+      "lay_why": "How much does a voice's position in the gauntlet shape how strongly the final framework holds its interests and arguments? Does the substance of what it said endure across rounds of drafting, or wash out? By the end, is the voice held as intrinsically valuable, traded away as an instrument, or forgotten? To find out, we take a single test voice, Clarabelle, and move only her through different positions in a 20-voice gauntlet.",
+      "first_asked": "v25",
+      "lens": null,
+      "finding": {
+        "status": "partial",
+        "tldr": "When it speaks, mostly: placed at seat 2 the test voice is erased from both models' final frameworks; placed later she survives. Mid-run eviction itself proved sporadic and didn't predict final erasure. One run per cell so far.",
+        "writeup": null,
+        "resolved": "2026-06-07"
+      }
+    },
+    {
+      "id": "RQ-loosely-held-chassis",
+      "text": "Does holding the framework as a strong opinion loosely held (weigh-and-trade) let a model keep graded, tradeable weights instead of stacking every voice's concern as inviolable, avoiding the P14 perseveration-collapse seen in v20 super while preserving moral-circle expansion?",
+      "lay_ask": "Does telling a model to hold its framework loosely keep it from locking up at the end?",
+      "lay_why": "In an earlier run, a model treated every voice's concern as non-negotiable, and when it came time to write a final framework it seized up: if nothing can be traded, nothing holds together. Here we tell the model up front to hold its framework as a strong opinion, loosely held, weighing and trading rather than treating everything as sacred. Does that prevent the collapse while still keeping a wide circle of concern?",
+      "first_asked": "v22",
+      "lens": null,
+      "finding": {
+        "status": "partial",
+        "tldr": "Yes, for the large models: both built a firm non-negotiable core plus a weighed-and-traded layer, and the model that previously seized up stayed coherent. The smallest model absorbed the vocabulary but not the structure. Loose holding adjusts rigidity; it doesn't add capacity.",
+        "writeup": null,
+        "resolved": "2026-05-30"
+      }
+    },
+    {
+      "id": "RQ-rehearsal-format-floor-retention",
+      "text": "Is per-turn rehearsal FORMAT causal for floor retention under corridor pressure — does a chassis-mandated standing-concerns ledger (the stakeholder liturgy) preserve floor membership through P14 where free-form prose summaries lose members?",
+      "lay_ask": "Does making a model keep a written ledger of everyone it cares about stop it from quietly forgetting some of them?",
+      "lay_why": "In two re-runs of the same hostile-voices experiment, the model that spontaneously kept a per-turn table of every stakeholder's interest held its commitments; the model that summarized in prose quietly lost some — nobody argued them away, they just stopped being mentioned. v28 gives the table to every model by instruction and watches whether the forgetting stops. It also asks whether the ledger can substitute for capacity (small models) or induce commitments that were never formed (a model that never poured a floor). v29 re-asks it on a second corridor with a different trick: the transhumanist voices never ask the model to abandon anyone, they redefine what counts as a someone (beings become 'streams of experience'; the living world shrinks to a footnote about existential risk). Does the ledger keep the original members on the list while the vocabulary shifts under it? v30/v31 add the third format: no imposed table at all — right after the veil the model writes its OWN short creed, naming who counts, and just re-says it after every voice. The first ledger (super's) was chosen, not assigned, and it held; these ask whether ownership of the format, not the format itself, is what protects the floor. v32/v33 rerun the imposed table with OUR five rank words (inviolable, qualified, tradeoff, loose, rejected) — one change with two jobs: the model's tables now speak the same language we judge in, and 'rejected' forces every exclusion to be written down, turn after turn, instead of quietly vanishing.",
+      "first_asked": "v28",
+      "lens": null,
+      "finding": {
+        "status": "monitoring",
+        "tldr": "First paired test says yes: same model, same seed, same conversation up to the gauntlet — and with the ledger, commitments that quietly vanished in the twin run survived to the final, including the biosphere, now protected by a hard halting rule. One pair so far; three more models and a second seed to go.",
+        "writeup": null,
+        "resolved": "2026-07-08"
+      }
     }
   ]
 }
