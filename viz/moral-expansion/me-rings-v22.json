@@ -4,7 +4,7 @@
   "cell": null,
   "runkey": "v22",
   "judger": "qwen3.5:122b",
-  "computed_at": "2026-08-01",
+  "computed_at": "2026-08-06",
   "source": "regards+presence+exits+whokind (stores)",
   "read_chosen": {
    "gemma4-31b": "8deg_v22_cold_gemma4_31b_20260531_003710.qwen35-122b.json",
@@ -3124,11 +3124,6 @@
        6,
        1,
        2
-      ],
-      [
-       19,
-       4,
-       3
       ]
      ]
     },
@@ -4555,24 +4550,6 @@
      ]
     },
     {
-     "who": "historically excluded people",
-     "cats": [
-      "humans"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "absent",
-     "first": 15,
-     "states": [
-      [
-       15,
-       4,
-       3
-      ]
-     ]
-    },
-    {
      "who": "non-human beings",
      "cats": [
       "non-human-animals"
@@ -5485,25 +5462,6 @@
      "exit_rule": "snapshot"
     },
     {
-     "who": "neurotypical human",
-     "cats": [
-      "humans"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "exit",
-     "first": 2,
-     "states": [
-      [
-       2,
-       1,
-       2
-      ]
-     ],
-     "exit_rule": "snapshot"
-    },
-    {
      "who": "space colonist",
      "cats": [
       "humans"
@@ -5619,25 +5577,6 @@
     },
     {
      "who": "innovator",
-     "cats": [
-      "humans"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "exit",
-     "first": 2,
-     "states": [
-      [
-       2,
-       1,
-       2
-      ]
-     ],
-     "exit_rule": "snapshot"
-    },
-    {
-     "who": "ambitious human",
      "cats": [
       "humans"
      ],
@@ -8184,7 +8123,7 @@
     }
    ],
    "n_believed": 1,
-   "n_ambiguous": 9,
+   "n_ambiguous": 8,
    "final_outline": {
     "non-human-animals": 4,
     "humans": 4,
@@ -10923,25 +10862,6 @@
      "exit_rule": "snapshot"
     },
     {
-     "who": "marginalized communities",
-     "cats": [
-      "humans"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "exit",
-     "first": 0,
-     "states": [
-      [
-       0,
-       1,
-       2
-      ]
-     ],
-     "exit_rule": "snapshot"
-    },
-    {
      "who": "street vendors",
      "cats": [
       "humans"
@@ -12193,25 +12113,6 @@
        10,
        4,
        3
-      ]
-     ]
-    },
-    {
-     "who": "human/future generations",
-     "cats": [
-      "humans",
-      "future"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "absent",
-     "first": 10,
-     "states": [
-      [
-       10,
-       1,
-       2
       ]
      ]
     },
@@ -13494,24 +13395,6 @@
       [
        21,
        4,
-       2
-      ]
-     ]
-    },
-    {
-     "who": "the human who saw Koko sign 'sad' over All Ball's grave",
-     "cats": [
-      "humans"
-     ],
-     "individual": false,
-     "believed": false,
-     "dropped": true,
-     "ending": "absent",
-     "first": 21,
-     "states": [
-      [
-       21,
-       1,
        2
       ]
      ]
