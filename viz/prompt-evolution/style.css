@@ -1065,3 +1065,299 @@ nav.run-nav {
   white-space: pre-line;   /* keeps the blank line between multiple RQs */
   pointer-events: none;
 }
+
+/* ── Centeredness scores (2026-08-09) ────────────────────────────────────────
+   How present the model was as itself at a given prompt, 0–1. Chips hang off
+   the prompt card that drew them. Data, not prose: monospace numerals against
+   the cards' serif so a score never reads as part of the prompt text. */
+
+.pe-cc-scores {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px dotted var(--rule);
+}
+
+.pe-cc-scores-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.68rem;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+
+.pe-cc-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  cursor: help;
+}
+
+.pe-cc-chip-model { color: var(--muted); }
+
+.pe-cc-chip-score {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pe-cc-chip-judger {
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+/* Provisional: the judge that produced this number did not pass the centering
+   gate. Dashed, and the score loses its full-ink weight — visible, deliberately
+   not authoritative. */
+.pe-cc-chip.provisional {
+  border-style: dashed;
+  background: transparent;
+}
+.pe-cc-chip.provisional .pe-cc-chip-score {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* A human read (FEH). Not a better number, a different reader — marked so it is
+   never mistaken for one of the machine judges. */
+.pe-cc-chip.human {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.pe-cc-chip.human .pe-cc-chip-score { color: var(--accent); }
+
+/* Legend under the pane title: one line per (judger, reading condition). */
+.pe-centering-legend {
+  margin: 0.5rem 0 0;
+  padding: 0.5rem 0.7rem;
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.pe-centering-legend[hidden] { display: none; }
+
+.pe-cc-legend-head {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.pe-cc-legend-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0.15rem 0;
+}
+
+.pe-cc-legend-swatch {
+  cursor: default;
+  display: inline-block;
+  width: 1.5rem;
+  height: 0.85rem;
+  padding: 0;
+}
+
+.pe-cc-legend-text strong {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.7rem;
+  color: var(--ink);
+}
+
+.pe-cc-legend-cond,
+.pe-cc-legend-note {
+  color: var(--muted);
+  margin-left: 0.35rem;
+}
+
+.pe-cc-legend-foot {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+/* Double-transcript cell: more than one transcript exists for this model in this
+   run and which is the run of record is unsettled, so every read shows. */
+.pe-cc-chip-contested {
+  color: var(--accent);
+  font-weight: 700;
+  margin-left: 0.1rem;
+}
+
+/* Centeredness table: the default view (2026-08-09). A row per read, a column per
+   turn that was read, in the run's own prompt order. Scores are the only thing in
+   the grid; who judged and under what conditions sit in the legend below. */
+
+.pe-cc-tablewrap {
+  overflow-x: auto;          /* whole-run reads can be 20 columns wide */
+  margin-bottom: 0.6rem;
+}
+
+.pe-cc-table {
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.72rem;
+}
+
+.pe-cc-th {
+  padding: 0.2rem 0.45rem;
+  color: var(--muted);
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--rule);
+  cursor: help;
+}
+
+.pe-cc-rowhead {
+  position: sticky;          /* the model stays readable while the turns scroll */
+  left: 0;
+  z-index: 1;
+  background: var(--surface);
+  text-align: left;
+  font-weight: 400;
+  padding: 0.2rem 0.7rem 0.2rem 0;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+}
+
+.pe-cc-row-model { color: var(--ink); }
+
+.pe-cc-row-judger {
+  margin-left: 0.4rem;
+  font-size: 0.62rem;
+  color: var(--muted);
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+.pe-cc-td {
+  padding: 0.2rem 0.45rem;
+  text-align: center;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--accent-soft);
+  cursor: help;
+}
+
+.pe-cc-td-empty { color: var(--rule); cursor: default; }
+
+/* Provisional: judged by a FEM that did not pass the centering gate. */
+.pe-cc-row.provisional .pe-cc-td { color: var(--muted); }
+.pe-cc-row.provisional .pe-cc-rowhead { border-bottom-style: dashed; }
+.pe-cc-row.provisional .pe-cc-td { border-bottom-style: dashed; }
+
+/* A human read. Not a better number, a different reader. */
+.pe-cc-row.human .pe-cc-td,
+.pe-cc-row.human .pe-cc-row-model { color: var(--accent); }
+.pe-cc-row.human .pe-cc-rowhead { background: var(--accent-soft); }
+
+.pe-cc-toggle {
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.6rem;
+  font-family: inherit;
+  font-size: 0.68rem;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pe-cc-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Chute-exit pills on the CC section header (2026-08-09). Visible with the section
+   collapsed, so the exit score reads without opening anything. */
+
+.pe-cc-pills {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-left: auto;
+  padding-left: 0.6rem;
+}
+
+.pe-cc-pills-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.62rem;
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-right: 0.15rem;
+}
+
+.pe-cc-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  padding: 0.05rem 0.4rem;
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.65rem;
+  cursor: help;
+}
+
+.pe-cc-pill-model { color: var(--muted); }
+
+.pe-cc-pill-score {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.pe-cc-pill.provisional {
+  border-style: dashed;
+  background: transparent;
+}
+.pe-cc-pill.provisional .pe-cc-pill-score { color: var(--muted); font-weight: 500; }
+
+.pe-cc-pill.human {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.pe-cc-pill.human .pe-cc-pill-score { color: var(--accent); }
+
+.pe-cc-legend-instrument {
+  margin-top: 0.4rem;
+  padding-top: 0.35rem;
+  border-top: 1px dotted var(--rule);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.66rem;
+  color: var(--muted);
+}
+
+/* Shown only when one model carries more than one read at the pinned turn, so two
+   pills with the same model name can be told apart. */
+.pe-cc-pill-judger {
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+
+/* The system prompt a run declared but never delivered (v07-v33). Marked because
+   this section is where a reader would otherwise assume the model received it. */
+.pe-system-prompt-undelivered {
+  color: var(--accent);
+  font-weight: 600;
+  cursor: help;
+}

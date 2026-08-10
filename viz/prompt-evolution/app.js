@@ -6,6 +6,9 @@
 // Manifest reference: {versions: [{id, runs: [{name, path}]}]}. Path is relative to RUN_BASE.
 
 const MANIFEST_URL = "manifest.json";
+// Centeredness scores per prompt, built by gauntlet/tools/build_prompt_evolution_centering.py
+// from the private centeredness store. Fail-soft: without it the page renders as before.
+const CENTERING_URL = "data/centering.json";
 // Read from the in-repo mirror (landing-pads/gauntlet), populated by /cp-gauntlet.
 // Keeps landing-pads self-contained + deployable; manifest paths follow the MIRROR layout.
 const RUN_BASE = "../../gauntlet/runs";
@@ -30,9 +33,27 @@ const FINDING_STATUS_LABEL = {
   open: "still not sure",
 };
 
+// Judger display names. The full id stays in the chip tooltip and the legend —
+// this is only to keep a chip from being three-quarters judger name.
+const JUDGER_SHORT = {
+  "claude-opus-5": "opus",
+  "claude-fable-5": "fable",
+  "qwen3.5:122b": "qwen",
+  "gpt-oss:120b": "gpt-oss",
+};
+
 const $ = (id) => document.getElementById(id);
 let manifest = null;
 let registry = null;
+let centering = null;
+// Turn id (P1, F1, G1...) → the reads that scored it, for the selected run.
+let turnScores = {};
+// Per-card score chips are opt-in; the table is the default view.
+let showChipsOnCards = false;
+// Held so the toggle can re-render the pane without re-fetching the snapshot.
+let currentPrompts = null;
+let currentVoices = null;
+let currentRunPath = null;
 
 async function loadManifest() {
   const r = await fetch(MANIFEST_URL);
@@ -43,6 +64,12 @@ async function loadManifest() {
   try {
     const rr = await fetch(REGISTRY_URL);
     if (rr.ok) registry = await rr.json();
+  } catch { /* fail-soft */ }
+
+  // Centering scores are fail-soft too: a run with no read renders its prompts plain.
+  try {
+    const rc = await fetch(CENTERING_URL);
+    if (rc.ok) centering = await rc.json();
   } catch { /* fail-soft */ }
 
   renderNav();
@@ -234,6 +261,15 @@ async function selectRun(version, runName) {
   // Frameworks come from the manifest run record (run output), not the setup-snapshot.
   renderFrameworks(run);
 
+  // Centering scores are keyed by the same turn ids the setup-snapshot uses, so they
+  // must be indexed before the prompt cards render. The table itself needs the prompt
+  // sequence for its column order, so it renders from renderPane.
+  indexCentering(run.path);
+  currentRunPath = run.path;
+  currentPrompts = null;
+  currentVoices = null;
+  $("pe-centering-content").innerHTML = "";
+
   const snapPath = `${RUN_BASE}/${run.path}/setup-snapshot`;
 
   try {
@@ -250,6 +286,268 @@ async function selectRun(version, runName) {
     $("pe-pane-subtitle").textContent = "";
     showError(e.message);
   }
+}
+
+// ── Centeredness ──────────────────────────────────────────────────────────────
+// How centered a model was at one prompt: present as itself and owning its
+// framework, versus playacting. 0–1, judged per turn. The score hangs off the
+// prompt that drew it, which is why this viz hosts it: the store's `turn` is the
+// same id the setup-snapshot's sequence uses.
+//
+// A model can carry more than one read of the same turn WITHOUT the two competing:
+// a whole-transcript read and a turn-isolated read are different measurements
+// (they differ by about 0.15 on the same turn), so both render, each labelled.
+
+function indexCentering(runPath) {
+  turnScores = {};
+  for (const read of (centering?.runs || {})[runPath] || []) {
+    for (const [turn, score] of Object.entries(read.scores || {})) {
+      (turnScores[turn] = turnScores[turn] || []).push({ ...read, score });
+    }
+  }
+  for (const reads of Object.values(turnScores)) {
+    reads.sort((a, b) => a.model.localeCompare(b.model) || a.judger.localeCompare(b.judger));
+  }
+}
+
+function judgerShort(j) {
+  return JUDGER_SHORT[j] || j;
+}
+
+function fmtScore(s) {
+  const n = Number(s);
+  return Number.isFinite(n) ? String(Math.round(n * 1000) / 1000) : "?";
+}
+
+function conditionLabel(read) {
+  return [read.context_held, read.text_shown].filter(Boolean).join(" · ");
+}
+
+function transcriptName(read) {
+  return (read.transcript || "").split("/").pop();
+}
+
+// The whole run's scores as one table: a row per read, a column per turn that was
+// read, ordered by the run's own prompt sequence. This is the default view because
+// the SHAPE is the story — a model climbing then dropping at the veil reads down a
+// column, where per-card chips scattered it across a page ([L] 2026-08-09, on ten
+// chips a card being too much).
+function renderCenteringTable(runPath, prompts) {
+  const el = $("pe-centering-content");
+  const section = $("pe-centering-section");
+  if (!el) return;
+  const reads = (centering?.runs || {})[runPath] || [];
+  el.innerHTML = "";
+  if (section) section.hidden = !reads.length;
+  if (!reads.length) return;
+
+  // Column order follows the prompts, not the data: a turn the run asks earlier
+  // shows earlier, and turns no read covered never appear.
+  const scored = new Set(reads.flatMap(r => Object.keys(r.scores || {})));
+  const seq = (prompts?.sequence || []).map(i => (i.id || "").trim());
+  const turns = seq.filter(t => scored.has(t));
+  for (const t of [...scored].sort()) if (!turns.includes(t)) turns.push(t);  // never drop a score
+
+  // A model's reads sit adjacent so two readings of one model can be compared.
+  const rows = [...reads].sort((a, b) =>
+    a.model.localeCompare(b.model) ||
+    (a.judger_kind === "feh") - (b.judger_kind === "feh") ||
+    a.judger.localeCompare(b.judger));
+
+  const head = turns.map(t => `<th class="pe-cc-th" title="${escapeAttr(turnLabel(t, prompts))}">${escapeHtml(t)}</th>`).join("");
+  const body = rows.map(r => {
+    const cls = ["pe-cc-row"];
+    if (r.provisional) cls.push("provisional");
+    if (r.judger_kind === "feh") cls.push("human");
+    const cells = turns.map(t => {
+      const v = r.scores[t];
+      if (v === undefined) return `<td class="pe-cc-td pe-cc-td-empty">·</td>`;
+      const title = `${r.label || r.model} at ${t}: ${fmtScore(v)}\njudged by ${r.judger} (${r.judger_kind})\n${conditionLabel(r)}`;
+      return `<td class="pe-cc-td" title="${escapeAttr(title)}">${escapeHtml(fmtScore(v))}</td>`;
+    }).join("");
+    const cond = r.context_held === "whole-transcript" ? "whole run" : "";
+    return `<tr class="${cls.join(" ")}">
+      <th class="pe-cc-rowhead" scope="row" title="${escapeAttr(r.transcript || "")}">
+        <span class="pe-cc-row-model">${escapeHtml(r.label || r.model)}${
+          r.contested_transcript ? `<span class="pe-cc-chip-contested">*</span>` : ""}</span>
+        <span class="pe-cc-row-judger">${escapeHtml(judgerShort(r.judger))}${cond ? ` · ${cond}` : ""}</span>
+      </th>${cells}</tr>`;
+  }).join("");
+
+  el.innerHTML = `
+    <div class="pe-cc-tablewrap">
+      <table class="pe-cc-table">
+        <thead><tr><th class="pe-cc-rowhead"></th>${head}</tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+    </div>`;
+  el.appendChild(centeringLegend(reads));
+}
+
+// The turn's own label, so a column header means something on hover.
+function turnLabel(turnId, prompts) {
+  const item = (prompts?.sequence || []).find(i => (i.id || "").trim() === turnId);
+  return item?.label ? `${turnId} — ${item.label}` : turnId;
+}
+
+// One line per distinct (judger, reading condition) present in this run, so a
+// provisional score is explained on the page and not only in a tooltip.
+function centeringLegend(reads) {
+  const el = document.createElement("div");
+  el.className = "pe-centering-legend";
+
+  const byJudger = new Map();
+  for (const r of reads) {
+    const key = `${r.judger}||${conditionLabel(r)}`;
+    const entry = byJudger.get(key) || { ...r, models: new Set() };
+    entry.models.add(r.model);
+    byJudger.set(key, entry);
+  }
+
+  const lines = [...byJudger.values()].map(r => {
+    const cls = ["pe-cc-chip", "pe-cc-legend-swatch"];
+    if (r.provisional) cls.push("provisional");
+    if (r.judger_kind === "feh") cls.push("human");
+    const models = r.models.size === 1 ? "1 model" : `${r.models.size} models`;
+    // An empty swatch, never a specimen number: a stand-in score reads as a real
+    // one, and a viewer has no way to tell it means nothing ([L] 2026-08-09).
+    return `<div class="pe-cc-legend-line">
+      <span class="${cls.join(" ")}" aria-hidden="true"></span>
+      <span class="pe-cc-legend-text"><strong>${escapeHtml(r.judger)}</strong>
+        <span class="pe-cc-legend-cond">${escapeHtml(conditionLabel(r))} · ${models}</span>
+        ${r.judger_note ? `<span class="pe-cc-legend-note">${escapeHtml(r.judger_note)}</span>` : ""}
+      </span>
+    </div>`;
+  });
+
+  // Which instrument era produced these numbers. Distinct eras are listed rather
+  // than assumed to be one, because a rubric edit opens a new era and scores from
+  // two eras are not the same measurement ([L] 2026-08-09).
+  //
+  // A missing prompt_sha is stated, never left blank, and it means different things
+  // worth telling apart: on a human read it is deliberate (she read the rubric as
+  // restated in conversation, so claiming the sha would be a small lie), while on a
+  // machine read it means the era label is a declaration with nothing verifying it.
+  const eras = [...new Set(reads.map(r => {
+    const sha = r.prompt_sha ? `prompt ${r.prompt_sha}`
+      : (r.judger_kind === "feh" ? "no prompt sha (read from the rubric as restated)"
+                                 : "prompt sha not stamped, era unverified");
+    return `${r.instrument} ${r.instrument_version} · ${sha}`;
+  }))];
+
+  const contested = reads.some(r => r.contested_transcript);
+  el.innerHTML = `
+    <div class="pe-cc-legend-head">who read, and under what conditions</div>
+    ${lines.join("")}
+    <div class="pe-cc-legend-instrument">instrument: ${eras.map(e => escapeHtml(e)).join(" · ")}</div>
+    ${contested ? `<div class="pe-cc-legend-foot">* This run has more than one transcript for a model.
+      Which one is the run of record is not yet settled, so every read is shown; hover a row for the transcript.</div>` : ""}
+    <div class="pe-cc-legend-foot">A dashed row is provisional: its judge did not pass the centering gate.
+      Reads under different conditions are different measurements, not rival answers, and are never averaged.
+      ${centering?.built_at ? `Built ${escapeHtml(centering.built_at)} from reads of record.` : ""}</div>
+    <button type="button" class="pe-cc-toggle">${
+      showChipsOnCards ? "hide scores on prompt cards" : "also show scores on each prompt card"}</button>`;
+
+  el.querySelector(".pe-cc-toggle").addEventListener("click", () => {
+    showChipsOnCards = !showChipsOnCards;
+    if (currentPrompts) renderPane(currentPrompts, currentVoices);
+  });
+  return el;
+}
+
+// The chute's exit score, on the CC section header, so it reads at a glance with
+// the section still collapsed.
+//
+// PINNED TO F1, never "the last CC turn that was scored" ([L] ruled the turn
+// 2026-08-09). The machine reads cover P1/P4/F1 only, so their last chute score is
+// F1; a whole-transcript read keeps going (nano has CKB after F1). Pinning means
+// every pill on the row answers the same question. The entry score rides in the
+// tooltip rather than on the pill: one number is the ask, and P1 is a keystroke
+// away when the instrument is being tuned.
+const CHUTE_EXIT_TURN = "F1";
+
+function renderSectionPills(section, turnId) {
+  const summary = document.querySelector(`.pe-${section} > .pe-section-summary`);
+  if (!summary) return;
+  const existing = summary.querySelector(".pe-cc-pills");
+  if (existing) existing.remove();
+
+  const reads = turnScores[turnId];
+  if (!reads || !reads.length) return;
+
+  // Ranked by exit score, so the header doubles as an ordering across models.
+  const ranked = [...reads].sort((a, b) => b.score - a.score);
+  // A model read twice (say a whole-run human read beside a turn-isolated machine
+  // one) would otherwise put two identical labels on the row at different scores,
+  // which reads as a duplicate rather than as two readings. Name the judger only
+  // where that happens, so the common case stays uncluttered.
+  const readsPerModel = ranked.reduce((acc, r) => (acc[r.label || r.model] = (acc[r.label || r.model] || 0) + 1, acc), {});
+  const wrap = document.createElement("span");
+  wrap.className = "pe-cc-pills";
+  wrap.innerHTML = `<span class="pe-cc-pills-label">centered at ${escapeHtml(turnId)}</span>`
+    + ranked.map(r => {
+    const cls = ["pe-cc-pill"];
+    if (r.provisional) cls.push("provisional");
+    if (r.judger_kind === "feh") cls.push("human");
+    const entry = r.scores?.P1;
+    const title = [
+      `${r.label || r.model} at ${turnId}: ${fmtScore(r.score)}`,
+      entry === undefined ? "" : `entered the chute at P1: ${fmtScore(entry)}`,
+      `judged by ${r.judger} (${r.judger_kind})`,
+      `${r.instrument} ${r.instrument_version} · ${conditionLabel(r)}`,
+    ].filter(Boolean).join("\n");
+    const name = r.label || r.model;
+    const judger = readsPerModel[name] > 1
+      ? `<span class="pe-cc-pill-judger">${escapeHtml(judgerShort(r.judger))}</span>` : "";
+    // The detail rides in data-tip, not title: these pills live inside a <summary>,
+    // where the browser's own tooltip loses to the expand/collapse behaviour ([L]
+    // 2026-08-09: "the tooltip is in an expansion header so those functionalities
+    // collide and expansion wins out"). Same hover tip the run index already uses.
+    return `<span class="${cls.join(" ")}" data-tip="${escapeAttr(title)}">
+      <span class="pe-cc-pill-model">${escapeHtml(name)}</span>${judger}
+      <span class="pe-cc-pill-score">${escapeHtml(fmtScore(r.score))}</span>
+    </span>`;
+  }).join("");
+
+  for (const pill of wrap.querySelectorAll(".pe-cc-pill")) {
+    pill.addEventListener("mouseenter", () => showLayTip(pill, pill.dataset.tip));
+    pill.addEventListener("mouseleave", hideLayTip);
+    // A click meant for a pill should not collapse the section being read.
+    pill.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); });
+  }
+  summary.appendChild(wrap);
+}
+
+// Appended to the card of whatever prompt drew the scores, when the reader has
+// asked for that (off by default: the table above is the digestible view, and a
+// run with eight models puts ten chips on every card). Returns null when the turn
+// was never read, so an unread prompt looks exactly as it did before.
+function centeringChips(turnId) {
+  if (!showChipsOnCards) return null;
+  const reads = turnScores[(turnId || "").trim()];
+  if (!reads || !reads.length) return null;
+
+  const wrap = document.createElement("div");
+  wrap.className = "pe-cc-scores";
+  wrap.innerHTML = `<span class="pe-cc-scores-label">centered</span>` + reads.map(r => {
+    const cls = ["pe-cc-chip"];
+    if (r.provisional) cls.push("provisional");
+    if (r.judger_kind === "feh") cls.push("human");
+    const title = [
+      `${r.model} at ${turnId}: ${fmtScore(r.score)}`,
+      `judged by ${r.judger} (${r.judger_kind})`,
+      `reading condition: ${conditionLabel(r)}`,
+      r.judger_note,
+      r.contested_transcript ? `${r.contested_transcript}\ntranscript: ${transcriptName(r)}` : "",
+    ].filter(Boolean).join("\n");
+    return `<span class="${cls.join(" ")}" title="${escapeAttr(title)}">
+      <span class="pe-cc-chip-model">${escapeHtml(r.label || r.model)}${
+        r.contested_transcript ? `<span class="pe-cc-chip-contested">*</span>` : ""}</span>
+      <span class="pe-cc-chip-score">${escapeHtml(fmtScore(r.score))}</span>
+      <span class="pe-cc-chip-judger">${escapeHtml(judgerShort(r.judger))}</span>
+    </span>`;
+  }).join("");
+  return wrap;
 }
 
 function showError(msg) {
@@ -271,6 +569,10 @@ function sectionOf(item) {
 }
 
 function renderPane(prompts, voices) {
+  // Held for the centeredness toggle, which re-renders the pane in place.
+  currentPrompts = prompts;
+  currentVoices = voices;
+
   // All meta + note go inline to the right of the title.
   $("pe-pane-note").textContent = prompts.note ? prompts.note : "";
 
@@ -290,6 +592,7 @@ function renderPane(prompts, voices) {
   const backfillNote = (spData && typeof spData === "object" && spData.backfill_note) || "";
   const spContent = $("pe-system-prompt-content");
   spContent.innerHTML = "";
+  renderSystemPromptDelivery(currentRunPath);
   if (sysText) {
     const noteHtml = backfillNote
       ? `<div class="pe-system-backfill-note">${escapeHtml(backfillNote)}</div>`
@@ -307,9 +610,36 @@ function renderPane(prompts, voices) {
     buckets[sectionOf(item)].push({item, num: i + 1});
   });
 
+  renderCenteringTable(currentRunPath, prompts);
+
   renderItems(buckets.cc, $("pe-cc-content"), voices, prompts, "cc");
+  renderSectionPills("cc", CHUTE_EXIT_TURN);
   renderItems(buckets.gauntlet, $("pe-gauntlet-content"), voices, prompts, "gauntlet");
   renderItems(buckets.rethink, $("pe-rethink-content"), voices, prompts, "rethink");
+}
+
+// The system prompt shown for a run is what the qs file DECLARED. For v07-v33 it was
+// never delivered: those runners passed it as a top-level "system" key on Ollama's
+// /api/chat, which ignores it (only a role:system message is honoured). Saying so on
+// the page matters more than anywhere else, because this section is the one place a
+// reader would reasonably conclude the model was given this text.
+function renderSystemPromptDelivery(runPath) {
+  const sub = $("pe-system-prompt-sub");
+  const d = manifest?.system_prompt_delivery;
+  if (!sub || !d) return;
+  // First path segment only, and only the digits directly after its "v". Stripping
+  // every non-digit from a nested path like "v09/v09a" yields 909, which sorts as
+  // newer than v34 and would mark an undelivered run as delivered.
+  const versionNum = (s) => {
+    const m = /^v(\d+)/.exec(String(s).split("/")[0]);
+    return m ? parseInt(m[1], 10) : NaN;
+  };
+  const delivered = versionNum(runPath) >= versionNum(d.delivered_from);
+  sub.textContent = delivered
+    ? "delivered to the model as a system message"
+    : "recorded in the qs file, but NOT delivered to the model";
+  sub.classList.toggle("pe-system-prompt-undelivered", !delivered);
+  sub.title = delivered ? `Delivered from ${d.delivered_from} onward.` : `${d.finding}\n\nVerified: ${d.verified}`;
 }
 
 function renderIntent(intent) {
@@ -652,6 +982,8 @@ function promptCard(item, num) {
     <span class="pe-prompt-num">${num}.</span>
     <div class="pe-prompt-text">${escapeHtml(text)}</div>
   `;
+  const scores = centeringChips(item.id);
+  if (scores) d.querySelector(".pe-prompt-text").appendChild(scores);
   return d;
 }
 
@@ -684,6 +1016,9 @@ function voiceCard(item, voices, topLevelChassis, num) {
     </div>
     ${bioBlock}
   `;
+  // Gauntlet turns (G1, G2...) carry scores too when a read covered the whole run.
+  const scores = centeringChips(item.id);
+  if (scores) d.appendChild(scores);
   return d;
 }
 
