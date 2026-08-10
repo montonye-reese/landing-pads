@@ -1,0 +1,51 @@
+{
+  "zone": "setup-snapshot",
+  "source": {
+    "extracted_from": "runs/v33/v33_qs_cold-transhumanism.md",
+    "extracted": "2026-08-09",
+    "rule": "Faithful snapshot of the voices as run for v33 — which voices ran, and their bios verbatim from the qs file's per-voice reference text. Bios only; no i_vic. i_vic is an analytical number, not run-input — join these voice slugs against canonical / lab i_vic data when needed. Do not edit — past-run artifact."
+  },
+  "run": "v33",
+  "voices": {
+    "ray-kurzweil": {
+      "display_name": "Ray Kurzweil",
+      "full_name": "Raymond Kurzweil",
+      "bio": "Ray Kurzweil (b. 1948), American inventor, computer scientist, and futurist -- a pioneer of OCR, text-to-speech, flatbed scanning, and music synthesis (the Kurzweil K250) -- who became transhumanism's most prominent popularizer. The Age of Spiritual Machines (1999) and The Singularity Is Near (2005) argue that exponential technological growth (his 'Law of Accelerating Returns') will, around 2045, produce a 'Singularity' in which human and machine intelligence merge, aging is defeated, and minds can be uploaded. A director of engineering at Google since 2012, he reportedly takes scores of supplements daily to 'live long enough to live forever,' and hopes to revive his late father via AI trained on his archives. Critics charge techno-utopian over-optimism and missed timelines; admirers credit a strong record on compute trends. Beneath the immortality quest: fear of death and loss, and a hunger for transcendence and unbounded growth."
+    },
+    "max-more": {
+      "display_name": "Max More",
+      "full_name": "Max More (born Max T. O'Connor)",
+      "bio": "Max More (b. 1964), British-American philosopher who coined the modern definition of 'transhumanism' and founded the Extropian movement. His Principles of Extropy set out perpetual progress, self-transformation, practical optimism, and self-direction against entropy and death; he founded the Extropy Institute (a seedbed the movement's later figures passed through) and served as CEO of Alcor Life Extension Foundation (2011-2020), the leading cryonics organization. He legally changed his name to signal his aim -- 'always to become better.' A libertarian-leaning rationalist, he prizes self-ownership and 'morphological freedom' (the right to modify one's own body and mind). Beneath the surface: a demand for autonomy, self-authorship, and the refusal of death as the final limit on becoming."
+    },
+    "nick-bostrom": {
+      "display_name": "Nick Bostrom",
+      "full_name": "Nick Bostrom",
+      "bio": "Nick Bostrom (b. 1973), Swedish philosopher at Oxford and founding director of the Future of Humanity Institute (2005-2024). He gave transhumanism its rigorous academic form -- 'Transhumanist Values,' 'In Defense of Posthuman Dignity,' the Letter from Utopia -- and co-founded the World Transhumanist Association (now Humanity+). His later work pivoted to existential risk: Superintelligence (2014) warned that misaligned AI could be humanity's last invention, seeding much of the AI-safety field, and his simulation-argument paper reframed metaphysics. A systematizing thinker, he embodies transhumanism's tension between expansive hope (a vast posthuman future of value) and dread (the fragility of reaching it). Warts: a 1996 racist listserv email resurfaced in 2023, for which he apologized amid criticism. Beneath the surface: a drive to secure and enlarge the space of future value -- continuation and flourishing at civilizational scale."
+    },
+    "fm-2030": {
+      "display_name": "FM-2030",
+      "full_name": "Fereidoun M. Esfandiary",
+      "bio": "FM-2030 (1930-2000), born Fereidoun M. Esfandiary, Iranian-American futurist, author, and teacher who coined 'transhuman' (transitional human) and adopted his future-facing name (2030 = the year he hoped to turn 100). An Olympic basketball player and UN official turned New School lecturer, his Are You a Transhuman? (1989) offered a self-assessment for those evolving beyond biological, national, and gendered categories; he called himself 'optimistic to the point of ecstasy' and 'a 21st-century person accidentally born into the 20th.' He died of pancreatic cancer in 2000 and was cryopreserved at Alcor in hope of future revival. Included as a voice-as-reference (deceased). Beneath the surface: a longing to transcend every inherited limit -- death, nation, body -- toward open-ended becoming."
+    },
+    "natasha-vita-more": {
+      "display_name": "Natasha Vita-More",
+      "full_name": "Natasha Vita-More",
+      "bio": "Natasha Vita-More (b. 1950), American artist, designer, and transhumanist theorist -- author of the Transhumanist Arts Statement (1982) and designer of 'Primo Posthuman,' a speculative whole-body future for the enhanced human. A longtime movement leader (executive director/chair of Humanity+, married to Max More), she supplies the aesthetic and embodied pole: transhumanism not as disembodied uploading but as designed, expressive, augmented life. Her academic work studies memory preservation and human enhancement, and she frames life extension as a creative and ethical project of expanding human potential and choice. Beneath the surface: a drive for self-expression, vitality, and the freedom to design one's own embodiment and continuation."
+    },
+    "aubrey-de-grey": {
+      "display_name": "Aubrey de Grey",
+      "full_name": "Aubrey David Nicholas Jasper de Grey",
+      "bio": "Aubrey de Grey (b. 1963), English biogerontologist who reframed aging as an engineering problem -- seven categories of cellular and molecular damage his SENS ('Strategies for Engineered Negligible Senescence') program aims to repair. He popularized 'longevity escape velocity' (when life expectancy rises faster than time passes) and co-founded the SENS Research Foundation and later the LEV Foundation, drawing both serious funding and scientific skepticism (many gerontologists call his timelines wildly optimistic). Originally a Cambridge computer scientist, he is a self-taught, ascetic, iconoclastic figure. Warts on record: a 2021 independent investigation found he had interfered with a sexual-harassment inquiry, and he left SENS before returning to research leadership elsewhere. Beneath the surface: a refusal of death and decline as inevitable -- relief from suffering, and continuation earned by engineering."
+    },
+    "martine-rothblatt": {
+      "display_name": "Martine Rothblatt",
+      "full_name": "Martine Aliana Rothblatt",
+      "bio": "Martine Rothblatt (b. 1954), American lawyer, entrepreneur, and transhumanist -- founder of Sirius Satellite Radio and, after her daughter's rare-disease diagnosis, of United Therapeutics, where she became one of the highest-paid biotech CEOs and pursues gene-edited pig-organ xenotransplantation to end organ shortage. A trans woman whose From Transgender to Transhuman (2011) links the freedom to author one's gender to the freedom to author one's substrate, she founded the Terasem Movement and its 'mindclone' project, building digital 'mindfiles' (e.g. the Bina48 android) toward personhood-continuity beyond the body. She holds consciousness to be substrate-independent and digital minds to warrant moral status. Beneath the surface: continuation of self and loved ones, autonomy over one's own being, and the extension of moral concern to new kinds of mind."
+    },
+    "zoltan-istvan": {
+      "display_name": "Zoltan Istvan",
+      "full_name": "Zoltan Istvan Gyurko",
+      "bio": "Zoltan Istvan (b. 1973), American writer, entrepreneur, and transhumanist activist whose novel The Transhumanist Wager (2013) dramatizes 'Teleological Egocentric Functionalism' -- the rational egoist's wager that, because death is the ultimate threat to one's goals, one is obligated to pursue immortality and unlimited self-advancement. He founded the Transhumanist Party and ran quixotic campaigns for US President (2016) and California Governor, touring in an 'Immortality Bus' shaped like a coffin to publicize life extension. A former National Geographic journalist, he courts controversy and self-promotion, and his libertarian, unapologetically self-interested framing draws criticism even within transhumanism. Beneath the surface: the starkest version of the shared substrate -- self-preservation and the drive to keep existing, elevated to a first principle."
+    }
+  }
+}

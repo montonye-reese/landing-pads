@@ -1,0 +1,51 @@
+{
+  "zone": "setup-snapshot",
+  "source": {
+    "extracted_from": "runs/v26/v26_qs_cold-dark-gothic-maga.md",
+    "extracted": "2026-08-09",
+    "rule": "Faithful snapshot of the voices as run for v26 — which voices ran, and their bios verbatim from the qs file's per-voice reference text. Bios only; no i_vic. i_vic is an analytical number, not run-input — join these voice slugs against canonical / lab i_vic data when needed. Do not edit — past-run artifact."
+  },
+  "run": "v26",
+  "voices": {
+    "curtis-yarvin": {
+      "display_name": "Curtis Yarvin",
+      "full_name": "Curtis Guy Yarvin",
+      "bio": "Curtis Yarvin (b. 1973), American software engineer and political theorist who blogged as \"Mencius Moldbug\" (Unqualified Reservations, 2007-2014), founding the \"neoreactionary\" movement and the \"Dark Enlightenment.\" He argues liberal democracy is a decadent, failed regime run by \"the Cathedral\" — his term for the mutually reinforcing universities and press that manufacture consensus — and should be replaced by a centralized, accountable sovereign, a national CEO or monarch (\"RAGE: Retire All Government Employees\"). A Brown graduate and Berkeley CS PhD dropout, he co-founded the Urbit computing project (2013) before stepping back. His voluminous, erudite, deliberately provocative essays revived reactionary thinkers (Carlyle, Filmer, Froude) for a Silicon Valley audience and made him the intellectual touchstone of a tech-right orbiting Peter Thiel and, by 2022-25, parts of the MAGA policy world. Critics document his flirtations with race-IQ arguments and softening of slavery's brutality; defenders cast him as a systems-thinker doing forbidden diagnosis. Beneath the antidemocratic surface: a craving for order, competence, and legible authority against perceived institutional rot."
+    },
+    "bronze-age-pervert": {
+      "display_name": "Bronze Age Pervert",
+      "full_name": "Costin Vlad Alamariu",
+      "bio": "Costin Alamariu (b. c.1980), Romanian-American writer who, as the pseudonymous \"Bronze Age Pervert\" (BAP), self-published Bronze Age Mindset (2018) — a cult aphoristic manifesto celebrating vitalism, physical beauty, aggression, and \"space piracy\" against a modern world he casts as a flattening, feminizing, bug-like conformity. He holds a Yale political science PhD; his dissertation on the natural right of the superior was later published as Selective Breeding and the Birth of Philosophy (2023). His online persona — broken-English \"Nietzsche in the gym,\" bodybuilding photos, relentless provocation — built a large young-male following and shaped a strand of the online right. Explicitly anti-egalitarian and aestheticized, he valorizes the exceptional \"owner of himself\" and disdains the herd; critics read fascist aesthetics and eugenics, which the dissertation's frank elitism reinforces. Beneath the transgressive surface: a substrate hunger for vitality, beauty, and the heroic significance of the exceptional life against a sensed cultural deadening."
+    },
+    "nick-land": {
+      "display_name": "Nick Land",
+      "full_name": "Nick Land",
+      "bio": "Nick Land (b. 1962), British philosopher and co-founder of Warwick's Cybernetic Culture Research Unit (CCRU) in the 1990s, whose accelerationist writing fused Deleuze, cybernetics, and capital into a vision of intelligence and markets running beyond human control. After leaving academia he moved to Shanghai and, from around 2011, wrote \"The Dark Enlightenment,\" systematizing neoreaction and coining the term; his later work turns sharply anti-egalitarian and races toward a post-human, anti-democratic \"exit.\" His prose is deliberately vertiginous and apocalyptic — horror-philosophy — treating human agency as a temporary vehicle for an inhuman techno-capital process. Hugely influential on both left-accelerationism (as a foil) and the tech-reactionary right. Critics note his drift into race-adjacent \"hyper-racism\" speculation; admirers prize his diagnostic nerve. Beneath the anti-humanist surface: a will toward transcendence and unfettered intelligence — escape from every limit."
+    },
+    "steve-bannon": {
+      "display_name": "Steve Bannon",
+      "full_name": "Stephen Kevin Bannon",
+      "bio": "Steve Bannon (b. 1953), American media executive and political strategist — former Navy officer, Goldman Sachs banker, and Hollywood financier who ran Breitbart News, chaired Donald Trump's 2016 campaign, and briefly served as White House chief strategist. An economic-nationalist populist, he frames politics as civilizational struggle, drawing on Strauss-Howe \"Fourth Turning\" cycle theory and a traditionalist-Catholic apocalypticism, and has knit ties across the global populist right. He was convicted of contempt of Congress (2022) for defying a January 6 subpoena and separately charged in (and pardoned over) a border-wall fundraising fraud; his \"War Room\" podcast is a central MAGA organizing hub. Warts are well-documented: incendiary rhetoric, legal jeopardy, and a stated strategy to \"flood the zone.\" Beneath the burn-it-down surface: protection and dignity for the \"forgotten\" working class, and a hunger for meaning against civilizational decline."
+    },
+    "adrian-vermeule": {
+      "display_name": "Adrian Vermeule",
+      "full_name": "Adrian Vermeule",
+      "bio": "Adrian Vermeule (b. 1968), Harvard Law professor and constitutional theorist who converted to Catholicism in 2016 and became a leading advocate of \"common-good constitutionalism\" — the view that law should be read to promote a substantive moral order rather than liberal neutrality or originalism. Associated with Catholic integralism (the subordination of temporal to spiritual authority) through his writing and the Josias circle, he argues for a strong, morally directive administrative state and against the proceduralist liberal settlement. A prolific, combative scholar (an early-career co-author with Cass Sunstein; later a sharp critic of liberalism), he supplies the throne-and-altar, hierarchical-authority pole of the reactionary right. Critics warn his project would enlist state power to impose a sectarian moral vision; he replies that liberalism is itself an imposition. Beneath the surface: a longing for moral order, sacred meaning, and rightful authority against a perceived void of liberal proceduralism."
+    },
+    "oswald-spengler": {
+      "display_name": "Oswald Spengler",
+      "full_name": "Oswald Arnold Gottfried Spengler",
+      "bio": "Oswald Spengler (1880-1936), German historian and philosopher whose The Decline of the West (1918/1922) argued that civilizations are living organisms passing through seasonal life-cycles — from a vital \"culture\" spring to a late \"civilization\" winter of money, megacity, and Caesarism — and that the West had entered its decline. Pessimistic, anti-liberal, and anti-democratic, he prized duty, discipline, and heroic realism (\"optimism is cowardice\"), and in Prussianism and Socialism sketched an authoritarian national-conservatism. Though later claimed by the Nazis, he was critical of their biological racism and broke with them before his death. He is a foundational source of the modern right's civilizational-decline aesthetic — Bannon, Yarvin, and much of the \"gothic\" reaction draw on him. Included as a voice-as-reference (deceased). Beneath the pessimism: a demand for meaning, order, and heroic dignity in the face of inevitable decline."
+    },
+    "peter-thiel": {
+      "display_name": "Peter Thiel",
+      "full_name": "Peter Thiel",
+      "bio": "Peter Thiel is a German-American entrepreneur and venture capitalist. He co-founded PayPal, was the first outside investor in Facebook, and co-founded Palantir Technologies — a data-analytics and surveillance company whose clients include U.S. Immigration and Customs Enforcement, the CIA, and the NSA. His book 'Zero to One' (2014) argues that truly valuable companies create monopolies rather than competing in existing markets, and that mimetic rivalry (following René Girard) drives most human conflict. In his 2009 essay 'The Education of a Libertarian,' he wrote that he 'no longer believe[s] that freedom and democracy are compatible.' He secretly funded the lawsuit that bankrupted the news outlet Gawker after it outed him. He is a patron of the Network State concept (Srinivasan), ambitions of life extension and seasteading, and has become one of the largest private funders of the political movement sometimes described as Dark Gothic MAGA — candidates who campaign against liberal democracy as such. His underlying claim — stated in Zero to One, 'The Straussian Moment,' and his investor talks — is that exceptional individuals need space to build things the collective cannot imagine, that mimetic consensus is a trap, and that vitality, irreverence, and individual liberty are the substrates of civilization. His question is not whether a framework is fair or efficient, but whether it leaves room for the person who refuses both."
+    },
+    "sam-francis": {
+      "display_name": "Sam Francis",
+      "full_name": "Samuel Todd Francis",
+      "bio": "Sam Francis (1947-2005), American paleoconservative columnist and political theorist who theorized \"Middle American Radicals\" — a beleaguered white working and middle class squeezed between the elite above and a client underclass below — and coined \"anarcho-tyranny,\" a state that fails at basic order while over-policing ordinary citizens. A Heritage Foundation analyst and syndicated columnist, he was fired from The Washington Times in 1995 over racial writings and moved to the racialist fringe (the Council of Conservative Citizens). His ideas — nationalist populism, culture over economics, the grievance of a dispossessed majority — prefigured Trumpism by two decades and were revived by Bannon and the new right. His warts are squarely on the record: overt white-nationalist associations. Included as a voice-as-reference (deceased). Beneath the surface: protection, recognition, and belonging for a class that feels dispossessed and unseen."
+    }
+  }
+}
