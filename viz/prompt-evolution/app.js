@@ -2,7 +2,8 @@
 // Fetches manifest.json + per-run setup-snapshot JSONs. Renders nav + right pane.
 // Schema reference:
 //   prompts.json:   {sequence: [{id,label,part,kind,text|voice,chassis?,snapshot?}], voice_chassis, system_prompt, ...}
-//   voices.biographies.json: {voices: {slug: {display_name, full_name, bio}}}
+//   voices.library.json (mirror of setup/): {voices: {slug: {display_name, full_name, bio}}}
+//   NOTE: the per-run setup-snapshot copy is still named voices.biographies.json — leaf snapshot names were deliberately NOT renamed (2026-08-12).
 // Manifest reference: {versions: [{id, runs: [{name, path}]}]}. Path is relative to RUN_BASE.
 
 const MANIFEST_URL = "manifest.json";
@@ -12,7 +13,7 @@ const CENTERING_URL = "data/centering.json";
 // Read from the in-repo mirror (landing-pads/gauntlet), populated by /cp-gauntlet.
 // Keeps landing-pads self-contained + deployable; manifest paths follow the MIRROR layout.
 const RUN_BASE = "../../gauntlet/runs";
-const REGISTRY_URL = "../../gauntlet/setup/research-questions.json";
+const REGISTRY_URL = "../../gauntlet/setup/research-questions.registry.json";
 
 // Write-ups (nugs) are .md, rendered by GitHub. A finding's `writeup` is a repo-relative
 // path (e.g. "nugs/foo.md"); we link to the GitHub blob view, opened in a new tab.

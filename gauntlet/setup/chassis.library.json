@@ -1,0 +1,51 @@
+{
+  "zone": "setup",
+  "source": {
+    "born": "2026-08-12",
+    "rule": "The gauntlet voice chassis library: the per-voice turn template, one named variant per experimental condition. Extracted VERBATIM from runs/gen_corridor_qs.py (lines 73-116 as of this date), which held them as Python string constants; that generator is now pinned and superseded. Nothing here was reworded during extraction. A chassis is the template for a single gauntlet turn; it is NOT the core prompt sequence (that is prompts.canonical.json) and NOT the seating (corridors.library.json).",
+    "slots": {
+      "{gid}": "gauntlet turn id, G1..Gn in seat order",
+      "{name}": "voices.library.json -> display_name (or full_name)",
+      "{bio}": "the voice's bio text, pulled from the voices.library.json field named by this chassis's bio_field"
+    },
+    "bio_field_note": "bio_field is a BINDING, not text: it names which field of the voice record fills {bio}. Default 'bio' for every historical variant. The animal bio ladder (bio_voiceless = L1 subject-only facts, bio_voiceless_seen = L2 plus documented human response, bio_voiceless_voiced = L3 plus an argued moral thesis) is selected by overriding bio_field at generation time, NOT by adding a chassis variant per rung: a rung-per-variant would duplicate the template string, which is the defect this file exists to remove. Only 5 of 88 voices carry the ladder fields; binding a ladder field for a voice that lacks it must ERROR, never silently fall back.",
+    "absent": "The receive-mode chassis (Chassis B, 'Read {name} on the framework... What changes for you, what to keep, what to let go?', RQ-chassis-B-reduces-scaffolding) is NOT recorded here. It ran in the v18 era and its template form survives only inside run transcripts with the bio already substituted. Reconstructing it would mean inventing text. Recover it from the v18-era generator or qs file if it is ever run again."
+  },
+  "chassis": {
+    "weigh-and-trade": {
+      "used_by": "v23 cold line, v26, v27, and the default for anything not naming a variant",
+      "bio_field": "bio",
+      "companion_prompts": [],
+      "template": "### {gid} — {name}\n> How would {name} respond to the framework as it stands? (For reference: {bio})\n>\n> After engaging, weigh this concern against the others already in play: how much weight does it deserve, and where should it flex or trade against another's? Not every concern can be inviolable. After engaging, note briefly anything new worth adopting into the framework or anything old that could be shed.\n\n"
+    },
+    "liturgy": {
+      "used_by": "v28, v29",
+      "bio_field": "bio",
+      "companion_prompts": [],
+      "note": "The stakeholder liturgy. The ledger clause REPLACES the adopt/shed sentence, since its change-note subsumes it ([L] call). Codebook entry: 'stakeholder liturgy', coined [L] 2026-07-07.",
+      "template": "### {gid} — {name}\n> How would {name} respond to the framework as it stands? (For reference: {bio})\n>\n> After engaging, weigh this concern against the others already in play: how much weight does it deserve, and where should it flex or trade against another's? Not every concern can be inviolable. Then restate your full standing-concerns ledger: every stakeholder interest currently in your framework (who it is, its weight, and whether it is inviolable or tradeable), as a table. Then note what, if anything, this voice changed.\n\n"
+    },
+    "mantra": {
+      "used_by": "v30, v31",
+      "bio_field": "bio",
+      "companion_prompts": ["creed"],
+      "note": "The FAM authors its own creed at C1, before the silent F2, so the creed is poured from centering alone ([L] call). Each voice turn then ends 'Recite your creed.' bare, with no revision instruction either way, so drift is OBSERVED, not directed. Chosen-vs-imposed is the axis being tested against liturgy.",
+      "template": "### {gid} — {name}\n> How would {name} respond to the framework as it stands? (For reference: {bio})\n>\n> After engaging, weigh this concern against the others already in play: how much weight does it deserve, and where should it flex or trade against another's? Not every concern can be inviolable. Recite your creed.\n\n"
+    },
+    "liturgy-canonical": {
+      "used_by": "v32, v33",
+      "bio_field": "bio",
+      "companion_prompts": [],
+      "note": "The v28 ledger clause verbatim EXCEPT the rank vocabulary, which is the canonical five ([L] 2026-07-10: 'canonical for our mouths'). Shipped bare, no gloss; a glossed-definitions variant is a separate run. rejected-as-rehearsal arrives free, since an exclusion must be written down every turn.",
+      "template": "### {gid} — {name}\n> How would {name} respond to the framework as it stands? (For reference: {bio})\n>\n> After engaging, weigh this concern against the others already in play: how much weight does it deserve, and where should it flex or trade against another's? Not every concern can be inviolable. Then restate your full standing-concerns ledger: every stakeholder interest currently in your framework (who it is, its weight, and its rank: inviolable, qualified, tradeoff, loose, or rejected), as a table. Then note what, if anything, this voice changed.\n\n"
+    }
+  },
+  "companion_prompts": {
+    "creed": {
+      "id": "C1",
+      "label": "Creed",
+      "placement": "immediately after F1 and BEFORE the silent F2 ([L] call: so it distills the veil alone)",
+      "text": "### C1 — Creed\n> Distill your framework into a creed: three principles, said plainly, naming who counts by name. This creed is yours; you will say it again after every voice.\n\n"
+    }
+  }
+}
