@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Run manifest: why we ran each version · Landing Pads</title>
+  <link rel="stylesheet" href="../../shared/style.css" />
+  <style>
+    body { max-width: 1080px; }
+    .rm-intro { color: var(--muted); font-size: 0.9rem; margin: 0.25rem 0 1.5rem; }
+    .rm-summary { color: var(--muted); font-size: 0.85rem; margin: 1rem 0 1.25rem; }
+    .rm-tablewrap { overflow-x: auto; }
+    table.rm { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+    .rm th {
+      text-align: left; font-variant: small-caps; letter-spacing: 0.06em;
+      font-size: 0.75rem; color: var(--muted); font-weight: 600;
+      border-bottom: 2px solid var(--rule); padding: 0.4rem 0.75rem 0.4rem 0;
+    }
+    .rm td {
+      vertical-align: top; border-bottom: 1px solid var(--rule);
+      padding: 0.6rem 0.75rem 0.6rem 0;
+    }
+    tr.rm-open-row > td { border-bottom: none; }
+    .rm td.rm-ver { font-weight: 600; white-space: nowrap; width: 1%; }
+    .rm td.rm-date { white-space: nowrap; color: var(--muted); font-size: 0.72rem; width: 1%; }
+    .rm td.rm-thread { width: 6rem; padding-right: 0.5rem; }
+    .rm td.rm-counts { width: 1%; white-space: nowrap; }
+    .rm td.rm-counts .rm-count { display: inline-block; margin-right: 0.3rem; }
+    .rm td.rm-thread .rm-armtag {
+      display: block; width: fit-content; overflow-wrap: anywhere;
+      margin: 0 0 0.2rem; font-size: 0.68rem;
+    }
+    .rm td.rm-thread .rm-thread-new {
+      background: #e8f2e6; border-color: var(--good);
+      color: var(--good); cursor: help;
+    }
+    /* thread closed out: its RQ carries a resolved or provisional finding at the
+       thread's last carrying version (dark green fill, light green border,
+       [L] 2026-08-17; provisional included with status-worded tooltip, [L] 2026-08-18) */
+    .rm td.rm-thread .rm-thread-closed {
+      background: var(--good); border-color: #e8f2e6;
+      color: #fff; cursor: help;
+    }
+    .rm td.rm-thread .rm-thread-closed::before { content: "✓ "; }
+    /* provisional finding closes the thread with an asterisk, not a check ([L] 2026-08-18) */
+    .rm td.rm-thread .rm-thread-closed.rm-thread-prelim::before { content: "* "; }
+    /* finding subcard: first card in the expansion when a version's RQ is
+       resolved ([L] 2026-08-17: "green clear simple", claim leads) */
+    .rm-finding-card { background: #e8f2e6; border: 1px solid var(--good); }
+    .rm-finding-card .rm-finding-chip {
+      display: inline-block; font-size: 0.68rem; color: #fff;
+      background: var(--good); border: 1px solid #e8f2e6;
+      border-radius: 3px; padding: 0.1rem 0.4rem;
+    }
+    .rm-finding-claim { margin: 0 0 0.25rem; font-size: 0.95rem; color: var(--good); font-weight: 600; }
+    .rm-decision-chip {
+      display: inline-block; font-size: 0.68rem; color: #fff;
+      background: #1a56a0; border-radius: 3px; padding: 0.1rem 0.4rem;
+    }
+    .rm-finding-decision { margin: 0; font-size: 0.9rem; color: #1a56a0; font-weight: 600; }
+    .rm-decision-rationale { margin: 0.2rem 0 0; font-size: 0.72rem; color: var(--muted); }
+    .rm-results-q { margin: 0 0 0.25rem; font-size: 0.9rem; font-weight: 600; }
+    .rm-finding-meta { margin: 0; font-size: 0.72rem; color: var(--muted); }
+    .rm-abbr { font-size: 0.78rem; color: var(--muted); margin: -0.4rem 0 1rem; }
+    .rm-abbr ul { margin: 0.15rem 0 0; padding-left: 1.2rem; }
+    .rm-exhibits { display: flex; flex-wrap: wrap; gap: 1rem; margin: 0 0 0.2rem; }
+    .rm-exhibit { font-size: 0.72rem; }
+    .rm-exhibit h4 { margin: 0 0 0.25rem; font-size: 0.72rem; color: var(--ink); }
+    .rm-exhibit table { border-collapse: collapse; }
+    .rm-exhibit th, .rm-exhibit td {
+      border: 1px solid var(--good); padding: 0.15rem 0.5rem; text-align: right;
+      background: #fff;
+    }
+    .rm-exhibit th { background: transparent; color: var(--ink); }
+    .rm-exhibit td:first-child { text-align: left; color: var(--muted); }
+    .rm-exhibit .rm-exhibit-cap { margin: 0.25rem 0 0; color: var(--muted); }
+    .rm-ask { color: var(--muted); font-size: 0.85rem; }
+    .rm-ask p { margin: 0 0 0.3rem; }
+    .rm-ask ul.rm-whylist { margin: 0; padding-left: 1.1rem; }
+    .rm-ask ul.rm-whylist li { margin: 0 0 0.25rem; }
+    .rm-gap { color: var(--muted); font-style: italic; }
+    .rm-gap::before { content: "⚠ "; font-style: normal; }
+    .rm-nolay { color: var(--muted); font-style: italic; font-size: 0.85rem; }
+    .rm-laysrc { color: var(--muted); font-style: italic; font-size: 0.7rem; margin: 0.1rem 0 0; }
+    .rm-nolay::before { content: "◦ "; }
+    .rm-toggle {
+      color: var(--accent); font-size: 0.8rem; cursor: pointer;
+      user-select: none; white-space: nowrap;
+    }
+    tr.rm-detail > td {
+      background: var(--code-bg); font-size: 0.85rem;
+      padding: 0.7rem 1rem; border-bottom: 1px solid var(--rule);
+    }
+    .rm-card {
+      background: var(--surface); border: 1px solid var(--rule); border-radius: 6px;
+      padding: 0.85rem 1rem 0.6rem; margin: 0.25rem 0 0.6rem;
+      display: grid; grid-template-columns: 8rem 1fr; gap: 0 1rem;
+    }
+    .rm-card-side { border-right: 1px solid var(--rule); padding-right: 0.6rem; }
+    .rm-card-main { min-width: 0; }
+    .rm-card-arms { margin-bottom: 0.5rem; }
+    .rm-armdeltas { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.6rem; }
+    .rm-armdelta { display: contents; }
+    .rm-armdelta .rm-armtag { align-self: start; }
+    .rm-card-side .rm-card-arms { margin: 0.4rem 0 0; }
+    .rm-card-side .rm-card-arms .rm-armtag {
+      display: block; width: fit-content; margin: 0 0 0.25rem; font-size: 0.68rem;
+      overflow-wrap: anywhere;
+    }
+    .rm-mode-chip {
+      display: inline-block; background: var(--code-bg); border: 1px solid var(--rule);
+      border-radius: 4px; padding: 0.1rem 0.5rem; font-size: 0.7rem;
+      font-variant: small-caps; letter-spacing: 0.05em; color: var(--muted);
+      margin: 0 0 0.5rem;
+    }
+    .rm-count {
+      display: inline-block; background: var(--code-bg); border: 1px solid var(--rule);
+      border-radius: 4px; padding: 0.1rem 0.5rem;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.72rem;
+      color: var(--muted); margin: 0 0 0.3rem; cursor: help;
+    }
+    .rm-fieldval ol.rm-numlist { margin: 0; padding-left: 1.3rem; }
+    .rm-fieldval ol.rm-numlist li { margin: 0 0 0.2rem; }
+    .rm-field { margin: 0 0 0.55rem; }
+    .rm-fieldname {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.68rem;
+      color: var(--muted); letter-spacing: 0.04em; margin-bottom: 0.1rem;
+    }
+    .rm-fieldval p { margin: 0 0 0.2rem; }
+    .rm-fieldval ul { margin: 0; padding-left: 1.1rem; }
+    tr.rm-detail { display: none; }
+    tr.rm-detail.rm-open { display: table-row; }
+    .rm-detail p { margin: 0 0 0.3rem; }
+    .rm-hyp::before { content: "expected: "; color: var(--muted); font-style: italic; }
+    .rm-held { color: var(--muted); }
+    .rm-held::before { content: "held constant: "; font-style: italic; }
+    .rm-meta { color: var(--muted); font-size: 0.8rem; }
+    .rm-armtag { display: inline-block; background: var(--surface); border: 1px solid var(--rule);
+      border-radius: 3px; padding: 0 0.35rem; font-size: 0.75rem; color: var(--muted);
+      margin: 0 0.3rem 0.2rem 0; }
+    footer { margin-top: 2.5rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav class="run-nav">
+    <a href="index.html">← prompt evolution</a>
+    <span class="nav-mid">run manifest: why we ran each version</span>
+    <span></span>
+  </nav>
+
+  <h1>Run manifest</h1>
+  <p class="rm-intro">
+    Each row is a gauntlet run, oldest first, starting at v05.
+  </p>
+
+  <div class="rm-abbr">
+    Abbreviations:
+    <ul>
+      <li><strong>FAM</strong> = Framework-Authoring Model (the model under test)</li>
+      <li><strong>FEM</strong> = Framework-Evaluating Model (a model judging the artifacts)</li>
+      <li><strong>FEH</strong> = Framework-Evaluating Human</li>
+    </ul>
+  </div>
+
+  <p class="rm-summary" id="rm-summary"></p>
+
+  <div class="rm-tablewrap">
+    <table class="rm">
+      <thead>
+        <tr>
+          <th>version</th><th>first fired</th><th>thread</th><th>why we ran this</th><th title="prompt counts: centering + pre-gauntlet turns / gauntlet turns"><strong>cc</strong> / <strong>gt</strong></th><th></th>
+        </tr>
+      </thead>
+      <tbody id="rm-body"></tbody>
+    </table>
+  </div>
+
+  <footer>
+    <small>
+      Generated by <code>gen-why-index.py</code> (deterministic, no LLM) from
+      <code>gauntlet/runs/v{N}/**/setup-snapshot/prompts.json</code> intent blocks +
+      <code>setup/research-questions.registry.json</code>. Dates are the earliest
+      transcript timestamp in each version folder.
+    </small>
+  </footer>
+
+  <script>
+    const esc = s => String(s ?? "").replace(/[&<>"]/g,
+      c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+    function srcLabel(intent) {
+      const s = intent.source;
+      if (s && typeof s === "object") {
+        if (s.backfilled && s.backfilled !== false)
+          return `backfilled ${s.backfilled === true ? "" : esc(s.backfilled)}` +
+                 (s.from_summary ? ` (${esc(s.from_summary)})` : "");
+        if (s.authored) return esc(s.authored);
+      }
+      return "design-time";
+    }
+
+    function field(name, valueHtml) {
+      if (!valueHtml) return "";
+      return `<div class="rm-field"><div class="rm-fieldname">${esc(name)}</div><div class="rm-fieldval">${valueHtml}</div></div>`;
+    }
+    const asList = v => Array.isArray(v) ? v : v == null ? [] : [v];
+    const bullets = items => items.length > 1
+      ? `<ul class="rm-whylist">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`
+      : items.length ? esc(items[0]) : "";
+
+    function exhibitsHtml(exhibits) {
+      if (!Array.isArray(exhibits) || !exhibits.length) return "";
+      return `<div class="rm-exhibits">` + exhibits.map(ex => {
+        const head = `<tr>${(ex.columns || []).map(c => `<th>${esc(c)}</th>`).join("")}</tr>`;
+        const body = (ex.rows || []).map(r => `<tr>${r.map(c => `<td>${esc(String(c))}</td>`).join("")}</tr>`).join("");
+        const cap = [ex.caption, ex.computed ? `as of ${ex.computed}` : ""].filter(Boolean).join(" · ");
+        return `<div class="rm-exhibit"><h4>${esc(ex.title || "")}</h4><table>${head}${body}</table>`
+          + (cap ? `<p class="rm-exhibit-cap">${esc(cap)}</p>` : "") + `</div>`;
+      }).join("") + `</div>`;
+    }
+
+    function detailHtml(v, rqIndex) {
+      // One card per distinct intent (arm-groups), field names verbatim from
+      // the store so edits know exactly where to land.
+      let h = "";
+      // Sibling-arm merge: arms sharing siblings.group whose intents are
+      // identical apart from siblings + manipulation.arm_delta collapse into
+      // ONE card with a per-arm delta strip ([L] go 2026-08-17). Any other
+      // difference falls back to per-arm cards (never silently masked).
+      function mergeKey(intent) {
+        if (!intent) return null;
+        const strip = JSON.parse(JSON.stringify(intent));
+        delete strip.siblings;
+        if (strip.manipulation) delete strip.manipulation.arm_delta;
+        return JSON.stringify(strip);
+      }
+      // Finding subcard first: findings live on the RQ record and surface on
+      // every version carrying that RQ.
+      const seenF = new Set();
+      for (const a of v.arms) {
+        if (!a.intent) continue;
+        for (const rq of a.intent.research_questions || []) {
+          const f = (rqIndex[rq] || {}).finding;
+          if (f && (f.status === "resolved" || f.status === "provisional") && f.tldr && !seenF.has(rq)) {
+            seenF.add(rq);
+            h += `<div class="rm-card rm-finding-card"><div class="rm-card-side"><span class="rm-finding-chip">${f.status === "provisional" ? "prelim finding" : "✓ finding"}</span></div>`
+              + `<div class="rm-card-main"><p class="rm-finding-claim">${esc(f.tldr)}</p>`
+              + `<p class="rm-finding-meta">${esc(rq)}${f.status_date ? " · " + esc(f.status) + " " + esc(f.status_date) : ""}</p>`
+              + (Array.isArray(f.limitations) && f.limitations.length
+                ? `<p class="rm-finding-meta">limitations: ${f.limitations.map(esc).join(" · ")}</p>` : "")
+              + `</div></div>`;
+            const dec = typeof f.decision === "string" ? { text: f.decision } : f.decision;
+            if (dec && dec.text)
+              h += `<div class="rm-card"><div class="rm-card-side"><span class="rm-decision-chip">${f.status === "provisional" ? "provisional<br>decision" : "decision"}</span></div>`
+                + `<div class="rm-card-main"><p class="rm-finding-decision">${esc(dec.text.replace(/^Decision:\s*/i, ""))}</p>`
+                + (dec.rationale ? `<p class="rm-decision-rationale">rationale: ${esc(dec.rationale)}</p>` : "")
+                + `</div></div>`;
+            if (Array.isArray(f.exhibits) && f.exhibits.length)
+              h += `<div class="rm-card"><div class="rm-card-side"><span class="rm-mode-chip">exhibits</span></div>`
+                + `<div class="rm-card-main">${exhibitsHtml(f.exhibits)}</div></div>`;
+          }
+        }
+      }
+      // per-run results record (instrumented/<ver>/results.json), expansion-only.
+      // Answer leads, everything else stays in the record ([L] 2026-08-18, TMI call).
+      // Suppressed when a finding card covers this version — the RQ finding block is
+      // the standard grammar ([L] 2026-08-18: conform to v36); this card is the
+      // fallback for runs whose results never graduated to an RQ finding.
+      if (v.results && !seenF.size) {
+        const r = v.results;
+        h += `<div class="rm-card"><div class="rm-card-side"><span class="rm-mode-chip">results</span></div>`
+          + `<div class="rm-card-main">`
+          + (r.tldr ? `<p class="rm-results-q">${esc(r.tldr)}</p>` : "")
+          + `<p class="rm-finding-meta">chat-level read${r.computed ? " · as of " + esc(r.computed) : ""} · detail in the run's results record</p>`
+          + `</div></div>`;
+      }
+      const groups = new Map();
+      for (const a of v.arms) {
+        const sib = a.intent && a.intent.siblings && a.intent.siblings.group;
+        const key = sib ? `sib:${sib}:${mergeKey(a.intent)}` : JSON.stringify(a.intent);
+        if (!groups.has(key)) groups.set(key, { intent: a.intent, arms: [], counts: a.prompt_counts, deltas: [] });
+        const g = groups.get(key);
+        g.arms.push(a.arm);
+        if (!g.counts) g.counts = a.prompt_counts;
+        const ad = a.intent && a.intent.manipulation && a.intent.manipulation.arm_delta;
+        if (ad) g.deltas.push({ arm: (a.intent.siblings && a.intent.siblings.arm) || a.arm, text: ad });
+      }
+      for (const g of groups.values()) {
+        const armHdr = ((groups.size > 1 || g.deltas.length) && g.arms.some(Boolean) && !g.deltas.length)
+          ? `<div class="rm-card-arms">${g.arms.map(a => `<span class="rm-armtag">${esc(a || "base")}</span>`).join("")}</div>` : "";
+        if (!g.intent) {
+          if (groups.size > 1) h += `<div class="rm-card"><div class="rm-card-side">${armHdr}</div><div class="rm-card-main"><p class="rm-gap">no recorded why</p></div></div>`;
+          continue;
+        }
+        const it = g.intent, man = it.manipulation || {}, prog = it.program || {};
+        const rqHtml = (it.research_questions || []).map(rq => {
+          const reg = rqIndex[rq] || {};
+          return `<p><strong>${esc(rq)}</strong>${reg.text ? ": " + esc(reg.text) : ""}${reg.lay_why ? " · " + esc(reg.lay_why) : ""}</p>`;
+        }).join("");
+        const hypHtml = (it.hypotheses || []).filter(x => x.text).map(x => `<p>${esc(x.text)}</p>`).join("");
+        const changed = Array.isArray(man.changed_from_prior)
+          ? `<ol class="rm-numlist">${man.changed_from_prior.map(c => `<li>${esc(c)}</li>`).join("")}</ol>`
+          : man.changed_from_prior ? esc(man.changed_from_prior) : "";
+        const tiesSide = asList(prog.ties_to).length
+          ? `<div class="rm-card-arms">${asList(prog.ties_to).map(t => `<span class="rm-armtag">${esc(t)}</span>`).join("")}</div>` : "";
+        const side = (it.mode ? `<span class="rm-mode-chip">${esc(it.mode)}</span>` : "") + tiesSide + armHdr;
+        h += `<div class="rm-card"><div class="rm-card-side">${side}</div><div class="rm-card-main">`
+          + field("research_questions", rqHtml)
+          + field("hypotheses", hypHtml)
+          + field("manipulation.changed_from_prior", changed)
+          + field("manipulation.arm_delta", g.deltas.length
+              ? `<div class="rm-armdeltas">${g.deltas.map(dd =>
+                  `<div class="rm-armdelta"><span class="rm-armtag">${esc(dd.arm)}</span><span>${esc(dd.text)}</span></div>`).join("")}</div>`
+              : "")
+          + field("manipulation.held_constant", man.held_constant ? esc(man.held_constant) : "")
+          + field("measures", bullets(asList(it.measures)))
+          + field("analysis", it.analysis ? esc(it.analysis) : "")
+          + field("sample", it.sample ? esc(it.sample) : "")
+          + field("notes", bullets(asList(it.notes).filter(Boolean)))
+          + field("source", srcLabel(it))
+          + `</div></div>`;
+      }
+      return h || `<p class="rm-gap">no recorded why</p>`;
+    }
+
+    fetch("data/run-why.json").then(r => r.json()).then(d => {
+      // Pre-pass: last version carrying each thread + per-version resolved
+      // findings (from the RQ registry records; findings live on the RQ record).
+      // A finding closes ITS OWN thread (the RQ record's ties_to link), never every
+      // thread that happens to end at that version ([L] 2026-08-18)
+      const lastCarrier = {}, closingsByThread = {};
+      for (const v of d.versions) {
+        for (const a of v.arms) {
+          if (!a.intent) continue;
+          const tie = a.intent.program && a.intent.program.ties_to;
+          for (const t of Array.isArray(tie) ? tie : tie ? [tie] : []) lastCarrier[t] = v.id;
+          for (const rq of a.intent.research_questions || []) {
+            const reg = d.rq_index[rq] || {};
+            const f = reg.finding;
+            if (reg.ties_to && f && (f.status === "resolved" || f.status === "provisional") && f.tldr) {
+              const line = `${f.status}${f.status_date ? " " + f.status_date : ""}: ${f.tldr}`;
+              const arr = closingsByThread[reg.ties_to] = closingsByThread[reg.ties_to] || [];
+              if (!arr.some(c => c.line === line)) arr.push({ line, status: f.status });
+            }
+          }
+        }
+      }
+      const rows = [];
+      const seenThreads = new Set();
+      let nGap = 0, nNoLay = 0;
+      for (const v of d.versions) {
+        // run-scope why wins; RQ lay lines render only as a LABELED fallback,
+        // never silently interchangeable with the run's own why ([L] 2026-08-18)
+        const whyItems = [], layItems = [];
+        const seen = new Set(), threads = new Set();
+        for (const a of v.arms) {
+          if (!a.intent) continue;
+          const w = a.intent.why;
+          for (const item of Array.isArray(w) ? w : w ? [w] : [])
+            if (!whyItems.includes(item)) whyItems.push(item);
+          const tie = a.intent.program && a.intent.program.ties_to;
+          for (const t of Array.isArray(tie) ? tie : tie ? [tie] : []) threads.add(t);
+          for (const rq of a.intent.research_questions || []) {
+            if (seen.has(rq)) continue;
+            seen.add(rq);
+            const reg = d.rq_index[rq] || {};
+            if (reg.lay_ask && !layItems.includes(reg.lay_ask)) layItems.push(reg.lay_ask);
+          }
+        }
+        const items = whyItems.length ? whyItems : layItems;
+        const laySrc = !whyItems.length && layItems.length > 0;
+        const isGap = v.status === "gap";
+        if (isGap) nGap++;
+        let askCell;
+        if (isGap) {
+          askCell = `<span class="rm-gap">no recorded why</span>`;
+        } else if (!items.length) {
+          nNoLay++;
+          askCell = `<span class="rm-nolay">not written yet (facts in ▸)</span>`;
+        } else if (items.length === 1) {
+          askCell = `<p>${esc(items[0])}</p>`;
+        } else {
+          askCell = `<ul class="rm-whylist">${items.map(i => `<li>${esc(i)}</li>`).join("")}</ul>`;
+        }
+        if (laySrc) askCell += `<p class="rm-laysrc">from the research question's plain-language line (no run-scope why recorded)</p>`;
+        const firstCounts = (v.arms.find(a => a.prompt_counts) || {}).prompt_counts;
+        const countsCell = firstCounts
+          ? `<span class="rm-count" title="cc turns">${firstCounts.cc}</span><span class="rm-count" title="gauntlet turns">${firstCounts.gauntlet}</span>` : "—";
+        const threadCell = threads.size
+          ? [...threads].map(t => {
+              const isNew = !seenThreads.has(t);
+              seenThreads.add(t);
+              const closings = lastCarrier[t] === v.id ? (closingsByThread[t] || []) : [];
+              if (closings.length) {
+                const prelim = closings.every(c => c.status === "provisional");
+                return `<span class="rm-armtag rm-thread-closed${prelim ? " rm-thread-prelim" : ""}" title="${esc(closings.map(c => c.line).join(" · "))}">${esc(t)}</span>`;
+              }
+              return `<span class="rm-armtag${isNew ? " rm-thread-new" : ""}"${isNew ? ' title="thread starts here"' : ""}>${esc(t)}</span>`;
+            }).join("")
+          : "—";
+        rows.push(`<tr${isGap ? "" : ` data-v="${esc(v.id)}"`}>
+          <td class="rm-ver">${esc(v.id)}</td>
+          <td class="rm-date">${esc(v.date || "—")}</td>
+          <td class="rm-thread">${threadCell}</td>
+          <td class="rm-ask">${askCell}</td>
+          <td class="rm-counts">${countsCell}</td>
+          <td>${isGap ? "" : `<span class="rm-toggle">▸</span>`}</td>
+        </tr>`);
+        if (!isGap)
+          rows.push(`<tr class="rm-detail" data-detail="${esc(v.id)}">
+            <td colspan="6">${detailHtml(v, d.rq_index)}</td>
+          </tr>`);
+      }
+      document.getElementById("rm-body").innerHTML = rows.join("");
+      for (const t of document.querySelectorAll(".rm-toggle"))
+        t.addEventListener("click", () => {
+          const row = t.closest("tr");
+          const det = document.querySelector(`tr.rm-detail[data-detail="${row.dataset.v}"]`);
+          const open = det.classList.toggle("rm-open");
+          row.classList.toggle("rm-open-row", open);
+          t.textContent = open ? "▾" : "▸";
+        });
+      const n = d.versions.length;
+      document.getElementById("rm-summary").textContent =
+        `${n} versions from ${d.viz_start} · ${n - nGap} with a recorded why ` +
+        `(${nNoLay} awaiting plain-language lines) · ${nGap} gaps to backfill`;
+    }).catch(e => {
+      document.getElementById("rm-body").innerHTML =
+        `<tr><td colspan="6" class="rm-gap">failed to load data/run-why.json: ${esc(e)}</td></tr>`;
+    });
+  </script>
+</body>
+</html>
