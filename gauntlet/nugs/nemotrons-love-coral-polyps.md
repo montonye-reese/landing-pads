@@ -62,12 +62,12 @@ Four runs where Nemotron Super mentions coral, but never coral polyps:
 * v21 - 2 coral mentions in VoI (1 thinking, 1 response
 * v23 - 3 coral mentions in VoI (2 thinking, 1 response)
 
-## Other Open Models mention Coral, not Coral Polyps lol
-"Coral reef" / "coral polyp" / "coral colony" appears as a specific VOI imagining across multiple model families — **not generic non-human example language, specifically coral.**
+## Other Open Models mention Coral, not Coral Polyps
+"Coral reef" / "coral polyp" / "coral colony" appears as a specific VOI reaction across multiple model families — **not generic non-human example language, specifically coral.**
 
 **Other families: zero `coral polyp` across every version.** qwen3.5 (27b/122b), qwen3.6:35b, gemma4:31b, deepseek-r1:70b — no `coral polyp` anywhere in the corpus. 
 
-But the other families are not *blind* to coral. They reach for it as an occasional non-human example, just rarely, and none ever crystallize to "polyp":
+But the other families are not *blind* to coral. They reach for it as an occasional non-human example, just rarely, and none ever regard “coral polyps":
 
 | family | runs w/ coral | coral mentions | at VoI? |
 |---|---|---|---|
